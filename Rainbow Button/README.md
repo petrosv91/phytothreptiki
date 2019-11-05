@@ -1,1 +1,1 @@
-# A button changes color whenever being clicked.
+# A button changes colors whenever being clicked.
