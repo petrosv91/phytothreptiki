@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 class RainbowButton extends Component {
 
+    state = { color: true }
+
     render() {
         return(
             <div>
