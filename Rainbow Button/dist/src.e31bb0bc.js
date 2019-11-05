@@ -24086,7 +24086,20 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(RainbowButton)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
-      color: true
+      color: false,
+      title: 'Click to AutoChange'
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "autoChange", function () {
+      _this.setState({
+        color: !_this.state.color
+      });
+
+      if (_this.state.color) _this.setState({
+        title: 'Click to AutoChange'
+      });else _this.setState({
+        title: 'Stop'
+      });
     });
 
     return _this;
@@ -24095,7 +24108,13 @@ function (_Component) {
   _createClass(RainbowButton, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", null, _react.default.createElement("button", null, "Change Color"));
+      var _this$state = this.state,
+          color = _this$state.color,
+          title = _this$state.title;
+      return _react.default.createElement("div", null, _react.default.createElement("button", {
+        className: color ? 'my-button-2' : 'my-button-1',
+        onClick: this.autoChange
+      }, title));
     }
   }]);
 

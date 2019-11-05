@@ -20,3 +20,25 @@ body {
 h1, h2, h3, h4, h5 {
     font-family: 'EconomicaBold';
 }
+
+.my-button-1 {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.my-button-2 {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    animation: myanimation 10s infinite;
+}
+
+@keyframes myanimation {
+    0% {background-color: red;}
+    25%{background-color:yellow;}
+    50%{background-color:green;}
+    75%{background-color:brown;}
+    100% {background-color: red;}
+  }
+
