@@ -1,23 +1,11 @@
 import React, { Component } from 'react';
 import RainbowButton from './rainbowButton';
+import ClickCounter from './ClickCounter';
+import HoverCounter from './HoverCounter';
 
 class App extends Component {
 
-    state = ({ flag: false, title: 'Show me' });
-
-    displayMe = () => {
-
-        this.setState({ flag: !this.state.flag });
-        
-        if( this.state.flag )
-            this.setState({ title: 'Show me' });
-        else  
-            this.setState({ title: 'Hide me' });
-    }
-
     render() {
-
-        const { title } = this.state;
 
         return(
             <div>
@@ -25,9 +13,11 @@ class App extends Component {
                 <hr />
                 <RainbowButton />
                 <hr />
-                <button onClick={this.displayMe}>{title}</button>
+                <ClickCounter />
+                <hr />
+                <HoverCounter />
             </div>
-        ) 
+        )
     }
 }
 

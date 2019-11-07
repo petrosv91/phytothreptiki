@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class RainbowButton extends Component {
 
-    state = { color: false, title: 'Click to AutoChange' }
+    state = { color: false, title: 'Click to AutoChange' };
 
     autoChange = () => {
         
