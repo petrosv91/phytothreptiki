@@ -1,0 +1,21 @@
+.close-reciept-button {
+  padding: 5px 18px;
+  border: none;
+  background: rgba(0, 120, 114, 0.8);
+  color: white;
+  opacity: 0.9;
+  border-radius: 2px;
+  margin-bottom: 6px;
+  font-size: 18px;
+  font-weight: 500;
+  transition-delay: 70ms;
+  cursor: pointer;
+}
+.close-reciept-button:hover {
+  opacity: 1;
+}
+.product-container-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

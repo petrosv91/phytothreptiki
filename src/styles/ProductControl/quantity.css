@@ -1,0 +1,17 @@
+.quantity-input {
+  position: relative;
+}
+
+.quantity-input label {
+  position: absolute;
+  right: 20px;
+  top: -3px;
+  font-weight: bold;
+  text-align: center;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

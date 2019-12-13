@@ -1,0 +1,60 @@
+.process-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+}
+
+.process-steps {
+  flex: 1;
+}
+
+.position-label-text {
+  color: white;
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 0.5px;
+  padding: 10px 50px;
+  transition: all 0.3s;
+}
+
+.user-information-container {
+  display: flex;
+  justify-content: center;
+  background: rgba(0, 120, 114, 0.8);
+  padding: 5px;
+}
+.flow-title {
+  font-size: 25px;
+  color: gray;
+  margin: 0 5px;
+}
+.drawer-button {
+  font-size: 40px !important;
+  cursor: pointer;
+  color: rgba(0, 120, 114, 0.8) !important;
+}
+.drawer-button-off {
+  font-size: 40px !important;
+  cursor: pointer;
+  color: grey;
+}
+
+.home-icon {
+  margin-left: 12px;
+  cursor: pointer;
+  font-size: 35px !important;
+  color: rgba(0, 120, 114, 0.8);
+}
+.process-navigation {
+  padding: 5px 0;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 500px) {
+  .position-label-text {
+    padding: 10px 10px;
+  }
+}

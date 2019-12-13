@@ -1,0 +1,9 @@
+.searchable-container {
+  display: flex;
+  justify-content: flex-start;
+  min-height: 100px;
+}
+
+.send-button {
+  margin-left: 10px;
+}

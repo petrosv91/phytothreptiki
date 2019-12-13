@@ -1,0 +1,25 @@
+
+.drawer-list-item {
+  font-size: 23px;
+  padding-top: 2px ;
+  cursor: pointer;
+}
+
+.drawer-close-button {
+  font-size: 60px !important;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  cursor: pointer;
+  
+}
+
+/* @media (max-width: 600px) {
+  .drawer-list {
+    width: 150px;
+  }
+  .drawer-close-button {
+    left: 50px;
+  }
+} */
