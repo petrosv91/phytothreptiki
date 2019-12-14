@@ -6,6 +6,10 @@
 	"prettier.useTabs": true,
 	"prettier.bracketSpacing": true,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": true
+	},
 	"editor.formatOnSave": true,
 	"color-highlight.matchWords": true,
 	"css.lint.boxModel": "warning",
@@ -20,6 +24,6 @@
 	"css.lint.unknownVendorSpecificProperties": "warning",
 	"css.lint.zeroUnits": "warning",
 	"CSSNavigation.alsoSearchDefinitionsInStyleTag": true,
-    "prettier.arrowParens": "always",
-    "prettier.endOfLine": "lf"
+	"prettier.arrowParens": "always",
+	"prettier.endOfLine": "lf"
 }
