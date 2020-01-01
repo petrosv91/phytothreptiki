@@ -1,0 +1,41 @@
+/** @format */
+
+.recipe {
+    border-radius: 10px;
+    box-shadow: 0 5px 20px black;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-image: linear-gradient(to right, #868f96 0%, #596164 100%);
+    align-items: center;
+    color: white;
+    width: 40%;
+}
+
+.image {
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+    margin-bottom: 20px;
+}
+
+.ingredient {
+    font-size: large;
+    max-width: 300px;
+    word-break: break-word;
+}
+
+.toggleBtn {
+    border: none;
+    outline: none;
+    margin-left: 20px;
+    padding: 10px 20px;
+    background: #e55039aa;
+    color: white;
+    border-radius: 25px;
+}
+
+.toggleBtn:hover {
+    background: #e55039;
+}

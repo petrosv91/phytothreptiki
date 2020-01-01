@@ -1,0 +1,16 @@
+/** @format */
+
+.container {
+    color: white;
+    margin-top: 4rem;
+    letter-spacing: 5px;
+}
+
+i {
+    font-size: 100px;
+}
+
+span {
+    margin-left: 30px;
+    margin-right: 30px;
+}
