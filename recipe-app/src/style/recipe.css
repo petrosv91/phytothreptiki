@@ -26,6 +26,10 @@
     word-break: break-word;
 }
 
+.title {
+    text-align: center;
+}
+
 .toggleBtn {
     border: none;
     outline: none;

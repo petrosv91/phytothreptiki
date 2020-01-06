@@ -1,49 +1,46 @@
 /** @format */
 
-import React, { useState, Fragment } from 'react';
-import style from '../style/recipe.module.css';
+import React, { useState } from 'react';
+import '../style/recipe.css';
 
 const Recipe = props => {
     const { title, calories, image, ingredients, healthLabels } = props;
-    const [health, setHealth] = useState(false);
-    const getCalories = () => {
-        return Math.floor(calories);
-    };
+    const [displayHealth, setDisplayHealth] = useState(false);
 
     const toggleHealth = () => {
-        setHealth(!health);
+        setDisplayHealth(!displayHealth);
     };
 
-    const displayHealth = health ? (
-        <Fragment>
+    const health = displayHealth ? (
+        <>
             <ul>
                 {healthLabels.map((healthLabel, index) => (
                     <li key={index}>{healthLabel}</li>
                 ))}
             </ul>
-            <button className={style.toggleBtn} onClick={toggleHealth}>
+            <button className='toggleBtn' onClick={toggleHealth}>
                 Hide Health Labels
             </button>
-        </Fragment>
+        </>
     ) : (
-        <button className={style.toggleBtn} onClick={toggleHealth}>
+        <button className='toggleBtn' onClick={toggleHealth}>
             Show Health Labels
         </button>
     );
 
     return (
-        <div className={style.recipe}>
-            <h1>{title}</h1>
-            <h4>{displayHealth}</h4>
-            <img className={style.image} src={image} alt='' />
+        <div className='recipe'>
+            <h1 className='title'>{title}</h1>
+            <h4>{health}</h4>
+            <img className='image' src={image} alt='' />
             <ol>
                 {ingredients.map((ingredient, index) => (
-                    <li key={index} className={style.ingredient}>
+                    <li key={index} className='ingredient'>
                         {ingredient.text}
                     </li>
                 ))}
             </ol>
-            <p>Calories: {getCalories()}</p>
+            <p>Calories: {Math.round(Math.floor(calories) / 10)}</p>
         </div>
     );
 };

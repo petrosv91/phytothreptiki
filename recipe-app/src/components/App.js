@@ -1,25 +1,24 @@
 /** @format */
 
-import React, { useState, lazy, Suspense } from 'react';
+import React, { useState } from 'react';
+import Recipe from './Recipe';
+import Axios from 'axios';
 import '../style/App.css';
 
 const APP_ID = '01eb9223';
 const APP_KEY = 'e8e89a4f4de711e701213371938fc3a2';
-
-const Recipe = lazy(() => import('./Recipe'));
 
 const App = () => {
     const [recipes, setRecipes] = useState([]);
     const [searchValue, setSearchValue] = useState('');
 
     const getRecipes = async value => {
-        await fetch(
+        await Axios.get(
             `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?q=${value}&app_id=${APP_ID}&app_key=${APP_KEY}`
         )
-            .then(response => response.json())
-            .then(json => {
-                console.log(json);
-                setRecipes(json.hits);
+            .then(response => {
+                console.log(response.data.hits);
+                setRecipes(response.data.hits);
             })
             .catch(error => alert(error.message));
     };
@@ -56,9 +55,7 @@ const App = () => {
                     Search
                 </button>
             </form>
-            <Suspense fallback={<div>Loading...</div>}>
-                <div className='recipes'>{recipeData}</div>
-            </Suspense>
+            <div className='recipes'>{recipeData}</div>
         </div>
     );
 };
