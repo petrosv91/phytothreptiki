@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 export const HeaderForm = styled.form`
   display: flex;
-  flex-direction: flex-end;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-end;
   flex-wrap: wrap;
   background-color: white;
   padding: 0 1.5rem;
@@ -15,6 +15,13 @@ export const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0.5rem;
+  select {
+    cursor: pointer;
+  }
+  select,
+  input {
+    padding: 0.25em 1em;
+  }
   label {
     color: #777;
     font-size: 0.75rem;

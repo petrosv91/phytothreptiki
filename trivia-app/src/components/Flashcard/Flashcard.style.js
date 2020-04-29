@@ -29,6 +29,8 @@ export const Front = styled.div`
 `;
 export const Back = styled.div`
   position: absolute;
+  padding: 1em;
+  text-align: center;
   transform: rotateY(180deg);
   backface-visibility: hidden;
 `;

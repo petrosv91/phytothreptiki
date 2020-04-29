@@ -2,9 +2,10 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import Category from './components/Category/Category';
 import FlashcardList from './components/FlashcardList/FlashcardList';
 import { useApi } from './hooks/useApi';
-import Category from './components/Category/Category';
+import { GlobalStyle } from './config/GlobalStyle';
 
 export const AppWrapper = styled.div`
   max-width: 100%;
@@ -14,20 +15,13 @@ export const AppWrapper = styled.div`
 function App() {
   const [data, loading, error, fetchdata] = useApi();
 
-  const handleSubmit = (e, amount, category) => {
-    e.preventDefault();
-    fetchdata(amount, category);
-  };
-
-  if (loading) return <h1>Loading...</h1>;
-  if (error) return <h1>{error}</h1>;
-  else
-    return (
-      <AppWrapper>
-        <Category handleSubmit={handleSubmit} />
-        <FlashcardList flashcards={data} />
-      </AppWrapper>
-    );
+  return (
+    <AppWrapper>
+      <GlobalStyle />
+      <Category fetchdata={fetchdata} />
+      <FlashcardList flashcards={data} loading={loading} error={error} />
+    </AppWrapper>
+  );
 }
 
 export default App;
