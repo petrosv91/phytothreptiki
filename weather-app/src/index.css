@@ -1,9 +1,0 @@
-/** @format */
-
-body {
-    text-align: center;
-    /* background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%); */
-    background-image: url('./assets/weather.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-}

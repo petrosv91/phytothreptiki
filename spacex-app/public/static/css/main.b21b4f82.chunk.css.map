@@ -1,1 +1,0 @@
-{"version":3,"sources":["App.css"],"names":[],"mappings":"AAAA,KACE,iBACF,CAEA,IACE,WAAY,CACZ,eACF","file":"main.b21b4f82.chunk.css","sourcesContent":[".App {\n  text-align: center;\n}\n\nimg {\n  width: 300px;\n  display: 'block';\n}\n"]}
