@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Footer from './components/footer/footer';
 import Navbar from './components/navbar/navbar';
+import Recipe from './components/recipe/recipe';
 import Layout from './layouts/layout';
 import Home from './pages/home';
 
@@ -15,6 +16,9 @@ function App() {
           <Switch>
             <Route exact path='/'>
               <Home />
+            </Route>
+            <Route exact path='/new-recipe'>
+              <Recipe />
             </Route>
           </Switch>
         </Flex>
