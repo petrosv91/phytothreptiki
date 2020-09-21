@@ -1,8 +1,10 @@
-import { Flex } from '@chakra-ui/core';
+import { Box, Flex, Icon } from '@chakra-ui/core';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { elements } from '../../config/elements';
-import { FormInput, Buttons, FormTagBox } from '../../lib/ui/';
+import { elements } from '../../config';
+import { FormInput, Buttons, FormIconInput } from '../../lib/ui/';
+
+const MAX_ELEMENTS = 3;
 
 export default function Recipe() {
   const { register, handleSubmit, erros } = useForm();
@@ -11,15 +13,19 @@ export default function Recipe() {
 
   return (
     <form style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
-      <Flex w='full' justify='space-evenly' align='center'>
+      <Flex w='full' align='center' justify='space-between'>
         <FormInput name='date' label='Ημερομηνία' formRef={register} />
         <FormInput name='type' label='Τύπος' formRef={register} />
         <FormInput name='recipe' label='Συνταγή' formRef={register} />
       </Flex>
-      {/* {elements.map(el => <Flex>
-        <FormTagBox name=''/>
-      </Flex>)} */}
-      <Flex w='full' justify='flex-end'>
+      {/* {MAX_ELEMENTS.map((el, index) => (
+        <FormIconInput w='full' name={`el-${index}`} label={el.name} />
+      ))} */}
+      <Flex mt='2' w='full' p='4' bg='gray.500' align='center' direction='column' cursor='pointer'>
+        Προσθήκη νέου στοιχείου
+        <Icon name='add' p='2' size='2em' rounded='full' border='1px solid white' />
+      </Flex>
+      <Flex mt='2' w='full' justify='flex-end'>
         <Buttons.Primary ml='auto' type='submit'>
           Καταχώρηση
         </Buttons.Primary>

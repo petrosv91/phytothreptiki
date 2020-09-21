@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Footer from './components/footer/footer';
 import Navbar from './components/navbar/navbar';
 import Recipe from './components/recipe/recipe';
-import Layout from './layouts/layout';
+import { Layout } from './layouts';
 import Home from './pages/home';
 
 function App() {

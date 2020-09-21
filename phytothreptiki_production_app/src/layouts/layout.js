@@ -4,7 +4,14 @@ import { Box } from '@chakra-ui/core';
 
 function Layout({ children }) {
   return (
-    <Box color='white' minHeight='100' height='100vh' bg='gray.700' overflowX='hidden'>
+    <Box
+      bg='gray.700'
+      color='white'
+      height='100vh'
+      minHeight='100'
+      overflowY='auto'
+      overflowX='hidden'
+    >
       {children}
     </Box>
   );
