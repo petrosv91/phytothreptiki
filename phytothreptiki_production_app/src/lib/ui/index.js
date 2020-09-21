@@ -10,6 +10,7 @@ import Skeleton from './loaders/skeleton';
 import Loading from './loaders/loading';
 import ConfirmationModal from './modals/confirmationModal';
 import Modal from './modals/modal';
+import CreateNewEntry from './create/createNewEntry';
 
 export {
   Buttons,
@@ -24,4 +25,5 @@ export {
   Skeleton,
   Modal,
   ConfirmationModal,
+  CreateNewEntry
 };

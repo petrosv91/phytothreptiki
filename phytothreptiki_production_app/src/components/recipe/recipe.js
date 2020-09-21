@@ -2,7 +2,12 @@ import { Box, Flex, Icon } from '@chakra-ui/core';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { elements } from '../../config';
-import { FormInput, Buttons, FormIconInput } from '../../lib/ui/';
+import {
+  FormInput,
+  Buttons,
+  FormIconInput,
+  CreateNewEntry
+} from '../../lib/ui/';
 
 const MAX_ELEMENTS = 3;
 
@@ -21,10 +26,7 @@ export default function Recipe() {
       {/* {MAX_ELEMENTS.map((el, index) => (
         <FormIconInput w='full' name={`el-${index}`} label={el.name} />
       ))} */}
-      <Flex mt='2' w='full' p='4' bg='gray.500' align='center' direction='column' cursor='pointer'>
-        Προσθήκη νέου στοιχείου
-        <Icon name='add' p='2' size='2em' rounded='full' border='1px solid white' />
-      </Flex>
+      <CreateNewEntry label='Προσθήκη νέου στοιχείου' />
       <Flex mt='2' w='full' justify='flex-end'>
         <Buttons.Primary ml='auto' type='submit'>
           Καταχώρηση
