@@ -2,18 +2,25 @@ import React from 'react';
 
 import { Flex, Text } from '@chakra-ui/core';
 
-import { Version } from '../../config/version';
+import { Version } from '../../config/';
 
 function Footer() {
   return (
-    <Flex w='full' color='gray.400' bottom='1' position='fixed' align='center' justify='center'>
+    <Flex
+      p='2'
+      mt='auto'
+      align='center'
+      color='gray.400'
+      position='relative'
+      justify={{ sm: 'center', xs: 'flex-start' }}
+    >
       <Flex>
         MyProject 2020
         <Text ml='.5em' fontSize='lg'>
           &copy;
         </Text>
       </Flex>
-      <Flex fontSize='sm' position='absolute' right='2'>
+      <Flex fontSize='sm' position='absolute' right='1em'>
         Version: {Version}
       </Flex>
     </Flex>

@@ -11,7 +11,7 @@ export default function Menu() {
   const MotionBox = motion.custom(Box);
 
   return (
-    <SimpleGrid h='full' px={5} pt={30} columns={2}>
+    <SimpleGrid px={5} pt={30} columns={2}>
       {menus.map((menu) => (
         <Flex key={menu.id} direction='column' align='center' justify='center'>
           <MotionBox whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>

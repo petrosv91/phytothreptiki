@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Flex, Heading, Text } from '@chakra-ui/core';
 import { useHistory } from 'react-router-dom';
-import useNavbarTitle from '../../hooks/useNavbarTitle';
+import { useNavbarTitle } from '../../hooks';
 
 function Navbar() {
   const history = useHistory();
-  const title = useNavbarTitle();
+  const { title } = useNavbarTitle();
 
   return (
     <Flex

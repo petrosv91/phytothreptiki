@@ -12,7 +12,7 @@ function useNavbarTitle() {
     return menuMatch?.label;
   }, [pathname]);
 
-  return title;
+  return { title };
 }
 
 export default useNavbarTitle;
