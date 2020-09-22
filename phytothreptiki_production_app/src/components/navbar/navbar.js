@@ -1,13 +1,10 @@
 import React from 'react';
 
-import { Flex, Heading, Text } from '@chakra-ui/core';
+import { Flex, Heading } from '@chakra-ui/core';
 import { useHistory } from 'react-router-dom';
-
-import { useNavbarTitle } from '../../hooks';
 
 function Navbar() {
   const history = useHistory();
-  const { title } = useNavbarTitle();
 
   return (
     <Flex
@@ -18,7 +15,7 @@ function Navbar() {
       bg='teal.400'
       padding='1.5rem'
       align='center'
-      justify='space-between'
+      justify='flex-start'
     >
       <Heading
         as='h1'
@@ -29,9 +26,6 @@ function Navbar() {
       >
         MyProject
       </Heading>
-      <Text fontWeight='semibold' fontSize='md'>
-        {title}
-      </Text>
     </Flex>
   );
 }

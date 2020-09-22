@@ -11,8 +11,10 @@ import FormSelect from './select/formSelect';
 import Select from './select/select';
 import FormSwitch from './switch/formSwitch';
 import Switch from './switch/switch';
+import * as Table from './table/table';
 
 export {
+  Table,
   Buttons,
   Input,
   FormInput,

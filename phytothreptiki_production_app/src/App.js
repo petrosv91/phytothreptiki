@@ -11,22 +11,24 @@ import Home from './pages/home';
 
 function App() {
   return (
-    <Layout>
-      <Router>
-        <Navbar />
-        <Flex px={[10, 50, 200, 300]} py={5} justify='center'>
-          <Switch>
-            <Route exact path='/'>
-              <Home />
-            </Route>
-            <Route exact path='/new-recipe'>
-              <Recipe />
-            </Route>
-          </Switch>
+    <Router>
+      <Layout>
+        <Flex h='full' direction='column'>
+          <Navbar />
+          <Flex px={[10, 50, 200, 300]} py={5} justify='center'>
+            <Switch>
+              <Route exact path='/'>
+                <Home />
+              </Route>
+              <Route exact path='/new-recipe'>
+                <Recipe />
+              </Route>
+            </Switch>
+          </Flex>
+          <Footer />
         </Flex>
-        <Footer />
-      </Router>
-    </Layout>
+      </Layout>
+    </Router>
   );
 }
 

@@ -21,6 +21,15 @@ const customTheme = {
     ...defaultTheme.icons,
     ...customIcons,
   },
+  colors: {
+    ...defaultTheme.colors,
+    primary: '#008D42',
+    secondary: '#F5F5F5',
+    tertiary: '#5E5E5E',
+    quaternary: '#FFFFFF',
+    quinary: '#C7E7F3',
+    senary: '#01491A',
+  },
 };
 
 export default customTheme;

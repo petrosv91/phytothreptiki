@@ -6,7 +6,7 @@ import Input from './input';
 
 function FormInput({ errors = {}, onChange, formRef, label, placeholder, name, ...rest }) {
   return (
-    <FormControl mt={2} isInvalid={errors[name]}>
+    <FormControl mt={2} isInvalid={errors[name] ? true : false}>
       {label && (
         <FormLabel mb={1} color='white' htmlFor={name}>
           {label}
