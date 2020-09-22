@@ -24,10 +24,16 @@ function ElementList({ data, isLoading, handleClick, ...rest }) {
     <ChakraList spacing={3} {...rest}>
       {data.map((item) => {
         return (
-          <ListItem key={uuidv4()} onClick={() => handleClick(item)}>
+          <ListItem
+            key={uuidv4()}
+            onClick={() => {
+              console.log('object');
+              handleClick(item);
+            }}
+          >
             <Flex align='center' justifyContent='flex-end'>
               <Flex mr={6} flexDirection='column'>
-                <Text fontSize='md' ml='auto'>
+                <Text color='gray.200' fontSize='md' ml='auto'>
                   {item.label}
                 </Text>
                 <Flex justify='flex-end' pt={1}>
@@ -37,7 +43,7 @@ function ElementList({ data, isLoading, handleClick, ...rest }) {
                         mr='1'
                         key={uuidv4()}
                         fontSize='sm'
-                        color='gray.300'
+                        color='gray.200'
                         _last={{ mr: '0' }}
                       >
                         {ingr}

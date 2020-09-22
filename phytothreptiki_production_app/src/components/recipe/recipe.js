@@ -47,9 +47,9 @@ export default function Recipe() {
             formRef={register({ required: true })}
           />
         </Flex>
-        <ElementForm mt={4} />
-        <ElementTable mt={4} elements={elements} />
       </form>
+      <ElementForm mt={4} />
+      <ElementTable mt={4} elements={elements} />
     </Flex>
   );
 }

@@ -1,15 +1,19 @@
 import React from 'react';
 
-import { Box, Flex, useDisclosure } from '@chakra-ui/core';
+import { Flex, useDisclosure } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
 
+import { useRecipeService } from '../../context/recipeProvider';
 import { Buttons, FormIconInput, FormInput, Modal } from '../../lib/ui';
 import FormTagBox from '../../lib/ui/inputs/formTagBox';
+import PickingElement from './pickingElement';
 
 export default function ElementForm() {
+  const [state, send] = useRecipeService();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit, errors } = useForm();
-
+  const { element } = state.context;
+  console.log(element);
   function deleteElement() {}
   function pickingElement() {
     onOpen();
@@ -19,9 +23,9 @@ export default function ElementForm() {
   }
 
   return (
-    <Box w='full'>
+    <Flex direction='column'>
       <Modal isOpen={isOpen} onClose={onClose} header='Επιλογή Ά Ύλης' darkMode>
-        {/* <PickingItem send={send} onClose={onClose} /> */}
+        <PickingElement send={send} onClose={onClose} />
       </Modal>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Flex direction='column'>
@@ -30,6 +34,7 @@ export default function ElementForm() {
             label='Ά Ύλη'
             errors={errors}
             leftIcon='search'
+            defaultValue={element.label}
             rightIcon='small-close'
             onClick={pickingElement}
             rightIconClick={deleteElement}
@@ -48,6 +53,6 @@ export default function ElementForm() {
           </Buttons.Primary>
         </Flex>
       </form>
-    </Box>
+    </Flex>
   );
 }

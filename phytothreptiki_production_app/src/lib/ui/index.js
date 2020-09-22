@@ -3,6 +3,7 @@ import CreateNewEntry from './create/createNewEntry';
 import FormIconInput from './inputs/formIconInput';
 import FormInput from './inputs/formInput';
 import Input from './inputs/input';
+import ElementList from './lists/elementList';
 import Loading from './loaders/loading';
 import Skeleton from './loaders/skeleton';
 import ConfirmationModal from './modals/confirmationModal';
@@ -28,4 +29,5 @@ export {
   Modal,
   ConfirmationModal,
   CreateNewEntry,
+  ElementList,
 };

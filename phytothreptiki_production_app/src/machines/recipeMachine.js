@@ -1,10 +1,18 @@
 import { createMachine } from 'xstate';
 
+import { actions } from './recipeMachine.config';
+
 export const RecipeMachine = createMachine({
   id: 'recipe',
   initial: 'fillingForm',
-  context: {},
+  context: {
+    element: '',
+  },
   states: {
-    fillingForm: {},
+    fillingForm: {
+      on: {
+        PICK_ELEMENT: { actions: [actions.assignElement, actions.callback] },
+      },
+    },
   },
 });
