@@ -1,6 +1,7 @@
+import React from 'react';
+
 import { Flex, Icon, Box } from '@chakra-ui/core';
 import { motion } from 'framer-motion';
-import React from 'react';
 
 export default function CreateNewEntry({ label, ...rest }) {
   const MotionBox = motion.custom(Box);
@@ -20,13 +21,7 @@ export default function CreateNewEntry({ label, ...rest }) {
         borderColor='white'
       >
         {label}
-        <Icon
-          name='add'
-          p='2'
-          size='2em'
-          rounded='full'
-          border='1px solid white'
-        />
+        <Icon name='add' p='2' size='2em' rounded='full' border='1px solid white' />
       </Flex>
     </MotionBox>
   );

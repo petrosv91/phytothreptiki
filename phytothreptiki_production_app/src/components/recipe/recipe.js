@@ -1,15 +1,10 @@
-import { Box, Flex, Icon } from '@chakra-ui/core';
 import React from 'react';
-import { useForm } from 'react-hook-form';
-import { elements } from '../../config';
-import {
-  FormInput,
-  Buttons,
-  FormIconInput,
-  CreateNewEntry
-} from '../../lib/ui/';
 
-const MAX_ELEMENTS = 3;
+import { Flex } from '@chakra-ui/core';
+import { useForm } from 'react-hook-form';
+
+import { elements } from '../../config';
+import { FormInput, Buttons, CreateNewEntry } from '../../lib/ui/';
 
 export default function Recipe() {
   const { register, handleSubmit, erros } = useForm();

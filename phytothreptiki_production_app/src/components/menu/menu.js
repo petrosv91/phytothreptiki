@@ -1,9 +1,10 @@
 import React from 'react';
 
 import { Flex, Icon, SimpleGrid, Text, Box } from '@chakra-ui/core';
-import { menus } from '../../config/menus';
-import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useHistory } from 'react-router-dom';
+
+import { menus } from '../../config/menus';
 
 export default function Menu() {
   const history = useHistory();

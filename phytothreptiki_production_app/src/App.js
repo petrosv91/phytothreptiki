@@ -1,6 +1,8 @@
-import { Flex } from '@chakra-ui/core';
 import React from 'react';
+
+import { Flex } from '@chakra-ui/core';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import Footer from './components/footer/footer';
 import Navbar from './components/navbar/navbar';
 import Recipe from './components/recipe/recipe';
