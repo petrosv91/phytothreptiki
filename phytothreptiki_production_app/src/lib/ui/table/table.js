@@ -33,5 +33,5 @@ export function Body(props) {
   return <Box as='tbody' {...props} />;
 }
 export function Cell(props) {
-  return <Box as='td' p={3} lineHeight='1.25rem' whiteSpace='nowrap' {...props} />;
+  return <Box as='td' p={3} lineHeight='1.25rem' whiteSpace='break-spaces' {...props} />;
 }

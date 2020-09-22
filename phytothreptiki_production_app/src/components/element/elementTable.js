@@ -19,7 +19,7 @@ export default function ElementTable({ elements = [], rate = '', ...rest }) {
           <Table.Row key={el.id}>
             <Table.Cell>{el.label}</Table.Cell>
             <Table.Cell>{rate}</Table.Cell>
-            {el.formula?.map((ingr, index) => (
+            {el.formula.map((ingr, index) => (
               <Table.Cell key={index}>{ingr}</Table.Cell>
             ))}
           </Table.Row>

@@ -22,7 +22,7 @@ function FormIconInput({
   ...rest
 }) {
   return (
-    <FormControl mt='2'>
+    <FormControl mt='2' isInvalid={errors[name] ? true : false}>
       <FormLabel color='white' htmlFor={name}>
         {label}
       </FormLabel>
@@ -30,17 +30,7 @@ function FormIconInput({
         <InputLeftElement>
           <Icon name={leftIcon} color='gray.500' />
         </InputLeftElement>
-        <Input
-          py='2'
-          px='10'
-          bg='white'
-          name={name}
-          color='gray.900'
-          formRef={formRef}
-          errorBorderColor='red.500'
-          isInvalid={errors[name] ? true : false}
-          {...rest}
-        />
+        <Input py='2' px='10' bg='white' name={name} color='gray.900' formRef={formRef} {...rest} />
         <InputRightElement>
           <Icon cursor='pointer' name={rightIcon} color='red.500' onClick={rightIconClick} />
         </InputRightElement>

@@ -6,9 +6,10 @@ import { useHistory } from 'react-router-dom';
 
 import { elements } from '../../config';
 import { useNavbarTitle } from '../../hooks';
-import { FormInput, Buttons } from '../../lib/ui/';
+import { FormInput, Buttons, FormIconInput } from '../../lib/ui/';
 import Header from '../../lib/ui/header/header';
-import ElementTable from './elementTable';
+import ElementForm from '../element/elementForm';
+import ElementTable from '../element/elementTable';
 
 export default function Recipe() {
   const history = useHistory();
@@ -46,6 +47,7 @@ export default function Recipe() {
             formRef={register({ required: true })}
           />
         </Flex>
+        <ElementForm mt={4} />
         <ElementTable mt={4} elements={elements} />
       </form>
     </Flex>
