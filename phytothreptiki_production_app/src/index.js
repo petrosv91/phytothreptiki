@@ -5,13 +5,16 @@ import ReactDOM from 'react-dom';
 
 import App from './app';
 import { customTheme } from './config';
+import { RecipeProvider } from './context/recipeProvider';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={customTheme}>
-      <App />
-      <CSSReset />
+      <RecipeProvider>
+        <App />
+        <CSSReset />
+      </RecipeProvider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root'),
