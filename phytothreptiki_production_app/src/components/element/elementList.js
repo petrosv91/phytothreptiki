@@ -13,19 +13,19 @@ function ElementList({ query, paginationProps, isLoading, handleChange, handleCl
         <InputGroup>
           <Input
             w={300}
-            onChange={handleChange}
-            placeholder='Αναζήτηση...'
             bg='gray.700'
             color='white'
             value={query}
             borderColor='gray.200'
+            onChange={handleChange}
+            placeholder='Αναζήτηση...'
           />
         </InputGroup>
       </FormControl>
       <List
         pt={5}
-        handleClick={handleClick}
         isLoading={isLoading}
+        handleClick={handleClick}
         data={paginationProps.currentData}
       />
       {!isLoading && <Pagination {...paginationProps} />}

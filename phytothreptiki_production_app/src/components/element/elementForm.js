@@ -1,43 +1,53 @@
 import React from 'react';
 
-import { Flex, useDisclosure } from '@chakra-ui/core';
+import { Flex, useDisclosure, useToast } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
 
-import { useRecipeService } from '../../context/recipeProvider';
-import { Buttons, FormIconInput, FormInput, Modal } from '../../lib/ui';
-import FormTagBox from '../../lib/ui/inputs/formTagBox';
+import { useFormService } from '../../context/formProvider';
+import { Modal, Buttons, FormIconInput, FormInput } from '../../lib/ui';
+import { ValidateTable } from '../../utils';
 import PickingElement from './pickingElement';
 
 export default function ElementForm() {
-  const [state, send] = useRecipeService();
+  const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { register, handleSubmit, errors } = useForm();
-  const { element } = state.context;
-  console.log(element);
-  function deleteElement() {}
-  function pickingElement() {
-    onOpen();
+  const { register, handleSubmit, reset, setValue, errors } = useForm();
+
+  const [state, send] = useFormService();
+  const { elements } = state.context;
+
+  function onSubmit(formData) {
+    const { element, rate, ingredients } = formData;
+    if (!ValidateTable({ formData, elements, toast })) return;
+    send({
+      type: 'UPDATE_TABLE',
+      label: element,
+      rate,
+      formula: ingredients.split('-'),
+      callback: reset,
+    });
   }
-  function onSubmit(data) {
-    console.log(data);
+  function handleItemClick(item) {
+    onClose();
+    setValue('element', item.label);
+    setValue('ingredients', item.formula.join('-'));
   }
 
   return (
-    <Flex direction='column'>
-      <Modal isOpen={isOpen} onClose={onClose} header='Επιλογή Ά Ύλης' darkMode>
-        <PickingElement send={send} onClose={onClose} />
-      </Modal>
+    <>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <Modal isOpen={isOpen} onClose={onClose} header='Επιλογή Ά Ύλης' darkMode>
+          <PickingElement handleItemClick={handleItemClick} />
+        </Modal>
         <Flex direction='column'>
           <FormIconInput
-            name='startingMaterial'
+            name='element'
             label='Ά Ύλη'
             errors={errors}
+            onClick={onOpen}
             leftIcon='search'
-            defaultValue={element.label}
+            rightIconClick={reset}
             rightIcon='small-close'
-            onClick={pickingElement}
-            rightIconClick={deleteElement}
             formRef={register({ required: true })}
           />
           <FormInput
@@ -47,12 +57,19 @@ export default function ElementForm() {
             errors={errors}
             formRef={register({ required: true })}
           />
-          <FormTagBox name='ingredients' label='Στοιχεία' />
-          <Buttons.Primary ml='auto' type='submit'>
+          <FormInput
+            w='full'
+            name='ingredients'
+            label='Στοιχεία'
+            cursor='default'
+            pointerEvents='none'
+            formRef={register}
+          />
+          <Buttons.Primary mt={4} ml='auto' type='submit'>
             Προσθήκη
           </Buttons.Primary>
         </Flex>
       </form>
-    </Flex>
+    </>
   );
 }

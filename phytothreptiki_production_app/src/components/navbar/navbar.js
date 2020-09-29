@@ -22,7 +22,9 @@ function Navbar() {
         size='md'
         cursor='pointer'
         letterSpacing={'-.1rem'}
-        onClick={() => history.push('/')}
+        onClick={() => {
+          history.push('/');
+        }}
       >
         MyProject
       </Heading>

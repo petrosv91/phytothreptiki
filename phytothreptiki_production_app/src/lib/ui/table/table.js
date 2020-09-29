@@ -3,7 +3,7 @@ import React from 'react';
 import { Box } from '@chakra-ui/core';
 
 export function Table(props) {
-  return <Box as='table' w='full' {...props} />;
+  return <Box as='table' w='full' overflow='auto' {...props} />;
 }
 export function Head(props) {
   return <Box as='thead' {...props} />;

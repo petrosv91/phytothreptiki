@@ -27,7 +27,6 @@ function ElementList({ data, isLoading, handleClick, ...rest }) {
           <ListItem
             key={uuidv4()}
             onClick={() => {
-              console.log('object');
               handleClick(item);
             }}
           >

@@ -6,7 +6,7 @@ import { elements } from '../../config';
 import { useFiltersData, usePagination } from '../../hooks';
 import ElementList from './elementList';
 
-export default function PickingElement({ send, onClose }) {
+export default function PickingElement({ handleItemClick }) {
   const keys = React.useRef(['label']);
   const [query, setQuery] = React.useState('');
   const filterdData = useFiltersData({ data: elements, query, keys });
@@ -15,20 +15,13 @@ export default function PickingElement({ send, onClose }) {
   function handleChange(e) {
     setQuery(e.target.value);
   }
-  function handleElementClick(element) {
-    send({
-      type: 'PICK_ELEMENT',
-      callback: onClose,
-      element,
-    });
-  }
 
   return (
     <Flex justify='center' align='center' direction='column'>
       <ElementList
         query={query}
-        handleClick={handleElementClick}
         handleChange={handleChange}
+        handleClick={handleItemClick}
         paginationProps={paginationProps}
         isLoading={false}
       />
