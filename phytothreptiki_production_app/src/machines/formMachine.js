@@ -1,6 +1,6 @@
 import { createMachine } from 'xstate';
 
-import { actions, guards, services } from './formMachine.config';
+import { actions } from './formMachine.config';
 
 export const FormMachine = createMachine({
   id: 'formMachine',

@@ -23,9 +23,7 @@ function FormIconInput({
 }) {
   return (
     <FormControl mt='2' isInvalid={errors[name] ? true : false}>
-      <FormLabel color='white' htmlFor={name}>
-        {label}
-      </FormLabel>
+      <FormLabel htmlFor={name}>{label}</FormLabel>
       <InputGroup>
         <InputLeftElement>
           <Icon name={leftIcon} color='gray.500' />
@@ -39,4 +37,4 @@ function FormIconInput({
   );
 }
 
-export default FormIconInput;
+export default React.memo(FormIconInput);

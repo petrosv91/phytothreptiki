@@ -23,7 +23,7 @@ export default function ElementTable({ ...rest }) {
         {elements.map((el, index) => (
           <Table.Row key={index}>
             <Table.Cell>{el.label}</Table.Cell>
-            <Table.Cell>{el.rate}</Table.Cell>
+            <Table.Cell>{el.rate}%</Table.Cell>
             {el.formula.map((ingr, index) => (
               <Table.Cell key={index}>{ingr}</Table.Cell>
             ))}

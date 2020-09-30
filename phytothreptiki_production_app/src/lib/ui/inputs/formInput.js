@@ -8,7 +8,7 @@ function FormInput({ errors = {}, onChange, formRef, label, placeholder, name, .
   return (
     <FormControl mt={2} isInvalid={errors[name] ? true : false}>
       {label && (
-        <FormLabel mb={1} color='white' htmlFor={name}>
+        <FormLabel mb={1} htmlFor={name}>
           {label}
         </FormLabel>
       )}
@@ -25,4 +25,4 @@ function FormInput({ errors = {}, onChange, formRef, label, placeholder, name, .
   );
 }
 
-export default FormInput;
+export default React.memo(FormInput);

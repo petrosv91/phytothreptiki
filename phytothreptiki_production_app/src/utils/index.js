@@ -14,13 +14,12 @@ export function isFormEmpty(formState) {
   return Object.values(formState).every((field) => field === '');
 }
 
-function isRateValid(elements, { rate }) {
-  const elSum = elements.reduce((acc, el) => acc + Number(el), 0);
-  console.log(elSum + rate);
+function isRateValid(elements, rate) {
+  const elSum = elements.reduce((acc, el) => acc + Number(el.rate), 0);
   return elSum + rate <= 100;
 }
-export function ValidateTable({ formData, elements, toast }) {
-  if (!isRateValid(elements, formData)) {
+export function ValidateTable({ formData, rate, elements, toast }) {
+  if (!isRateValid(elements, rate)) {
     createToast(toast, { type: 'error', title: 'Το ποσοστό έχει ξεπεράσει το 100%' });
     return false;
   }

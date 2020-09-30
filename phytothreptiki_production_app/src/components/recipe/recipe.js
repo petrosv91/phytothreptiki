@@ -42,7 +42,7 @@ export default function Recipe() {
     <Flex as='section' py={4} w={450} direction='column'>
       <ConfirmationModal message={MESSAGE} callback={onConfirm} isOpen={isOpen} onClose={onClose} />
       <form style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
-        <Header title={title} handleback={handleback} />
+        <Header title={title} handleback={handleback} submit />
         <Flex mt={2} w='full' align='center' justify='space-between'>
           <FormInput
             name='date'

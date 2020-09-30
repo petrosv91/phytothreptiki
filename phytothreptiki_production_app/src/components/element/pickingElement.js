@@ -8,11 +8,12 @@ import { useFiltersData, usePagination } from '../../hooks';
 import ElementList from './elementList';
 
 export default function PickingElement({ handleItemClick }) {
-  const { data = [], status, error } = useQuery('elements', baseGetService);
-
   const keys = React.useRef(['label']);
   const [query, setQuery] = React.useState('');
-  const filterdData = useFiltersData({ data: data, query, keys });
+
+  const { data = [], status, error } = useQuery('elements', baseGetService);
+
+  const filterdData = useFiltersData({ data, query, keys });
   const paginationProps = usePagination(filterdData);
 
   function handleChange(e) {

@@ -1,28 +1,33 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { Flex, useDisclosure, useToast } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
 
 import { useFormService } from '../../context/formProvider';
 import { Modal, Buttons, FormIconInput, FormInput } from '../../lib/ui';
+import FormSlider from '../../lib/ui/slider/formSlider';
 import { ValidateTable } from '../../utils';
 import PickingElement from './pickingElement';
 
 export default function ElementForm() {
   const toast = useToast();
+  const [rate, setRate] = useState(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit, reset, setValue, errors } = useForm();
 
   const [state, send] = useFormService();
   const { elements } = state.context;
 
+  const onSliderChange = useCallback((value) => {
+    setRate(value);
+  }, []);
   function onSubmit(formData) {
-    const { element, rate, ingredients } = formData;
-    if (!ValidateTable({ formData, elements, toast })) return;
+    const { element, ingredients } = formData;
+    if (!ValidateTable({ formData, rate, elements, toast })) return;
     send({
       type: 'UPDATE_TABLE',
       label: element,
-      rate,
+      rate: rate,
       formula: ingredients.split('-'),
       callback: reset,
     });
@@ -41,22 +46,16 @@ export default function ElementForm() {
         </Modal>
         <Flex direction='column'>
           <FormIconInput
-            name='element'
             label='Ά Ύλη'
-            errors={errors}
-            onClick={onOpen}
+            name='element'
             leftIcon='search'
-            rightIconClick={reset}
             rightIcon='small-close'
-            formRef={register({ required: true })}
-          />
-          <FormInput
-            w='full'
-            name='rate'
-            label='Συμμετοχή'
+            onClick={() => onOpen()}
+            rightIconClick={reset}
             errors={errors}
             formRef={register({ required: true })}
           />
+          <FormSlider w='full' label='Συμμετοχή' value={rate} onChange={onSliderChange} />
           <FormInput
             w='full'
             name='ingredients'
