@@ -15,7 +15,7 @@ function Modal({ children, isOpen, onClose, header, darkMode }) {
   return (
     <ChakraModal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent py={4} minH='70vh' borderRadius='md' bg={darkMode ? dark.bg : light.bg}>
+      <ModalContent py={4} minH='80vh' borderRadius='md' bg={darkMode ? dark.bg : light.bg}>
         <ModalHeader textAlign='center' color={darkMode ? dark.color : light.color}>
           {header}
         </ModalHeader>

@@ -4,7 +4,7 @@ import { Box, Flex, Text } from '@chakra-ui/core';
 
 import { Buttons } from '..';
 
-export default function Header({ handleback, title, ...rest }) {
+export default function Header({ handleback, title, submit = false, ...rest }) {
   return (
     <Flex align='center' {...rest}>
       <Buttons.Icon icon='arrow-back' onClick={handleback} />
@@ -13,9 +13,11 @@ export default function Header({ handleback, title, ...rest }) {
           {title}
         </Text>
       </Box>
-      <Buttons.Tertiary w={200} type='submit'>
-        Καταχώρηση
-      </Buttons.Tertiary>
+      {submit && (
+        <Buttons.Tertiary w={200} type='submit'>
+          Καταχώρηση
+        </Buttons.Tertiary>
+      )}
     </Flex>
   );
 }

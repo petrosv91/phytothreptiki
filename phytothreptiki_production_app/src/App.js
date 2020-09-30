@@ -9,6 +9,7 @@ import Recipe from './components/recipe/recipe';
 import { FormProvider } from './context/formProvider';
 import { Layout } from './layouts';
 import Home from './pages/home';
+import ListRecipe from './components/listRecipe/listRecipe';
 
 function App() {
   return (
@@ -25,7 +26,9 @@ function App() {
                 <Route path='/recipe'>
                   <Recipe />
                 </Route>
-                <Route path='/search'>hello</Route>
+                <Route path='/search'>
+                  <ListRecipe />
+                </Route>
               </FormProvider>
             </Switch>
           </Flex>

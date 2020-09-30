@@ -1,29 +1,40 @@
 import React from 'react';
 
-import { Flex } from '@chakra-ui/core';
+import { Flex, Text } from '@chakra-ui/core';
+import { useQuery } from 'react-query';
 
-import { elements } from '../../config';
+import baseGetService from '../../api';
 import { useFiltersData, usePagination } from '../../hooks';
 import ElementList from './elementList';
 
 export default function PickingElement({ handleItemClick }) {
+  const { data = [], status, error } = useQuery('elements', baseGetService);
+
   const keys = React.useRef(['label']);
   const [query, setQuery] = React.useState('');
-  const filterdData = useFiltersData({ data: elements, query, keys });
+  const filterdData = useFiltersData({ data: data, query, keys });
   const paginationProps = usePagination(filterdData);
 
   function handleChange(e) {
     setQuery(e.target.value);
   }
 
+  if (error)
+    return (
+      <Flex justify='center' align='center'>
+        <Text color='white' fontSize='md' fontWeight='500'>
+          {error.message}
+        </Text>
+      </Flex>
+    );
   return (
-    <Flex justify='center' align='center' direction='column'>
+    <Flex justify='center' align='center'>
       <ElementList
         query={query}
         handleChange={handleChange}
         handleClick={handleItemClick}
         paginationProps={paginationProps}
-        isLoading={false}
+        isLoading={status === 'loading'}
       />
     </Flex>
   );
