@@ -9,8 +9,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Import Routes
-const postsRoute = require('./routes/posts');
-app.use('/posts', postsRoute);
+const apiRoute = require('./routes/api');
+app.use('/api', apiRoute);
 
 // Connect to DB
 const mongoose = require('mongoose');
@@ -31,4 +31,4 @@ mongoose.connect(
     console.log('}');
   }
 );
-app.listen(3000);
+app.listen(3001);
