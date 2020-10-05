@@ -16,19 +16,13 @@ function FormSelect({
   ...rest
 }) {
   return (
-    <FormControl mt={2}>
+    <FormControl mt={2} {...rest}>
       {label && (
         <FormLabel mb={1} color='white' htmlFor={name}>
           {label}
         </FormLabel>
       )}
-      <Select
-        formRef={formRef}
-        name={name}
-        defaultValue={defaultValue}
-        onChange={onChange}
-        {...rest}
-      >
+      <Select formRef={formRef} name={name} defaultValue={defaultValue} onChange={onChange}>
         {options.map((option, index) => (
           <option key={index} value={option[optionId]}>
             {option[optionName]}

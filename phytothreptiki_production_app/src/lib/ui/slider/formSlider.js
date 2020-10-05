@@ -13,14 +13,14 @@ import {
 
 function FormSlider({ value = 0, onChange, label, ...rest }) {
   return (
-    <FormControl mt={2}>
+    <FormControl mt={2} {...rest}>
       {label && (
         <Flex mb={1}>
           <FormLabel>{label}</FormLabel>
           <Text>({value}%)</Text>
         </Flex>
       )}
-      <Slider defaultValue={0} min={0} max={100} onChange={onChange} {...rest}>
+      <Slider defaultValue={0} min={0} max={100} onChange={onChange}>
         <SliderTrack>
           <SliderFilledTrack />
         </SliderTrack>

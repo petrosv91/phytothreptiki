@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { DeleteIcon, Icon } from '@chakra-ui/icons';
+import { Icon } from '@chakra-ui/core';
+import { CloseIcon } from '@chakra-ui/icons';
 
 import { useFormService } from '../../context/formProvider';
 import { Table } from '../../lib/ui';
@@ -30,7 +31,9 @@ export default function ElementTable({ ...rest }) {
             {el.formula.map((ingr, index) => (
               <Table.Cell key={index}>{ingr}</Table.Cell>
             ))}
-            <Table.Cell>{/* <Icon as={DeleteIcon} color='red.400' size='10px' /> */}</Table.Cell>
+            <Table.Cell>
+              <Icon as={CloseIcon} color='red.400' />
+            </Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>
