@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { List as ChakraList, Flex, Text, PseudoBox } from '@chakra-ui/core';
+import { List as ChakraList, Flex, Text, Box } from '@chakra-ui/core';
 import { v4 as uuidv4 } from 'uuid';
 
 import { ITEMS_PER_PAGE } from '../../../hooks/usePagination';
@@ -36,18 +36,17 @@ function ElementList({ data, isLoading, handleClick, ...rest }) {
                   {item.label}
                 </Text>
                 <Flex justify='flex-end' pt={1}>
-                  {item.formula.map((ingr, index) => {
+                  {item.formula.map((ingr) => {
                     return (
-                      <PseudoBox
-                        mr='1'
+                      <Box
                         key={uuidv4()}
                         fontSize='sm'
                         color='gray.200'
-                        _last={{ mr: '0' }}
+                        _after={{ content: "'-'" }}
+                        _last={{ _after: { content: "''" } }}
                       >
                         {ingr}
-                        {index === item.formula.length - 1 ? '' : '-'}
-                      </PseudoBox>
+                      </Box>
                     );
                   })}
                 </Flex>

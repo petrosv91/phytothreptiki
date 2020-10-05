@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 
 import { Flex, useDisclosure, useToast } from '@chakra-ui/core';
+import { SmallCloseIcon, SearchIcon } from '@chakra-ui/icons';
 import { useForm } from 'react-hook-form';
 
 import { useFormService } from '../../context/formProvider';
@@ -48,14 +49,14 @@ export default function ElementForm() {
           <FormIconInput
             label='Ά Ύλη'
             name='element'
-            leftIcon='search'
-            rightIcon='small-close'
             onClick={() => onOpen()}
+            leftIcon={SearchIcon}
+            rightIcon={SmallCloseIcon}
             rightIconClick={reset}
             errors={errors}
             formRef={register({ required: true })}
           />
-          <FormSlider w='full' label='Συμμετοχή' value={rate} onChange={onSliderChange} />
+          <FormSlider label='Συμμετοχή' value={rate} onChange={onSliderChange} />
           <FormInput
             w='full'
             name='ingredients'

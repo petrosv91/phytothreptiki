@@ -26,11 +26,11 @@ function FormIconInput({
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <InputGroup>
         <InputLeftElement>
-          <Icon name={leftIcon} color='gray.500' />
+          <Icon as={leftIcon} color='gray.500' />
         </InputLeftElement>
         <Input py='2' px='10' bg='white' name={name} color='gray.900' formRef={formRef} {...rest} />
         <InputRightElement>
-          <Icon cursor='pointer' name={rightIcon} color='red.500' onClick={rightIconClick} />
+          <Icon cursor='pointer' as={rightIcon} color='red.500' onClick={rightIconClick} />
         </InputRightElement>
       </InputGroup>
     </FormControl>

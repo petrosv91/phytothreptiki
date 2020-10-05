@@ -12,7 +12,6 @@ import {
 } from '@chakra-ui/core';
 
 function FormSlider({ value = 0, onChange, label, ...rest }) {
-  console.log(value);
   return (
     <FormControl mt={2}>
       {label && (
@@ -21,9 +20,10 @@ function FormSlider({ value = 0, onChange, label, ...rest }) {
           <Text>({value}%)</Text>
         </Flex>
       )}
-      <Slider min={0} max={100} onChange={onChange} {...rest}>
-        <SliderTrack />
-        <SliderFilledTrack />
+      <Slider defaultValue={0} min={0} max={100} onChange={onChange} {...rest}>
+        <SliderTrack>
+          <SliderFilledTrack />
+        </SliderTrack>
         <SliderThumb />
       </Slider>
     </FormControl>

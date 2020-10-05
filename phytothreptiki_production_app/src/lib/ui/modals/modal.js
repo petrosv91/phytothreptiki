@@ -14,14 +14,15 @@ const light = { bg: 'gray.200', color: 'black' };
 function Modal({ children, isOpen, onClose, header, darkMode }) {
   return (
     <ChakraModal isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent py={4} minH='80vh' borderRadius='md' bg={darkMode ? dark.bg : light.bg}>
-        <ModalHeader textAlign='center' color={darkMode ? dark.color : light.color}>
-          {header}
-        </ModalHeader>
-        <ModalCloseButton color={darkMode ? dark.color : light.color} />
-        {children}
-      </ModalContent>
+      <ModalOverlay>
+        <ModalContent py={4} minH='80vh' borderRadius='md' bg={darkMode ? dark.bg : light.bg}>
+          <ModalHeader textAlign='center' color={darkMode ? dark.color : light.color}>
+            {header}
+          </ModalHeader>
+          <ModalCloseButton color={darkMode ? dark.color : light.color} />
+          {children}
+        </ModalContent>
+      </ModalOverlay>
     </ChakraModal>
   );
 }

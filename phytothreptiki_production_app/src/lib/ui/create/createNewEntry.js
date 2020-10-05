@@ -21,7 +21,7 @@ export default function CreateNewEntry({ label, ...rest }) {
         borderColor='white'
       >
         {label}
-        <Icon name='add' p='2' size='2em' rounded='full' border='1px solid white' />
+        <Icon name='add' p='2' boxSize='2em' rounded='full' border='1px solid white' />
       </Flex>
     </MotionBox>
   );

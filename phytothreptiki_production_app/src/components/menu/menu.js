@@ -1,24 +1,20 @@
 import React from 'react';
 
 import { Flex, Icon, SimpleGrid, Text } from '@chakra-ui/core';
-// import { motion } from 'framer-motion';
 import { useHistory } from 'react-router-dom';
 
 import { menus } from '../../config/menus';
 
 export default function Menu() {
   const history = useHistory();
-  // const [active, setActive] = React.useState(false);
-  // const MotionBox = motion.custom(Box);
 
   return (
     <SimpleGrid px={5} pt={30} columns={2}>
       {menus.map((menu) => (
         <Flex key={menu.id} direction='column' align='center' justify='center'>
-          {/* <MotionBox whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}> */}
           <Flex
-            size='100px'
             bg='gray.200'
+            boxSize='100px'
             align='center'
             justify='center'
             cursor='pointer'
@@ -29,9 +25,8 @@ export default function Menu() {
               history.push(menu.url);
             }}
           >
-            <Icon size='32px' color='gray.600' name={menu.iconName} />
+            <Icon boxSize='32px' color='gray.600' as={menu.icon} />
           </Flex>
-          {/* </MotionBox> */}
           <Text mt={2} color='gray.300' textAlign='center' fontWeight='bold'>
             {menu.label}
           </Text>

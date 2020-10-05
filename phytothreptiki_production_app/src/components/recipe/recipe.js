@@ -43,7 +43,7 @@ export default function Recipe() {
       <ConfirmationModal message={MESSAGE} callback={onConfirm} isOpen={isOpen} onClose={onClose} />
       <form style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
         <Header title={title} handleback={handleback} submit />
-        <Flex mt={2} w='full' align='center' justify='space-between'>
+        <Flex mt={2} align='center' justify='space-between'>
           <FormInput
             name='date'
             label='Ημερομηνία'

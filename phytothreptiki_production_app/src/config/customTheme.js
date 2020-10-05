@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { theme as defaultTheme } from '@chakra-ui/core';
+import { theme } from '@chakra-ui/core';
 
 const customIcons = {
   user: {
@@ -16,19 +16,15 @@ const customIcons = {
 };
 
 const customTheme = {
-  ...defaultTheme,
+  ...theme,
   icons: {
-    ...defaultTheme.icons,
+    ...theme.icons,
     ...customIcons,
   },
   colors: {
-    ...defaultTheme.colors,
-    primary: '#008D42',
-    secondary: '#F5F5F5',
-    tertiary: '#5E5E5E',
-    quaternary: '#FFFFFF',
-    quinary: '#C7E7F3',
-    senary: '#01491A',
+    ...theme.colors,
+    formground: '#FFFFFF',
+    background: '#ECEBF2',
   },
 };
 

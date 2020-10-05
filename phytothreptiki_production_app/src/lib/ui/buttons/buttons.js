@@ -37,9 +37,9 @@ function Secondary({ children, ...rest }) {
 function Tertiary({ children, ...rest }) {
   return (
     <Button
-      cursor='pointer'
-      fontSize='md'
       bg='gray.50'
+      fontSize='md'
+      cursor='pointer'
       color='gray.500'
       variant='outline'
       {...rest}
@@ -53,11 +53,10 @@ function Icon({ icon, ...rest }) {
   return (
     <IconButton
       size='md'
-      cursor='pointer'
+      icon={icon}
       bg='teal.300'
       rounded='full'
-      icon={icon}
-      aria-label={icon}
+      cursor='pointer'
       _hover={{ bg: 'teal.300' }}
       _focus={{ boxShadow: 'none' }}
       {...rest}
