@@ -1,14 +1,20 @@
 import React from 'react';
 
-import { Icon } from '@chakra-ui/core';
-import { CloseIcon } from '@chakra-ui/icons';
+import { Flex, Icon } from '@chakra-ui/core';
+import { CloseIcon, EditIcon } from '@chakra-ui/icons';
+import { send } from 'xstate';
 
 import { useFormService } from '../../context/formProvider';
 import { Table } from '../../lib/ui';
 
 export default function ElementTable({ ...rest }) {
-  const [state] = useFormService();
+  const [state, send] = useFormService();
   const { elements } = state.context;
+
+  function editElement() {}
+  function deleteElement(el) {
+    send({ type: 'DELETE', el });
+  }
 
   if (!elements.length) return null;
   return (
@@ -31,8 +37,23 @@ export default function ElementTable({ ...rest }) {
             {el.formula.map((ingr, index) => (
               <Table.Cell key={index}>{ingr}</Table.Cell>
             ))}
-            <Table.Cell>
-              <Icon as={CloseIcon} color='red.400' />
+            <Table.Cell w='full'>
+              <Flex justify='space-between'>
+                <Icon
+                  as={EditIcon}
+                  size='10px'
+                  color='gray.300'
+                  cursor='pointer'
+                  onClick={() => editElement(el)}
+                />
+                <Icon
+                  as={CloseIcon}
+                  size='10px'
+                  color='red.400'
+                  cursor='pointer'
+                  onClick={() => deleteElement(el)}
+                />
+              </Flex>
             </Table.Cell>
           </Table.Row>
         ))}

@@ -9,7 +9,7 @@ export default function Menu() {
   const history = useHistory();
 
   return (
-    <SimpleGrid px={5} pt={30} columns={2}>
+    <SimpleGrid px={5} pt={30} columns={2} spacing={8}>
       {menus.map((menu) => (
         <Flex key={menu.id} direction='column' align='center' justify='center'>
           <Flex

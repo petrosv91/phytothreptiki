@@ -1,4 +1,4 @@
-import { SearchIcon, AddIcon } from '@chakra-ui/icons';
+import { SearchIcon, AddIcon, CloseIcon } from '@chakra-ui/icons';
 
 export const menus = [
   {
@@ -12,5 +12,11 @@ export const menus = [
     label: 'Νεα Συνταγή',
     url: '/recipe',
     icon: AddIcon,
+  },
+  {
+    id: 3,
+    label: 'Διαγραφή Συνταγής',
+    url: '/delete',
+    icon: CloseIcon,
   },
 ];

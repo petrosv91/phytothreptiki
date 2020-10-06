@@ -3,6 +3,7 @@ import React, { useCallback, useState } from 'react';
 import { Flex, useDisclosure, useToast } from '@chakra-ui/core';
 import { SmallCloseIcon, SearchIcon } from '@chakra-ui/icons';
 import { useForm } from 'react-hook-form';
+import { v4 as uuidv4 } from 'uuid';
 
 import { useFormService } from '../../context/formProvider';
 import { Modal, Buttons, FormIconInput, FormInput } from '../../lib/ui';
@@ -27,6 +28,7 @@ export default function ElementForm() {
     if (!ValidateTable({ formData, rate, elements, toast })) return;
     send({
       type: 'UPDATE_TABLE',
+      id: uuidv4(),
       label: element,
       rate: rate,
       formula: ingredients.split('-'),

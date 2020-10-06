@@ -6,7 +6,13 @@ export const actions = {
   },
   updateTable: assign({
     elements: (ctx, e) => {
-      return [...ctx.elements, { label: e.label, rate: e.rate, formula: e.formula }];
+      return [...ctx.elements, { id: e.id, label: e.label, rate: e.rate, formula: e.formula }];
+    },
+  }),
+  deleteElement: assign({
+    elements: (ctx, e) => {
+      const updatedTable = ctx.elements.filter((el) => el.id !== e.el.id);
+      return updatedTable;
     },
   }),
 };

@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import { useFormService } from '../../context/formProvider';
 import { useNavbarTitle } from '../../hooks';
-import { ConfirmationModal, FormInput } from '../../lib/ui/';
+import { ConfirmationModal, FormInput } from '../../lib/ui';
 import Header from '../../lib/ui/header/header';
 import { isFormEmpty } from '../../utils';
 import ElementForm from '../element/elementForm';

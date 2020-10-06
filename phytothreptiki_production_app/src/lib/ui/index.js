@@ -4,6 +4,7 @@ import FormIconInput from './inputs/formIconInput';
 import FormInput from './inputs/formInput';
 import Input from './inputs/input';
 import ElementList from './lists/elementList';
+import RecipeList from './lists/recipeList';
 import Loading from './loaders/loading';
 import Skeleton from './loaders/skeleton';
 import ConfirmationModal from './modals/confirmationModal';
@@ -30,4 +31,5 @@ export {
   ConfirmationModal,
   CreateNewEntry,
   ElementList,
+  RecipeList,
 };

@@ -12,6 +12,7 @@ export const FormMachine = createMachine({
     editting: {
       on: {
         UPDATE_TABLE: { actions: [actions.updateTable, actions.callback] },
+        DELETE: { actions: [actions.deleteElement] },
       },
     },
   },
