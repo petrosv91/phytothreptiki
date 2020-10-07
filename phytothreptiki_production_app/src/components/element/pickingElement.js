@@ -3,7 +3,7 @@ import React from 'react';
 import { Flex, Text } from '@chakra-ui/core';
 import { useQuery } from 'react-query';
 
-import baseGetService from '../../api';
+import { getData } from '../../api';
 import { useFiltersData, usePagination } from '../../hooks';
 import ElementList from './elementList';
 
@@ -11,7 +11,7 @@ export default function PickingElement({ handleItemClick }) {
   const keys = React.useRef(['label']);
   const [query, setQuery] = React.useState('');
 
-  const { data = [], status, error } = useQuery('elements', baseGetService);
+  const { data = [], status, error } = useQuery('elements', getData);
 
   const filterdData = useFiltersData({ data, query, keys });
   const paginationProps = usePagination(filterdData);

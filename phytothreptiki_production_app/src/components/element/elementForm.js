@@ -15,7 +15,7 @@ export default function ElementForm() {
   const toast = useToast();
   const [rate, setRate] = useState(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { register, handleSubmit, reset, setValue, errors } = useForm();
+  const { register, handleSubmit, reset, setValue, getValues, errors } = useForm();
 
   const [state, send] = useFormService();
   const { elements } = state.context;
@@ -44,18 +44,19 @@ export default function ElementForm() {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Modal isOpen={isOpen} onClose={onClose} header='Επιλογή Ά Ύλης' darkMode>
+        <Modal isOpen={isOpen} onClose={onClose} header='Επιλογή Ά Ύλης'>
           <PickingElement handleItemClick={handleItemClick} />
         </Modal>
         <Flex direction='column'>
           <FormIconInput
             label='Ά Ύλη'
             name='element'
-            onClick={() => onOpen()}
+            onClick={onOpen}
             leftIcon={SearchIcon}
             rightIcon={SmallCloseIcon}
             rightIconClick={reset}
             errors={errors}
+            value={getValues('element')}
             formRef={register({ required: true })}
           />
           <FormSlider label='Συμμετοχή' value={rate} onChange={onSliderChange} />

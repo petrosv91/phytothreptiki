@@ -40,8 +40,10 @@ function Tertiary({ children, ...rest }) {
       bg='gray.50'
       fontSize='md'
       cursor='pointer'
-      color='gray.500'
+      color='gray.400'
       variant='outline'
+      colorScheme='gray.100'
+      _hover={{ color: 'gray.500' }}
       {...rest}
     >
       {children}
@@ -52,12 +54,10 @@ function Tertiary({ children, ...rest }) {
 function Icon({ icon, ...rest }) {
   return (
     <IconButton
-      size='md'
       icon={icon}
-      bg='teal.300'
-      rounded='full'
+      color='teal.300'
       cursor='pointer'
-      _hover={{ bg: 'teal.300' }}
+      _hover={{ color: 'teal.500' }}
       _focus={{ boxShadow: 'none' }}
       {...rest}
     />

@@ -15,16 +15,16 @@ function FormSlider({ value = 0, onChange, label, ...rest }) {
   return (
     <FormControl mt={2} {...rest}>
       {label && (
-        <Flex mb={1}>
+        <Flex mb={1} color='gray.500'>
           <FormLabel>{label}</FormLabel>
           <Text>({value}%)</Text>
         </Flex>
       )}
       <Slider defaultValue={0} min={0} max={100} onChange={onChange}>
-        <SliderTrack>
-          <SliderFilledTrack />
+        <SliderTrack bg='gray.300'>
+          <SliderFilledTrack bg='teal.400' />
         </SliderTrack>
-        <SliderThumb />
+        <SliderThumb bg='teal.300' />
       </Slider>
     </FormControl>
   );

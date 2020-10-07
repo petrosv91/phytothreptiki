@@ -26,7 +26,6 @@ function RecipeList({ data, isLoading, handleClick, ...rest }) {
       {data.map((item) => {
         return (
           <ListItem
-            py={3}
             key={uuidv4()}
             onClick={() => {
               handleClick(item);
@@ -37,9 +36,7 @@ function RecipeList({ data, isLoading, handleClick, ...rest }) {
                 <Icon as={EditIcon} color='gray.300' size='md' cursor='pointer' />
                 <Icon mt={4} as={CloseIcon} color='red.400' size='md' cursor='pointer' />
               </Flex> */}
-              <Text mr={6} color='gray.200' fontSize='md'>
-                {item.label}
-              </Text>
+              <Text mr={6}>{item.label}</Text>
             </Flex>
           </ListItem>
         );

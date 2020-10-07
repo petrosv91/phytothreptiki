@@ -10,9 +10,9 @@ function Footer() {
       p='2'
       mt='auto'
       align='center'
-      color='gray.400'
+      color='gray.500'
       position='relative'
-      justify={{ sm: 'center', xs: 'flex-start' }}
+      justify={{ md: 'flex-start', lg: 'center' }}
     >
       <Flex>
         MyProject 2020

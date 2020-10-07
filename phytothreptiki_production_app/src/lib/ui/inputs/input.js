@@ -10,8 +10,13 @@ function Input({ onChange, formRef, placeholder, name, ...rest }) {
       ref={formRef}
       onChange={onChange}
       placeholder={placeholder}
+      color='gray.600'
+      fontSize='md'
+      fontWeight='500'
+      autoComplete='off'
+      borderColor='gray.300'
       errorBorderColor='red.500'
-      focusBorderColor='teal.100'
+      focusBorderColor='gray.400'
       {...rest}
     />
   );

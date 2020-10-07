@@ -39,7 +39,7 @@ export default function Recipe() {
   }
 
   return (
-    <Flex as='section' py={4} w={450} direction='column'>
+    <Flex as='section' py={6} px={8} w={600} direction='column' bg='gray.100' boxShadow='xl'>
       <ConfirmationModal message={MESSAGE} callback={onConfirm} isOpen={isOpen} onClose={onClose} />
       <form style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
         <Header title={title} handleback={handleback} submit />

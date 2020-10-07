@@ -12,9 +12,10 @@ function Navbar() {
       w='full'
       wrap='wrap'
       color='white'
-      bg='teal.400'
+      bg='teal.500'
       padding='1.5rem'
       align='center'
+      boxShadow='md'
       justify='flex-start'
     >
       <Heading

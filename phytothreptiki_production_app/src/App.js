@@ -18,7 +18,7 @@ function App() {
       <Layout>
         <Flex h='full' direction='column'>
           <Navbar />
-          <Flex px={[10, 50, 200, 300]} py={5} justify='center'>
+          <Flex px={[10, 50, 200, 300]} py={10} justify='center'>
             <Switch>
               <FormProvider>
                 <Route exact path='/'>

@@ -30,18 +30,16 @@ function ElementList({ data, isLoading, handleClick, ...rest }) {
               handleClick(item);
             }}
           >
-            <Flex align='center' justifyContent='flex-end'>
+            <Flex align='center' justify='flex-end'>
               <Flex mr={6} flexDirection='column'>
-                <Text color='gray.200' fontSize='md' ml='auto'>
-                  {item.label}
-                </Text>
-                <Flex justify='flex-end' pt={1}>
+                <Text>{item.label}</Text>
+                <Flex mt={0.5} justify='flex-end'>
                   {item.formula.map((ingr) => {
                     return (
                       <Box
                         key={uuidv4()}
                         fontSize='sm'
-                        color='gray.200'
+                        color='gray.500'
                         _after={{ content: "'-'" }}
                         _last={{ _after: { content: "''" } }}
                       >

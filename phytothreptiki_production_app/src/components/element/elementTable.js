@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Flex, Icon } from '@chakra-ui/core';
 import { CloseIcon, EditIcon } from '@chakra-ui/icons';
-import { send } from 'xstate';
 
 import { useFormService } from '../../context/formProvider';
 import { Table } from '../../lib/ui';

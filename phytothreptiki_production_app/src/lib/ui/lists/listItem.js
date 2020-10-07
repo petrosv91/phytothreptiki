@@ -5,16 +5,19 @@ import { ListItem as ChakraListItem, Skeleton } from '@chakra-ui/core';
 function ListItem({ children, onClick, isLoaded = true, ...rest }) {
   const listItem = (
     <ChakraListItem
+      py={4}
+      bg='white'
       width={300}
       cursor='pointer'
       onClick={onClick}
       rounded='md'
-      bg='gray.500'
-      textAlign='center'
+      boxShadow='md'
+      color='gray.500'
+      fontSize='md'
       fontWeight='semibold'
       borderRightWidth={15}
-      borderColor='teal.400'
-      py={4}
+      borderColor='teal.200'
+      _hover={{ boxShadow: 'lg', color: 'gray.600', borderColor: 'teal.300' }}
       {...rest}
     >
       {children}
@@ -25,17 +28,7 @@ function ListItem({ children, onClick, isLoaded = true, ...rest }) {
   }
   return (
     <Skeleton>
-      <ChakraListItem
-        rounded='md'
-        width={300}
-        bg='gray.500'
-        textAlign='center'
-        fontWeight='semibold'
-        borderRightWidth={15}
-        borderColor='teal.400'
-        height={24}
-        {...rest}
-      >
+      <ChakraListItem height={24} width={300} rounded='md' {...rest}>
         {children}
       </ChakraListItem>
     </Skeleton>

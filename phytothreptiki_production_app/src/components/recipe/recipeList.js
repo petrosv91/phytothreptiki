@@ -12,10 +12,8 @@ function RecipeList({ query, paginationProps, isLoading, handleChange, handleCli
         <InputGroup>
           <Input
             w={300}
-            bg='gray.700'
-            color='white'
+            boxShadow='md'
             value={query}
-            borderColor='gray.200'
             onChange={handleChange}
             placeholder='Αναζήτηση...'
           />
