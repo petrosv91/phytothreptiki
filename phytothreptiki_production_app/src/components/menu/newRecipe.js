@@ -39,24 +39,27 @@ export default function Recipe() {
   }
 
   return (
-    <Flex as='section' py={6} px={8} w={600} direction='column' bg='gray.100' boxShadow='xl'>
+    <Flex as='section' py={6} px={8} direction='column' bg='gray.100' boxShadow='xl'>
       <ConfirmationModal message={MESSAGE} callback={onConfirm} isOpen={isOpen} onClose={onClose} />
       <form style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
         <Header title={title} handleback={handleback} submit />
         <Flex mt={2} align='center' justify='space-between'>
           <FormInput
+            w='30%'
             name='date'
             label='Ημερομηνία'
             errors={errors}
             formRef={register({ required: true })}
           />
           <FormInput
+            w='30%'
             name='type'
             label='Τύπος'
             errors={errors}
             formRef={register({ required: true })}
           />
           <FormInput
+            w='30%'
             name='recipe'
             label='Συνταγή'
             errors={errors}

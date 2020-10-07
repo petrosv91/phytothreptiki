@@ -7,7 +7,8 @@ import { Version } from '../../config/';
 function Footer() {
   return (
     <Flex
-      p='2'
+      py={2}
+      px='1.5rem'
       mt='auto'
       align='center'
       color='gray.500'
@@ -20,7 +21,7 @@ function Footer() {
           &copy;
         </Text>
       </Flex>
-      <Flex fontSize='sm' position='absolute' right='1em'>
+      <Flex fontSize='sm' position='absolute' right='2em'>
         Version: {Version}
       </Flex>
     </Flex>

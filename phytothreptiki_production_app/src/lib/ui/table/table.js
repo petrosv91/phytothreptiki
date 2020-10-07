@@ -3,7 +3,16 @@ import React from 'react';
 import { Box } from '@chakra-ui/core';
 
 export function Table(props) {
-  return <Box as='table' w='full' overflow='auto' {...props} />;
+  return (
+    <Box
+      as='table'
+      w='full'
+      overflow='auto'
+      borderColor='teal.400'
+      borderBottomWidth={4}
+      {...props}
+    />
+  );
 }
 export function Head(props) {
   return <Box as='thead' {...props} />;
@@ -15,23 +24,21 @@ export function Header(props) {
   return (
     <Box
       as='th'
-      p={3}
+      p={4}
       fontSize='xs'
       textAlign='left'
-      color='gray.500'
+      color='white'
       lineHeight='1rem'
-      fontWeight='medium'
+      fontWeight='bold'
       letterSpacing='wider'
       textTransform='uppercase'
-      backgroundColor='gray.50'
-      borderBottomWidth='1px'
       {...props}
     />
   );
 }
 export function Body(props) {
-  return <Box as='tbody' {...props} />;
+  return <Box as='tbody' color='gray.500' fontSize='md' fontWeight='500' {...props} />;
 }
 export function Cell(props) {
-  return <Box as='td' p={3} lineHeight='1.25rem' whiteSpace='break-spaces' {...props} />;
+  return <Box as='td' p={4} lineHeight='1.25rem' whiteSpace='break-spaces' {...props} />;
 }

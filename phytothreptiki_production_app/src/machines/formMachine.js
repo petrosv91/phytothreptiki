@@ -6,7 +6,13 @@ export const FormMachine = createMachine({
   id: 'formMachine',
   initial: 'editting',
   context: {
-    elements: [],
+    elements: [
+      {
+        label: 'ΦΩΣΦΩΡΙΚΟ ΚΑΛΙΟ',
+        rate: '30',
+        formula: [1, 2, 3],
+      },
+    ],
   },
   states: {
     editting: {
