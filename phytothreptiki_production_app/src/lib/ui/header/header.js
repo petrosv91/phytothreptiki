@@ -18,7 +18,7 @@ export default function Header({ handleback, title, submit = false, ...rest }) {
         _focus={{ boxShadow: 'none' }}
       />
       <Box px='2' w='full' textAlign='center'>
-        <Text as='h2' fontSize='lg' fontWeight='semibold' color='gray.600'>
+        <Text as='h2' fontSize='lg' fontWeight='semibold' color='gray.700'>
           {title}
         </Text>
       </Box>

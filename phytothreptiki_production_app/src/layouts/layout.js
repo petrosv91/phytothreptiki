@@ -5,8 +5,8 @@ import { Box } from '@chakra-ui/core';
 function Layout({ children }) {
   return (
     <Box
-      bg='gray.200'
-      color='white'
+      bg='gray.300'
+      color='gray.600'
       height='100vh'
       minHeight='100'
       overflowY='auto'

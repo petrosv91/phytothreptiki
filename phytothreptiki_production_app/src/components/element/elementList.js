@@ -12,11 +12,17 @@ function ElementList({ query, paginationProps, isLoading, handleChange, handleCl
       <FormControl mt={3}>
         <InputGroup>
           <Input
-            w={300}
-            boxShadow='md'
             value={query}
             onChange={handleChange}
             placeholder='Αναζήτηση...'
+            color='gray.600'
+            bg='gray.100'
+            boxShadow='md'
+            fontSize=''
+            borderWidth={1}
+            borderColor='gray.400'
+            _focus={{ bg: 'white' }}
+            _placeholder={{ color: 'gray.500' }}
           />
         </InputGroup>
       </FormControl>

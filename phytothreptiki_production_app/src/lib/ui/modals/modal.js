@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/core';
 
 const dark = { bg: 'gray.700', color: 'white' };
-const light = { bg: 'gray.200', color: 'black' };
+const light = { bg: 'gray.300', color: 'black' };
 
 function Modal({ children, isOpen, onClose, header, darkMode }) {
   return (

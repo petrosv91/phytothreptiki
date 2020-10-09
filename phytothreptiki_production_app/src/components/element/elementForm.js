@@ -19,7 +19,6 @@ export default function ElementForm() {
 
   const [state, send] = useFormService();
   const { elements } = state.context;
-
   const onSliderChange = useCallback((value) => {
     setRate(value);
   }, []);

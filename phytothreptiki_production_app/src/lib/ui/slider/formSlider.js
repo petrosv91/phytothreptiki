@@ -15,7 +15,7 @@ function FormSlider({ value = 0, onChange, label, ...rest }) {
   return (
     <FormControl mt={2} {...rest}>
       {label && (
-        <Flex mb={1} color='gray.500'>
+        <Flex mb={1} color='gray.600'>
           <FormLabel>{label}</FormLabel>
           <Text>({value}%)</Text>
         </Flex>

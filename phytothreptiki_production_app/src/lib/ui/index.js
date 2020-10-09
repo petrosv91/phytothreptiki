@@ -1,5 +1,4 @@
 import * as Buttons from './buttons/buttons';
-import CreateNewEntry from './create/createNewEntry';
 import FormIconInput from './inputs/formIconInput';
 import FormInput from './inputs/formInput';
 import Input from './inputs/input';
@@ -29,7 +28,6 @@ export {
   Skeleton,
   Modal,
   ConfirmationModal,
-  CreateNewEntry,
   ElementList,
   RecipeList,
 };

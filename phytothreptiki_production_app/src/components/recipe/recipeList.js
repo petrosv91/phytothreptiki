@@ -1,21 +1,26 @@
 import React from 'react';
 
-import { FormControl, InputGroup, Box } from '@chakra-ui/core';
+import { FormControl, InputGroup } from '@chakra-ui/core';
 
 import { Pagination } from '../../layouts';
 import { RecipeList as List, Input } from '../../lib/ui';
 
 function RecipeList({ query, paginationProps, isLoading, handleChange, handleClick }) {
   return (
-    <Box w={300}>
+    <>
       <FormControl mt={3}>
         <InputGroup>
           <Input
-            w={300}
-            boxShadow='md'
             value={query}
             onChange={handleChange}
             placeholder='Αναζήτηση...'
+            bg='gray.100'
+            color='gray.600'
+            boxShadow='md'
+            borderWidth={1}
+            borderColor='gray.400'
+            _focus={{ bg: 'white' }}
+            _placeholder={{ color: 'gray.500' }}
           />
         </InputGroup>
       </FormControl>
@@ -26,7 +31,7 @@ function RecipeList({ query, paginationProps, isLoading, handleChange, handleCli
         data={paginationProps.currentData}
       />
       {!isLoading && <Pagination {...paginationProps} />}
-    </Box>
+    </>
   );
 }
 

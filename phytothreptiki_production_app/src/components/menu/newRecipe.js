@@ -31,7 +31,7 @@ export default function Recipe() {
     history.push('/');
   }
   function handleback() {
-    if (!isFormEmpty(getValues()) && !elements.length) {
+    if (!isFormEmpty(getValues()) || elements.length) {
       onOpen();
       return;
     }
@@ -39,7 +39,7 @@ export default function Recipe() {
   }
 
   return (
-    <Flex as='section' py={6} px={8} direction='column' bg='gray.100' boxShadow='xl'>
+    <Flex as='section' py={6} px={8} direction='column' bg='white' boxShadow='xl'>
       <ConfirmationModal message={MESSAGE} callback={onConfirm} isOpen={isOpen} onClose={onClose} />
       <form style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
         <Header title={title} handleback={handleback} submit />
