@@ -6,7 +6,13 @@ import { FormControl, InputGroup, Box } from '@chakra-ui/core';
 import { Pagination } from '../../layouts';
 import { ElementList as List, Input } from '../../lib/ui';
 
-function ElementList({ query, paginationProps, isLoading, handleChange, handleClick }) {
+function ElementList({
+  query,
+  paginationProps,
+  isLoading,
+  handleChange,
+  handleClick
+}) {
   return (
     <Box w={300}>
       <FormControl mt={3}>
@@ -21,8 +27,8 @@ function ElementList({ query, paginationProps, isLoading, handleChange, handleCl
             fontSize=''
             borderWidth={1}
             borderColor='gray.400'
-            _focus={{ bg: 'white' }}
             _placeholder={{ color: 'gray.500' }}
+            _focus={{ bg: 'white', borderColor: 'teal.200' }}
           />
         </InputGroup>
       </FormControl>

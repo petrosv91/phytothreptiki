@@ -5,27 +5,32 @@ import { useHistory } from 'react-router-dom';
 
 import { menus } from '../../config/menus';
 import ListItem from '../../lib/ui/lists/listItem';
+import { AnimatePresence } from 'framer-motion';
 
 export default function Menu() {
   const history = useHistory();
+
   return (
-    <List spacing={3}>
-      {menus.map((menu, index) => {
-        return (
-          <ListItem
-            p={8}
-            key={index}
-            onClick={() => {
-              history.push(menu.url);
-            }}
-          >
-            <Flex align='center' justify='space-between'>
-              <Icon boxSize={6} as={menu.icon} />
-              <Text>{menu.label}</Text>
-            </Flex>
-          </ListItem>
-        );
-      })}
-    </List>
+    <AnimatePresence initial={false}>
+      <List spacing={3}>
+        {menus.map((menu, index) => {
+          return (
+            <ListItem
+              p={8}
+              key={index}
+              onClick={() => {
+                history.push(menu.url);
+              }}
+              animation={{ index, shouldAnimate: true }}
+            >
+              <Flex align='center' justify='space-between'>
+                <Icon boxSize={6} as={menu.icon} />
+                <Text textAlign='right'>{menu.label}</Text>
+              </Flex>
+            </ListItem>
+          );
+        })}
+      </List>
+    </AnimatePresence>
   );
 }

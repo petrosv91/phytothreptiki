@@ -16,7 +16,7 @@ function Input({ onChange, formRef, placeholder, name, ...rest }) {
       autoComplete='off'
       borderColor='gray.300'
       errorBorderColor='red.500'
-      focusBorderColor='gray.400'
+      focusBorderColor='teal.200'
       _hover={{ borderColor: 'gray.400' }}
       {...rest}
     />

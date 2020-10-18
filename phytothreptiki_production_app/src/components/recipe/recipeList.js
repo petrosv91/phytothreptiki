@@ -5,7 +5,13 @@ import { FormControl, InputGroup } from '@chakra-ui/core';
 import { Pagination } from '../../layouts';
 import { RecipeList as List, Input } from '../../lib/ui';
 
-function RecipeList({ query, paginationProps, isLoading, handleChange, handleClick }) {
+function RecipeList({
+  query,
+  paginationProps,
+  isLoading,
+  handleChange,
+  handleClick
+}) {
   return (
     <>
       <FormControl mt={3}>
@@ -19,8 +25,8 @@ function RecipeList({ query, paginationProps, isLoading, handleChange, handleCli
             boxShadow='md'
             borderWidth={1}
             borderColor='gray.400'
-            _focus={{ bg: 'white' }}
             _placeholder={{ color: 'gray.500' }}
+            _focus={{ bg: 'white', borderColor: 'teal.200' }}
           />
         </InputGroup>
       </FormControl>
