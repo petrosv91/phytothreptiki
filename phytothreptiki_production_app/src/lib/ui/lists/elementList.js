@@ -42,9 +42,9 @@ function ElementList({ data, isLoading, handleClick, ...rest }) {
               }}
               animation={{ index, shouldAnimate: shouldAnimate.current }}
             >
-              <Flex align='center' justify='flex-end'>
-                <Flex mr={6} flexDirection='column'>
-                  <Text>{item.label}</Text>
+              <Flex px={6} align='center' justify='flex-end'>
+                <Flex flexDirection='column'>
+                  <Text textAlign='right'>{item.label}</Text>
                   <Flex mt={0.5} justify='flex-end'>
                     {item.formula.map(ingr => {
                       return (
