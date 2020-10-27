@@ -42,8 +42,8 @@ function RecipeList({ data, isLoading, handleClick, ...rest }) {
               }}
               animation={{ index, shouldAnimate: shouldAnimate.current }}
             >
-              <Flex align='center' justify='flex-end'>
-                <Text mr={6}>{item.label}</Text>
+              <Flex px={6} align='center' justify='flex-end'>
+                <Text textAlign='right'>{item.label}</Text>
               </Flex>
             </ListItem>
           );
