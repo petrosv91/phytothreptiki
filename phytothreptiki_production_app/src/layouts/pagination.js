@@ -7,8 +7,8 @@ function Pagination({ next, prev, jump, maxPage, canNext, canPrevious, currentPa
   const disabledColor = 'gray.500';
   const enabledColor = 'gray.600';
   return (
-    <Flex justifyContent='flex-end' py={4} align='center' >
-      <Box fontSize='sm' mr={2} color='gray.600'>
+    <Flex justifyContent='flex-end' py={4} align='center'>
+      <Box fontSize='sm' mr={2} color='text'>
         {currentPage} <span></span>από {maxPage}{' '}
       </Box>
       <Icon

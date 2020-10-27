@@ -1,17 +1,19 @@
 import React from 'react';
 
-import { ChakraProvider } from '@chakra-ui/core';
 import ReactDOM from 'react-dom';
 
 import App from './app';
-import { customTheme } from './config';
+import { ColorModeProvider } from './context/colorModeProvider';
+import { ThemeModeProvider } from './context/themeModeProvider';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ChakraProvider theme={customTheme}>
-      <App />
-    </ChakraProvider>
+    <ThemeModeProvider>
+      <ColorModeProvider>
+        <App />
+      </ColorModeProvider>
+    </ThemeModeProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

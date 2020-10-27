@@ -14,15 +14,15 @@ const icons = {
 function Toast({ type = 'error', title, content, onClose }) {
   return (
     <Flex
-      borderRightWidth={12}
-      borderColor={colors[type]}
-      bg='gray.300'
       w={['sm', 'sm', 'md', 'md']}
       mb={[5, 5, 2, 2]}
-      rounded='md'
       px={6}
       py={4}
+      rounded='md'
+      bg='gray.300'
       align='center'
+      borderRightWidth={12}
+      borderColor={colors[type]}
     >
       <Icon name={icons[type]} color={colors[type]} size='20px' />
       <Flex direction='column' w='full' justify='center' color='gray.700'>

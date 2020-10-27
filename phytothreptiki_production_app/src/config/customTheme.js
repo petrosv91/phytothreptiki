@@ -1,13 +1,33 @@
-import { theme } from '@chakra-ui/core';
+import { theme as defaultTheme } from '@chakra-ui/core';
 
-const customTheme = {
-  ...theme,
-  icons: {
-    ...theme.icons,
-  },
+const breakpoints = ['22em', '48em', '62em', '80em'];
+breakpoints.sm = '22em';
+breakpoints.md = '48em';
+breakpoints.lg = '62em';
+breakpoints.xl = '80em';
+
+export const darkTheme = {
+  ...defaultTheme,
+  breakpoints: breakpoints,
+  icons: { ...defaultTheme.icons },
   colors: {
-    ...theme.colors,
+    ...defaultTheme.colors,
+    background: defaultTheme.colors.gray[700],
+    secondaryBackground: defaultTheme.colors.gray[500],
+    text: defaultTheme.colors.white,
+    secondaryText: defaultTheme.colors.gray[300],
   },
 };
 
-export default customTheme;
+export const lightTheme = {
+  ...darkTheme,
+  breakpoints: breakpoints,
+  icons: { ...defaultTheme.icons },
+  colors: {
+    ...darkTheme.colors,
+    background: defaultTheme.colors.gray[300],
+    secondaryBackground: defaultTheme.colors.white,
+    text: defaultTheme.colors.blackAlpha[800],
+    secondaryText: defaultTheme.colors.gray[500],
+  },
+};

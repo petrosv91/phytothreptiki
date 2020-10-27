@@ -32,10 +32,10 @@ function ListItem({ animation, children, onClick, isLoaded = true, ...rest }) {
             opacity: 0,
           },
         }}
+        exit='removed'
+        animate='visible'
         custom={animation.index}
         initial={animation.shouldAnimate ? 'hidden' : 'visible'}
-        animate='visible'
-        exit='removed'
       >
         <ChakraListItem
           py={4}

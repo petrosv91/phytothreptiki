@@ -3,6 +3,8 @@ import React from 'react';
 import { Flex, Heading } from '@chakra-ui/core';
 import { useHistory } from 'react-router-dom';
 
+import Colorpicker from '../colorPicker/colorPicker';
+
 function Navbar() {
   const history = useHistory();
 
@@ -16,7 +18,7 @@ function Navbar() {
       padding='1.5rem'
       align='center'
       boxShadow='md'
-      justify='flex-start'
+      justify='space-between'
     >
       <Heading
         as='h1'
@@ -29,6 +31,7 @@ function Navbar() {
       >
         MyProject
       </Heading>
+      <Colorpicker />
     </Flex>
   );
 }
