@@ -5,13 +5,7 @@ import { FormControl, InputGroup } from '@chakra-ui/core';
 import { Pagination } from '../../layouts';
 import { RecipeList as List, Input } from '../../lib/ui';
 
-function RecipeList({
-  query,
-  paginationProps,
-  isLoading,
-  handleChange,
-  handleClick
-}) {
+function RecipeList({ query, isLoading, handleClick, handleChange, paginationProps }) {
   return (
     <>
       <FormControl mt={3}>
