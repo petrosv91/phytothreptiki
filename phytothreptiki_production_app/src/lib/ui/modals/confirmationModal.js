@@ -11,22 +11,16 @@ import {
   Button,
 } from '@chakra-ui/core';
 
-export default function ConfirmationModal({
-  onClose,
-  isOpen,
-  message,
-  callback,
-  isLoading = false,
-}) {
+function ConfirmationModal({ isOpen, onClose, message, onConfirm, isLoading = false }) {
   return (
     <Modal isOpen={isOpen} onClose={isLoading ? () => {} : onClose}>
       <ModalOverlay>
-        <ModalContent borderRadius='md' bg='gray.300' py={4}>
+        <ModalContent py={4} bg='gray.300' borderRadius='md'>
           <ModalHeader>Επιβεβαίωση ενέργειας</ModalHeader>
           <ModalCloseButton tabIndex={-1} />
           <ModalBody>{message}</ModalBody>
           <ModalFooter>
-            <Button mr={3} colorScheme='teal' onClick={callback} isLoading={isLoading}>
+            <Button mr={3} colorScheme='teal' onClick={onConfirm} isLoading={isLoading}>
               Συνέχεια
             </Button>
             <Button variant='ghost' onClick={onClose} pointerEvents={isLoading ? 'none' : 'auto'}>
@@ -38,3 +32,5 @@ export default function ConfirmationModal({
     </Modal>
   );
 }
+
+export default ConfirmationModal;

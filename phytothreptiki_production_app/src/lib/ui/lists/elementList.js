@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { List as ChakraList, Flex, Text, Box } from '@chakra-ui/core';
+import { AnimatePresence } from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid';
 
 import { ITEMS_PER_PAGE } from '../../../hooks/usePagination';
 import ListItem from './listItem';
-import { AnimatePresence } from 'framer-motion';
 
 function ElementList({ data, isLoading, handleClick, ...rest }) {
   const shouldAnimate = React.useRef(true);
@@ -46,7 +46,7 @@ function ElementList({ data, isLoading, handleClick, ...rest }) {
                 <Flex mr={6} flexDirection='column'>
                   <Text>{item.label}</Text>
                   <Flex mt={0.5} justify='flex-end'>
-                    {item.formula.map(ingr => {
+                    {item.formula.map((ingr) => {
                       return (
                         <Box
                           key={uuidv4()}

@@ -4,8 +4,10 @@ import { Box, Flex, Icon, Text } from '@chakra-ui/core';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 
 import { Buttons } from '..';
+import { useNavbarTitle } from '../../../hooks';
 
-export default function Header({ handleback, title, submit = false, ...rest }) {
+export default function Header({ handleback, submit = false, ...rest }) {
+  const { title } = useNavbarTitle();
   return (
     <Flex align='center' {...rest}>
       <Icon

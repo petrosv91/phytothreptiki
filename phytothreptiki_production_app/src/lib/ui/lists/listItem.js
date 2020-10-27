@@ -17,20 +17,20 @@ function ListItem({ animation, children, onClick, isLoaded = true, ...rest }) {
     <AnimatePresence>
       <motion.div
         variants={{
-          hidden: index => ({
+          hidden: (index) => ({
             opacity: 0,
-            y: -15 * index
+            y: -15 * index,
           }),
-          visible: index => ({
+          visible: (index) => ({
             opacity: 1,
             y: 0,
             transition: {
-              delay: index * 0.025
-            }
+              delay: index * 0.025,
+            },
           }),
           removed: {
-            opacity: 0
-          }
+            opacity: 0,
+          },
         }}
         custom={animation.index}
         initial={animation.shouldAnimate ? 'hidden' : 'visible'}
@@ -44,7 +44,6 @@ function ListItem({ animation, children, onClick, isLoaded = true, ...rest }) {
           cursor='pointer'
           onClick={onClick}
           rounded='md'
-          boxShadow='md'
           color='gray.500'
           fontSize='md'
           fontWeight='semibold'
@@ -53,7 +52,7 @@ function ListItem({ animation, children, onClick, isLoaded = true, ...rest }) {
           _hover={{
             boxShadow: 'lg',
             color: 'gray.600',
-            borderColor: 'teal.300'
+            borderColor: 'teal.300',
           }}
           {...rest}
         >

@@ -5,18 +5,16 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
 import { useFormService } from '../../context/formProvider';
-import { useNavbarTitle } from '../../hooks';
 import { ConfirmationModal, FormInput } from '../../lib/ui';
 import Header from '../../lib/ui/header/header';
 import { isFormEmpty } from '../../utils';
 import ElementForm from '../element/elementForm';
-import ElementTable from '../element/elementTable';
+import ElementStore from '../element/elementStore';
 
 const MESSAGE = 'Προσοχή αν πατήσετε σύνεχεια θα χάσετε ότι έχετε κάνει στην διαδικασία';
 
 export default function Recipe() {
   const history = useHistory();
-  const { title } = useNavbarTitle();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit, getValues, errors } = useForm();
 
@@ -40,9 +38,14 @@ export default function Recipe() {
 
   return (
     <Flex as='section' py={6} px={8} direction='column' bg='white' boxShadow='xl'>
-      <ConfirmationModal message={MESSAGE} callback={onConfirm} isOpen={isOpen} onClose={onClose} />
+      <ConfirmationModal
+        message={MESSAGE}
+        isOpen={isOpen}
+        onClose={onClose}
+        onConfirm={onConfirm}
+      />
       <form style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
-        <Header title={title} handleback={handleback} submit />
+        <Header handleback={handleback} submit={true} />
         <Flex mt={2} align='center' justify='space-between'>
           <FormInput
             w='30%'
@@ -68,7 +71,7 @@ export default function Recipe() {
         </Flex>
       </form>
       <ElementForm mt={4} />
-      <ElementTable mt={4} />
+      <ElementStore mt={4} />
     </Flex>
   );
 }

@@ -6,13 +6,13 @@ export const FormMachine = createMachine({
   id: 'formMachine',
   initial: 'editting',
   context: {
-    elements: [],
+    store: [],
   },
   states: {
     editting: {
       on: {
-        UPDATE_TABLE: { actions: [actions.updateTable, actions.callback] },
-        DELETE: { actions: [actions.deleteElement] },
+        ADD: { actions: [actions.addItemToStore, actions.callback] },
+        DELETE: { actions: [actions.deleteItemFromStore] },
       },
     },
   },

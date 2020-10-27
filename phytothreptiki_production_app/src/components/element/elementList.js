@@ -2,17 +2,10 @@ import React from 'react';
 
 import { FormControl, InputGroup, Box } from '@chakra-ui/core';
 
-// import Barcode from '../../assets/barcode.png';
 import { Pagination } from '../../layouts';
 import { ElementList as List, Input } from '../../lib/ui';
 
-function ElementList({
-  query,
-  paginationProps,
-  isLoading,
-  handleChange,
-  handleClick
-}) {
+function ElementList({ query, isLoading, handleClick, handleChange, paginationProps }) {
   return (
     <Box w={300}>
       <FormControl mt={3}>

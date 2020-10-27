@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+  Flex,
   Modal as ChakraModal,
   ModalOverlay,
   ModalContent,
@@ -20,7 +21,9 @@ function Modal({ children, isOpen, onClose, header, darkMode }) {
             {header}
           </ModalHeader>
           <ModalCloseButton color={darkMode ? dark.color : light.color} />
-          {children}
+          <Flex align='center' justify='center'>
+            {children}
+          </Flex>
         </ModalContent>
       </ModalOverlay>
     </ChakraModal>

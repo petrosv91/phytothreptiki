@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { Flex, Icon, List, Text } from '@chakra-ui/core';
+import { AnimatePresence } from 'framer-motion';
 import { useHistory } from 'react-router-dom';
 
 import { menus } from '../../config/menus';
 import ListItem from '../../lib/ui/lists/listItem';
-import { AnimatePresence } from 'framer-motion';
 
 export default function Menu() {
   const history = useHistory();
