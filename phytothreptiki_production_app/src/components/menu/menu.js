@@ -7,9 +7,8 @@ import { useHistory } from 'react-router-dom';
 import { menus } from '../../config/menus';
 import ListItem from '../../lib/ui/lists/listItem';
 
-export default function Menu() {
+function Menu() {
   const history = useHistory();
-
   return (
     <AnimatePresence initial={false}>
       <List spacing={3}>
@@ -34,3 +33,5 @@ export default function Menu() {
     </AnimatePresence>
   );
 }
+
+export default Menu;

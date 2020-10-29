@@ -17,7 +17,7 @@ function ElementStore({ ...rest }) {
   if (!store.length) return null;
   return (
     <Table.Table {...rest}>
-      <Table.Head bg='teal.400'>
+      <Table.Head>
         <Table.Row>
           <Table.Header>Ά Ύλες</Table.Header>
           <Table.Header>Συμμετοχή</Table.Header>

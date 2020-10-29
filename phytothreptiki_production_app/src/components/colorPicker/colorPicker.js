@@ -30,17 +30,11 @@ function Circle({ color }) {
 function Colorpicker() {
   const { colorChange } = useColorMode();
   const { toggleTheme, currentTheme } = useThemeMode();
-  const MotionIcon = motion.custom(Icon);
+  const MotionIcon = motion.custom(SettingsIcon);
   return (
     <Menu>
       <MenuButton>
-        <MotionIcon
-          as={SettingsIcon}
-          width={5}
-          height={5}
-          rotate={30}
-          whileHover={{ rotate: 60 }}
-        />
+        <MotionIcon boxSize={5} whileHover={{ rotate: 30 }} />
       </MenuButton>
       <MenuList minWidth='50px' bg='background'>
         <SimpleGrid columns={MAX_LINEITEMS}>

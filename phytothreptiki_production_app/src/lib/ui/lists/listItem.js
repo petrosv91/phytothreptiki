@@ -3,7 +3,10 @@ import React from 'react';
 import { ListItem as ChakraListItem, Skeleton } from '@chakra-ui/core';
 import { AnimatePresence, motion } from 'framer-motion';
 
+import { useColorMode } from '../../../context/colorModeProvider';
+
 function ListItem({ animation, children, onClick, isLoaded = true, ...rest }) {
+  const { currentColor } = useColorMode();
   if (!isLoaded) {
     return (
       <Skeleton>
@@ -38,21 +41,21 @@ function ListItem({ animation, children, onClick, isLoaded = true, ...rest }) {
         initial={animation.shouldAnimate ? 'hidden' : 'visible'}
       >
         <ChakraListItem
-          py={4}
-          bg='white'
-          width={300}
           cursor='pointer'
           onClick={onClick}
+          py={4}
+          width={300}
           rounded='md'
-          color='gray.500'
           fontSize='md'
+          boxShadow='md'
           fontWeight='semibold'
           borderRightWidth={15}
-          borderColor='teal.200'
+          borderColor={`${currentColor}.400`}
+          color='secondaryText'
+          bg='secondaryBackground'
           _hover={{
-            boxShadow: 'lg',
-            color: 'gray.600',
-            borderColor: 'teal.300',
+            color: 'text',
+            borderColor: `${currentColor}.300`,
           }}
           {...rest}
         >

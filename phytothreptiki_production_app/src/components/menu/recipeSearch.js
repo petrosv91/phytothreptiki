@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import Header from '../../lib/ui/header/header';
 import PickingRecipe from '../recipe/pickingRecipe';
 
-export default function RecipeSearch() {
+function RecipeSearch() {
   const history = useHistory();
 
   function handleback() {
@@ -23,3 +23,5 @@ export default function RecipeSearch() {
     </Flex>
   );
 }
+
+export default RecipeSearch;

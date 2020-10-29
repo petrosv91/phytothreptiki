@@ -7,7 +7,7 @@ import { getData } from '../../api';
 import { useFiltersData, usePagination } from '../../hooks';
 import RecipeList from './recipeList';
 
-export default function PickingRecipe({ handleItemClick }) {
+function PickingRecipe({ handleItemClick }) {
   const keys = React.useRef(['label']);
   const [query, setQuery] = React.useState('');
   const { data = [], status, error } = useQuery('elements', getData);
@@ -20,7 +20,7 @@ export default function PickingRecipe({ handleItemClick }) {
 
   if (error)
     return (
-      <Text color='white' fontSize='md' fontWeight='500'>
+      <Text color='red.500' fontSize='md' fontWeight='500'>
         {error.message}
       </Text>
     );
@@ -34,3 +34,5 @@ export default function PickingRecipe({ handleItemClick }) {
     />
   );
 }
+
+export default PickingRecipe;

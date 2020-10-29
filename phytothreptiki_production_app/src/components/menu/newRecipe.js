@@ -13,13 +13,13 @@ import ElementStore from '../element/elementStore';
 
 const MESSAGE = 'Προσοχή αν πατήσετε σύνεχεια θα χάσετε ότι έχετε κάνει στην διαδικασία';
 
-export default function Recipe() {
+function Recipe() {
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit, getValues, errors } = useForm();
 
   const [state] = useFormService();
-  const { elements } = state.context;
+  const { store } = state.context;
 
   function onSubmit(data) {
     console.log(data);
@@ -29,7 +29,7 @@ export default function Recipe() {
     history.push('/');
   }
   function handleback() {
-    if (!isFormEmpty(getValues()) || elements.length) {
+    if (!isFormEmpty(getValues()) || store.length) {
       onOpen();
       return;
     }
@@ -37,7 +37,7 @@ export default function Recipe() {
   }
 
   return (
-    <Flex as='section' py={6} px={8} direction='column' bg='white' boxShadow='xl'>
+    <Flex w={[200, 300, 400, 500]} as='section' direction='column'>
       <ConfirmationModal
         message={MESSAGE}
         isOpen={isOpen}
@@ -75,3 +75,5 @@ export default function Recipe() {
     </Flex>
   );
 }
+
+export default Recipe;

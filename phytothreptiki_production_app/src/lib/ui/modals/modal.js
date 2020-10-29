@@ -9,18 +9,15 @@ import {
   ModalHeader,
 } from '@chakra-ui/core';
 
-const dark = { bg: 'gray.700', color: 'white' };
-const light = { bg: 'gray.300', color: 'black' };
-
-function Modal({ children, isOpen, onClose, header, darkMode }) {
+function Modal({ children, isOpen, onClose, header }) {
   return (
     <ChakraModal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay>
-        <ModalContent py={8} minH='50vh' borderRadius='md' bg={darkMode ? dark.bg : light.bg}>
-          <ModalHeader textAlign='center' color={darkMode ? dark.color : light.color}>
+        <ModalContent py={8} minH='50vh' borderRadius='md' bg='background'>
+          <ModalHeader textAlign='center' color='text'>
             {header}
           </ModalHeader>
-          <ModalCloseButton color={darkMode ? dark.color : light.color} />
+          <ModalCloseButton color='text' />
           <Flex align='center' justify='center'>
             {children}
           </Flex>

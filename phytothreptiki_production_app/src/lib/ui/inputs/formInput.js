@@ -8,7 +8,7 @@ function FormInput({ errors = {}, onChange, formRef, label, placeholder, name, .
   return (
     <FormControl mt={2} w={130} isInvalid={errors[name]} {...rest}>
       {label && (
-        <FormLabel mb={1} htmlFor={name} color='gray.600'>
+        <FormLabel mb={1} htmlFor={name} color='text'>
           {label}
         </FormLabel>
       )}

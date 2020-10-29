@@ -25,7 +25,7 @@ export default function PickingElement({ send, onClose }) {
 
   if (error)
     return (
-      <Text color='white' fontSize='md' fontWeight='500'>
+      <Text color='red.500' fontSize='md' fontWeight='500'>
         {error.message}
       </Text>
     );

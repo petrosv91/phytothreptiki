@@ -11,16 +11,11 @@ function RecipeList({ query, isLoading, handleClick, handleChange, paginationPro
       <FormControl mt={3}>
         <InputGroup>
           <Input
+            w={[250, 300]}
+            bg='background'
             value={query}
             onChange={handleChange}
             placeholder='Αναζήτηση...'
-            bg='gray.100'
-            color='gray.600'
-            boxShadow='md'
-            borderWidth={1}
-            borderColor='gray.400'
-            _placeholder={{ color: 'gray.500' }}
-            _focus={{ bg: 'white', borderColor: 'teal.200' }}
           />
         </InputGroup>
       </FormControl>

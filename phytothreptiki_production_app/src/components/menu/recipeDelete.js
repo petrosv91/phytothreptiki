@@ -10,7 +10,7 @@ import Header from '../../lib/ui/header/header';
 import { createToast } from '../../utils';
 import PickingRecipe from '../recipe/pickingRecipe';
 
-export default function RecipeDelete() {
+function RecipeDelete() {
   const toast = useToast();
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -55,3 +55,5 @@ export default function RecipeDelete() {
     </Flex>
   );
 }
+
+export default RecipeDelete;

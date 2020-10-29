@@ -1,11 +1,11 @@
 import React from 'react';
 
 import {
-  FormControl,
+  Icon,
   FormLabel,
+  FormControl,
   InputGroup,
   InputLeftElement,
-  Icon,
   InputRightElement,
 } from '@chakra-ui/core';
 
@@ -24,16 +24,16 @@ function FormIconInput({
   ...rest
 }) {
   return (
-    <FormControl mt='2' isInvalid={errors[name]} {...rest} >
-      <FormLabel htmlFor={name} color='gray.600'>
+    <FormControl mt='2' isInvalid={errors[name]} {...rest}>
+      <FormLabel htmlFor={name} color='text'>
         {label}
       </FormLabel>
       <InputGroup>
         <InputLeftElement>
-          <Icon as={leftIcon} color='gray.600' />
+          <Icon as={leftIcon} color='text' />
         </InputLeftElement>
         <Input py='2' px='10' id={name} name={name} onClick={onClick} formRef={formRef} />
-        <InputRightElement cursor='pointer' pointerEvents='auto' onClick={rightIconClick}>
+        <InputRightElement cursor='pointer' onClick={rightIconClick}>
           {value && <Icon as={rightIcon} color='red.500' onClick={rightIconClick} />}
         </InputRightElement>
       </InputGroup>

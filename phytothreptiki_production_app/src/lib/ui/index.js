@@ -8,10 +8,6 @@ import Loading from './loaders/loading';
 import Skeleton from './loaders/skeleton';
 import ConfirmationModal from './modals/confirmationModal';
 import Modal from './modals/modal';
-import FormSelect from './select/formSelect';
-import Select from './select/select';
-import FormSwitch from './switch/formSwitch';
-import Switch from './switch/switch';
 import * as Table from './table/table';
 
 export {
@@ -20,10 +16,6 @@ export {
   Input,
   FormInput,
   FormIconInput,
-  Select,
-  FormSelect,
-  Switch,
-  FormSwitch,
   Loading,
   Skeleton,
   Modal,

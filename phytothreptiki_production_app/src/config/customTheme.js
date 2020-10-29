@@ -16,6 +16,7 @@ export const darkTheme = {
     secondaryBackground: defaultTheme.colors.gray[500],
     text: defaultTheme.colors.white,
     secondaryText: defaultTheme.colors.gray[300],
+    colorText: defaultTheme.colors.white,
   },
 };
 
@@ -25,9 +26,10 @@ export const lightTheme = {
   icons: { ...defaultTheme.icons },
   colors: {
     ...darkTheme.colors,
-    background: defaultTheme.colors.gray[300],
-    secondaryBackground: defaultTheme.colors.white,
+    background: defaultTheme.colors.white,
+    secondaryBackground: defaultTheme.colors.gray[100],
     text: defaultTheme.colors.blackAlpha[800],
     secondaryText: defaultTheme.colors.gray[500],
+    colorText: defaultTheme.colors.white,
   },
 };

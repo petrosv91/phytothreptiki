@@ -11,7 +11,7 @@ export const actions = {
   }),
   deleteItemFromStore: assign({
     store: (ctx, e) => {
-      const updatedStore = ctx.elements.filter((el) => el.id !== e.el.id);
+      const updatedStore = ctx.store.filter((el) => el.id !== e.el.id);
       return updatedStore;
     },
   }),

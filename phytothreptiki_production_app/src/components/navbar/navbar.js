@@ -3,22 +3,23 @@ import React from 'react';
 import { Flex, Heading } from '@chakra-ui/core';
 import { useHistory } from 'react-router-dom';
 
+import { useColorMode } from '../../context/colorModeProvider';
 import Colorpicker from '../colorPicker/colorPicker';
 
 function Navbar() {
   const history = useHistory();
-
+  const { currentColor } = useColorMode();
   return (
     <Flex
       as='nav'
       w='full'
       wrap='wrap'
-      color='white'
-      bg='teal.500'
+      color='colorText'
+      boxShadow='md'
       padding='1.5rem'
       align='center'
-      boxShadow='md'
       justify='space-between'
+      bg={`${currentColor}.500`}
     >
       <Heading
         as='h1'

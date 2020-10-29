@@ -18,13 +18,13 @@ export default function ElementForm() {
   const { register, handleSubmit, reset, setValue, getValues, errors } = useForm();
 
   const [state, send] = useFormService();
-  const { elements } = state.context;
+  const { store } = state.context;
   const onSliderChange = useCallback((value) => {
     setRate(value);
   }, []);
   function onSubmit(formData) {
     const { element, ingredients } = formData;
-    if (!ValidateTable({ formData, rate, elements, toast })) return;
+    if (!ValidateTable({ formData, rate, store, toast })) return;
     send({
       type: 'UPDATE_TABLE',
       id: uuidv4(),
