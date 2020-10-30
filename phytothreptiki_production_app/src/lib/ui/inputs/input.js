@@ -11,7 +11,6 @@ function Input({ onChange, formRef, placeholder, name, ...rest }) {
       name={name}
       ref={formRef}
       onChange={onChange}
-      placeholder={placeholder}
       color='text'
       fontSize='md'
       fontWeight='500'

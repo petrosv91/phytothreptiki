@@ -51,7 +51,6 @@ function ElementList({ data, isLoading, handleClick, ...rest }) {
                         <Box
                           key={uuidv4()}
                           fontSize='sm'
-                          color='gray.500'
                           _after={{ content: "'-'" }}
                           _last={{ _after: { content: "''" } }}
                         >

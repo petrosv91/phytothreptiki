@@ -34,7 +34,15 @@ function FormIconInput({
         </InputLeftElement>
         <Input py='2' px='10' id={name} name={name} onClick={onClick} formRef={formRef} />
         <InputRightElement cursor='pointer' onClick={rightIconClick}>
-          {value && <Icon as={rightIcon} color='red.500' onClick={rightIconClick} />}
+          {value && (
+            <Icon
+              as={rightIcon}
+              boxSize={5}
+              color='red.500'
+              _hover={{ color: 'red.400' }}
+              onClick={rightIconClick}
+            />
+          )}
         </InputRightElement>
       </InputGroup>
     </FormControl>

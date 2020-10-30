@@ -5,7 +5,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
 function Pagination({ next, prev, jump, maxPage, canNext, canPrevious, currentPage }) {
   const disabledColor = 'gray.500';
-  const enabledColor = 'gray.600';
+  const enabledColor = 'text';
   return (
     <Flex justifyContent='flex-end' py={4} align='center'>
       <Box fontSize='sm' mr={2} color='text'>

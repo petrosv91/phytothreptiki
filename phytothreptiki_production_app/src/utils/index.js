@@ -6,7 +6,7 @@ export function createToast(toast, props) {
   toast({
     position: 'bottom',
     isClosable: true,
-    duration: 3500,
+    duration: 3000,
     render: ({ onClose }) => <Toast {...props} onClose={onClose} />,
   });
 }
@@ -18,7 +18,7 @@ function isRateValid(store, { rate }) {
   const elSum = store.reduce((acc, el) => acc + Number(el.rate), 0);
   return elSum + rate <= 100;
 }
-export function ValidateTable({ formData, store, toast }) {
+export function validateTable({ formData, store, toast }) {
   if (!isRateValid(store, formData)) {
     createToast(toast, { type: 'error', title: 'Το ποσοστό έχει ξεπεράσει το 100%' });
     return false;

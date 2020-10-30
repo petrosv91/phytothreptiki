@@ -43,7 +43,7 @@ function Colorpicker() {
               key={index}
               mb={2}
               borderBottomWidth={1}
-              borderBottomColor='secondaryBackground'
+              borderBottomColor='secondaryText'
               onClick={() => colorChange(color)}
             >
               <Circle color={color} />

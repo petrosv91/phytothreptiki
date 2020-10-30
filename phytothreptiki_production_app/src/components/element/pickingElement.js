@@ -7,7 +7,7 @@ import { getData } from '../../api';
 import { useFiltersData, usePagination } from '../../hooks';
 import ElementList from './elementList';
 
-export default function PickingElement({ send, onClose }) {
+export default function PickingElement({ handleItemClick }) {
   const keys = React.useRef(['label']);
   const [query, setQuery] = React.useState('');
 
@@ -17,10 +17,6 @@ export default function PickingElement({ send, onClose }) {
 
   function handleChange(e) {
     setQuery(e.target.value);
-  }
-  function handleElementClick(element) {
-    onClose();
-    send({ type: 'SAVE_ELEMENT', element });
   }
 
   if (error)
@@ -33,7 +29,7 @@ export default function PickingElement({ send, onClose }) {
     <ElementList
       query={query}
       handleChange={handleChange}
-      handleClick={handleElementClick}
+      handleClick={handleItemClick}
       paginationProps={paginationProps}
       isLoading={status === 'loading'}
     />

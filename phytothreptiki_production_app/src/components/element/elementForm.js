@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useFormService } from '../../context/formProvider';
 import { Modal, Buttons, FormIconInput, FormInput } from '../../lib/ui';
 import FormSlider from '../../lib/ui/slider/formSlider';
-import { ValidateTable } from '../../utils';
+import { validateTable } from '../../utils';
 import PickingElement from './pickingElement';
 
 export default function ElementForm() {
@@ -24,7 +24,7 @@ export default function ElementForm() {
   }, []);
   function onSubmit(formData) {
     const { element, ingredients } = formData;
-    if (!ValidateTable({ formData, rate, store, toast })) return;
+    if (!validateTable({ formData, rate, store, toast })) return;
     send({
       type: 'UPDATE_TABLE',
       id: uuidv4(),

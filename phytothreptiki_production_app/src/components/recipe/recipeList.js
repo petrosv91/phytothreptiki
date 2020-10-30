@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { FormControl, InputGroup } from '@chakra-ui/core';
+import { Box, FormControl, InputGroup } from '@chakra-ui/core';
 
 import { Pagination } from '../../layouts';
 import { RecipeList as List, Input } from '../../lib/ui';
 
 function RecipeList({ query, isLoading, handleClick, handleChange, paginationProps }) {
   return (
-    <>
+    <Box>
       <FormControl mt={3}>
         <InputGroup>
           <Input
@@ -26,7 +26,7 @@ function RecipeList({ query, isLoading, handleClick, handleChange, paginationPro
         data={paginationProps.currentData}
       />
       {!isLoading && <Pagination {...paginationProps} />}
-    </>
+    </Box>
   );
 }
 
