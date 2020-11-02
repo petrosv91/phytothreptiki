@@ -42,6 +42,7 @@ function Colorpicker() {
             <MenuItem
               key={index}
               mb={2}
+              _focus={{ bg: `${color}.300` }}
               borderBottomWidth={1}
               borderBottomColor='secondaryText'
               onClick={() => colorChange(color)}
@@ -50,7 +51,7 @@ function Colorpicker() {
             </MenuItem>
           ))}
         </SimpleGrid>
-        <MenuItem onClick={toggleTheme}>
+        <MenuItem _focus={{ bg: 'gray.500' }} onClick={toggleTheme}>
           <Icon color='text' as={currentTheme === 'dark' ? SunIcon : MoonIcon} />
         </MenuItem>
       </MenuList>

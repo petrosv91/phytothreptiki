@@ -7,12 +7,15 @@ export const FormMachine = createMachine({
   initial: 'editting',
   context: {
     store: [],
+    element: {},
   },
   states: {
     editting: {
       on: {
         ADD: { actions: [actions.addItemToStore, actions.callback] },
         DELETE: { actions: [actions.deleteItemFromStore] },
+        PICK_ELEMENT: { actions: [actions.assignElement] },
+        RESET_FORM: { actions: [actions.deleteElement, actions.callback] },
       },
     },
   },

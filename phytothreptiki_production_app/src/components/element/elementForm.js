@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 
 import { Flex, useDisclosure, useToast } from '@chakra-ui/core';
 import { SmallCloseIcon, SearchIcon } from '@chakra-ui/icons';
@@ -7,65 +7,81 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { useFormService } from '../../context/formProvider';
 import { Modal, Buttons, FormIconInput, FormInput } from '../../lib/ui';
-import FormSlider from '../../lib/ui/slider/formSlider';
 import { validateTable } from '../../utils';
 import PickingElement from './pickingElement';
 
-export default function ElementForm() {
+function ElementForm() {
   const toast = useToast();
-  const [rate, setRate] = useState(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { register, handleSubmit, reset, setValue, getValues, errors } = useForm();
+  const { register, handleSubmit, reset, errors } = useForm();
 
   const [state, send] = useFormService();
-  const { store } = state.context;
+  const { store, element } = state.context;
 
-  const onSliderChange = useCallback((value) => {
-    setRate(value);
-  }, []);
-  function onSubmit(formData) {
-    const { element, ingredients } = formData;
-    if (!validateTable({ formData, rate, store, toast })) return;
-    send({
-      type: 'UPDATE_TABLE',
-      id: uuidv4(),
-      rate: rate,
-      label: element,
-      formula: ingredients.split('-'),
-      callback: reset,
-    });
+  function resetForm() {
+    send({ type: 'RESET_FORM', callback: reset });
   }
-  function handleItemClick(item) {
-    onClose();
-    setValue('element', item.label);
-    setValue('ingredients', item.formula.join('-'));
+  function onSubmit(formData) {
+    const { rate, price, restPrice } = formData;
+    if (!validateTable({ formData, store, toast })) return;
+    resetForm();
+    send({
+      type: 'ADD',
+      id: uuidv4(),
+      rate,
+      price,
+      restPrice,
+      label: element.label,
+      formula: element.formula,
+      callback: resetForm,
+    });
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Modal isOpen={isOpen} onClose={onClose} header='Επιλογή Ά Ύλης'>
-        <PickingElement handleItemClick={handleItemClick} />
+        <PickingElement send={send} onClose={onClose} />
       </Modal>
       <Flex direction='column'>
         <FormIconInput
           label='Ά Ύλη'
-          name='element'
           onClick={onOpen}
           leftIcon={SearchIcon}
           rightIcon={SmallCloseIcon}
-          rightIconClick={reset}
-          errors={errors}
-          value={getValues('element')}
-          formRef={register({ required: true })}
+          rightIconClick={resetForm}
+          defaultValue={element.label}
         />
-        <FormSlider label='Συμμετοχή' value={rate} onChange={onSliderChange} />
+        <Flex align='center' justify='space-between'>
+          <FormInput
+            w='30%'
+            name='rate'
+            label='Συμμετοχή'
+            type='number'
+            tag='%'
+            formRef={register({ validate: (value) => Number(value) > 0 })}
+          />
+          <FormInput
+            w='30%'
+            name='price'
+            label='Τιμή'
+            type='number'
+            tag='€'
+            formRef={register({ validate: (value) => Number(value) > 0 })}
+          />
+          <FormInput
+            w='30%'
+            name='restPrice'
+            label='Διάφορα'
+            type='number'
+            tag='€'
+            formRef={register({ validate: (value) => Number(value) > 0 })}
+          />
+        </Flex>
         <FormInput
-          w='full'
-          name='ingredients'
           label='Στοιχεία'
           cursor='default'
           pointerEvents='none'
-          formRef={register}
+          defaultValue={element.formula?.join('-')}
         />
         <Buttons.Primary mt={4} ml='auto' type='submit'>
           Προσθήκη
@@ -74,3 +90,5 @@ export default function ElementForm() {
     </form>
   );
 }
+
+export default ElementForm;

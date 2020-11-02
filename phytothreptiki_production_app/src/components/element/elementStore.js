@@ -22,15 +22,19 @@ function ElementStore({ ...rest }) {
           <Table.Header>Ά Ύλες</Table.Header>
           <Table.Header>Συμμετοχή</Table.Header>
           <Table.Header>Φόρμουλα</Table.Header>
-          <Table.Header>Ενεργειες</Table.Header>
+          <Table.Header>Τιμή</Table.Header>
+          <Table.Header>Διάφορα</Table.Header>
+          <Table.Header>Ε</Table.Header>
         </Table.Row>
       </Table.Head>
       <Table.Body>
         {store.map((row, index) => (
           <Table.Row key={index}>
             <Table.Cell>{row.label}</Table.Cell>
-            <Table.Cell>{row.rate}%</Table.Cell>
-            <Table.Cell key={index}>{row.formula?.join('-')}</Table.Cell>
+            <Table.Cell>{row.rate} %</Table.Cell>
+            <Table.Cell>{row.formula?.join('-')}</Table.Cell>
+            <Table.Cell>{row.price} €</Table.Cell>
+            <Table.Cell>{row.restPrice} €</Table.Cell>
             <Table.Cell>
               <Icon
                 as={DeleteIcon}

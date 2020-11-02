@@ -4,9 +4,29 @@ export const actions = {
   callback: (ctx, e) => {
     if (e.callback) e.callback();
   },
+  assignElement: assign({
+    element: (ctx, e) => {
+      return { label: e.el.label, formula: e.el.formula };
+    },
+  }),
   addItemToStore: assign({
     store: (ctx, e) => {
-      return [...ctx.store, { id: e.id, label: e.label, rate: e.rate, formula: e.formula }];
+      return [
+        ...ctx.store,
+        {
+          id: e.id,
+          rate: e.rate,
+          price: e.price,
+          label: e.label,
+          formula: e.formula,
+          restPrice: e.restPrice,
+        },
+      ];
+    },
+  }),
+  deleteElement: assign({
+    element: (ctx, e) => {
+      return {};
     },
   }),
   deleteItemFromStore: assign({

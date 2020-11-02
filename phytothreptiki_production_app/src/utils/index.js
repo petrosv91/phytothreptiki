@@ -10,6 +10,7 @@ export function createToast(toast, props) {
     render: ({ onClose }) => <Toast {...props} onClose={onClose} />,
   });
 }
+
 export function isFormEmpty(formState) {
   return Object.values(formState).every((field) => field === '');
 }

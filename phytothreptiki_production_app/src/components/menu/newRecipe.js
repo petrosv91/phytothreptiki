@@ -37,7 +37,7 @@ function Recipe() {
   }
 
   return (
-    <Flex w={[200, 300, 400, 500]} as='section' direction='column'>
+    <Flex w={[200, 500]} as='section' direction='column'>
       <ConfirmationModal
         message={MESSAGE}
         isOpen={isOpen}

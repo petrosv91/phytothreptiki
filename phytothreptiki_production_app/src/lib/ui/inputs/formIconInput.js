@@ -14,7 +14,7 @@ import Input from './input';
 function FormIconInput({
   name,
   label,
-  value,
+  defaultValue,
   formRef,
   leftIcon,
   rightIcon,
@@ -24,7 +24,7 @@ function FormIconInput({
   ...rest
 }) {
   return (
-    <FormControl mt='2' isInvalid={errors[name]} {...rest}>
+    <FormControl mt='2' isInvalid={errors[name]}>
       <FormLabel htmlFor={name} color='text'>
         {label}
       </FormLabel>
@@ -32,9 +32,17 @@ function FormIconInput({
         <InputLeftElement>
           <Icon as={leftIcon} color='text' />
         </InputLeftElement>
-        <Input py='2' px='10' id={name} name={name} onClick={onClick} formRef={formRef} />
+        <Input
+          py='2'
+          px='10'
+          name={name}
+          formRef={formRef}
+          onClick={onClick}
+          defaultValue={defaultValue}
+          {...rest}
+        />
         <InputRightElement cursor='pointer' onClick={rightIconClick}>
-          {value && (
+          {defaultValue && (
             <Icon
               as={rightIcon}
               boxSize={5}

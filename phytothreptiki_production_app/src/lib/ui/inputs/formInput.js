@@ -1,24 +1,29 @@
 import React from 'react';
 
-import { FormControl, FormLabel } from '@chakra-ui/core';
+import { FormControl, FormLabel, InputGroup, InputRightElement, Tag } from '@chakra-ui/core';
 
+import { useColorMode } from '../../../context/colorModeProvider';
 import Input from './input';
 
-function FormInput({ errors = {}, onChange, formRef, label, placeholder, name, ...rest }) {
+function FormInput({ errors = {}, w, formRef, label, name, tag, ...rest }) {
+  const { currentColor } = useColorMode();
   return (
-    <FormControl mt={2} w={130} isInvalid={errors[name]} {...rest}>
+    <FormControl w={w} mt={2} isInvalid={errors[name]}>
       {label && (
         <FormLabel mb={1} htmlFor={name} color='text'>
           {label}
         </FormLabel>
       )}
-      <Input
-        id={name}
-        name={name}
-        formRef={formRef}
-        onChange={onChange}
-        placeholder={placeholder}
-      />
+      <InputGroup>
+        <Input pr={tag ? '10' : '4'} name={name} formRef={formRef} {...rest} />
+        {tag && (
+          <InputRightElement>
+            <Tag size='lg' color='colorText' bg={`${currentColor}.400`}>
+              {tag}
+            </Tag>
+          </InputRightElement>
+        )}
+      </InputGroup>
     </FormControl>
   );
 }
