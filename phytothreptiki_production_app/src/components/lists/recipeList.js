@@ -10,13 +10,7 @@ function RecipeList({ query, isLoading, handleClick, handleChange, paginationPro
     <Box>
       <FormControl mt={3}>
         <InputGroup>
-          <Input
-            w={[250, 300]}
-            bg='background'
-            value={query}
-            onChange={handleChange}
-            placeholder='Αναζήτηση...'
-          />
+          <Input w={[250, 300]} value={query} onChange={handleChange} placeholder='Αναζήτηση...' />
         </InputGroup>
       </FormControl>
       <List

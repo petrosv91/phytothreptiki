@@ -8,16 +8,7 @@ import { ITEMS_PER_PAGE } from '../../../hooks/usePagination';
 import ListItem from './listItem';
 
 function RecipeList({ data, isLoading, handleClick, ...rest }) {
-  const shouldAnimate = React.useRef(true);
   const SkeletoArray = new Array(ITEMS_PER_PAGE).fill(0);
-
-  React.useEffect(() => {
-    if (data.length) {
-      shouldAnimate.current = false;
-    } else {
-      shouldAnimate.current = true;
-    }
-  }, [data]);
 
   if (isLoading) {
     return (
@@ -37,10 +28,11 @@ function RecipeList({ data, isLoading, handleClick, ...rest }) {
           return (
             <ListItem
               key={uuidv4()}
+              itemIndex={index}
+              listLength={data.length}
               onClick={() => {
                 handleClick(item);
               }}
-              animation={{ index, shouldAnimate: shouldAnimate.current }}
             >
               <Flex px={6} align='center' justify='flex-end'>
                 <Text textAlign='right'>{item.label}</Text>

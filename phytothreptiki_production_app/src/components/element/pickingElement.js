@@ -5,7 +5,7 @@ import { useQuery } from 'react-query';
 
 import { getData } from '../../api';
 import { useFiltersData, usePagination } from '../../hooks';
-import ElementList from './elementList';
+import ElementList from '../lists/elementList';
 
 export default function PickingElement({ handleItemClick }) {
   const keys = React.useRef(['label']);

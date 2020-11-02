@@ -1,0 +1,43 @@
+import React from 'react';
+
+import { motion } from 'framer-motion';
+
+function ListAnimation({ length, index, children }) {
+  const shouldAnimate = React.useRef(length);
+  React.useEffect(() => {
+    if (length) {
+      shouldAnimate.current = false;
+    } else {
+      shouldAnimate.current = true;
+    }
+  }, [length]);
+
+  return (
+    <motion.div
+      variants={{
+        hidden: (index) => ({
+          opacity: 0,
+          y: -15 * index,
+        }),
+        visible: (index) => ({
+          opacity: 1,
+          y: 0,
+          transition: {
+            delay: index * 0.025,
+          },
+        }),
+        removed: {
+          opacity: 0,
+        },
+      }}
+      custom={index}
+      exit='removed'
+      animate='visible'
+      initial={shouldAnimate.current ? 'hidden' : 'visible'}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export default ListAnimation;

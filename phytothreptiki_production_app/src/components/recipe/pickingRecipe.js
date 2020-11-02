@@ -5,7 +5,7 @@ import { useQuery } from 'react-query';
 
 import { getData } from '../../api';
 import { useFiltersData, usePagination } from '../../hooks';
-import RecipeList from './recipeList';
+import RecipeList from '../lists/recipeList';
 
 function PickingRecipe({ handleItemClick }) {
   const keys = React.useRef(['label']);

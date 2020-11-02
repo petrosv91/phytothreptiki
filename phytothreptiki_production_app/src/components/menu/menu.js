@@ -10,17 +10,18 @@ import ListItem from '../../lib/ui/lists/listItem';
 function Menu() {
   const history = useHistory();
   return (
-    <AnimatePresence initial={false}>
+    <AnimatePresence initial={true}>
       <List spacing={3}>
         {menus.map((menu, index) => {
           return (
             <ListItem
               p={8}
               key={index}
+              itemIndex={index}
+              listLength={menus.length}
               onClick={() => {
                 history.push(menu.url);
               }}
-              animation={{ index, shouldAnimate: true }}
             >
               <Flex align='center' justify='space-between'>
                 <Icon boxSize={6} as={menu.icon} />

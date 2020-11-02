@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Flex, Icon, Text, Box } from '@chakra-ui/core';
+import { Flex, Icon, Text } from '@chakra-ui/core';
 import { WarningIcon, CheckIcon, SmallCloseIcon } from '@chakra-ui/icons';
 
 const colors = {
@@ -35,16 +35,14 @@ function Toast({ type = 'error', title, content, onClose }) {
           {content}
         </Text>
       </Flex>
-      <Box>
-        <Icon
-          onClick={onClose}
-          as={SmallCloseIcon}
-          boxSize={5}
-          cursor='pointer'
-          color='red.500'
-          _hover={{ color: 'red.400' }}
-        />
-      </Box>
+      <Icon
+        onClick={onClose}
+        as={SmallCloseIcon}
+        boxSize={5}
+        cursor='pointer'
+        color='red.500'
+        _hover={{ color: 'red.400' }}
+      />
     </Flex>
   );
 }

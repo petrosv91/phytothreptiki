@@ -19,6 +19,7 @@ export default function ElementForm() {
 
   const [state, send] = useFormService();
   const { store } = state.context;
+
   const onSliderChange = useCallback((value) => {
     setRate(value);
   }, []);
@@ -28,8 +29,8 @@ export default function ElementForm() {
     send({
       type: 'UPDATE_TABLE',
       id: uuidv4(),
-      label: element,
       rate: rate,
+      label: element,
       formula: ingredients.split('-'),
       callback: reset,
     });
@@ -41,37 +42,35 @@ export default function ElementForm() {
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Modal isOpen={isOpen} onClose={onClose} header='Επιλογή Ά Ύλης'>
-          <PickingElement handleItemClick={handleItemClick} />
-        </Modal>
-        <Flex direction='column'>
-          <FormIconInput
-            label='Ά Ύλη'
-            name='element'
-            onClick={onOpen}
-            leftIcon={SearchIcon}
-            rightIcon={SmallCloseIcon}
-            rightIconClick={reset}
-            errors={errors}
-            value={getValues('element')}
-            formRef={register({ required: true })}
-          />
-          <FormSlider label='Συμμετοχή' value={rate} onChange={onSliderChange} />
-          <FormInput
-            w='full'
-            name='ingredients'
-            label='Στοιχεία'
-            cursor='default'
-            pointerEvents='none'
-            formRef={register}
-          />
-          <Buttons.Primary mt={4} ml='auto' type='submit'>
-            Προσθήκη
-          </Buttons.Primary>
-        </Flex>
-      </form>
-    </>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Modal isOpen={isOpen} onClose={onClose} header='Επιλογή Ά Ύλης'>
+        <PickingElement handleItemClick={handleItemClick} />
+      </Modal>
+      <Flex direction='column'>
+        <FormIconInput
+          label='Ά Ύλη'
+          name='element'
+          onClick={onOpen}
+          leftIcon={SearchIcon}
+          rightIcon={SmallCloseIcon}
+          rightIconClick={reset}
+          errors={errors}
+          value={getValues('element')}
+          formRef={register({ required: true })}
+        />
+        <FormSlider label='Συμμετοχή' value={rate} onChange={onSliderChange} />
+        <FormInput
+          w='full'
+          name='ingredients'
+          label='Στοιχεία'
+          cursor='default'
+          pointerEvents='none'
+          formRef={register}
+        />
+        <Buttons.Primary mt={4} ml='auto' type='submit'>
+          Προσθήκη
+        </Buttons.Primary>
+      </Flex>
+    </form>
   );
 }
