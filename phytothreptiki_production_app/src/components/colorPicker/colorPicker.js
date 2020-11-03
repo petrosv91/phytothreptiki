@@ -47,7 +47,7 @@ function Colorpicker() {
       <MotionBox layout rotate={0} whileHover={{ rotate: 30 }}>
         <MenuButton as={SettingsIcon} boxSize={5} cursor='pointer' />
       </MotionBox>
-      <MenuList minWidth='50px' bg='background'>
+      <MenuList px={1} minWidth='50px' bg='background'>
         <SimpleGrid columns={MAX_LINEITEMS}>
           {colors.map((color, index) => (
             <MenuItem
