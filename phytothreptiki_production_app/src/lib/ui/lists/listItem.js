@@ -5,7 +5,7 @@ import { ListItem as ChakraListItem, Skeleton } from '@chakra-ui/core';
 import ListAnimation from '../../../animations/listAnimation';
 import { useColorMode } from '../../../context/colorModeProvider';
 
-function ListItem({ listLength, itemIndex, children, onClick, isLoaded = true, ...rest }) {
+function ListItem({ itemIndex, children, onClick, isLoaded = true, ...rest }) {
   const { currentColor } = useColorMode();
   if (!isLoaded) {
     return (
@@ -17,7 +17,7 @@ function ListItem({ listLength, itemIndex, children, onClick, isLoaded = true, .
     );
   }
   return (
-    <ListAnimation length={listLength} index={itemIndex}>
+    <ListAnimation index={itemIndex}>
       <ChakraListItem
         cursor='pointer'
         onClick={onClick}

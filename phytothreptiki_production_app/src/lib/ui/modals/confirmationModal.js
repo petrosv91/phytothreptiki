@@ -15,7 +15,7 @@ function ConfirmationModal({ isOpen, onClose, message, onConfirm, isLoading = fa
   return (
     <Modal isOpen={isOpen} onClose={isLoading ? () => {} : onClose}>
       <ModalOverlay>
-        <ModalContent py={4} bg='background' borderRadius='md'>
+        <ModalContent py={4} bg='background' color='text' borderRadius='md'>
           <ModalHeader>Επιβεβαίωση ενέργειας</ModalHeader>
           <ModalCloseButton tabIndex={-1} />
           <ModalBody>{message}</ModalBody>
@@ -23,7 +23,12 @@ function ConfirmationModal({ isOpen, onClose, message, onConfirm, isLoading = fa
             <Button mr={3} colorScheme='teal' onClick={onConfirm} isLoading={isLoading}>
               Συνέχεια
             </Button>
-            <Button variant='ghost' onClick={onClose} pointerEvents={isLoading ? 'none' : 'auto'}>
+            <Button
+              variant='ghost'
+              onClick={onClose}
+              _hover={{ color: 'gray.300' }}
+              pointerEvents={isLoading ? 'none' : 'auto'}
+            >
               Άκυρο
             </Button>
           </ModalFooter>

@@ -2,16 +2,7 @@ import React from 'react';
 
 import { motion } from 'framer-motion';
 
-function ListAnimation({ length, index, children }) {
-  const shouldAnimate = React.useRef(length);
-  React.useEffect(() => {
-    if (length) {
-      shouldAnimate.current = false;
-    } else {
-      shouldAnimate.current = true;
-    }
-  }, [length]);
-
+function ListAnimation({ index, children }) {
   return (
     <motion.div
       variants={{
@@ -33,7 +24,7 @@ function ListAnimation({ length, index, children }) {
       custom={index}
       exit='removed'
       animate='visible'
-      initial={shouldAnimate.current ? 'hidden' : 'visible'}
+      initial={'hidden'}
     >
       {children}
     </motion.div>

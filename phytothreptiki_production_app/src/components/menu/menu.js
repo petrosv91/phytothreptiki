@@ -18,7 +18,6 @@ function Menu() {
               p={8}
               key={index}
               itemIndex={index}
-              listLength={menus.length}
               onClick={() => {
                 history.push(menu.url);
               }}

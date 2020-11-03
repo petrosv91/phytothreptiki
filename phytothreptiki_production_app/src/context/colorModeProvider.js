@@ -1,14 +1,19 @@
 import React, { useContext } from 'react';
 
+import { useLocalStorage } from '../hooks';
+
 const ColorModeContext = React.createContext();
 
 function ColorModeProvider({ children }) {
-  const [value, setValue] = React.useState('teal');
+  const [storedValue, setValue] = useLocalStorage(`color`, 'teal');
   function handleColorChange(color) {
     setValue(color);
   }
+
   return (
-    <ColorModeContext.Provider value={{ currentColor: value, colorChange: handleColorChange }}>
+    <ColorModeContext.Provider
+      value={{ currentColor: storedValue, colorChange: handleColorChange }}
+    >
       {children}
     </ColorModeContext.Provider>
   );

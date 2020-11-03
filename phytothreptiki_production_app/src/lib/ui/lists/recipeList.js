@@ -29,7 +29,6 @@ function RecipeList({ data, isLoading, handleClick, ...rest }) {
             <ListItem
               key={uuidv4()}
               itemIndex={index}
-              listLength={data.length}
               onClick={() => {
                 handleClick(item);
               }}

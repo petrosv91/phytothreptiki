@@ -1,6 +1,16 @@
 import React from 'react';
 
-import { Box, Icon, Menu, MenuButton, MenuItem, MenuList, SimpleGrid } from '@chakra-ui/core';
+import {
+  Box,
+  chakra,
+  Icon,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  SimpleGrid,
+  Text,
+} from '@chakra-ui/core';
 import { MoonIcon, SettingsIcon, SunIcon } from '@chakra-ui/icons';
 import { motion } from 'framer-motion';
 
@@ -30,12 +40,13 @@ function Circle({ color }) {
 function Colorpicker() {
   const { colorChange } = useColorMode();
   const { toggleTheme, currentTheme } = useThemeMode();
-  const MotionIcon = motion.custom(SettingsIcon);
+  const MotionBox = chakra(motion.div);
+
   return (
     <Menu>
-      <MenuButton>
-        <MotionIcon boxSize={5} whileHover={{ rotate: 30 }} />
-      </MenuButton>
+      <MotionBox layout rotate={0} whileHover={{ rotate: 30 }}>
+        <MenuButton as={SettingsIcon} boxSize={5} cursor='pointer' />
+      </MotionBox>
       <MenuList minWidth='50px' bg='background'>
         <SimpleGrid columns={MAX_LINEITEMS}>
           {colors.map((color, index) => (
@@ -51,8 +62,9 @@ function Colorpicker() {
             </MenuItem>
           ))}
         </SimpleGrid>
-        <MenuItem _focus={{ bg: 'gray.500' }} onClick={toggleTheme}>
-          <Icon color='text' as={currentTheme === 'dark' ? SunIcon : MoonIcon} />
+        <MenuItem _focus={{ bg: 'gray.500' }} color='text' onClick={toggleTheme}>
+          <Icon as={currentTheme === 'dark' ? SunIcon : MoonIcon} />
+          <Text ml={2}>{currentTheme === 'dark' ? 'Φωτεινό Θέμα' : 'Σκούρο Θέμα'}</Text>
         </MenuItem>
       </MenuList>
     </Menu>
