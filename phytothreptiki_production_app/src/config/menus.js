@@ -1,22 +1,22 @@
-import { SearchIcon, EditIcon, DeleteIcon } from '@chakra-ui/icons';
+import { MdSearch, MdEdit, MdDelete } from 'react-icons/md';
 
 export const menus = [
   {
     id: 1,
     label: 'Αναζήτηση Συνταγής',
     url: '/search',
-    icon: SearchIcon,
+    icon: MdSearch,
   },
   {
     id: 2,
     label: 'Νεα Συνταγή',
     url: '/recipe',
-    icon: EditIcon,
+    icon: MdEdit,
   },
   {
     id: 3,
     label: 'Διαγραφή Συνταγής',
     url: '/delete',
-    icon: DeleteIcon,
+    icon: MdDelete,
   },
 ];

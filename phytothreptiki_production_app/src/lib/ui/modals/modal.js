@@ -7,7 +7,7 @@ import {
   ModalContent,
   ModalCloseButton,
   ModalHeader,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 
 function Modal({ children, isOpen, onClose, header }) {
   return (

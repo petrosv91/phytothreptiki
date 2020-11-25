@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ListItem as ChakraListItem, Skeleton } from '@chakra-ui/core';
+import { ListItem as ChakraListItem, Skeleton } from '@chakra-ui/react';
 
 import ListAnimation from '../../../animations/listAnimation';
 import { useColorMode } from '../../../context/colorModeProvider';

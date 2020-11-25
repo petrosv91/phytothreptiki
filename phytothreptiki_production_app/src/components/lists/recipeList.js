@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, FormControl, InputGroup } from '@chakra-ui/core';
+import { Box, FormControl, InputGroup } from '@chakra-ui/react';
 
 import { Pagination } from '../../layouts';
 import { RecipeList as List, Input } from '../../lib/ui';

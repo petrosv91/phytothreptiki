@@ -1,19 +1,30 @@
 import React from 'react';
 
-import { Flex, useDisclosure, useToast } from '@chakra-ui/core';
-import { SmallCloseIcon, SearchIcon } from '@chakra-ui/icons';
+import { Flex, useDisclosure, useToast } from '@chakra-ui/react';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { MdClose, MdSearch } from 'react-icons/md';
 import { v4 as uuidv4 } from 'uuid';
+import * as yup from 'yup';
 
 import { useFormService } from '../../context/formProvider';
-import { Modal, Buttons, FormIconInput, FormInput } from '../../lib/ui';
+import { Modal, Buttons, FormInput } from '../../lib/ui';
 import { validateTable } from '../../utils';
 import PickingElement from './pickingElement';
+
+const schema = yup.object().shape({
+  rate: yup.number().required().typeError('Υποχρεωτικό Πεδίο').positive('Μόνο θετικοί αριθμοί'),
+  price: yup.number().typeError('Υποχρεωτικό Πεδίο').positive('Μόνο θετικοί αριθμοί'),
+  restPrice: yup.number().typeError('Υποχρεωτικό Πεδίο').positive('Μόνο θετικοί αριθμοί'),
+});
 
 function ElementForm() {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { register, handleSubmit, reset, errors } = useForm();
+  const { register, handleSubmit, reset, errors } = useForm({
+    mode: 'onBlur',
+    resolver: yupResolver(schema),
+  });
 
   const [state, send] = useFormService();
   const { store, element } = state.context;
@@ -22,15 +33,11 @@ function ElementForm() {
     send({ type: 'RESET_FORM', callback: reset });
   }
   function onSubmit(formData) {
-    const { rate, price, restPrice } = formData;
     if (!validateTable({ formData, store, toast })) return;
-    resetForm();
     send({
       type: 'ADD',
       id: uuidv4(),
-      rate,
-      price,
-      restPrice,
+      ...formData,
       label: element.label,
       formula: element.formula,
       callback: resetForm,
@@ -43,11 +50,11 @@ function ElementForm() {
         <PickingElement send={send} onClose={onClose} />
       </Modal>
       <Flex direction='column'>
-        <FormIconInput
+        <FormInput
           label='Ά Ύλη'
           onClick={onOpen}
-          leftIcon={SearchIcon}
-          rightIcon={SmallCloseIcon}
+          leftIcon={MdSearch}
+          rightIcon={MdClose}
           rightIconClick={resetForm}
           defaultValue={element.label}
         />
@@ -56,25 +63,28 @@ function ElementForm() {
             w='30%'
             name='rate'
             label='Συμμετοχή'
-            type='number'
             tag='%'
-            formRef={register({ validate: (value) => Number(value) > 0 })}
+            type='number'
+            errors={errors}
+            formRef={register}
           />
           <FormInput
             w='30%'
             name='price'
             label='Τιμή'
-            type='number'
             tag='€'
-            formRef={register({ validate: (value) => Number(value) > 0 })}
+            type='number'
+            errors={errors}
+            formRef={register}
           />
           <FormInput
             w='30%'
             name='restPrice'
             label='Διάφορα'
-            type='number'
             tag='€'
-            formRef={register({ validate: (value) => Number(value) > 0 })}
+            type='number'
+            errors={errors}
+            formRef={register}
           />
         </Flex>
         <FormInput

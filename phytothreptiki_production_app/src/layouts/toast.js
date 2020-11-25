@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { Flex, Icon, Text } from '@chakra-ui/core';
-import { WarningIcon, CheckIcon, SmallCloseIcon } from '@chakra-ui/icons';
+import { Flex, Icon, Text } from '@chakra-ui/react';
+import { MdWarning, MdCheck, MdClose } from 'react-icons/md';
 
 const colors = {
   success: 'teal.500',
   error: 'yellow.500',
 };
 const icons = {
-  success: CheckIcon,
-  error: WarningIcon,
+  success: MdCheck,
+  error: MdWarning,
 };
 
 function Toast({ type = 'error', title, content, onClose }) {
@@ -37,7 +37,7 @@ function Toast({ type = 'error', title, content, onClose }) {
       </Flex>
       <Icon
         onClick={onClose}
-        as={SmallCloseIcon}
+        as={MdClose}
         boxSize={5}
         cursor='pointer'
         color='red.500'

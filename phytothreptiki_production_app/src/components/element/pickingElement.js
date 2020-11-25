@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Text } from '@chakra-ui/core';
+import { Text } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 
 import { getData } from '../../api';

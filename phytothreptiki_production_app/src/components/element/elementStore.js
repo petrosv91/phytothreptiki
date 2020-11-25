@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Icon } from '@chakra-ui/core';
-import { DeleteIcon } from '@chakra-ui/icons';
+import { Flex, Icon, Text } from '@chakra-ui/react';
+import { MdDelete } from 'react-icons/md';
 
 import { useFormService } from '../../context/formProvider';
 import { Table } from '../../lib/ui';
@@ -19,25 +19,32 @@ function ElementStore({ ...rest }) {
     <Table.Table {...rest}>
       <Table.Head>
         <Table.Row>
-          <Table.Header>Ά Ύλες</Table.Header>
-          <Table.Header>Συμμετοχή</Table.Header>
-          <Table.Header>Φόρμουλα</Table.Header>
-          <Table.Header>Τιμή</Table.Header>
-          <Table.Header>Διάφορα</Table.Header>
+          <Table.Header>Ά ΥΛΕΣ</Table.Header>
+          <Table.Header>ΣΥΜΜΕΤΟΧΗ</Table.Header>
+          <Table.Header>ΤΙΜΗ</Table.Header>
+          <Table.Header>ΔΙΑΦΟΡΑ</Table.Header>
+          <Table.Header>Συνολικό Κόστος</Table.Header>
           <Table.Header>Ε</Table.Header>
         </Table.Row>
       </Table.Head>
       <Table.Body>
         {store.map((row, index) => (
           <Table.Row key={index}>
-            <Table.Cell>{row.label}</Table.Cell>
+            <Table.Cell>
+              <Flex direction='column'>
+                {row.label}
+                <Text mt={1} color='secondaryText' fontSize='sm'>
+                  {row.formula?.join('-')}
+                </Text>
+              </Flex>
+            </Table.Cell>
             <Table.Cell>{row.rate} %</Table.Cell>
-            <Table.Cell>{row.formula?.join('-')}</Table.Cell>
             <Table.Cell>{row.price} €</Table.Cell>
             <Table.Cell>{row.restPrice} €</Table.Cell>
+            <Table.Cell>{(row.rate / 100) * (row.price + row.restPrice)} €</Table.Cell>
             <Table.Cell>
               <Icon
-                as={DeleteIcon}
+                as={MdDelete}
                 color='red.400'
                 cursor='pointer'
                 _hover={{ color: 'red.500' }}
@@ -48,6 +55,19 @@ function ElementStore({ ...rest }) {
             </Table.Cell>
           </Table.Row>
         ))}
+        <Table.Row>
+          <Table.Cell>Σύνολο</Table.Cell>
+          <Table.Cell>{store.reduce((prev, curr) => prev + curr.rate, 0)} %</Table.Cell>
+          <Table.Cell>{store.reduce((prev, curr) => prev + curr.price, 0)} €</Table.Cell>
+          <Table.Cell>{store.reduce((prev, curr) => prev + curr.restPrice, 0)} €</Table.Cell>
+          <Table.Cell>
+            {store.reduce((prev, curr) => {
+              return prev + (curr.rate / 100) * curr.price + curr.restPrice;
+            }, 0)}{' '}
+            €
+          </Table.Cell>
+          <Table.Cell></Table.Cell>
+        </Table.Row>
       </Table.Body>
     </Table.Table>
   );

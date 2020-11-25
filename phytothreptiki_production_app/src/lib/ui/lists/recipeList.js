@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { List as ChakraList, Flex, Text } from '@chakra-ui/core';
+import { List as ChakraList, Flex, Text } from '@chakra-ui/react';
 import { AnimatePresence } from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid';
 

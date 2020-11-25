@@ -9,7 +9,7 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 
 function ConfirmationModal({ isOpen, onClose, message, onConfirm, isLoading = false }) {
   return (

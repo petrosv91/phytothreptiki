@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Flex, useDisclosure, useToast } from '@chakra-ui/core';
+import { Flex, useDisclosure, useToast } from '@chakra-ui/react';
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
 

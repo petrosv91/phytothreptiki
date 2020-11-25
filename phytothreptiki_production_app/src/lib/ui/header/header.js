@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Box, Flex, Icon, Text } from '@chakra-ui/core';
-import { ArrowBackIcon } from '@chakra-ui/icons';
+import { Box, Flex, Icon, Text } from '@chakra-ui/react';
+import { MdArrowBack } from 'react-icons/md';
 
 import { Buttons } from '..';
 import { useColorMode } from '../../../context/colorModeProvider';
@@ -13,7 +13,7 @@ function Header({ handleback, submit = false, ...rest }) {
   return (
     <Flex align='center' {...rest}>
       <Icon
-        as={ArrowBackIcon}
+        as={MdArrowBack}
         onClick={handleback}
         boxSize={9}
         cursor='pointer'

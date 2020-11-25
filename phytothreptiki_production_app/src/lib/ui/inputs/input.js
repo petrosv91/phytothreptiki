@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Input as ChakraInput } from '@chakra-ui/core';
+import { Input as ChakraInput } from '@chakra-ui/react';
 
 import { useColorMode } from '../../../context/colorModeProvider';
 

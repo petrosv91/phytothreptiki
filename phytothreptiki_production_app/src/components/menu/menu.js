@@ -1,35 +1,43 @@
 import React from 'react';
 
-import { Flex, Icon, List, Text } from '@chakra-ui/core';
-import { AnimatePresence } from 'framer-motion';
+import { Box, chakra, Flex, Icon, Text } from '@chakra-ui/react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useHistory } from 'react-router-dom';
 
+import ListAnimation from '../../animations/listAnimation';
 import { menus } from '../../config/menus';
-import ListItem from '../../lib/ui/lists/listItem';
 
 function Menu() {
   const history = useHistory();
+  const MotionBox = chakra(motion.div);
   return (
     <AnimatePresence initial={true}>
-      <List spacing={3}>
+      <Flex wrap='wrap' px={2} pt={30} justify='center' align='center'>
         {menus.map((menu, index) => {
           return (
-            <ListItem
-              p={8}
-              key={index}
-              itemIndex={index}
-              onClick={() => {
-                history.push(menu.url);
-              }}
-            >
-              <Flex align='center' justify='space-between'>
-                <Icon boxSize={6} as={menu.icon} />
-                <Text textAlign='right'>{menu.label}</Text>
-              </Flex>
-            </ListItem>
+            <MotionBox key={index} whileHover={{ scale: 1.025 }} whileTap={{ scale: 0.975 }}>
+              <ListAnimation index={index}>
+                <Box
+                  w={200}
+                  mr={5}
+                  mt={5}
+                  cursor='pointer'
+                  borderRadius='lg'
+                  overflow='hidden'
+                  onClick={() => history.push(menu.url)}
+                >
+                  <Flex p={4} h={130} align='center' justify='center' bg='secondaryBackground'>
+                    <Icon as={menu.icon} mr={4} boxSize={7} color='text' />
+                    <Text color='text' fontWeight='bold' textAlign='center'>
+                      {menu.label}
+                    </Text>
+                  </Flex>
+                </Box>
+              </ListAnimation>
+            </MotionBox>
           );
         })}
-      </List>
+      </Flex>
     </AnimatePresence>
   );
 }

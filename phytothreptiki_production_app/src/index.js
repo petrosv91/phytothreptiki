@@ -7,6 +7,8 @@ import { ColorModeProvider } from './context/colorModeProvider';
 import { ThemeModeProvider } from './context/themeModeProvider';
 import * as serviceWorker from './serviceWorker';
 
+import 'focus-visible/dist/focus-visible';
+
 ReactDOM.render(
   <React.StrictMode>
     <ThemeModeProvider>

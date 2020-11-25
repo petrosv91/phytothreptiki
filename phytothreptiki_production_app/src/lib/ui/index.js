@@ -1,5 +1,4 @@
 import * as Buttons from './buttons/buttons';
-import FormIconInput from './inputs/formIconInput';
 import FormInput from './inputs/formInput';
 import Input from './inputs/input';
 import ElementList from './lists/elementList';
@@ -15,7 +14,6 @@ export {
   Buttons,
   Input,
   FormInput,
-  FormIconInput,
   Loading,
   Skeleton,
   Modal,

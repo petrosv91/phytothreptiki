@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Flex, Heading } from '@chakra-ui/core';
+import { Flex, Heading } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 
 import { useColorMode } from '../../context/colorModeProvider';

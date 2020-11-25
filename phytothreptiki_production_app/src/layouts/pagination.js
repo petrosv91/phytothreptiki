@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Flex, Icon, Box } from '@chakra-ui/core';
-import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import { Flex, Icon, Box } from '@chakra-ui/react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 function Pagination({ next, prev, jump, maxPage, canNext, canPrevious, currentPage }) {
   const disabledColor = 'gray.500';
@@ -13,17 +13,17 @@ function Pagination({ next, prev, jump, maxPage, canNext, canPrevious, currentPa
       </Box>
       <Icon
         mr={2}
-        boxSize='30px'
+        boxSize={5}
         cursor='pointer'
         onClick={prev}
-        as={ChevronLeftIcon}
+        as={FaChevronLeft}
         color={canPrevious ? enabledColor : disabledColor}
       />
       <Icon
-        boxSize='30px'
+        boxSize={5}
         cursor='pointer'
         onClick={next}
-        as={ChevronRightIcon}
+        as={FaChevronRight}
         color={canNext ? enabledColor : disabledColor}
       />
     </Flex>
