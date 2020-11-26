@@ -4,36 +4,18 @@ export const actions = {
   callback: (ctx, e) => {
     if (e.callback) e.callback();
   },
-  assignElement: assign({
-    element: (ctx, e) => {
-      return { label: e.el.label, formula: e.el.formula };
-    },
+  assignItem: assign((ctx, e) => {
+    return { ...ctx, [e.key]: { ...e.data } };
   }),
-  addItemToStore: assign({
-    store: (ctx, e) => {
-      return [
-        ...ctx.store,
-        {
-          id: e.id,
-          rate: e.rate,
-          price: e.price,
-          label: e.label,
-          formula: e.formula,
-          restPrice: e.restPrice,
-        },
-      ];
-    },
+  deleteItem: assign((ctx, e) => {
+    return { ...ctx, [e.key]: {} };
   }),
-  deleteElement: assign({
-    element: (ctx, e) => {
-      return {};
-    },
+  addItemToStore: assign((ctx, e) => {
+    return { ...ctx, [e.key]: [...ctx[e.key], { ...e.data }] };
   }),
-  deleteItemFromStore: assign({
-    store: (ctx, e) => {
-      const updatedStore = ctx.store.filter((el) => el.id !== e.el.id);
-      return updatedStore;
-    },
+  deleteItemFromStore: assign((ctx, e) => {
+    const updatedStore = ctx[e.key].filter((item) => item.id !== e.row.id);
+    return { ...ctx, [e.key]: updatedStore };
   }),
 };
 

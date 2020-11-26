@@ -4,19 +4,12 @@ import { Text } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 
 import { getData } from '../../api';
-import { useFiltersData, usePagination } from '../../hooks';
-import RecipeList from '../lists/recipeList';
+import { RecipeList } from '../../lib/ui';
+import ItemList from '../lists/itemList';
 
 function PickingRecipe({ handleItemClick }) {
   const keys = React.useRef(['label']);
-  const [query, setQuery] = React.useState('');
   const { data = [], status, error } = useQuery('elements', getData);
-  const filterdData = useFiltersData({ data, query, keys });
-  const paginationProps = usePagination(filterdData);
-
-  function handleChange(e) {
-    setQuery(e.target.value);
-  }
 
   if (error)
     return (
@@ -25,11 +18,11 @@ function PickingRecipe({ handleItemClick }) {
       </Text>
     );
   return (
-    <RecipeList
-      query={query}
-      handleChange={handleChange}
+    <ItemList
+      keys={keys}
+      data={data}
+      List={RecipeList}
       handleClick={handleItemClick}
-      paginationProps={paginationProps}
       isLoading={status === 'loading'}
     />
   );

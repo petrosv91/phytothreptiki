@@ -10,13 +10,28 @@ import { menus } from '../../config/menus';
 function Menu() {
   const history = useHistory();
   const MotionBox = chakra(motion.div);
+  const shouldAnimate = React.useRef(true);
+
+  React.useEffect(() => {
+    if (menus.length) {
+      shouldAnimate.current = false;
+    } else {
+      shouldAnimate.current = true;
+    }
+  }, []);
+
   return (
     <AnimatePresence initial={true}>
       <Flex wrap='wrap' px={2} pt={30} justify='center' align='center'>
         {menus.map((menu, index) => {
           return (
             <MotionBox key={index} whileHover={{ scale: 1.025 }} whileTap={{ scale: 0.975 }}>
-              <ListAnimation index={index}>
+              <ListAnimation
+                animation={{
+                  index,
+                  shouldAnimate: shouldAnimate.current,
+                }}
+              >
                 <Box
                   w={200}
                   mr={5}

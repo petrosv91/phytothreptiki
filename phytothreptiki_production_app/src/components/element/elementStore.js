@@ -8,13 +8,13 @@ import { Table } from '../../lib/ui';
 
 function ElementStore({ ...rest }) {
   const [state, send] = useFormService();
-  const { store } = state.context;
+  const { elementStore } = state.context;
 
   function deleteElement(row) {
-    send({ type: 'DELETE', row });
+    send({ type: 'DELETE_ROW', key: 'elementStore', row });
   }
 
-  if (!store.length) return null;
+  if (!elementStore.length) return null;
   return (
     <Table.Table {...rest}>
       <Table.Head>
@@ -28,7 +28,7 @@ function ElementStore({ ...rest }) {
         </Table.Row>
       </Table.Head>
       <Table.Body>
-        {store.map((row, index) => (
+        {elementStore.map((row, index) => (
           <Table.Row key={index}>
             <Table.Cell>
               <Flex direction='column'>
@@ -57,11 +57,11 @@ function ElementStore({ ...rest }) {
         ))}
         <Table.Row>
           <Table.Cell>Σύνολο</Table.Cell>
-          <Table.Cell>{store.reduce((prev, curr) => prev + curr.rate, 0)} %</Table.Cell>
-          <Table.Cell>{store.reduce((prev, curr) => prev + curr.price, 0)} €</Table.Cell>
-          <Table.Cell>{store.reduce((prev, curr) => prev + curr.restPrice, 0)} €</Table.Cell>
+          <Table.Cell>{elementStore.reduce((prev, curr) => prev + curr.rate, 0)} %</Table.Cell>
+          <Table.Cell>{elementStore.reduce((prev, curr) => prev + curr.price, 0)} €</Table.Cell>
+          <Table.Cell>{elementStore.reduce((prev, curr) => prev + curr.restPrice, 0)} €</Table.Cell>
           <Table.Cell>
-            {store.reduce((prev, curr) => {
+            {elementStore.reduce((prev, curr) => {
               return prev + (curr.rate / 100) * curr.price + curr.restPrice;
             }, 0)}{' '}
             €

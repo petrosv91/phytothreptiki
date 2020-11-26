@@ -8,7 +8,16 @@ import { ITEMS_PER_PAGE } from '../../../hooks/usePagination';
 import ListItem from './listItem';
 
 function ElementList({ data, isLoading, handleClick, ...rest }) {
+  const shouldAnimate = React.useRef(true);
   const SkeletoArray = new Array(ITEMS_PER_PAGE).fill(0);
+
+  React.useEffect(() => {
+    if (data.length) {
+      shouldAnimate.current = false;
+    } else {
+      shouldAnimate.current = true;
+    }
+  }, [data]);
 
   if (isLoading) {
     return (
@@ -28,7 +37,10 @@ function ElementList({ data, isLoading, handleClick, ...rest }) {
           return (
             <ListItem
               key={uuidv4()}
-              itemIndex={index}
+              animation={{
+                index,
+                shouldAnimate: shouldAnimate.current,
+              }}
               onClick={() => {
                 handleClick(item);
               }}

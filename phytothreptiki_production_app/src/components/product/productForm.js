@@ -10,9 +10,8 @@ import { subFormSchema } from '../../config/';
 import { useFormService } from '../../context/formProvider';
 import { Modal, Buttons, FormInput } from '../../lib/ui';
 import { validateTable } from '../../utils';
-import PickingElement from './pickingElement';
 
-function ElementForm() {
+function ProductForm() {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit, reset, errors } = useForm({
@@ -21,21 +20,20 @@ function ElementForm() {
   });
 
   const [state, send] = useFormService();
-  const { element, elementStore } = state.context;
+  const { productStore, product } = state.context;
 
   function resetForm() {
-    send({ type: 'DELETE_ITEM', key: 'element', callback: reset });
+    send({ type: 'DELETE_ITEM', item: 'product', callback: reset });
   }
   function onSubmit(formData) {
-    if (!validateTable({ formData, store: elementStore, toast })) return;
+    if (!validateTable({ formData, productStore, toast })) return;
     send({
       type: 'ADD_ROW',
-      key: 'elementStore',
+      store: 'productStore',
       data: {
         id: uuidv4(),
         ...formData,
-        label: element.label,
-        formula: element.formula,
+        label: product.label,
       },
       callback: resetForm,
     });
@@ -43,53 +41,37 @@ function ElementForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Modal isOpen={isOpen} onClose={onClose} header='Επιλογή Ά Ύλης'>
+      {/* <Modal isOpen={isOpen} onClose={onClose} header='Επιλογή Ά Ύλης'>
         <PickingElement send={send} onClose={onClose} />
-      </Modal>
+      </Modal> */}
       <Flex direction='column'>
         <FormInput
-          label='Ά Ύλη'
+          label='Επωνυμία Προιόντος'
           onClick={onOpen}
           leftIcon={MdSearch}
           rightIcon={MdClose}
           rightIconClick={resetForm}
-          defaultValue={element.label}
+          defaultValue={product.label}
         />
         <Flex align='center' justify='space-between'>
           <FormInput
-            w='30%'
-            name='rate'
-            label='Συμμετοχή'
-            tag='%'
+            w='40%'
+            name='weights'
+            label='Κιλά'
+            tag='kg'
             type='number'
             errors={errors}
             formRef={register}
           />
           <FormInput
-            w='30%'
-            name='price'
-            label='Τιμή'
-            tag='€'
-            type='number'
-            errors={errors}
-            formRef={register}
-          />
-          <FormInput
-            w='30%'
-            name='restPrice'
-            label='Διάφορα'
-            tag='€'
+            w='40%'
+            name='units'
+            label='Τεμάχια'
             type='number'
             errors={errors}
             formRef={register}
           />
         </Flex>
-        <FormInput
-          label='Στοιχεία'
-          cursor='default'
-          pointerEvents='none'
-          defaultValue={element.formula?.join('-')}
-        />
         <Buttons.Primary mt={4} ml='auto' type='submit'>
           Προσθήκη
         </Buttons.Primary>
@@ -98,4 +80,4 @@ function ElementForm() {
   );
 }
 
-export default ElementForm;
+export default ProductForm;

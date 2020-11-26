@@ -4,23 +4,16 @@ import { Text } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 
 import { getData } from '../../api';
-import { useFiltersData, usePagination } from '../../hooks';
-import ElementList from '../lists/elementList';
+import { ElementList } from '../../lib/ui';
+import ItemList from '../lists/itemList';
 
 export default function PickingElement({ send, onClose }) {
   const keys = React.useRef(['label']);
-  const [query, setQuery] = React.useState('');
-
   const { data = [], status, error } = useQuery('elements', getData);
-  const filterdData = useFiltersData({ data, query, keys });
-  const paginationProps = usePagination(filterdData);
 
-  function handleChange(e) {
-    setQuery(e.target.value);
-  }
   function handleElementClick(el) {
     onClose();
-    send({ type: 'PICK_ELEMENT', el });
+    send({ type: 'ADD_ITEM', key: 'element', data: el });
   }
 
   if (error)
@@ -30,12 +23,12 @@ export default function PickingElement({ send, onClose }) {
       </Text>
     );
   return (
-    <ElementList
-      query={query}
-      handleChange={handleChange}
-      handleClick={handleElementClick}
-      paginationProps={paginationProps}
+    <ItemList
+      keys={keys}
+      data={data}
+      List={ElementList}
       isLoading={status === 'loading'}
+      handleClick={handleElementClick}
     />
   );
 }

@@ -2,10 +2,19 @@ import React from 'react';
 
 import { Box, FormControl, InputGroup } from '@chakra-ui/react';
 
+import { useFiltersData, usePagination } from '../../hooks';
 import { Pagination } from '../../layouts';
-import { RecipeList as List, Input } from '../../lib/ui';
+import { Input } from '../../lib/ui';
 
-function RecipeList({ query, isLoading, handleClick, handleChange, paginationProps }) {
+function ItemList({ isLoading, handleClick, data, keys, List }) {
+  const [query, setQuery] = React.useState('');
+
+  const filterdData = useFiltersData({ data, query, keys });
+  const paginationProps = usePagination(filterdData);
+
+  function handleChange(e) {
+    setQuery(e.target.value);
+  }
   return (
     <Box>
       <FormControl mt={3}>
@@ -24,4 +33,4 @@ function RecipeList({ query, isLoading, handleClick, handleChange, paginationPro
   );
 }
 
-export default RecipeList;
+export default ItemList;

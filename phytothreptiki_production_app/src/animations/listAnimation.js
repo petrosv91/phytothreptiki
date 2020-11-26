@@ -2,7 +2,7 @@ import React from 'react';
 
 import { motion } from 'framer-motion';
 
-function ListAnimation({ index, children }) {
+function ListAnimation({ animation, children }) {
   return (
     <motion.div
       variants={{
@@ -21,10 +21,10 @@ function ListAnimation({ index, children }) {
           opacity: 0,
         },
       }}
-      custom={index}
-      exit='removed'
+      custom={animation.index}
+      initial={animation.shouldAnimate ? 'hidden' : 'visible'}
       animate='visible'
-      initial={'hidden'}
+      exit='removed'
     >
       {children}
     </motion.div>
