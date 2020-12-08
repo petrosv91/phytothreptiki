@@ -3,19 +3,19 @@ import React from 'react';
 import { useMachine, useService } from '@xstate/react';
 
 import { FormMachine } from '../machines/formMachine';
-const FormContext = React.createContext();
+const MainFormContext = React.createContext();
 
-function FormProvider({ children }) {
+function MainFormProvider({ children }) {
   const [, , service] = useMachine(FormMachine, { devTools: true });
-  return <FormContext.Provider value={service}>{children}</FormContext.Provider>;
+  return <MainFormContext.Provider value={service}>{children}</MainFormContext.Provider>;
 }
 
-function useFormService() {
-  const context = React.useContext(FormContext);
+function useMainFormService() {
+  const context = React.useContext(MainFormContext);
   if (context === undefined) {
     throw new Error('useFormService must be used within a FormProvider');
   }
   return useService(context);
 }
 
-export { FormProvider, useFormService };
+export { MainFormProvider, useMainFormService };

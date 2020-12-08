@@ -9,12 +9,12 @@ function useReactQueryConfig() {
 
   const overrides = useMemo(() => {
     function handleError(e) {
-      createToast(toast, { type: 'error', content: e.message, title: 'Αποτυχία' });
+      createToast(toast, { type: 'error', title: 'Αποτυχία', content: e.message });
     }
     return {
       queries: {
-        refetchOnWindowFocus: false,
         retry: 1,
+        refetchOnWindowFocus: false,
         onError: handleError,
       },
       mutations: {

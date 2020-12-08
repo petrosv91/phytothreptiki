@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { ITEMS_PER_PAGE } from '../../../hooks/usePagination';
 import ListItem from './listItem';
 
-function RecipeList({ data, isLoading, handleClick, ...rest }) {
+function ProductList({ data, isLoading, handleClick, ...rest }) {
   const shouldAnimate = React.useRef(true);
   const SkeletoArray = new Array(ITEMS_PER_PAGE).fill(0);
 
@@ -46,7 +46,7 @@ function RecipeList({ data, isLoading, handleClick, ...rest }) {
               }}
             >
               <Flex px={6} align='center' justify='flex-end'>
-                <Text textAlign='right'>{item.recipe}</Text>
+                <Text textAlign='right'>{item.label}</Text>
               </Flex>
             </ListItem>
           );
@@ -56,4 +56,4 @@ function RecipeList({ data, isLoading, handleClick, ...rest }) {
   );
 }
 
-export default React.memo(RecipeList);
+export default React.memo(ProductList);

@@ -1,62 +1,55 @@
 import React from 'react';
 
 import { Flex, useDisclosure, useToast } from '@chakra-ui/react';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import { useFormContext } from 'react-hook-form';
 
-import { mainFormSchema } from '../../config/';
-import { useFormService } from '../../context/formProvider';
-import { ConfirmationModal, FormInput } from '../../lib/ui';
-import Header from '../../lib/ui/header/header';
+import { useMainFormService } from '../../context/mainFormProvider';
+import { ConfirmationModal, FormInput, Loading } from '../../lib/ui';
 import { createToast, isFormEmpty } from '../../utils';
 import ElementForm from '../element/elementForm';
 import ElementStore from '../element/elementStore';
+import ProductForm from '../product/productForm';
+import ProductStore from '../product/productStore';
 
 const MESSAGE = 'Προσοχή αν πατήσετε σύνεχεια θα χάσετε ότι έχετε κάνει στην διαδικασία';
 
 function Recipe() {
   const toast = useToast();
-  const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { register, handleSubmit, getValues, setValue, errors } = useForm({
-    resolver: yupResolver(mainFormSchema),
-  });
 
-  const [state] = useFormService();
-  const { elementStore } = state.context;
+  const [state, send] = useMainFormService();
+  const { context } = state;
+  const isSubmitting = state.matches('submitting');
 
-  function onSubmit(data) {
-    console.log(data);
-  }
+  const { register, handleSubmit, getValues, reset, setValue, errors } = useFormContext();
+
   function onConfirm() {
     onClose();
-    history.push('/');
   }
-  function handleOnBlur() {
+  function onSubmit(formData) {
+    send({
+      type: 'SUBMIT',
+      data: formData,
+      callback: reset,
+      toast: (props) => createToast(toast, props),
+    });
+  }
+
+  function handleback() {
+    const formValues = getValues();
+    if (!isFormEmpty(formValues, context)) {
+      onOpen();
+      return;
+    }
+  }
+
+  function calcTotalWeight() {
     const { loops, weights } = getValues();
     if (!loops || !weights) {
       setValue('totalWeight', '');
       return;
     }
-    if (weights > 600) {
-      createToast(toast, {
-        type: 'error',
-        content: 'Η χωρητικότητα του μηχανήματος ειναι μέχρι 600 κιλά',
-        title: 'Προέκυψε Σφάλμα',
-      });
-      setValue('weights', '');
-      setValue('totalWeight', '');
-      return;
-    }
     setValue('totalWeight', loops * weights);
-  }
-  function handleback() {
-    if (!isFormEmpty(getValues()) || elementStore.length) {
-      onOpen();
-      return;
-    }
-    history.push('/');
   }
 
   return (
@@ -67,30 +60,12 @@ function Recipe() {
         onClose={onClose}
         onConfirm={onConfirm}
       />
+      <Loading isLoading={isSubmitting} />
       <form style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
-        <Header handleback={handleback} submit={true} />
         <Flex mt={2} align='center' justify='space-between'>
-          <FormInput
-            w='30%'
-            name='date'
-            label='Ημερομηνία'
-            errors={errors}
-            formRef={register({ required: true })}
-          />
-          <FormInput
-            w='30%'
-            name='type'
-            label='Τύπος'
-            errors={errors}
-            formRef={register({ required: true })}
-          />
-          <FormInput
-            w='30%'
-            name='recipe'
-            label='Συνταγή'
-            errors={errors}
-            formRef={register({ required: true })}
-          />
+          <FormInput w='30%' name='date' label='Ημερομηνία' errors={errors} formRef={register} />
+          <FormInput w='30%' name='type' label='Τύπος' errors={errors} formRef={register} />
+          <FormInput w='30%' name='recipe' label='Συνταγή' errors={errors} formRef={register} />
         </Flex>
         <Flex align='center' justify='space-between'>
           <FormInput
@@ -100,7 +75,7 @@ function Recipe() {
             type='number'
             errors={errors}
             formRef={register}
-            onBlur={handleOnBlur}
+            onBlur={calcTotalWeight}
           />
           <FormInput
             w='30%'
@@ -110,7 +85,7 @@ function Recipe() {
             tag='kg'
             errors={errors}
             formRef={register}
-            onBlur={handleOnBlur}
+            onBlur={calcTotalWeight}
           />
           <FormInput
             w='30%'
@@ -127,6 +102,8 @@ function Recipe() {
       </form>
       <ElementForm mt={4} />
       <ElementStore mt={4} />
+      <ProductForm mt={4} />
+      <ProductStore mt={4} />
     </Flex>
   );
 }

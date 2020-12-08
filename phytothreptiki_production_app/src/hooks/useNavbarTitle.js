@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useLocation } from 'react-router-dom';
 
-import { menus } from '../config/menus';
+// import { menus } from '../config/menus';
 
 function useNavbarTitle() {
   const { pathname } = useLocation();
@@ -10,7 +10,7 @@ function useNavbarTitle() {
   const title = React.useMemo(() => {
     if (pathname === '/') return '';
     const [mainPath] = pathname.split('/').filter((item) => item !== '');
-    const menuMatch = menus.find((menu) => menu.url === `/${mainPath}`);
+    const menuMatch = [].find((menu) => menu.url === `/${mainPath}`);
     return menuMatch?.label;
   }, [pathname]);
 

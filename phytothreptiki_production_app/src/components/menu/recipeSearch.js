@@ -1,24 +1,24 @@
 import React from 'react';
 
 import { Flex } from '@chakra-ui/react';
-import { useHistory } from 'react-router-dom';
+import { useFormContext } from 'react-hook-form';
 
-import Header from '../../lib/ui/header/header';
+import { useMainFormService } from '../../context/mainFormProvider';
 import PickingRecipe from '../recipe/pickingRecipe';
 
 function RecipeSearch() {
-  const history = useHistory();
+  const { setValue } = useFormContext();
+  const [, send] = useMainFormService();
 
-  function handleback() {
-    history.push('/');
-  }
-  function editItem(item) {
-    console.log(item);
+  function editItem({ elements, products, ...recipe }) {
+    send({ type: 'ADD_RECIPE', elements, products });
+    Object.entries(recipe).forEach(([key, value]) => {
+      setValue(key, value);
+    });
   }
 
   return (
     <Flex direction='column'>
-      <Header my={4} handleback={handleback} />
       <PickingRecipe handleItemClick={editItem} />
     </Flex>
   );

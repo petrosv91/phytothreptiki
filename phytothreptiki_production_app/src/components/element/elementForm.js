@@ -6,28 +6,32 @@ import { useForm } from 'react-hook-form';
 import { MdClose, MdSearch } from 'react-icons/md';
 import { v4 as uuidv4 } from 'uuid';
 
-import { subFormSchema } from '../../config/';
-import { useFormService } from '../../context/formProvider';
+import { useReactFormSchema } from '../../config/';
+import { useMainFormService } from '../../context/mainFormProvider';
 import { Modal, Buttons, FormInput } from '../../lib/ui';
-import { validateTable } from '../../utils';
+import { validateElementStore } from '../../utils';
 import PickingElement from './pickingElement';
 
 function ElementForm() {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { elementFormSchema } = useReactFormSchema();
   const { register, handleSubmit, reset, errors } = useForm({
     mode: 'onBlur',
-    resolver: yupResolver(subFormSchema),
+    resolver: yupResolver(elementFormSchema),
   });
 
-  const [state, send] = useFormService();
-  const { element, elementStore } = state.context;
+  const [state, send] = useMainFormService();
+  const { element, ...context } = state.context;
 
   function resetForm() {
     send({ type: 'DELETE_ITEM', key: 'element', callback: reset });
   }
   function onSubmit(formData) {
-    if (!validateTable({ formData, store: elementStore, toast })) return;
+    if (!validateElementStore(formData, context, toast)) {
+      return;
+    }
     send({
       type: 'ADD_ROW',
       key: 'elementStore',

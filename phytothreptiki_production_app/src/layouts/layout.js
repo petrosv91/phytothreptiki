@@ -1,19 +1,20 @@
 import React from 'react';
 
-import { Box } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 
 function Layout({ children }) {
   return (
-    <Box
+    <Flex
       bg='background'
       color='text'
       height='100vh'
       minHeight='100'
       overflowY='auto'
       overflowX='hidden'
+      direction='column'
     >
       {children}
-    </Box>
+    </Flex>
   );
 }
 
