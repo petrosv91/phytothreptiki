@@ -28,7 +28,6 @@ function Secondary({ children, ...rest }) {
       cursor='pointer'
       color='secondaryText'
       variant='outline'
-      colorScheme='secondaryText'
       _hover={{ color: 'text', colorScheme: 'text' }}
       {...rest}
     >
@@ -37,4 +36,19 @@ function Secondary({ children, ...rest }) {
   );
 }
 
-export { Primary, Secondary };
+function Tertiary({ children, ...rest }) {
+  return (
+    <Button
+      fontSize='md'
+      cursor='pointer'
+      variant='link'
+      color='secondaryText'
+      _hover={{ color: 'text' }}
+      {...rest}
+    >
+      {children}
+    </Button>
+  );
+}
+
+export { Primary, Secondary, Tertiary };

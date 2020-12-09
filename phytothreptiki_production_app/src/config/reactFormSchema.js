@@ -38,7 +38,7 @@ function useReactFormSchema() {
       price: yup.number().positive(),
       restPrice: yup.number().positive(),
     });
-  }, [toast]);
+  }, []);
 
   const productFormSchema = React.useMemo(() => {
     return yup.object().shape({

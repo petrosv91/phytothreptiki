@@ -7,7 +7,7 @@ import { MdClose, MdSearch } from 'react-icons/md';
 import { v4 as uuidv4 } from 'uuid';
 
 import { useReactFormSchema } from '../../config/';
-import { useMainFormService } from '../../context/mainFormProvider';
+import { useMainMachine } from '../../context/mainMachineProvider';
 import { Modal, Buttons, FormInput } from '../../lib/ui';
 import { validateElementStore } from '../../utils';
 import PickingElement from './pickingElement';
@@ -22,7 +22,7 @@ function ElementForm() {
     resolver: yupResolver(elementFormSchema),
   });
 
-  const [state, send] = useMainFormService();
+  const [state, send] = useMainMachine();
   const { element, ...context } = state.context;
 
   function resetForm() {

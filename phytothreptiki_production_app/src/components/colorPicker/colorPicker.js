@@ -42,7 +42,7 @@ function Colorpicker() {
 
   return (
     <Menu>
-      <MenuButton cursor='pointer'>
+      <MenuButton ml={4} cursor='pointer'>
         <Icon as={MdSettings} boxSize={5} />
       </MenuButton>
       <MenuList px={1} py={1} minWidth='50px' bg='background'>

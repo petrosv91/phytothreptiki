@@ -14,8 +14,8 @@ export function createToast(toast, props) {
 
 export function isFormEmpty(formState, { elementStore, productStore }) {
   return (
-    !elementStore.length ||
-    !productStore.length ||
+    !elementStore.length &&
+    !productStore.length &&
     Object.values(formState).every((field) => field === '')
   );
 }

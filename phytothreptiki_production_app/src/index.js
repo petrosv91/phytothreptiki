@@ -2,7 +2,7 @@ import React from 'react';
 
 import ReactDOM from 'react-dom';
 
-import App from './app';
+import App from './App';
 import { ColorModeProvider } from './context/colorModeProvider';
 import { ThemeModeProvider } from './context/themeModeProvider';
 import * as serviceWorker from './serviceWorker';

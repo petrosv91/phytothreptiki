@@ -3,11 +3,11 @@ import React from 'react';
 import { Flex, Icon } from '@chakra-ui/react';
 import { MdDelete } from 'react-icons/md';
 
-import { useMainFormService } from '../../context/mainFormProvider';
+import { useMainMachine } from '../../context/mainMachineProvider';
 import { Table } from '../../lib/ui';
 
 function ProductStore({ ...rest }) {
-  const [state, send] = useMainFormService();
+  const [state, send] = useMainMachine();
   const { productStore } = state.context;
 
   function deleteProduct(row) {
@@ -23,6 +23,7 @@ function ProductStore({ ...rest }) {
           <Table.Header>ΚΙΛΑ</Table.Header>
           <Table.Header>ΤΕΜΑΧΙΑ</Table.Header>
           <Table.Header>Συνολικά Κιλά</Table.Header>
+          <Table.Header>E</Table.Header>
         </Table.Row>
       </Table.Head>
       <Table.Body>

@@ -5,7 +5,7 @@ import { ReactQueryConfigProvider } from 'react-query';
 
 import { darkTheme, lightTheme, useReactQueryConfig } from './config';
 import { useThemeMode } from './context/themeModeProvider';
-import Menu from './menu';
+import Home from './pages/home';
 
 function App() {
   const { currentTheme } = useThemeMode();
@@ -13,7 +13,7 @@ function App() {
   return (
     <ChakraProvider theme={currentTheme === 'dark' ? darkTheme : lightTheme}>
       <ReactQueryConfigProvider config={overrides}>
-        <Menu />
+        <Home />
       </ReactQueryConfigProvider>
     </ChakraProvider>
   );

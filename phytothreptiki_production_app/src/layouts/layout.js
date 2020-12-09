@@ -5,13 +5,13 @@ import { Flex } from '@chakra-ui/react';
 function Layout({ children }) {
   return (
     <Flex
-      bg='background'
-      color='text'
+      direction='column'
       height='100vh'
       minHeight='100'
       overflowY='auto'
       overflowX='hidden'
-      direction='column'
+      color='text'
+      bg='background'
     >
       {children}
     </Flex>

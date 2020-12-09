@@ -3,11 +3,11 @@ import React from 'react';
 import { Flex, Icon, Text } from '@chakra-ui/react';
 import { MdDelete } from 'react-icons/md';
 
-import { useMainFormService } from '../../context/mainFormProvider';
+import { useMainMachine } from '../../context/mainMachineProvider';
 import { Table } from '../../lib/ui';
 
 function ElementStore({ ...rest }) {
-  const [state, send] = useMainFormService();
+  const [state, send] = useMainMachine();
   const { elementStore } = state.context;
 
   function deleteElement(row) {

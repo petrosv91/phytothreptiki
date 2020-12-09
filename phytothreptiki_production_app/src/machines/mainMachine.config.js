@@ -60,4 +60,20 @@ export const services = {
       throw Object.assign(new Error(error), { toast: e.toast, message: error.message });
     }
   },
+  setElement: async (ctx, e) => {
+    try {
+      const result = await baseGetService({ service: 'setElement', data: { ...e.data } });
+      return { result, ...e };
+    } catch (error) {
+      throw Object.assign(new Error(error), { toast: e.toast, message: error.message });
+    }
+  },
+  setProduct: async (ctx, e) => {
+    try {
+      const result = await baseGetService({ service: 'setProduct', data: { ...e.data } });
+      return { result, ...e };
+    } catch (error) {
+      throw Object.assign(new Error(error), { toast: e.toast, message: error.message });
+    }
+  },
 };

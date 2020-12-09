@@ -61,7 +61,7 @@ function FormInput({
           </InputRightElement>
         )}
         {tag && (
-          <InputRightElement>
+          <InputRightElement zIndex={0}>
             <Tag p={0} size='lg' color='colorText' bg={`${currentColor}.400`}>
               <Text w='full' textAlign='center'>
                 {tag}
