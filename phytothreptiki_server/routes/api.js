@@ -27,6 +27,16 @@ router.post('/', async (req, res) => {
       const savedPost = await newPost.save();
       res.json({ success: true });
     }
+    if (req.body.service === 'setElement') {
+      const newPost = new Element({ ...req.body.data });
+      const savedPost = await newPost.save();
+      res.json({ success: true });
+    }
+    if (req.body.service === 'setProduct') {
+      const newPost = new Element({ ...req.body.data });
+      const savedPost = await newPost.save();
+      res.json({ success: true });
+    }
   } catch (err) {
     res.json({ success: false, message: err });
   }
