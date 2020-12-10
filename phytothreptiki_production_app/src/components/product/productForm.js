@@ -43,11 +43,15 @@ function ProductForm() {
       callback: resetForm,
     });
   }
+  function handleProductClick(product) {
+    onClose();
+    send({ type: 'ADD_ITEM', key: 'product', data: product });
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Modal isOpen={isOpen} onClose={onClose} header='Επιλογή Ά Ύλης'>
-        <PickingProduct send={send} onClose={onClose} />
+        <PickingProduct handleProductClick={handleProductClick} />
       </Modal>
       <Flex direction='column'>
         <FormInput

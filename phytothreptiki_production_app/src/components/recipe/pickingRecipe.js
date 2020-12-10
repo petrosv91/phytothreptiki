@@ -6,9 +6,9 @@ import useGetRecipes from '../../api/queries/useGetRecipes';
 import { RecipeList } from '../../lib/ui';
 import ItemList from '../lists/itemList';
 
-function PickingRecipe({ handleItemClick }) {
+function PickingRecipe({ handleRecipeClick }) {
   const keys = React.useRef(['label']);
-  const { data = [], status, error } = useGetRecipes();
+  const { data = [], status, error, isFetching } = useGetRecipes();
 
   if (error)
     return (
@@ -21,8 +21,8 @@ function PickingRecipe({ handleItemClick }) {
       keys={keys}
       data={data}
       List={RecipeList}
-      handleClick={handleItemClick}
-      isLoading={status === 'loading'}
+      handleClick={handleRecipeClick}
+      isLoading={status === 'loading' || isFetching}
     />
   );
 }

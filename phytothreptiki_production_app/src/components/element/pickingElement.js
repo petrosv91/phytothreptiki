@@ -6,14 +6,9 @@ import useGetElements from '../../api/queries/useGetElements';
 import { ElementList } from '../../lib/ui';
 import ItemList from '../lists/itemList';
 
-function PickingElement({ send, onClose }) {
+function PickingElement({ handleElementClick }) {
   const keys = React.useRef(['label']);
-  const { data = [], status, error } = useGetElements();
-
-  function handleElementClick(el) {
-    onClose();
-    send({ type: 'ADD_ITEM', key: 'element', data: el });
-  }
+  const { data = [], status, error, isFetching } = useGetElements();
 
   if (error)
     return (
@@ -26,8 +21,8 @@ function PickingElement({ send, onClose }) {
       keys={keys}
       data={data}
       List={ElementList}
-      isLoading={status === 'loading'}
       handleClick={handleElementClick}
+      isLoading={status === 'loading' || isFetching}
     />
   );
 }

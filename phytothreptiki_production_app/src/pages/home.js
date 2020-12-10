@@ -7,9 +7,9 @@ import { FormProvider, useForm } from 'react-hook-form';
 import Footer from '../components/footer/footer';
 import CreateMenu from '../components/menu/createMenu';
 import DeleteMenu from '../components/menu/deleteMenu';
+import SearchMenu from '../components/menu/searchMenu';
 import Navbar from '../components/navbar/navbar';
 import NewRecipe from '../components/recipe/newRecipe';
-import RecipeSearch from '../components/recipe/recipeSearch';
 import { useReactFormSchema } from '../config/';
 import { MainMachineProvider } from '../context/mainMachineProvider';
 import { Layout } from '../layouts';
@@ -27,7 +27,7 @@ function Home() {
           <Navbar />
           <Flex p={10} justify='center' direction='column'>
             <Stack direction='row' spacing={2} justify='flex-end'>
-              <RecipeSearch />
+              <SearchMenu />
               <CreateMenu />
               <DeleteMenu />
             </Stack>

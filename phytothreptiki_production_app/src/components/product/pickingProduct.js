@@ -6,14 +6,9 @@ import useGetProducts from '../../api/queries/useGetProducts';
 import { ProductList } from '../../lib/ui/';
 import ItemList from '../lists/itemList';
 
-function PickingProduct({ send, onClose }) {
+function PickingProduct({ handleProductClick }) {
   const keys = React.useRef(['label']);
-  const { data = [], status, error } = useGetProducts();
-
-  function handleProductClick(product) {
-    onClose();
-    send({ type: 'ADD_ITEM', key: 'product', data: product });
-  }
+  const { data = [], status, error, isFetching } = useGetProducts();
 
   if (error)
     return (
@@ -26,8 +21,8 @@ function PickingProduct({ send, onClose }) {
       keys={keys}
       data={data}
       List={ProductList}
-      isLoading={status === 'loading'}
       handleClick={handleProductClick}
+      isLoading={status === 'loading' || isFetching}
     />
   );
 }

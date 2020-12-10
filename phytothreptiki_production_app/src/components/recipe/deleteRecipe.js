@@ -1,24 +1,27 @@
 import React from 'react';
 
-import { Flex, useDisclosure, useToast } from '@chakra-ui/react';
+import { useDisclosure, useToast } from '@chakra-ui/react';
+import { queryCache } from 'react-query';
 
-import useDeleteElements from '../../api/mutations/useDeleteElement';
+import useDeleteRecipe from '../../api/mutations/useDeleteRecipe';
 import { ConfirmationModal } from '../../lib/ui';
 import { createToast } from '../../utils';
-import PickingRecipe from '../recipe/pickingRecipe';
+import PickingRecipe from './pickingRecipe';
 
-function RecipeDelete() {
+function DeleteRecipe() {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [mutate, { status }] = useDeleteElements({
+  const [mutate, { status }] = useDeleteRecipe({
     onSuccess: () => {
+      onClose();
+      queryCache.refetchQueries(queryCache.refetchQueries(['recipes'], { exact: true }));
       createToast(toast, { type: 'success', title: 'Επιτυχής Διαγραφή!' });
     },
   });
 
   const [item, setItem] = React.useState(undefined);
   const message = React.useMemo(() => {
-    return `Θέλετε να διαγράψετε το στοιχείο ${item?.label}`;
+    return `Θέλετε να διαγράψετε τη συνταγή ${item?.recipe}`;
   }, [item]);
 
   function deleteItem(selectedItem) {
@@ -26,22 +29,21 @@ function RecipeDelete() {
     setItem(selectedItem);
   }
   async function onConfirm() {
-    onClose();
-    await mutate({ id: item });
+    await mutate({ id: item._id });
   }
 
   return (
-    <Flex direction='column'>
+    <div>
       <ConfirmationModal
         isOpen={isOpen}
         onClose={onClose}
         message={message}
-        callback={onConfirm}
+        onConfirm={onConfirm}
         isLoading={status === 'loading'}
       />
-      <PickingRecipe handleItemClick={deleteItem} />
-    </Flex>
+      <PickingRecipe handleRecipeClick={deleteItem} />
+    </div>
   );
 }
 
-export default RecipeDelete;
+export default DeleteRecipe;

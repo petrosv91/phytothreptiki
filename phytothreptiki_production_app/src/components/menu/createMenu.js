@@ -8,21 +8,21 @@ import CreateProduct from '../product/createProduct';
 
 function CreateMenu() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [Component, setComponent] = React.useState();
+  const [{ comp, label }, setComponent] = React.useState({});
   const options = [
-    { label: 'Στοιχείου', comp: <CreateElement onClose={onClose} /> },
-    { label: 'Προιόντος', comp: <CreateProduct onClose={onClose} /> },
+    { label: 'Στοιχείου', comp: <CreateElement /> },
+    { label: 'Προιόντος', comp: <CreateProduct /> },
   ];
 
   function handleClick(opt) {
     onOpen();
-    setComponent(opt.comp);
+    setComponent(opt);
   }
 
   return (
     <div>
-      <Modal isOpen={isOpen} onClose={onClose} header='Δημιουργία'>
-        {Component}
+      <Modal isOpen={isOpen} onClose={onClose} header={`Δημιουργία ${label}`}>
+        {comp}
       </Modal>
       <Menu options={options} title='Δημιουργία' handleClick={handleClick} />
     </div>

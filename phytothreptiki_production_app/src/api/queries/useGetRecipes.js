@@ -8,7 +8,7 @@ async function getRecipes() {
 }
 
 function useGetRecipes(options = {}) {
-  return useQuery('products', getRecipes, { ...options });
+  return useQuery('recipes', getRecipes, { ...options });
 }
 
 export default useGetRecipes;

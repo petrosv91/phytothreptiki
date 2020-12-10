@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Flex, useDisclosure, useToast } from '@chakra-ui/react';
+import { Flex, useDisclosure } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Buttons, ConfirmationModal, FormInput, Loading } from '../../lib/ui';
-import { createToast, isFormEmpty } from '../../utils';
+import { isFormEmpty } from '../../utils';
 import ElementForm from '../element/elementForm';
 import ElementStore from '../element/elementStore';
 import ProductForm from '../product/productForm';
@@ -14,15 +14,11 @@ import ProductStore from '../product/productStore';
 const MESSAGE = 'Προσοχή αν πατήσετε σύνεχεια θα χάσετε ότι έχετε κάνει στην διαδικασία';
 
 function Recipe() {
-  const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [state, send] = useMainMachine();
   const { context } = state;
-  const isSubmitting =
-    state.matches('recipeSubmitting') ||
-    state.matches('elementSubmitting') ||
-    state.matches('productSubmitting');
+  const isSubmitting = state.matches('recipeSubmitting');
 
   const { register, handleSubmit, getValues, reset, setValue, errors } = useFormContext();
 
@@ -31,7 +27,6 @@ function Recipe() {
       type: 'RECIPE_SUBMIT',
       data: formData,
       callback: reset,
-      toast: (props) => createToast(toast, props),
     });
   }
 

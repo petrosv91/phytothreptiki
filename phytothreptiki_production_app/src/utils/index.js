@@ -3,7 +3,6 @@ import React from 'react';
 import { Toast } from '../layouts';
 
 export function createToast(toast, props) {
-  console.log(toast);
   toast({
     position: 'bottom',
     isClosable: true,

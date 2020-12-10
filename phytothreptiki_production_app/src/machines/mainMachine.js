@@ -24,7 +24,7 @@ export const MainMachine = createMachine({
           target: 'elementSubmitting',
         },
         PRODUCT_SUBMIT: {
-          target: 'elementSubmitting',
+          target: 'productSubmitting',
         },
       },
     },
@@ -33,11 +33,11 @@ export const MainMachine = createMachine({
         src: services.setElement,
         onDone: {
           target: 'editting',
-          actions: [actions.renderSuccess, actions.resetContext, actions.callback],
+          actions: ['renderSuccess', actions.resetContext, actions.callback],
         },
         onError: {
           target: 'editting',
-          actions: [actions.renderError],
+          actions: ['renderError'],
         },
       },
     },
@@ -46,11 +46,11 @@ export const MainMachine = createMachine({
         src: services.setProduct,
         onDone: {
           target: 'editting',
-          actions: [actions.renderSuccess, actions.resetContext, actions.callback],
+          actions: ['renderSuccess', actions.resetContext, actions.callback],
         },
         onError: {
           target: 'editting',
-          actions: [actions.renderError],
+          actions: ['renderError'],
         },
       },
     },
@@ -59,11 +59,11 @@ export const MainMachine = createMachine({
         src: services.setRecipe,
         onDone: {
           target: 'editting',
-          actions: [actions.renderSuccess, actions.resetContext, actions.callback],
+          actions: ['renderSuccess', actions.resetContext, actions.callback],
         },
         onError: {
           target: 'editting',
-          actions: [actions.renderError],
+          actions: ['renderError'],
         },
       },
     },

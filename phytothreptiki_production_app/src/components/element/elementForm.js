@@ -44,11 +44,15 @@ function ElementForm() {
       callback: resetForm,
     });
   }
+  function handleElementClick(el) {
+    onClose();
+    send({ type: 'ADD_ITEM', key: 'element', data: el });
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Modal isOpen={isOpen} onClose={onClose} header='Επιλογή Ά Ύλης'>
-        <PickingElement send={send} onClose={onClose} />
+        <PickingElement handleElementClick={handleElementClick} />
       </Modal>
       <Flex direction='column'>
         <FormInput

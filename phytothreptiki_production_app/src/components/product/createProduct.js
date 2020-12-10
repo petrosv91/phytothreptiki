@@ -1,24 +1,21 @@
 import React from 'react';
 
-import { useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { MdClose, MdSearch } from 'react-icons/md';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Buttons, FormInput } from '../../lib/ui';
-import { createToast } from '../../utils';
 
-function CreateProduct({ onClose }) {
-  const toast = useToast();
-  const [, send] = useMainMachine();
+function CreateProduct() {
+  const [state, send] = useMainMachine();
   const { register, handleSubmit, reset } = useForm();
+  const isSubmitting = state.matches('productSubmitting');
 
-  function onSubmit(data) {
+  function onSubmit(formData) {
     send({
       type: 'PRODUCT_SUBMIT',
-      data,
-      toast: (props) => createToast(toast, props),
-      callback: onClose,
+      data: formData,
+      callback: reset,
     });
   }
   return (
@@ -31,7 +28,7 @@ function CreateProduct({ onClose }) {
         rightIconClick={reset}
         formRef={register}
       />
-      <Buttons.Primary mt={4} w='full' type='submit'>
+      <Buttons.Primary mt={4} w='full' type='submit' isLoading={isSubmitting}>
         Προσθήκη
       </Buttons.Primary>
     </form>

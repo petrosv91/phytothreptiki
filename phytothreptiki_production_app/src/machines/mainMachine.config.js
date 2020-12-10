@@ -15,14 +15,6 @@ export const actions = {
     if (e.callback) e.callback();
     if (e.data?.callback) e.data.callback();
   },
-  renderSuccess: (ctx, e) => {
-    const { toast } = e.data;
-    toast({ type: 'success', title: 'Επιτυχής καταχώρηση' });
-  },
-  renderError: (ctx, e) => {
-    const { toast, message } = e.data;
-    toast({ type: 'error', title: 'Αποτυχία', content: message });
-  },
   resetContext: assign((ctx, e) => {
     return { ...initialContext };
   }),
