@@ -7,6 +7,11 @@ const Recipe = require('../models/recipe');
 
 router.post('/', async (req, res) => {
   try {
+    if (req.body.service === 'getRecipes') {
+      const allPosts = await Recipe.find();
+      res.json({ success: true, data: allPosts });
+      return;
+    }
     if (req.body.service === 'getElements') {
       const allPosts = await Element.find();
       res.json({ success: true, data: allPosts });
@@ -14,11 +19,6 @@ router.post('/', async (req, res) => {
     }
     if (req.body.service === 'getProducts') {
       const allPosts = await Product.find();
-      res.json({ success: true, data: allPosts });
-      return;
-    }
-    if (req.body.service === 'getRecipes') {
-      const allPosts = await Recipe.find();
       res.json({ success: true, data: allPosts });
       return;
     }
@@ -33,34 +33,26 @@ router.post('/', async (req, res) => {
       res.json({ success: true });
     }
     if (req.body.service === 'setProduct') {
-      const newPost = new Element({ ...req.body.data });
+      const newPost = new Product({ ...req.body.data });
       const savedPost = await newPost.save();
+      res.json({ success: true });
+    }
+    if (req.body.service === 'deleteRecipe') {
+      const deletedPost = await Recipe.deleteOne({ _id: req.body.id });
+      res.json({ success: true });
+    }
+    if (req.body.service === 'deleteElement') {
+      const deletedPost = await Element.deleteOne({ _id: req.body.id });
+      res.json({ success: true });
+    }
+    if (req.body.service === 'deleteProduct') {
+      const deletedPost = await Product.deleteOne({ _id: req.body.id });
       res.json({ success: true });
     }
   } catch (err) {
     res.json({ success: false, message: err });
   }
 });
-
-// router.post('/', async (req, res) => {
-//   try {
-//     const newPost = new Post({
-//       name: req.body.name,
-//       label: req.body.label,
-//       formula: req.body.formula,
-//     });
-//     const savedPost = await newPost.save();
-//     res.json({ sucess: true });
-//   } catch (err) {
-//     res.json({ message: err });
-// router.get('/:postId', async (req, res) => {
-//   try {
-//     const specificPost = await Post.findById(req.params.postId);
-//     res.json(specificPost);
-//   } catch (err) {
-//     res.json({ message: err });
-//   }
-// });
 
 // router.patch('/:postId', async (req, res) => {
 //   try {
@@ -73,14 +65,5 @@ router.post('/', async (req, res) => {
 //     res.json({ message: err });
 //   }
 // });
-
-router.delete('/:postId', async (req, res) => {
-  try {
-    const deletedPost = await Post.deleteOne({ _id: req.params.postId });
-    res.json({ success: true, data: deletedPost });
-  } catch (err) {
-    res.json({ success: false, message: err });
-  }
-});
 
 module.exports = router;
