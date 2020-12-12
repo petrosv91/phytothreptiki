@@ -3,7 +3,7 @@ import { assign } from 'xstate';
 import { baseGetService } from '../api/services';
 
 export const initialContext = {
-  recipe: {},
+  recipeId: undefined,
   element: {},
   elementStore: [],
   product: {},
@@ -21,6 +21,10 @@ export const actions = {
   assignItem: assign((ctx, e) => {
     return { ...ctx, [e.key]: e.data };
   }),
+  assignCode: assign((ctx, e) => {
+    const [{ _id, code }] = e.data.result.data;
+    return { ...ctx, codeId: _id, code };
+  }),
   deleteItem: assign((ctx, e) => {
     return { ...ctx, [e.key]: {} };
   }),
@@ -33,6 +37,8 @@ export const actions = {
   }),
   updateContext: assign((ctx, e) => {
     return {
+      code: e.code,
+      recipeId: e.id,
       elementStore: e.elements,
       productStore: e.products,
     };
@@ -44,8 +50,15 @@ export const guards = {};
 export const services = {
   setRecipe: async (ctx, e) => {
     try {
-      const { elementStore, productStore } = ctx;
-      const data = { ...e.data, elements: elementStore, products: productStore };
+      const { recipeId, elementStore, productStore, codeId, code } = ctx;
+      const data = {
+        ...e.data,
+        code,
+        codeId,
+        id: recipeId,
+        elements: elementStore,
+        products: productStore,
+      };
       const result = await baseGetService({ service: 'setRecipe', data });
       return { result, ...e };
     } catch (error) {
@@ -63,6 +76,14 @@ export const services = {
   setProduct: async (ctx, e) => {
     try {
       const result = await baseGetService({ service: 'setProduct', data: { ...e.data } });
+      return { result, ...e };
+    } catch (error) {
+      throw Object.assign(new Error(error), { toast: e.toast, message: error.message });
+    }
+  },
+  getMaxCode: async (ctx, e) => {
+    try {
+      const result = await baseGetService({ service: 'getMaxCode' });
       return { result, ...e };
     } catch (error) {
       throw Object.assign(new Error(error), { toast: e.toast, message: error.message });

@@ -18,35 +18,11 @@ export function isFormEmpty(formState, { elementStore, productStore }) {
     Object.values(formState).every((field) => field === '')
   );
 }
-
-function isRateValid({ elementStore }, { rate: newRate }) {
+export function isRateValid({ elementStore }, { rate: newRate }) {
   const rateSum = elementStore.reduce((prev, curr) => prev + curr.rate, 0);
   return rateSum + newRate <= 100;
 }
-export function validateElementStore(formData, context, toast) {
-  if (!isRateValid(context, formData)) {
-    createToast(toast, {
-      type: 'error',
-      title: 'Αποτυχία',
-      content: 'Το ποσοστό έχει ξεπεράσει το 100%',
-    });
-    return false;
-  }
-  return true;
-}
-
-function isTotalWeightValid({ productStore, recipe }, { weights, units }) {
+export function isTotalWeightValid({ productStore }, { weights, units }, totalWeight) {
   const weightsSum = productStore.reduce((prev, curr) => prev + curr.weights * curr.units, 0);
-  return weightsSum + weights * units <= recipe.totalWeight;
-}
-export function validateProductStore(formData, context, toast) {
-  if (!isTotalWeightValid(context, formData)) {
-    createToast(toast, {
-      type: 'error',
-      title: 'Αποτυχία',
-      content: 'Τα κιλά έχουν ξεπεράσει τα συνολικά κιλά που δώθηκαν',
-    });
-    return false;
-  }
-  return true;
+  return weightsSum + weights * units <= totalWeight;
 }

@@ -13,8 +13,8 @@ function SearchMenu() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [{ comp, label }, setComponent] = React.useState({});
 
-  function handleRecipeClick({ elements, products, ...recipe }) {
-    send({ type: 'ADD_RECIPE', elements, products });
+  function handleRecipeClick({ _id, code, elements, products, ...recipe }) {
+    send({ type: 'ADD_RECIPE', elements, products, id: _id, code });
     Object.entries(recipe).forEach(([key, value]) => {
       setValue(key, value);
     });

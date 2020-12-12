@@ -12,16 +12,17 @@ function Menu({ handleClick, options, title }) {
         fontSize='md'
         cursor='pointer'
         variant='ghost'
-        color='secondaryText'
-        borderRadius={0}
-        borderBottomWidth={1}
-        borderBottomColor='text'
+        // borderRadius={0}
+        // borderBottomWidth={1}
+        // borderBottomColor='text'
         rightIcon={<MdExpandMore />}
-        _hover={{ color: 'text' }}
+        _active={{ bg: 'none' }}
+        _hover={{ color: 'secondaryText' }}
+        _expanded={{ bg: 'none', color: 'text' }}
       >
         {title}
       </MenuButton>
-      <MenuList minWidth={150} px={1} py={1} bg='background'>
+      <MenuList p={1} minWidth={150} bg='background' borderRadius='sm'>
         {options.map((opt, index) => {
           return (
             <MenuItem
@@ -31,8 +32,7 @@ function Menu({ handleClick, options, title }) {
               borderBottomWidth={1}
               borderBottomColor='secondaryText'
               _last={{ borderBottomWidth: 0 }}
-              _hover={{ bg: 'gray.500' }}
-              _focus={{ bg: 'gray.500' }}
+              _hover={{ bg: 'secondaryBackground' }}
               onClick={() => {
                 handleClick(opt);
               }}

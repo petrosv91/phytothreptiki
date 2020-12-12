@@ -28,13 +28,13 @@ function ListItem({ animation, children, onClick, isLoaded = true, ...rest }) {
         boxShadow='md'
         fontWeight='semibold'
         borderRightWidth={15}
-        color='secondaryText'
-        bg='secondaryBackground'
-        borderColor={`${currentColor}.500`}
+        color='text'
+        bg='background'
+        borderColor={currentColor}
         transition='all 0.25s'
         _hover={{
-          color: 'text',
-          borderColor: `${currentColor}.300`,
+          color: 'secondaryText',
+          borderColor: `${currentColor}AA`,
         }}
         {...rest}
       >

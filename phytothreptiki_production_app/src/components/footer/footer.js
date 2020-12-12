@@ -16,7 +16,7 @@ function Footer() {
       justify={{ md: 'flex-start', lg: 'center' }}
     >
       <Flex>
-        MyProject 2020
+        ΦΥΤΟΘΡΕΠΤΙΚΗ 2020
         <Text ml='.5em' fontSize='lg'>
           &copy;
         </Text>

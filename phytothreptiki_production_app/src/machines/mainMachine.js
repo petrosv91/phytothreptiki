@@ -4,7 +4,7 @@ import { initialContext, actions, services } from './mainMachine.config';
 
 export const MainMachine = createMachine({
   id: 'mainMachine',
-  initial: 'editting',
+  initial: 'gettingMaxCode',
   context: {
     ...initialContext,
   },
@@ -25,6 +25,19 @@ export const MainMachine = createMachine({
         },
         PRODUCT_SUBMIT: {
           target: 'productSubmitting',
+        },
+      },
+    },
+    gettingMaxCode: {
+      invoke: {
+        src: services.getMaxCode,
+        onDone: {
+          target: 'editting',
+          actions: [actions.assignCode],
+        },
+        onError: {
+          target: 'editting',
+          actions: ['renderError'],
         },
       },
     },
@@ -58,7 +71,7 @@ export const MainMachine = createMachine({
       invoke: {
         src: services.setRecipe,
         onDone: {
-          target: 'editting',
+          target: 'gettingMaxCode',
           actions: ['renderSuccess', actions.resetContext, actions.callback],
         },
         onError: {

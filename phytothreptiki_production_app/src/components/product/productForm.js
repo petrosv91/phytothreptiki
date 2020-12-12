@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Flex, useDisclosure, useToast } from '@chakra-ui/react';
+import { Flex, useDisclosure } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { MdClose, MdSearch } from 'react-icons/md';
@@ -8,12 +8,12 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { useReactFormSchema } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
+import useStoreValidation from '../../hooks/useStoreValidation';
 import { Modal, Buttons, FormInput } from '../../lib/ui';
-import { validateProductStore } from '../../utils';
 import PickingProduct from './pickingProduct';
 
 function ProductForm() {
-  const toast = useToast();
+  const { validate } = useStoreValidation();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { productFormSchema } = useReactFormSchema();
@@ -23,13 +23,13 @@ function ProductForm() {
   });
 
   const [state, send] = useMainMachine();
-  const { product, ...context } = state.context;
+  const { product } = state.context;
 
   function resetForm() {
-    send({ type: 'DELETE_ITEM', item: 'product', callback: reset });
+    send({ type: 'DELETE_ITEM', key: 'product', callback: reset });
   }
   function onSubmit(formData) {
-    if (!validateProductStore(formData, context, toast)) {
+    if (!validate(formData, 'product')) {
       return;
     }
     send({

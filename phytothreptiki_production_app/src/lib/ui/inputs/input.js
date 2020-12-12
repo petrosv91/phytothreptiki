@@ -10,10 +10,13 @@ function Input({ formRef, name, ...rest }) {
     <ChakraInput
       name={name}
       ref={formRef}
+      fontWeight='500'
       color='text'
+      borderRadius='sm'
       borderColor='secondaryText'
       errorBorderColor='red.500'
-      focusBorderColor={`${currentColor}.100`}
+      focusBorderColor={`${currentColor}AA`}
+      _hover={{ borderColor: 'text' }}
       {...rest}
     />
   );

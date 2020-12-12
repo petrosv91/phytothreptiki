@@ -15,8 +15,8 @@ export const darkTheme = {
   ...customTheme,
   colors: {
     ...customTheme.colors,
-    background: customTheme.colors.gray[700],
-    secondaryBackground: customTheme.colors.gray[500],
+    background: customTheme.colors.gray[600],
+    secondaryBackground: customTheme.colors.gray[700],
     text: customTheme.colors.white,
     secondaryText: customTheme.colors.gray[300],
     colorText: customTheme.colors.white,

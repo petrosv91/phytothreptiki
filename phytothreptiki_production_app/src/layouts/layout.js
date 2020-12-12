@@ -11,7 +11,7 @@ function Layout({ children }) {
       overflowY='auto'
       overflowX='hidden'
       color='text'
-      bg='background'
+      bg='secondaryBackground'
     >
       {children}
     </Flex>

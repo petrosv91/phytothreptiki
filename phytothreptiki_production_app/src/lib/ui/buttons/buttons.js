@@ -8,12 +8,12 @@ function Primary({ children, ...rest }) {
   const { currentColor } = useColorMode();
   return (
     <Button
-      border={0}
       variant='solid'
-      color='colorText'
       cursor='pointer'
-      bg={`${currentColor}.400`}
-      _hover={{ color: 'colorText', bg: `${currentColor}.500` }}
+      borderRadius='sm'
+      color='colorText'
+      bg={currentColor}
+      _hover={{ color: 'colorText', bg: `${currentColor}DD` }}
       {...rest}
     >
       {children}
@@ -26,9 +26,11 @@ function Secondary({ children, ...rest }) {
     <Button
       fontSize='md'
       cursor='pointer'
-      color='secondaryText'
       variant='outline'
-      _hover={{ color: 'text', colorScheme: 'text' }}
+      borderRadius='sm'
+      color='secondaryText'
+      borderColor='secondaryText'
+      _hover={{ color: 'text', borderColor: 'text' }}
       {...rest}
     >
       {children}
@@ -41,7 +43,7 @@ function Tertiary({ children, ...rest }) {
     <Button
       fontSize='md'
       cursor='pointer'
-      variant='link'
+      variant='ghost'
       color='secondaryText'
       _hover={{ color: 'text' }}
       {...rest}

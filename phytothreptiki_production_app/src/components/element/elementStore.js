@@ -6,7 +6,7 @@ import { MdDelete } from 'react-icons/md';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Table } from '../../lib/ui';
 
-function ElementStore({ ...rest }) {
+function ElementStore({ printable, ...rest }) {
   const [state, send] = useMainMachine();
   const { elementStore } = state.context;
 
@@ -21,10 +21,14 @@ function ElementStore({ ...rest }) {
         <Table.Row>
           <Table.Header>Ά ΥΛΕΣ</Table.Header>
           <Table.Header>ΣΥΜΜΕΤΟΧΗ</Table.Header>
-          <Table.Header>ΤΙΜΗ</Table.Header>
-          <Table.Header>ΔΙΑΦΟΡΑ</Table.Header>
-          <Table.Header>Συνολικό Κόστος</Table.Header>
-          <Table.Header>Ε</Table.Header>
+          {!printable && (
+            <>
+              <Table.Header>ΤΙΜΗ</Table.Header>
+              <Table.Header>ΔΙΑΦΟΡΑ</Table.Header>
+              <Table.Header>ΣΥΝΟΛΙΚΟ ΚΟΣΤΟΣ</Table.Header>
+              <Table.Header></Table.Header>
+            </>
+          )}
         </Table.Row>
       </Table.Head>
       <Table.Body>
@@ -39,35 +43,43 @@ function ElementStore({ ...rest }) {
               </Flex>
             </Table.Cell>
             <Table.Cell>{row.rate} %</Table.Cell>
-            <Table.Cell>{row.price} €</Table.Cell>
-            <Table.Cell>{row.restPrice} €</Table.Cell>
-            <Table.Cell>{(row.rate / 100) * (row.price + row.restPrice)} €</Table.Cell>
-            <Table.Cell>
-              <Icon
-                as={MdDelete}
-                color='red.400'
-                cursor='pointer'
-                _hover={{ color: 'red.500' }}
-                onClick={() => {
-                  deleteElement(row);
-                }}
-              />
-            </Table.Cell>
+            {!printable && (
+              <>
+                <Table.Cell>{row.price} €</Table.Cell>
+                <Table.Cell>{row.restPrice} €</Table.Cell>
+                <Table.Cell>{(row.rate / 100) * (row.price + row.restPrice)} €</Table.Cell>
+                <Table.Cell>
+                  <Icon
+                    as={MdDelete}
+                    color='red.500'
+                    cursor='pointer'
+                    _hover={{ color: 'red.400' }}
+                    onClick={() => {
+                      deleteElement(row);
+                    }}
+                  />
+                </Table.Cell>
+              </>
+            )}
           </Table.Row>
         ))}
-        <Table.Row>
-          <Table.Cell>Σύνολο</Table.Cell>
-          <Table.Cell>{elementStore.reduce((prev, curr) => prev + curr.rate, 0)} %</Table.Cell>
-          <Table.Cell>{elementStore.reduce((prev, curr) => prev + curr.price, 0)} €</Table.Cell>
-          <Table.Cell>{elementStore.reduce((prev, curr) => prev + curr.restPrice, 0)} €</Table.Cell>
-          <Table.Cell>
-            {elementStore.reduce((prev, curr) => {
-              return prev + (curr.rate / 100) * curr.price + curr.restPrice;
-            }, 0)}{' '}
-            €
-          </Table.Cell>
-          <Table.Cell></Table.Cell>
-        </Table.Row>
+        {!printable && (
+          <Table.Row>
+            <Table.Cell>Σύνολο</Table.Cell>
+            <Table.Cell>{elementStore.reduce((prev, curr) => prev + curr.rate, 0)} %</Table.Cell>
+            <Table.Cell>{elementStore.reduce((prev, curr) => prev + curr.price, 0)} €</Table.Cell>
+            <Table.Cell>
+              {elementStore.reduce((prev, curr) => prev + curr.restPrice, 0)} €
+            </Table.Cell>
+            <Table.Cell>
+              {elementStore.reduce((prev, curr) => {
+                return prev + (curr.rate / 100) * curr.price + curr.restPrice;
+              }, 0)}{' '}
+              €
+            </Table.Cell>
+            <Table.Cell></Table.Cell>
+          </Table.Row>
+        )}
       </Table.Body>
     </Table.Table>
   );

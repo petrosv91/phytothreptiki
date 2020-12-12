@@ -5,11 +5,10 @@ import { useLocalStorage } from '../hooks';
 const ColorModeContext = React.createContext();
 
 function ColorModeProvider({ children }) {
-  const [storedValue, setValue] = useLocalStorage(`color`, 'teal');
+  const [storedValue, setValue] = useLocalStorage(`color`, '#008D42');
   function handleColorChange(color) {
     setValue(color);
   }
-
   return (
     <ColorModeContext.Provider
       value={{ currentColor: storedValue, colorChange: handleColorChange }}

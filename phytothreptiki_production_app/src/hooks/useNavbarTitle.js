@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom';
 function useNavbarTitle() {
   const { pathname } = useLocation();
 
-  const title = React.useMemo(() => {
+  const title = React.useCallback(() => {
     if (pathname === '/') return '';
     const [mainPath] = pathname.split('/').filter((item) => item !== '');
     const menuMatch = [].find((menu) => menu.url === `/${mainPath}`);

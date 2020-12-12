@@ -6,7 +6,7 @@ import { MdDelete } from 'react-icons/md';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Table } from '../../lib/ui';
 
-function ProductStore({ ...rest }) {
+function ProductStore({ printable, ...rest }) {
   const [state, send] = useMainMachine();
   const { productStore } = state.context;
 
@@ -22,8 +22,8 @@ function ProductStore({ ...rest }) {
           <Table.Header>ΕΠΩΝΥΜΙΑ</Table.Header>
           <Table.Header>ΚΙΛΑ</Table.Header>
           <Table.Header>ΤΕΜΑΧΙΑ</Table.Header>
-          <Table.Header>Συνολικά Κιλά</Table.Header>
-          <Table.Header>E</Table.Header>
+          <Table.Header>ΣΥΝΟΛΙΚΑ ΚΙΛΑ</Table.Header>
+          {!printable && <Table.Header></Table.Header>}
         </Table.Row>
       </Table.Head>
       <Table.Body>
@@ -35,17 +35,19 @@ function ProductStore({ ...rest }) {
             <Table.Cell>{row.weights} kg</Table.Cell>
             <Table.Cell>{row.units} </Table.Cell>
             <Table.Cell>{row.weights * row.units} kg</Table.Cell>
-            <Table.Cell>
-              <Icon
-                as={MdDelete}
-                color='red.400'
-                cursor='pointer'
-                _hover={{ color: 'red.500' }}
-                onClick={() => {
-                  deleteProduct(row);
-                }}
-              />
-            </Table.Cell>
+            {!printable && (
+              <Table.Cell>
+                <Icon
+                  as={MdDelete}
+                  color='red.500'
+                  cursor='pointer'
+                  _hover={{ color: 'red.400' }}
+                  onClick={() => {
+                    deleteProduct(row);
+                  }}
+                />
+              </Table.Cell>
+            )}
           </Table.Row>
         ))}
         <Table.Row>
@@ -55,7 +57,7 @@ function ProductStore({ ...rest }) {
           <Table.Cell>
             {productStore.reduce((prev, curr) => prev + curr.weights * curr.units, 0)} kg
           </Table.Cell>
-          <Table.Cell></Table.Cell>
+          {!printable && <Table.Cell></Table.Cell>}
         </Table.Row>
       </Table.Body>
     </Table.Table>

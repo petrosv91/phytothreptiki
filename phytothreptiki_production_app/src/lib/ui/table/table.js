@@ -11,27 +11,28 @@ export function Table(props) {
       as='table'
       w='full'
       overflow='auto'
-      borderColor={`${currentColor}.400`}
+      borderWidth={2}
       borderBottomWidth={4}
+      borderColor={currentColor}
       {...props}
     />
   );
 }
 export function Head(props) {
   const { currentColor } = useColorMode();
-  return <Box as='thead' {...props} bg={`${currentColor}.400`} />;
+  return <Box as='thead' {...props} bg={`${currentColor}CC`} />;
 }
 export function Row(props) {
-  return <Box as='tr' {...props} />;
+  return <Box as='tr' {...props} _last={{ fontWeight: 'bold' }} />;
 }
 export function Header(props) {
   return (
     <Box
       as='th'
       p={4}
-      fontSize='xs'
+      fontSize='sm'
       textAlign='left'
-      color='text'
+      color='colorText'
       lineHeight='1rem'
       fontWeight='bold'
       letterSpacing='wider'
@@ -40,7 +41,7 @@ export function Header(props) {
   );
 }
 export function Body(props) {
-  return <Box as='tbody' fontSize='md' fontWeight='500' color='secondaryBackground' {...props} />;
+  return <Box as='tbody' fontSize='md' fontWeight='500' {...props} />;
 }
 export function Cell(props) {
   const { currentColor } = useColorMode();
@@ -48,10 +49,10 @@ export function Cell(props) {
     <Box
       as='td'
       p={4}
+      color='text'
       lineHeight='1.25rem'
       whiteSpace='break-spaces'
-      color='text'
-      // _first={{ bg: `${currentColor}.400`, color: 'colorText' }}
+      _first={{ color: currentColor, fontSize: 'md' }}
       {...props}
     />
   );

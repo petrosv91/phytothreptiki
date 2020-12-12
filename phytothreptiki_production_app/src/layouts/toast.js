@@ -17,17 +17,17 @@ function Toast({ type = 'error', title, content, onClose }) {
     <Flex
       px={6}
       py={4}
-      mb={[5, 2]}
+      mb={5}
       w={['sm', 'md']}
-      rounded='md'
-      bg='gray.300'
       align='center'
       justify='space-between'
+      rounded='sm'
+      bg='background'
       borderRightWidth={12}
       borderColor={colors[type]}
     >
       <Icon as={icons[type]} color={colors[type]} boxSize={5} />
-      <Flex direction='column' justify='center' color='gray.700'>
+      <Flex direction='column' justify='center' color='text'>
         <Text as='h3' fontWeight='semibold'>
           {title}
         </Text>

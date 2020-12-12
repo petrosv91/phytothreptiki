@@ -17,9 +17,8 @@ function Header({ handleback, submit = false, ...rest }) {
         onClick={handleback}
         boxSize={9}
         cursor='pointer'
-        color={`${currentColor}.400`}
-        _focus={{ boxShadow: 'none' }}
-        _hover={{ color: `${currentColor}.300` }}
+        color={currentColor}
+        _hover={{ color: currentColor }}
       />
       <Box px='2' w='full' textAlign='center'>
         <Text as='h2' fontSize='lg' fontWeight='semibold' color='text'>

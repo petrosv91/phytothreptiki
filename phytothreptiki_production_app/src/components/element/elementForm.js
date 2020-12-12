@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Flex, useDisclosure, useToast } from '@chakra-ui/react';
+import { Flex, useDisclosure } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { MdClose, MdSearch } from 'react-icons/md';
@@ -8,12 +8,12 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { useReactFormSchema } from '../../config/';
 import { useMainMachine } from '../../context/mainMachineProvider';
+import useStoreValidation from '../../hooks/useStoreValidation';
 import { Modal, Buttons, FormInput } from '../../lib/ui';
-import { validateElementStore } from '../../utils';
 import PickingElement from './pickingElement';
 
 function ElementForm() {
-  const toast = useToast();
+  const { validate } = useStoreValidation();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { elementFormSchema } = useReactFormSchema();
@@ -23,13 +23,13 @@ function ElementForm() {
   });
 
   const [state, send] = useMainMachine();
-  const { element, ...context } = state.context;
+  const { element } = state.context;
 
   function resetForm() {
     send({ type: 'DELETE_ITEM', key: 'element', callback: reset });
   }
   function onSubmit(formData) {
-    if (!validateElementStore(formData, context, toast)) {
+    if (!validate(formData, 'element')) {
       return;
     }
     send({

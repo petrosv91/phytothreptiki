@@ -1,28 +1,32 @@
 import React from 'react';
 
-import { Flex, Heading } from '@chakra-ui/react';
+import { Flex, Image, Stack } from '@chakra-ui/react';
 
+import Logo from '../../assets/logo.png';
 import { useColorMode } from '../../context/colorModeProvider';
 import Colorpicker from '../colorPicker/colorPicker';
+import CreateMenu from '../menu/createMenu';
+import DeleteMenu from '../menu/deleteMenu';
+import SearchMenu from '../menu/searchMenu';
 
 function Navbar() {
   const { currentColor } = useColorMode();
   return (
     <Flex
-      as='nav'
-      w='full'
-      wrap='wrap'
-      color='colorText'
+      px={10}
+      bg='background'
+      color={currentColor}
       boxShadow='md'
-      padding='1.5rem'
       align='center'
       justify='space-between'
-      bg={`${currentColor}.500`}
     >
-      <Heading as='h1' size='md' cursor='pointer' letterSpacing={'-.1rem'}>
-        MyProject
-      </Heading>
-      <Colorpicker />
+      <Image src={Logo} boxSize='100px' objectFit='scale-down' />
+      <Stack direction='row' spacing={5} align='center' justify='flex-end'>
+        <SearchMenu />
+        <CreateMenu />
+        <DeleteMenu />
+        <Colorpicker />
+      </Stack>
     </Flex>
   );
 }
