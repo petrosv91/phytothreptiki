@@ -21,7 +21,7 @@ function Navbar() {
       justify='space-between'
     >
       <Image src={Logo} boxSize='100px' objectFit='scale-down' />
-      <Stack direction='row' spacing={5} align='center' justify='flex-end'>
+      <Stack direction='row' align='center' justify='flex-end'>
         <SearchMenu />
         <CreateMenu />
         <DeleteMenu />

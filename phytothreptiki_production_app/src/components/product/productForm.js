@@ -62,9 +62,9 @@ function ProductForm() {
           rightIconClick={resetForm}
           defaultValue={product.label}
         />
-        <Flex align='center' justify='space-between'>
+        <Flex direction={['column', 'row']} align='center' justify='space-between'>
           <FormInput
-            w='45%'
+            w={['full', '45%']}
             name='units'
             label='Τεμάχια'
             type='number'
@@ -72,7 +72,7 @@ function ProductForm() {
             formRef={register}
           />
           <FormInput
-            w='45%'
+            w={['full', '45%']}
             name='weights'
             label='Κιλά'
             tag='kg'

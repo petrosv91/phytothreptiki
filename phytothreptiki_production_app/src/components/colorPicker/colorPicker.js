@@ -60,7 +60,12 @@ function Colorpicker() {
               </MenuItem>
             ))}
           </SimpleGrid> */}
-          <MenuItem _hover={{ bg: 'secondaryBackground' }} color='text' onClick={toggleTheme}>
+          <MenuItem
+            _hover={{ bg: 'secondaryBackground' }}
+            _focus={{ bg: 'secondaryBackground' }}
+            color='text'
+            onClick={toggleTheme}
+          >
             <Icon as={currentTheme === 'dark' ? FaSun : FaMoon} />
             <Text ml={2}>{currentTheme === 'dark' ? 'Φωτεινό Θέμα' : 'Σκούρο Θέμα'}</Text>
           </MenuItem>

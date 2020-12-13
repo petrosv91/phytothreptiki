@@ -9,6 +9,9 @@ import { useThemeMode } from './context/themeModeProvider';
 import Home from './pages/home';
 
 const GlobalStyles = css`
+  body {
+    overflow: hidden;
+  }
   .js-focus-visible :focus:not([data-focus-visible-added]) {
     outline: none;
     box-shadow: none;

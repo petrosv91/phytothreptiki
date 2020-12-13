@@ -17,10 +17,13 @@ const MESSAGE = 'Προσοχή αν πατήσετε σύνεχεια θα χά
 
 function Recipe() {
   const printRef = React.useRef();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [printLoading, setPrintLoading] = React.useState(false);
   const handlePrint = useReactToPrint({
     content: () => printRef.current,
+    onBeforePrint: () => setPrintLoading(true),
+    onAfterPrint: () => setPrintLoading(false),
   });
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [state, send] = useMainMachine();
   const { context } = state;
@@ -56,7 +59,15 @@ function Recipe() {
   }
 
   return (
-    <Flex minW={600} direction='column' mt={10} p={10} bg='background' boxShadow='lg'>
+    <Flex
+      maxW={[300, 700]}
+      minW={[300, 400]}
+      p={[2, 5, 10]}
+      overflow='hidden'
+      bg='background'
+      boxShadow='lg'
+      direction='column'
+    >
       <Loading isLoading={isSubmitting || isLoading} />
       <ComponentToPrint printRef={printRef} />
       <ConfirmationModal
@@ -66,7 +77,7 @@ function Recipe() {
         onConfirm={onConfirm}
       />
       <form style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
-        <Flex align='center' justify='space-between'>
+        <Flex wrap='wrap' align='center' justify={['center', 'space-between']}>
           <Buttons.Secondary w={150} type='submit'>
             Καταχώρηση
           </Buttons.Secondary>
@@ -74,28 +85,46 @@ function Recipe() {
             <Buttons.Tertiary w={150} onClick={resetForm}>
               Επαναφορά
             </Buttons.Tertiary>
-            <Buttons.Tertiary w={150} onClick={handlePrint}>
+            <Buttons.Tertiary w={150} onClick={handlePrint} isLoading={printLoading}>
               Εκτύπωση
             </Buttons.Tertiary>
           </Flex>
         </Flex>
         <Flex mt={4} justify='flex-end'>
           <FormInput
-            w={150}
+            w={['full', '30%']}
             tag='No.'
             cursor='default'
             pointerEvents='none'
             defaultValue={context.code}
           />
         </Flex>
-        <Flex mt={4} align='center' justify='space-between'>
-          <FormInput w='30%' name='date' label='Ημερομηνία' errors={errors} formRef={register} />
-          <FormInput w='30%' name='type' label='Τύπος' errors={errors} formRef={register} />
-          <FormInput w='30%' name='recipe' label='Συνταγή' errors={errors} formRef={register} />
-        </Flex>
-        <Flex align='center' justify='space-between'>
+        <Flex direction={['column', 'row']} mt={4} align='center' justify='space-between'>
           <FormInput
-            w='30%'
+            w={['full', '30%']}
+            name='date'
+            label='Ημερομηνία'
+            errors={errors}
+            formRef={register}
+          />
+          <FormInput
+            w={['full', '30%']}
+            name='type'
+            label='Τύπος'
+            errors={errors}
+            formRef={register}
+          />
+          <FormInput
+            w={['full', '30%']}
+            name='recipe'
+            label='Συνταγή'
+            errors={errors}
+            formRef={register}
+          />
+        </Flex>
+        <Flex direction={['column', 'row']} align='center' justify='space-between'>
+          <FormInput
+            w={['full', '30%']}
             name='loops'
             label='Χαρμάνια'
             type='number'
@@ -104,7 +133,7 @@ function Recipe() {
             onBlur={calcTotalWeight}
           />
           <FormInput
-            w='30%'
+            w={['full', '30%']}
             name='weights'
             label='Κιλά'
             type='number'
@@ -114,7 +143,7 @@ function Recipe() {
             onBlur={calcTotalWeight}
           />
           <FormInput
-            w='30%'
+            w={['full', '30%']}
             tag='kg'
             type='number'
             name='totalWeight'

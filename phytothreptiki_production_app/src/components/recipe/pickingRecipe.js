@@ -12,7 +12,7 @@ function PickingRecipe({ handleRecipeClick }) {
 
   if (error)
     return (
-      <Text textAlign='center' color='red.500' fontSize='md' fontWeight='500'>
+      <Text textAlign='center' color='red.500' fontSize={['sm', 'md']} fontWeight='500'>
         {error.message}
       </Text>
     );

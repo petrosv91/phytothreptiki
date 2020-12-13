@@ -22,7 +22,7 @@ function Home() {
       <MainMachineProvider>
         <Layout>
           <Navbar />
-          <Flex justify='center'>
+          <Flex p={10} justify='center'>
             <NewRecipe />
           </Flex>
           <Footer />

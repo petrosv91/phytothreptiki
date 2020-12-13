@@ -12,7 +12,7 @@ function PickingProduct({ handleProductClick }) {
 
   if (error)
     return (
-      <Text color='red.500' fontSize='md' fontWeight='500'>
+      <Text color='red.500' fontSize={('sm', 'md')} fontWeight='500'>
         {error.message}
       </Text>
     );

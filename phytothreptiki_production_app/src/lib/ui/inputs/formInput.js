@@ -31,7 +31,7 @@ function FormInput({
   return (
     <FormControl w={w} mt={2} isInvalid={errors[name]}>
       {label && (
-        <FormLabel htmlFor={name} color='text'>
+        <FormLabel htmlFor={name} fontSize={{ sm: 'sm', md: 'md' }} color='text'>
           {label}
         </FormLabel>
       )}

@@ -19,7 +19,13 @@ function ItemList({ isLoading, handleClick, data, keys, List }) {
     <Box>
       <FormControl mt={3}>
         <InputGroup>
-          <Input w={[250, 300]} value={query} onChange={handleChange} placeholder='Αναζήτηση...' />
+          <Input
+            w={[250, 300]}
+            value={query}
+            onChange={handleChange}
+            placeholder='Αναζήτηση...'
+            _placeholder={{ color: 'secondaryText' }}
+          />
         </InputGroup>
       </FormControl>
       <List

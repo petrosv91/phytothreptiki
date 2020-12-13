@@ -17,7 +17,7 @@ function Footer() {
     >
       <Flex>
         ΦΥΤΟΘΡΕΠΤΙΚΗ 2020
-        <Text ml='.5em' fontSize='lg'>
+        <Text ml='.5em' fontSize={{ sm: 'sm', md: 'lg' }}>
           &copy;
         </Text>
       </Flex>

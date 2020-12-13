@@ -9,12 +9,9 @@ function Menu({ handleClick, options, title }) {
       <MenuButton
         w={150}
         as={Button}
-        fontSize='md'
+        fontSize={['sm', 'md']}
         cursor='pointer'
         variant='ghost'
-        // borderRadius={0}
-        // borderBottomWidth={1}
-        // borderBottomColor='text'
         rightIcon={<MdExpandMore />}
         _active={{ bg: 'none' }}
         _hover={{ color: 'secondaryText' }}
@@ -33,6 +30,7 @@ function Menu({ handleClick, options, title }) {
               borderBottomColor='secondaryText'
               _last={{ borderBottomWidth: 0 }}
               _hover={{ bg: 'secondaryBackground' }}
+              _focus={{ bg: 'secondaryBackground' }}
               onClick={() => {
                 handleClick(opt);
               }}
