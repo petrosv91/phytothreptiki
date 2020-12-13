@@ -21,8 +21,8 @@ function SearchMenu() {
     onClose();
   }
   function handleClick(opt) {
-    onOpen();
     setComponent(opt);
+    onOpen();
   }
 
   const options = [

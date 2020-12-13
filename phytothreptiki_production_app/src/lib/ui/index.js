@@ -1,4 +1,5 @@
 import * as Buttons from './buttons/buttons';
+import Drawer from './drawer/drawer';
 import FormInput from './inputs/formInput';
 import Input from './inputs/input';
 import ElementList from './lists/elementList';
@@ -11,6 +12,7 @@ import Modal from './modals/modal';
 import * as Table from './table/table';
 
 export {
+  Drawer,
   Table,
   Buttons,
   Input,

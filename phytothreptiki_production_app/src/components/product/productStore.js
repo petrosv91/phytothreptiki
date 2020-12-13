@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Flex, Icon } from '@chakra-ui/react';
+import { Box, Flex, Icon } from '@chakra-ui/react';
 import { MdDelete } from 'react-icons/md';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
@@ -16,51 +16,55 @@ function ProductStore({ printable, ...rest }) {
 
   if (!productStore.length) return null;
   return (
-    <Table.Table {...rest}>
-      <Table.Head>
-        <Table.Row>
-          <Table.Header>ΕΠΩΝΥΜΙΑ</Table.Header>
-          <Table.Header>ΚΙΛΑ</Table.Header>
-          <Table.Header>ΤΕΜΑΧΙΑ</Table.Header>
-          <Table.Header>ΣΥΝΟΛΙΚΑ ΚΙΛΑ</Table.Header>
-          {!printable && <Table.Header></Table.Header>}
-        </Table.Row>
-      </Table.Head>
-      <Table.Body>
-        {productStore.map((row, index) => (
-          <Table.Row key={index}>
-            <Table.Cell>
-              <Flex direction='column'>{row.label}</Flex>
-            </Table.Cell>
-            <Table.Cell>{row.weights} kg</Table.Cell>
-            <Table.Cell>{row.units} </Table.Cell>
-            <Table.Cell>{row.weights * row.units} kg</Table.Cell>
-            {!printable && (
-              <Table.Cell>
-                <Icon
-                  as={MdDelete}
-                  color='red.500'
-                  cursor='pointer'
-                  _hover={{ color: 'red.400' }}
-                  onClick={() => {
-                    deleteProduct(row);
-                  }}
-                />
-              </Table.Cell>
-            )}
+    <Box w='full' overflowX='auto'>
+      <Table.Table {...rest}>
+        <Table.Head>
+          <Table.Row>
+            <Table.Header>ΕΠΩΝΥΜΙΑ</Table.Header>
+            <Table.Header>ΚΙΛΑ</Table.Header>
+            <Table.Header>ΤΕΜΑΧΙΑ</Table.Header>
+            <Table.Header>ΣΥΝΟΛΙΚΑ ΚΙΛΑ</Table.Header>
+            {!printable && <Table.Header></Table.Header>}
           </Table.Row>
-        ))}
-        <Table.Row>
-          <Table.Cell>Σύνολο</Table.Cell>
-          <Table.Cell>{productStore.reduce((prev, curr) => prev + curr.weights, 0)} kg</Table.Cell>
-          <Table.Cell>{productStore.reduce((prev, curr) => prev + curr.units, 0)} </Table.Cell>
-          <Table.Cell>
-            {productStore.reduce((prev, curr) => prev + curr.weights * curr.units, 0)} kg
-          </Table.Cell>
-          {!printable && <Table.Cell></Table.Cell>}
-        </Table.Row>
-      </Table.Body>
-    </Table.Table>
+        </Table.Head>
+        <Table.Body>
+          {productStore.map((row, index) => (
+            <Table.Row key={index}>
+              <Table.Cell>
+                <Flex direction='column'>{row.label}</Flex>
+              </Table.Cell>
+              <Table.Cell>{row.weights} kg</Table.Cell>
+              <Table.Cell>{row.units} </Table.Cell>
+              <Table.Cell>{row.weights * row.units} kg</Table.Cell>
+              {!printable && (
+                <Table.Cell>
+                  <Icon
+                    as={MdDelete}
+                    color='red.500'
+                    cursor='pointer'
+                    _hover={{ color: 'red.400' }}
+                    onClick={() => {
+                      deleteProduct(row);
+                    }}
+                  />
+                </Table.Cell>
+              )}
+            </Table.Row>
+          ))}
+          <Table.Row>
+            <Table.Cell>Σύνολο</Table.Cell>
+            <Table.Cell>
+              {productStore.reduce((prev, curr) => prev + curr.weights, 0)} kg
+            </Table.Cell>
+            <Table.Cell>{productStore.reduce((prev, curr) => prev + curr.units, 0)} </Table.Cell>
+            <Table.Cell>
+              {productStore.reduce((prev, curr) => prev + curr.weights * curr.units, 0)} kg
+            </Table.Cell>
+            {!printable && <Table.Cell></Table.Cell>}
+          </Table.Row>
+        </Table.Body>
+      </Table.Table>
+    </Box>
   );
 }
 

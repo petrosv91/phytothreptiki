@@ -63,7 +63,6 @@ function Recipe() {
       maxW={[300, 700]}
       minW={[300, 400]}
       p={[2, 5, 10]}
-      overflow='hidden'
       bg='background'
       boxShadow='lg'
       direction='column'
