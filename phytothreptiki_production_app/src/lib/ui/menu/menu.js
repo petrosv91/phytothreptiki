@@ -9,7 +9,8 @@ function Menu({ handleClick, options, title }) {
       <MenuButton
         w={150}
         as={Button}
-        fontSize={['sm', 'md']}
+        fontWeight='500'
+        fontSize={['md', 'lg']}
         cursor='pointer'
         variant='ghost'
         rightIcon={<MdExpandMore />}
@@ -26,6 +27,8 @@ function Menu({ handleClick, options, title }) {
               key={index}
               p={2}
               color='text'
+              fontWeight='400'
+              fontSize={['sm', 'md']}
               borderBottomWidth={1}
               borderBottomColor='secondaryText'
               _last={{ borderBottomWidth: 0 }}
