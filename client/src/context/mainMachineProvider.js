@@ -16,10 +16,10 @@ function MainMachineProvider({ children }) {
       renderSuccess: (ctx, e) => {
         createToast(toast, { type: 'success', title: 'Επιτυχής καταχώρηση' });
       },
-    },
-    renderError: (ctx, e) => {
-      const { message } = e.data;
-      createToast(toast, { type: 'error', title: 'Αποτυχία', content: message });
+      renderError: (ctx, e) => {
+        const { message } = e.data;
+        createToast(toast, { type: 'error', title: 'Αποτυχία', content: message });
+      },
     },
   });
   return <MainMachineContext.Provider value={service}>{children}</MainMachineContext.Provider>;

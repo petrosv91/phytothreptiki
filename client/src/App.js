@@ -2,9 +2,8 @@ import React from 'react';
 
 import { ChakraProvider } from '@chakra-ui/react';
 import { css, Global } from '@emotion/react';
-import { ReactQueryConfigProvider } from 'react-query';
 
-import { darkTheme, lightTheme, useReactQueryConfig } from './config';
+import { darkTheme, lightTheme } from './config';
 import { useThemeMode } from './context/themeModeProvider';
 import Home from './pages/home';
 
@@ -33,13 +32,10 @@ const GlobalStyles = css`
 `;
 function App() {
   const { currentTheme } = useThemeMode();
-  const overrides = useReactQueryConfig();
   return (
     <ChakraProvider theme={currentTheme === 'dark' ? darkTheme : lightTheme}>
-      <ReactQueryConfigProvider config={overrides}>
-        <Home />
-        <Global styles={GlobalStyles} />
-      </ReactQueryConfigProvider>
+      <Home />
+      <Global styles={GlobalStyles} />
     </ChakraProvider>
   );
 }

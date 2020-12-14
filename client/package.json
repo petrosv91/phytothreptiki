@@ -2,6 +2,7 @@
   "name": "phytothreptiki_production_app",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@chakra-ui/react": "^1.0.0",
     "@emotion/react": "^11.0.0",
@@ -35,6 +36,11 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-react": "^7.20.5"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -46,11 +52,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-react": "^7.20.5",
-    "react-query-devtools": "^2.6.0"
   }
 }

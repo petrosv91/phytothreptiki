@@ -7,28 +7,32 @@ import { FormProvider, useForm } from 'react-hook-form';
 import Footer from '../components/footer/footer';
 import Navbar from '../components/navbar/navbar';
 import NewRecipe from '../components/recipe/newRecipe';
-import { useReactFormSchema } from '../config/';
+import { useReactFormSchema, useReactQueryConfig } from '../config/';
 import { MainMachineProvider } from '../context/mainMachineProvider';
 import { Layout } from '../layouts';
+import { ReactQueryConfigProvider } from 'react-query';
 
 function Home() {
+  const overrides = useReactQueryConfig();
   const { mainFormSchema } = useReactFormSchema();
   const methods = useForm({
     mode: 'onBlur',
     resolver: yupResolver(mainFormSchema),
   });
   return (
-    <FormProvider {...methods}>
-      <MainMachineProvider>
-        <Layout>
-          <Navbar />
-          <Flex p={10} justify='center'>
-            <NewRecipe />
-          </Flex>
-          <Footer />
-        </Layout>
-      </MainMachineProvider>
-    </FormProvider>
+    <ReactQueryConfigProvider config={overrides}>
+      <FormProvider {...methods}>
+        <MainMachineProvider>
+          <Layout>
+            <Navbar />
+            <Flex p={10} justify='center'>
+              <NewRecipe />
+            </Flex>
+            <Footer />
+          </Layout>
+        </MainMachineProvider>
+      </FormProvider>
+    </ReactQueryConfigProvider>
   );
 }
 
