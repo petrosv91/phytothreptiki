@@ -5,7 +5,7 @@ import { useLocalStorage } from '../hooks';
 const ThemeModeContext = React.createContext();
 
 function ThemeModeProvider({ children }) {
-  const [storedValue, setValue] = useLocalStorage(`theme`, 'dark');
+  const [storedValue, setValue] = useLocalStorage(`theme`, 'light');
 
   function toggleTheme() {
     setValue((prev) => (prev === 'dark' ? 'light' : 'dark'));
