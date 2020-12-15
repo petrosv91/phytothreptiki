@@ -14,7 +14,7 @@ function Modal({ children, isOpen, onClose, header }) {
     <ChakraModal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay>
         <ModalContent
-          py={0}
+          py={10}
           minH={['100vh', '70vh']}
           my={{ base: 0, sm: 20 }}
           borderRadius='sm'
