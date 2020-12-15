@@ -5,7 +5,7 @@ import { MdExpandMore } from 'react-icons/md';
 
 function Menu({ handleClick, options, title }) {
   return (
-    <ChakraMenu>
+    <ChakraMenu placement='bottom'>
       <MenuButton
         w={150}
         as={Button}

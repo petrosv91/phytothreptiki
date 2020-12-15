@@ -37,7 +37,7 @@ import { useThemeMode } from '../../context/themeModeProvider';
 //   return <Box bg={`${color}.500`} borderRadius='full' height={5} width={5} />;
 // }
 
-function Colorpicker({ drawerClose }) {
+function Colorpicker({ drawerClose = () => {} }) {
   // const { colorChange } = useColorMode();
   const { toggleTheme, currentTheme } = useThemeMode();
 

@@ -30,3 +30,11 @@ export function isTotalWeightValid({ productStore }, { weights, units }, totalWe
 export function roundToTwo(num) {
   return Math.round((num + Number.EPSILON) * 100) / 100;
 }
+
+export function getCurrentDate() {
+  const dateObj = new Date();
+  const day = dateObj.getDate();
+  const month = dateObj.getMonth() + 1;
+  const year = dateObj.getFullYear();
+  return `${day}/${month}/${year}`;
+}

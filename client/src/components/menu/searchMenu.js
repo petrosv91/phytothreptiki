@@ -7,7 +7,7 @@ import { useMainMachine } from '../../context/mainMachineProvider';
 import { Menu, Modal } from '../../lib/ui';
 import PickingRecipe from '../recipe/pickingRecipe';
 
-function SearchMenu({ drawerClose }) {
+function SearchMenu({ drawerClose = () => {} }) {
   const [, send] = useMainMachine();
   const { setValue } = useFormContext();
   const { isOpen, onOpen, onClose } = useDisclosure();

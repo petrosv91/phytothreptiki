@@ -11,11 +11,15 @@ import NewRecipe from '../components/recipe/newRecipe';
 import { useReactFormSchema, useReactQueryConfig } from '../config/';
 import { MainMachineProvider } from '../context/mainMachineProvider';
 import { Layout } from '../layouts';
+import { getCurrentDate } from '../utils';
 
 function Home() {
   const overrides = useReactQueryConfig();
   const { mainFormSchema } = useReactFormSchema();
   const methods = useForm({
+    defaultValues: {
+      date: getCurrentDate(),
+    },
     mode: 'onBlur',
     resolver: yupResolver(mainFormSchema),
   });
@@ -25,7 +29,7 @@ function Home() {
         <MainMachineProvider>
           <Layout>
             <Navbar />
-            <Flex p={[5, 10]} justify='center'>
+            <Flex p={[3, 5, 10]} justify='center'>
               <NewRecipe />
             </Flex>
             {/* <Footer /> */}
