@@ -79,6 +79,7 @@ function ElementForm() {
             label='Τιμή'
             tag='€'
             type='number'
+            step='any'
             errors={errors}
             formRef={register}
           />
@@ -88,6 +89,7 @@ function ElementForm() {
             label='Διάφορα'
             tag='€'
             type='number'
+            step='any'
             errors={errors}
             formRef={register}
           />

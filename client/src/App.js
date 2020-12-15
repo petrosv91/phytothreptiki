@@ -11,7 +11,7 @@ const GlobalStyles = css`
   body {
     overflow: hidden;
   }
-  .js-focus-visible :focus:not([data-focus-visible-added]) {
+  .js-focus-visible:focus:not([data-focus-visible-added]) {
     outline: none;
     box-shadow: none;
   }
@@ -34,8 +34,8 @@ function App() {
   const { currentTheme } = useThemeMode();
   return (
     <ChakraProvider theme={currentTheme === 'dark' ? darkTheme : lightTheme}>
-      <Home />
       <Global styles={GlobalStyles} />
+      <Home />
     </ChakraProvider>
   );
 }

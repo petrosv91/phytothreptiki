@@ -5,6 +5,7 @@ import { MdDelete } from 'react-icons/md';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Table } from '../../lib/ui';
+import { roundToTwo } from '../../utils';
 
 function ProductStore({ printable, ...rest }) {
   const [state, send] = useMainMachine();
@@ -35,7 +36,7 @@ function ProductStore({ printable, ...rest }) {
               </Table.Cell>
               <Table.Cell>{row.weights} kg</Table.Cell>
               <Table.Cell>{row.units} </Table.Cell>
-              <Table.Cell>{row.weights * row.units} kg</Table.Cell>
+              <Table.Cell>{row.weights * row.units}</Table.Cell>
               {!printable && (
                 <Table.Cell>
                   <Icon
@@ -54,11 +55,11 @@ function ProductStore({ printable, ...rest }) {
           <Table.Row>
             <Table.Cell>Σύνολο</Table.Cell>
             <Table.Cell>
-              {productStore.reduce((prev, curr) => prev + curr.weights, 0)} kg
+              {roundToTwo(productStore.reduce((prev, curr) => prev + curr.weights, 0))} kg
             </Table.Cell>
             <Table.Cell>{productStore.reduce((prev, curr) => prev + curr.units, 0)} </Table.Cell>
             <Table.Cell>
-              {productStore.reduce((prev, curr) => prev + curr.weights * curr.units, 0)} kg
+              {roundToTwo(productStore.reduce((prev, curr) => prev + curr.weights * curr.units, 0))}
             </Table.Cell>
             {!printable && <Table.Cell></Table.Cell>}
           </Table.Row>

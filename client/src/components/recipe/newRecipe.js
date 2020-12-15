@@ -60,11 +60,11 @@ function Recipe() {
 
   return (
     <Flex
-      maxW={[300, 700]}
+      maxW={[450, 700]}
       minW={[300, 400]}
-      p={[2, 5, 10]}
+      p={[3, 5, 10]}
       bg='background'
-      boxShadow='lg'
+      boxShadow='md'
       direction='column'
     >
       <Loading isLoading={isSubmitting || isLoading} />
@@ -136,6 +136,7 @@ function Recipe() {
             name='weights'
             label='Κιλά'
             type='number'
+            step='any'
             tag='kg'
             errors={errors}
             formRef={register}

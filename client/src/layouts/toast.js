@@ -22,6 +22,7 @@ function Toast({ type = 'error', title, content, onClose }) {
       align='center'
       justify='space-between'
       rounded='sm'
+      boxShadow='md'
       bg='background'
       borderRightWidth={12}
       borderColor={colors[type]}

@@ -5,6 +5,7 @@ import { MdDelete } from 'react-icons/md';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Table } from '../../lib/ui';
+import { roundToTwo } from '../../utils';
 
 function ElementStore({ printable, ...rest }) {
   const [state, send] = useMainMachine();
@@ -46,9 +47,9 @@ function ElementStore({ printable, ...rest }) {
               <Table.Cell>{row.rate} %</Table.Cell>
               {!printable && (
                 <>
-                  <Table.Cell>{row.price} €</Table.Cell>
-                  <Table.Cell>{row.restPrice} €</Table.Cell>
-                  <Table.Cell>{(row.rate / 100) * (row.price + row.restPrice)} €</Table.Cell>
+                  <Table.Cell>{row.price}</Table.Cell>
+                  <Table.Cell>{row.restPrice}</Table.Cell>
+                  <Table.Cell>{(row.rate / 100) * (row.price + row.restPrice)}</Table.Cell>
                   <Table.Cell>
                     <Icon
                       as={MdDelete}
@@ -68,15 +69,18 @@ function ElementStore({ printable, ...rest }) {
             <Table.Row>
               <Table.Cell>Σύνολο</Table.Cell>
               <Table.Cell>{elementStore.reduce((prev, curr) => prev + curr.rate, 0)} %</Table.Cell>
-              <Table.Cell>{elementStore.reduce((prev, curr) => prev + curr.price, 0)} €</Table.Cell>
               <Table.Cell>
-                {elementStore.reduce((prev, curr) => prev + curr.restPrice, 0)} €
+                {roundToTwo(elementStore.reduce((prev, curr) => prev + curr.price, 0))}
               </Table.Cell>
               <Table.Cell>
-                {elementStore.reduce((prev, curr) => {
-                  return prev + (curr.rate / 100) * curr.price + curr.restPrice;
-                }, 0)}{' '}
-                €
+                {elementStore.reduce((prev, curr) => prev + curr.restPrice, 0)}
+              </Table.Cell>
+              <Table.Cell>
+                {roundToTwo(
+                  elementStore.reduce((prev, curr) => {
+                    return prev + (curr.rate * (curr.price + curr.restPrice)) / 100;
+                  }, 0),
+                )}
               </Table.Cell>
               <Table.Cell></Table.Cell>
             </Table.Row>

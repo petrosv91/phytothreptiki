@@ -27,10 +27,10 @@ function Navbar() {
         isOpen={isOpen}
         onClose={onClose}
         heading={<Image src={Logo} m='0 auto' boxSize='100px' objectFit='scale-down' />}
-        footer={<Colorpicker />}
+        footer={<Colorpicker drawerClose={onClose} />}
       >
         <Stack mt={10} spacing={8} direction='column' align='center'>
-          <SearchMenu />
+          <SearchMenu drawerClose={onClose} />
           <CreateMenu />
           <DeleteMenu />
         </Stack>

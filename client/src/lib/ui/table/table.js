@@ -9,7 +9,7 @@ export function Table(props) {
   return (
     <Box
       as='table'
-      w='full'
+      minW='full'
       borderWidth={2}
       borderBottomWidth={4}
       borderColor={currentColor}
@@ -40,7 +40,7 @@ export function Header(props) {
   );
 }
 export function Body(props) {
-  return <Box as='tbody' fontSize={['sm', 'md']} fontWeight='500' {...props} />;
+  return <Box as='tbody' fontSize={['sm', 'sm', 'md']} fontWeight='500' {...props} />;
 }
 export function Cell(props) {
   const { currentColor } = useColorMode();
@@ -50,8 +50,7 @@ export function Cell(props) {
       p={4}
       color='text'
       lineHeight='1.25rem'
-      whiteSpace='break-spaces'
-      _first={{ color: currentColor, fontSize: ['sm', 'md'] }}
+      _first={{ color: currentColor, fontSize: ['sm', 'sm', 'md'] }}
       {...props}
     />
   );

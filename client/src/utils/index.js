@@ -26,3 +26,7 @@ export function isTotalWeightValid({ productStore }, { weights, units }, totalWe
   const weightsSum = productStore.reduce((prev, curr) => prev + curr.weights * curr.units, 0);
   return weightsSum + weights * units <= totalWeight;
 }
+
+export function roundToTwo(num) {
+  return Math.round((num + Number.EPSILON) * 100) / 100;
+}

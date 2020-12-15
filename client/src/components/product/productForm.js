@@ -77,6 +77,7 @@ function ProductForm() {
             label='Κιλά'
             tag='kg'
             type='number'
+            step='any'
             errors={errors}
             formRef={register}
           />
