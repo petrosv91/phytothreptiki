@@ -93,6 +93,8 @@ function Recipe() {
           <FormInput
             w={['full', '30%']}
             tag='No.'
+            fontSize='lg'
+            color='red.500'
             cursor='default'
             pointerEvents='none'
             defaultValue={context.code}

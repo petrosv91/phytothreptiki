@@ -20,7 +20,13 @@ function ComponentToPrint({ printRef }) {
       <ChakraProvider theme={lightTheme}>
         <Flex direction='column' ref={printRef}>
           <Flex justify='flex-end'>
-            <FormInput w={150} tag='No.' defaultValue={context.code} />
+            <FormInput
+              w={150}
+              tag='No.'
+              fontSize='lg'
+              color='red.500'
+              defaultValue={context.code}
+            />
           </Flex>
           <Box
             position='relative'
