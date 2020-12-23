@@ -10,6 +10,7 @@ export function Table(props) {
     <Box
       as='table'
       minW='full'
+      className='print'
       borderWidth={2}
       borderBottomWidth={4}
       borderColor={currentColor}
@@ -19,10 +20,10 @@ export function Table(props) {
 }
 export function Head(props) {
   const { currentColor } = useColorMode();
-  return <Box as='thead' {...props} bg={`${currentColor}CC`} />;
+  return <Box as='thead' bg={`${currentColor}CC`} {...props} />;
 }
 export function Row(props) {
-  return <Box as='tr' {...props} _last={{ fontWeight: 'bold' }} />;
+  return <Box as='tr' _last={{ fontWeight: 'bold' }} {...props} />;
 }
 export function Header(props) {
   return (

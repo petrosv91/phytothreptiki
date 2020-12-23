@@ -15,7 +15,7 @@ function ConfirmationModal({ isOpen, onClose, message, onConfirm, isLoading = fa
   return (
     <Modal isOpen={isOpen} onClose={isLoading ? () => {} : onClose}>
       <ModalOverlay>
-        <ModalContent py={4} bg='secondaryBackground' color='text' borderRadius='sm'>
+        <ModalContent mx={3} py={4} bg='secondaryBackground' color='text' borderRadius='sm'>
           <ModalHeader>Επιβεβαίωση ενέργειας</ModalHeader>
           <ModalCloseButton tabIndex={-1} />
           <ModalBody>{message}</ModalBody>

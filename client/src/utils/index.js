@@ -6,9 +6,16 @@ export function createToast(toast, props) {
   toast({
     position: 'bottom',
     isClosable: true,
-    duration: 3000,
+    duration: 4000,
     render: ({ onClose }) => <Toast {...props} onClose={onClose} />,
   });
+}
+
+export function convertEmptyFields(formData) {
+  return Object.entries(formData).reduce(
+    (acc, [key, value]) => ({ ...acc, [key]: value || 0 }),
+    {},
+  );
 }
 
 export function isFormEmpty(formState, { elementStore, productStore }) {

@@ -60,7 +60,7 @@ function Recipe() {
 
   return (
     <Flex
-      maxW={[450, 700]}
+      maxW={[450, 800]}
       minW={[300, 400]}
       p={[3, 5, 10]}
       bg='background'

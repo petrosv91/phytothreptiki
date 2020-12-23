@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useDisclosure } from '@chakra-ui/react';
+import { Box, useDisclosure } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
@@ -30,12 +30,12 @@ function SearchMenu({ drawerClose = () => {} }) {
     { label: 'Συνταγής', comp: <PickingRecipe handleRecipeClick={handleRecipeClick} /> },
   ];
   return (
-    <div>
+    <Box>
       <Modal isOpen={isOpen} onClose={onClose} header={`Αναζήτηση ${label}`}>
         {comp}
       </Modal>
       <Menu options={options} title='Αναζήτηση' handleClick={handleClick} />
-    </div>
+    </Box>
   );
 }
 

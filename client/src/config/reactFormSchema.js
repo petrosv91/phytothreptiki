@@ -21,6 +21,10 @@ yup.addMethod(yup.mixed, 'weightValidation', function (toast) {
 function useReactFormSchema() {
   const toast = useToast();
 
+  function nullConverter(value, originalValue) {
+    return String(originalValue).trim() === '' ? null : value;
+  }
+
   const mainFormSchema = React.useMemo(() => {
     return yup.object().shape({
       date: yup.string().required(),
@@ -35,8 +39,8 @@ function useReactFormSchema() {
   const elementFormSchema = React.useMemo(() => {
     return yup.object().shape({
       rate: yup.number().required().positive(),
-      price: yup.number().positive(),
-      restPrice: yup.number().positive(),
+      price: yup.number().default(0).positive().nullable().transform(nullConverter),
+      restPrice: yup.number().positive().nullable().transform(nullConverter),
     });
   }, []);
 

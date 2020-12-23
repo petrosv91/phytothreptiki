@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useDisclosure } from '@chakra-ui/react';
+import { Box, useDisclosure } from '@chakra-ui/react';
 
 import { Menu, Modal } from '../../lib/ui';
 import DeleteElement from '../element/deleteElement';
@@ -23,12 +23,12 @@ function DeleteMenu() {
   }
 
   return (
-    <div>
+    <Box>
       <Modal isOpen={isOpen} onClose={onClose} header={`Αναζήτηση ${label}`}>
         {comp}
       </Modal>
       <Menu options={options} title='Διαγραφη' handleClick={handleClick} />
-    </div>
+    </Box>
   );
 }
 

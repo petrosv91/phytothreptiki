@@ -18,15 +18,34 @@ const GlobalStyles = css`
   @media print {
     html,
     body {
-      height: 100%;
-      width: 100%;
-      padding: 25px;
-      display: flex;
-      align-content: center;
-      justify-content: center;
+      height: initial !important;
+      overflow: initial !important;
+      -webkit-print-color-adjust: exact;
+      table.print > thead > tr > th {
+        padding: 10px;
+        font-size: 16px;
+        line-height: 16px;
+      }
+      table.print > tbody > tr > td {
+        padding: 10px;
+        font-size: 16px;
+        line-height: 20px;
+      }
+      table.print > tbody > tr {
+        page-break-inside: avoid;
+      }
+      table.print > thead {
+        display: table-row-group;
+      }
+    }
+    #page,
+    #page * {
+      page-break-inside: avoid;
+      visibility: visible;
     }
     @page {
-      size: portrait;
+      size: auto;
+      margin: 5mm 10mm;
     }
   }
 `;

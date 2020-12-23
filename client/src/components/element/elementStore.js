@@ -49,7 +49,9 @@ function ElementStore({ printable, ...rest }) {
                 <>
                   <Table.Cell>{row.price}</Table.Cell>
                   <Table.Cell>{row.restPrice}</Table.Cell>
-                  <Table.Cell>{(row.rate / 100) * (row.price + row.restPrice)}</Table.Cell>
+                  <Table.Cell>
+                    {roundToTwo((row.rate * (row.price + row.restPrice)) / 100)}
+                  </Table.Cell>
                   <Table.Cell>
                     <Icon
                       as={MdDelete}
@@ -65,26 +67,36 @@ function ElementStore({ printable, ...rest }) {
               )}
             </Table.Row>
           ))}
-          {!printable && (
-            <Table.Row>
-              <Table.Cell>Σύνολο</Table.Cell>
-              <Table.Cell>{elementStore.reduce((prev, curr) => prev + curr.rate, 0)} %</Table.Cell>
-              <Table.Cell>
-                {roundToTwo(elementStore.reduce((prev, curr) => prev + curr.price, 0))}
-              </Table.Cell>
-              <Table.Cell>
-                {elementStore.reduce((prev, curr) => prev + curr.restPrice, 0)}
-              </Table.Cell>
-              <Table.Cell>
-                {roundToTwo(
-                  elementStore.reduce((prev, curr) => {
-                    return prev + (curr.rate * (curr.price + curr.restPrice)) / 100;
-                  }, 0),
-                )}
-              </Table.Cell>
-              <Table.Cell></Table.Cell>
-            </Table.Row>
-          )}
+          <Table.Row>
+            <Table.Cell>Σύνολο</Table.Cell>
+            <Table.Cell>{elementStore.reduce((prev, curr) => prev + curr.rate, 0)}%</Table.Cell>
+            {!printable && (
+              <>
+                <Table.Cell>
+                  {roundToTwo(
+                    elementStore.reduce((prev, curr) => {
+                      return prev + curr.price;
+                    }, 0),
+                  )}
+                </Table.Cell>
+                <Table.Cell>
+                  {roundToTwo(
+                    elementStore.reduce((prev, curr) => {
+                      return prev + curr.restPrice;
+                    }, 0),
+                  )}
+                </Table.Cell>
+                <Table.Cell>
+                  {roundToTwo(
+                    elementStore.reduce((prev, curr) => {
+                      return prev + (curr.rate * (curr.price + curr.restPrice)) / 100;
+                    }, 0),
+                  )}
+                </Table.Cell>
+                <Table.Cell></Table.Cell>
+              </>
+            )}
+          </Table.Row>
         </Table.Body>
       </Table.Table>
     </Box>

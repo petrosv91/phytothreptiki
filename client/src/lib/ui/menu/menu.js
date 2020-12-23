@@ -7,7 +7,7 @@ function Menu({ handleClick, options, title }) {
   return (
     <ChakraMenu placement='bottom'>
       <MenuButton
-        w={150}
+        w={170}
         as={Button}
         fontWeight='500'
         fontSize={['md', 'lg']}

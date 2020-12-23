@@ -10,6 +10,7 @@ import { useReactFormSchema } from '../../config/';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import useStoreValidation from '../../hooks/useStoreValidation';
 import { Modal, Buttons, FormInput } from '../../lib/ui';
+import { convertEmptyFields } from '../../utils';
 import PickingElement from './pickingElement';
 
 function ElementForm() {
@@ -37,9 +38,9 @@ function ElementForm() {
       key: 'elementStore',
       data: {
         id: uuidv4(),
-        ...formData,
         label: element.label,
         formula: element.formula,
+        ...convertEmptyFields(formData),
       },
       callback: resetForm,
     });

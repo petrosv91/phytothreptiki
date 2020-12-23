@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useDisclosure } from '@chakra-ui/react';
+import { Box, useDisclosure } from '@chakra-ui/react';
 
 import { Menu, Modal } from '../../lib/ui';
 import CreateElement from '../element/createElement';
@@ -20,12 +20,12 @@ function CreateMenu() {
   }
 
   return (
-    <div>
+    <Box>
       <Modal isOpen={isOpen} onClose={onClose} header={`Δημιουργία ${label}`}>
         {comp}
       </Modal>
       <Menu options={options} title='Δημιουργία' handleClick={handleClick} />
-    </div>
+    </Box>
   );
 }
 
