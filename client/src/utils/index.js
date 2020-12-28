@@ -25,6 +25,14 @@ export function isFormEmpty(formState, { elementStore, productStore }) {
     Object.values(formState).every((field) => field === '')
   );
 }
+export function isFormFull(formState, { elementStore, productStore }) {
+  return (
+    elementStore.length &&
+    productStore.length &&
+    Object.values(formState).every((field) => field !== '')
+  );
+}
+
 export function isRateValid({ elementStore }, { rate: newRate }) {
   const rateSum = elementStore.reduce((prev, curr) => prev + curr.rate, 0);
   return rateSum + newRate <= 100;

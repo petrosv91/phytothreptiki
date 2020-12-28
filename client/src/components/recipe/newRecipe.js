@@ -6,7 +6,7 @@ import { useReactToPrint } from 'react-to-print';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Buttons, ConfirmationModal, FormInput, Loading } from '../../lib/ui';
-import { isFormEmpty } from '../../utils';
+import { getCurrentDate, isFormEmpty, isFormFull } from '../../utils';
 import ElementForm from '../element/elementForm';
 import ElementStore from '../element/elementStore';
 import ComponentToPrint from '../print/componentToPrint';
@@ -24,13 +24,12 @@ function Recipe() {
     onBeforePrint: () => setPrintLoading(true),
     onAfterPrint: () => setPrintLoading(false),
   });
-
   const [state, send] = useMainMachine();
   const { context } = state;
   const isLoading = state.matches('gettingMaxCode');
   const isSubmitting = state.matches('recipeSubmitting');
 
-  const { register, handleSubmit, getValues, reset, setValue, errors } = useFormContext();
+  const { register, handleSubmit, getValues, watch, reset, setValue, errors } = useFormContext();
   function onSubmit(formData) {
     send({
       type: 'RECIPE_SUBMIT',
@@ -39,15 +38,19 @@ function Recipe() {
     });
   }
 
+  function canSubmit() {
+    const mainFormValues = watch();
+    return isFormFull(mainFormValues, context);
+  }
+  function canReset() {
+    const currentDate = getCurrentDate();
+    const { date, ...mainFormValues } = watch();
+    return !isFormEmpty(mainFormValues, context) || date !== currentDate;
+  }
+
   function onConfirm() {
     onClose();
     send({ type: 'DELETE_RECIPE', callback: reset });
-  }
-  function resetForm() {
-    const formValues = getValues();
-    if (!isFormEmpty(formValues, context)) {
-      onOpen();
-    }
   }
   function calcTotalWeight() {
     const { loops, weights } = getValues();
@@ -77,11 +80,11 @@ function Recipe() {
       />
       <form style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
         <Flex wrap='wrap' align='center' justify={['center', 'space-between']}>
-          <Buttons.Secondary w={150} type='submit'>
+          <Buttons.Secondary w={150} type='submit' isDisabled={!canSubmit()}>
             Καταχώρηση
           </Buttons.Secondary>
           <Flex>
-            <Buttons.Tertiary w={150} onClick={resetForm}>
+            <Buttons.Tertiary w={150} onClick={onOpen} isDisabled={!canReset()}>
               Επαναφορά
             </Buttons.Tertiary>
             <Buttons.Tertiary w={150} onClick={handlePrint} isLoading={printLoading}>

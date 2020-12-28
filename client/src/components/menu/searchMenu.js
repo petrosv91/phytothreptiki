@@ -9,7 +9,7 @@ import PickingRecipe from '../recipe/pickingRecipe';
 
 function SearchMenu({ drawerClose = () => {} }) {
   const [, send] = useMainMachine();
-  const { setValue } = useFormContext();
+  const { setValue, clearErrors } = useFormContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [{ comp, label }, setComponent] = React.useState({});
 
@@ -18,6 +18,7 @@ function SearchMenu({ drawerClose = () => {} }) {
     Object.entries(recipe).forEach(([key, value]) => {
       setValue(key, value);
     });
+    clearErrors();
     onClose();
     drawerClose();
   }

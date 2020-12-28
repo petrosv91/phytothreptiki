@@ -12,7 +12,10 @@ export const MainMachine = createMachine({
     editting: {
       on: {
         ADD_RECIPE: { actions: [actions.updateContext] },
-        DELETE_RECIPE: { actions: [actions.resetContext, actions.callback] },
+        DELETE_RECIPE: {
+          target: 'gettingMaxCode',
+          actions: [actions.resetContext, actions.callback],
+        },
         ADD_ITEM: { actions: [actions.assignItem] },
         DELETE_ITEM: { actions: [actions.deleteItem, actions.callback] },
         ADD_ROW: { actions: [actions.addItemToStore, actions.callback] },
@@ -46,7 +49,7 @@ export const MainMachine = createMachine({
         src: services.setElement,
         onDone: {
           target: 'editting',
-          actions: ['renderSuccess', actions.resetContext, actions.callback],
+          actions: ['renderSuccess', actions.callback],
         },
         onError: {
           target: 'editting',
@@ -59,7 +62,7 @@ export const MainMachine = createMachine({
         src: services.setProduct,
         onDone: {
           target: 'editting',
-          actions: ['renderSuccess', actions.resetContext, actions.callback],
+          actions: ['renderSuccess', actions.callback],
         },
         onError: {
           target: 'editting',

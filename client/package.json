@@ -1,5 +1,5 @@
 {
-  "name": "phytothreptiki_production_app",
+  "name": "phytothreptiki_client",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:5000",
@@ -33,6 +33,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "author": "Petros Vasilopoulos",
+  "license": "ISC",
   "eslintConfig": {
     "extends": "react-app"
   },

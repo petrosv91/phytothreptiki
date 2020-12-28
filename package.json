@@ -1,23 +1,24 @@
 {
-  "name": "phytothreptiki_server",
+  "name": "phytothreptiki_app",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "phytothreptiki-recipe-creator",
   "scripts": {
-    "start": "cd server && nodemon app.js",
-    "server": "cd server && nodemon app.js",
     "client": "cd client && npm start",
+    "server": "cd server && npm start",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "cd client && npm install --no-shrinkwrap && npm run build"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petrosv91/ReactProjects.git"
+  },
+  "author": "Petros Vasilopoulos",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/petrosv91/ReactProjects/issues"
+  },
+  "homepage": "https://github.com/petrosv91/ReactProjects#readme",
   "dependencies": {
-    "concurrently": "^5.3.0",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "mongoose": "^5.10.7",
-    "nodemon": "^2.0.4"
+    "concurrently": "^5.3.0"
   }
 }
