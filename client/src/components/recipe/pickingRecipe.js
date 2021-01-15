@@ -7,7 +7,7 @@ import { RecipeList } from '../../lib/ui';
 import ItemList from '../lists/itemList';
 
 function PickingRecipe({ handleRecipeClick }) {
-  const keys = React.useRef(['label']);
+  const keys = React.useRef(['recipe']);
   const { data = [], status, error, isFetching } = useGetRecipes();
 
   if (error)

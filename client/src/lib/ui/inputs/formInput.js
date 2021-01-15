@@ -42,8 +42,8 @@ function FormInput({
           </InputLeftElement>
         )}
         <Input
-          pr={tag ? '10' : '4'}
-          px={(leftIcon || rightIcon) && '10'}
+          pr={tag ? '10' : '2'}
+          px={leftIcon || rightIcon ? '10' : '2'}
           name={name}
           defaultValue={defaultValue}
           formRef={formRef}

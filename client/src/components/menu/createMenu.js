@@ -11,7 +11,7 @@ function CreateMenu() {
   const [{ comp, label }, setComponent] = React.useState({});
   const options = [
     { label: 'Στοιχείου', comp: <CreateElement /> },
-    { label: 'Προιόντος', comp: <CreateProduct /> },
+    { label: 'Προϊόντος', comp: <CreateProduct /> },
   ];
 
   function handleClick(opt) {

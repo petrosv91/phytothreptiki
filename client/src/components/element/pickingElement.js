@@ -7,7 +7,7 @@ import { ElementList } from '../../lib/ui';
 import ItemList from '../lists/itemList';
 
 function PickingElement({ handleElementClick }) {
-  const keys = React.useRef(['label']);
+  const keys = React.useRef(['label', 'formula']);
   const { data = [], status, error, isFetching } = useGetElements();
 
   if (error)

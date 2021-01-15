@@ -14,7 +14,7 @@ function DeleteMenu() {
   const options = [
     { label: 'Συνταγής', comp: <DeleteRecipe /> },
     { label: 'Στοιχείου', comp: <DeleteElement /> },
-    { label: 'Προιόντος', comp: <DeleteProduct /> },
+    { label: 'Προϊόντος', comp: <DeleteProduct /> },
   ];
 
   function handleClick(opt) {

@@ -50,7 +50,7 @@ function ProductForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Modal isOpen={isOpen} onClose={onClose} header='Επιλογή Ά Ύλης'>
+      <Modal isOpen={isOpen} onClose={onClose} header='Επιλογή Προϊόντος'>
         <PickingProduct handleProductClick={handleProductClick} />
       </Modal>
       <Flex direction='column'>

@@ -2,7 +2,12 @@ import React from 'react';
 
 function findMatch(keys, query, item) {
   const match = keys.current.find((key) => {
-    if (item[key]?.toLowerCase().includes(query.toLowerCase())) return true;
+    if (typeof item[key] === 'string') {
+      return item[key].toLowerCase().includes(query.toLowerCase());
+    }
+    if (item[key] instanceof Array) {
+      return item[key].some((cell) => String(cell)?.toLowerCase().includes(query.toLowerCase()));
+    }
     return false;
   });
   return match;
