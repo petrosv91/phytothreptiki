@@ -25,7 +25,7 @@ function ProductStore({ printable, ...rest }) {
             <Table.Header>ΚΙΛΑ</Table.Header>
             <Table.Header>ΤΕΜΑΧΙΑ</Table.Header>
             <Table.Header>ΣΥΝΟΛΙΚΑ ΚΙΛΑ</Table.Header>
-            {!printable && <Table.Header></Table.Header>}
+            {!printable && <Table.Header>{/* Actions */}</Table.Header>}
           </Table.Row>
         </Table.Head>
         <Table.Body>
@@ -75,8 +75,9 @@ function ProductStore({ printable, ...rest }) {
                   return prev + curr.weights * curr.units;
                 }, 0),
               )}
+              kg
             </Table.Cell>
-            {!printable && <Table.Cell></Table.Cell>}
+            {!printable && <Table.Cell>{/* Actions */}</Table.Cell>}
           </Table.Row>
         </Table.Body>
       </Table.Table>

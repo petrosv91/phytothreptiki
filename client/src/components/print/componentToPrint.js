@@ -13,7 +13,7 @@ import ProductStore from '../product/productStore';
 function ComponentToPrint({ printRef }) {
   const [{ context }] = useMainMachine();
   const { getValues } = useFormContext();
-  const { date, type, recipe, totalWeight } = getValues();
+  const { date, type, recipe, totalWeight, loops, weights } = getValues();
 
   return (
     <div style={{ display: 'none' }}>
@@ -49,8 +49,12 @@ function ComponentToPrint({ printRef }) {
             <FormInput w='30%' label='Τύπος' defaultValue={type} />
             <FormInput w='30%' label='Συνταγή' defaultValue={recipe} />
           </Flex>
+          <Flex align='center' justify='space-between'>
+            <FormInput label='Χαρμάνια' w='30%' defaultValue={loops} />
+            <FormInput label='Κιλά' w='30%' tag='kg' defaultValue={weights} />
+            <FormInput label='Συνολικά Κιλά' w='30%' tag='kg' defaultValue={totalWeight} />
+          </Flex>
           <ElementStore mt={2} printable />
-          <FormInput label='Χαρμάνια' tag='kg' defaultValue={totalWeight} />
           <ProductStore mt={2} printable />
         </Flex>
       </ChakraProvider>

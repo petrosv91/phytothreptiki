@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Box, Flex, Icon, Text } from '@chakra-ui/react';
+import { useFormContext } from 'react-hook-form';
 import { MdDelete } from 'react-icons/md';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
@@ -9,7 +10,10 @@ import { roundToTwo } from '../../utils';
 
 function ElementStore({ printable, ...rest }) {
   const [state, send] = useMainMachine();
+  const { getValues } = useFormContext();
   const { elementStore } = state.context;
+
+  const { weights } = getValues();
 
   function deleteElement(row) {
     send({ type: 'DELETE_ROW', key: 'elementStore', row });
@@ -23,12 +27,13 @@ function ElementStore({ printable, ...rest }) {
           <Table.Row>
             <Table.Header>Ά ΥΛΕΣ</Table.Header>
             <Table.Header>ΣΥΜΜΕΤΟΧΗ</Table.Header>
+            <Table.Header>ΚΙΛΑ</Table.Header>
             {!printable && (
               <>
                 <Table.Header>ΤΙΜΗ</Table.Header>
                 <Table.Header>ΔΙΑΦΟΡΑ</Table.Header>
                 <Table.Header>ΣΥΝΟΛΙΚΟ ΚΟΣΤΟΣ</Table.Header>
-                <Table.Header></Table.Header>
+                <Table.Header>{/* Actions */}</Table.Header>
               </>
             )}
           </Table.Row>
@@ -44,7 +49,8 @@ function ElementStore({ printable, ...rest }) {
                   </Text>
                 </Flex>
               </Table.Cell>
-              <Table.Cell>{row.rate} %</Table.Cell>
+              <Table.Cell>{row.rate}</Table.Cell>
+              <Table.Cell>{roundToTwo(weights / row.rate)}</Table.Cell>
               {!printable && (
                 <>
                   <Table.Cell>{row.price}</Table.Cell>
@@ -70,6 +76,9 @@ function ElementStore({ printable, ...rest }) {
           <Table.Row>
             <Table.Cell>Σύνολο</Table.Cell>
             <Table.Cell>{elementStore.reduce((prev, curr) => prev + curr.rate, 0)}%</Table.Cell>
+            <Table.Cell>
+              {elementStore.reduce((prev, curr) => prev + weights / curr.rate, 0)}kg
+            </Table.Cell>
             {!printable && (
               <>
                 <Table.Cell>
@@ -78,6 +87,7 @@ function ElementStore({ printable, ...rest }) {
                       return prev + curr.price;
                     }, 0),
                   )}
+                  €
                 </Table.Cell>
                 <Table.Cell>
                   {roundToTwo(
@@ -85,6 +95,7 @@ function ElementStore({ printable, ...rest }) {
                       return prev + curr.restPrice;
                     }, 0),
                   )}
+                  €
                 </Table.Cell>
                 <Table.Cell>
                   {roundToTwo(
@@ -92,8 +103,9 @@ function ElementStore({ printable, ...rest }) {
                       return prev + (curr.rate * (curr.price + curr.restPrice)) / 100;
                     }, 0),
                   )}
+                  €
                 </Table.Cell>
-                <Table.Cell></Table.Cell>
+                <Table.Cell>{/* Actions */}</Table.Cell>
               </>
             )}
           </Table.Row>
