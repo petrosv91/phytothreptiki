@@ -90,4 +90,4 @@ function ProductForm() {
   );
 }
 
-export default ProductForm;
+export default React.memo(ProductForm);

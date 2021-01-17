@@ -47,10 +47,18 @@ function Recipe() {
     const { date, ...mainFormValues } = watch();
     return !isFormEmpty(mainFormValues, context) || date !== currentDate;
   }
-
   function onConfirm() {
     onClose();
     send({ type: 'DELETE_RECIPE', callback: reset });
+  }
+
+  function weightsOnBlur(e) {
+    calcTotalWeight();
+    send({
+      type: 'ADD_ITEM',
+      key: 'weightStaticValue',
+      data: Number(e.target.value),
+    });
   }
   function calcTotalWeight() {
     const { loops, weights } = getValues();
@@ -145,7 +153,7 @@ function Recipe() {
             tag='kg'
             errors={errors}
             formRef={register}
-            onBlur={calcTotalWeight}
+            onBlur={weightsOnBlur}
           />
           <FormInput
             w={['full', '30%']}

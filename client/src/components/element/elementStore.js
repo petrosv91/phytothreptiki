@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Box, Flex, Icon, Text } from '@chakra-ui/react';
-import { useFormContext } from 'react-hook-form';
 import { MdDelete } from 'react-icons/md';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
@@ -10,10 +9,7 @@ import { roundToTwo } from '../../utils';
 
 function ElementStore({ printable, ...rest }) {
   const [state, send] = useMainMachine();
-  const { getValues } = useFormContext();
-  const { elementStore } = state.context;
-
-  const { weights } = getValues();
+  const { elementStore, weightStaticValue: weights } = state.context;
 
   function deleteElement(row) {
     send({ type: 'DELETE_ROW', key: 'elementStore', row });
@@ -77,7 +73,12 @@ function ElementStore({ printable, ...rest }) {
             <Table.Cell>Σύνολο</Table.Cell>
             <Table.Cell>{elementStore.reduce((prev, curr) => prev + curr.rate, 0)}%</Table.Cell>
             <Table.Cell>
-              {elementStore.reduce((prev, curr) => prev + weights / curr.rate, 0)}kg
+              {roundToTwo(
+                elementStore.reduce((prev, curr) => {
+                  return prev + weights / curr.rate;
+                }, 0),
+              )}
+              kg
             </Table.Cell>
             {!printable && (
               <>
@@ -115,4 +116,4 @@ function ElementStore({ printable, ...rest }) {
   );
 }
 
-export default ElementStore;
+export default React.memo(ElementStore);

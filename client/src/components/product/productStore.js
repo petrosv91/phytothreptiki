@@ -85,4 +85,4 @@ function ProductStore({ printable, ...rest }) {
   );
 }
 
-export default ProductStore;
+export default React.memo(ProductStore);

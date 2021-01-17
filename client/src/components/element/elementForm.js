@@ -109,4 +109,4 @@ function ElementForm() {
   );
 }
 
-export default ElementForm;
+export default React.memo(ElementForm);

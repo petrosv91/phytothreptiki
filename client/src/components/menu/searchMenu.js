@@ -15,6 +15,7 @@ function SearchMenu({ drawerClose = () => {} }) {
 
   function handleRecipeClick({ _id, code, elements, products, ...recipe }) {
     send({ type: 'ADD_RECIPE', elements, products, id: _id, code });
+    send({ type: 'ADD_ITEM', key: 'weightStaticValue', data: recipe.weights });
     Object.entries(recipe).forEach(([key, value]) => {
       setValue(key, value);
     });

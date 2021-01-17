@@ -14,7 +14,7 @@ function useStoreValidation() {
   const validate = React.useCallback(
     (formData, key) => {
       if (!formData) return true;
-      const { totalWeight } = getValues();
+      const { totalWeight, weights } = getValues();
 
       switch (key) {
         case 'element':
@@ -23,6 +23,14 @@ function useStoreValidation() {
               type: 'error',
               title: 'Αποτυχία',
               content: 'Το ποσοστό έχει ξεπεράσει το 100%',
+            });
+            return false;
+          }
+          if (!weights) {
+            createToast(toast, {
+              type: 'error',
+              title: 'Αποτυχία',
+              content: 'Το πεδίο κιλά είναι άδειο',
             });
             return false;
           }

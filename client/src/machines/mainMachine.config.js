@@ -4,6 +4,7 @@ import { baseGetService } from '../api/services';
 
 export const initialContext = {
   recipeId: undefined,
+  weightStaticValue: 0,
   element: {},
   elementStore: [],
   product: {},
