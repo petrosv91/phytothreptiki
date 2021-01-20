@@ -84,6 +84,7 @@ function ProductForm() {
               cursor='pointer'
               onClick={handleIEditClick}
               color={edit ? 'text' : 'secondaryText'}
+              display={['none', 'none', 'inline-block']}
               _hover={edit ? { color: 'secondaryText' } : { color: 'text' }}
             />
             {edit ? (
