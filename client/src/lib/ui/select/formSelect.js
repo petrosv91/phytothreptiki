@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { FormControl, FormLabel } from '@chakra-ui/react';
+import { FormControl, FormLabel, useTheme } from '@chakra-ui/react';
 
 import Select from './select';
 
 function FormSelect({ w, options, label, name, errors, formRef, ...rest }) {
+  const { colors } = useTheme();
   return (
     <FormControl w={w} mt={2} isInvalid={errors[name]}>
       {label && (
@@ -12,9 +13,12 @@ function FormSelect({ w, options, label, name, errors, formRef, ...rest }) {
           {label}
         </FormLabel>
       )}
-      <Select placeholder='-- Διάλεξε επιλογή --' name={name} formRef={formRef} {...rest}>
+      <Select name={name} defaultValue={0} formRef={formRef} {...rest}>
+        <option value={0} disabled style={{ color: colors.secondaryText }}>
+          {'-- Διάλεξε επιλογή --'}
+        </option>
         {options.map((opt, index) => (
-          <option key={index} value={opt}>
+          <option key={index} value={opt} style={{ background: colors.background }}>
             {opt}
           </option>
         ))}

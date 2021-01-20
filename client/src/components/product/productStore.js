@@ -22,8 +22,8 @@ function ProductStore({ printable, ...rest }) {
         <Table.Head>
           <Table.Row>
             <Table.Header>ΕΠΩΝΥΜΙΑ</Table.Header>
-            <Table.Header>ΚΙΛΑ</Table.Header>
             <Table.Header>ΤΕΜΑΧΙΑ</Table.Header>
+            <Table.Header>ΚΙΛΑ</Table.Header>
             <Table.Header>ΣΥΝΟΛΙΚΑ ΚΙΛΑ</Table.Header>
             {!printable && <Table.Header>{/* Actions */}</Table.Header>}
           </Table.Row>
@@ -34,8 +34,8 @@ function ProductStore({ printable, ...rest }) {
               <Table.Cell>
                 <Flex direction='column'>{row.label}</Flex>
               </Table.Cell>
-              <Table.Cell>{row.weights} kg</Table.Cell>
               <Table.Cell>{row.units} </Table.Cell>
+              <Table.Cell>{row.weights} kg</Table.Cell>
               <Table.Cell>{roundToTwo(row.weights * row.units)}</Table.Cell>
               {!printable && (
                 <Table.Cell>
@@ -57,17 +57,17 @@ function ProductStore({ printable, ...rest }) {
             <Table.Cell>
               {roundToTwo(
                 productStore.reduce((prev, curr) => {
-                  return prev + curr.weights;
+                  return prev + curr.units;
                 }, 0),
               )}
-              kg
             </Table.Cell>
             <Table.Cell>
               {roundToTwo(
                 productStore.reduce((prev, curr) => {
-                  return prev + curr.units;
+                  return prev + curr.weights;
                 }, 0),
               )}
+              kg
             </Table.Cell>
             <Table.Cell>
               {roundToTwo(
