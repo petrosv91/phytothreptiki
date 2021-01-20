@@ -9,13 +9,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { weights, useReactFormSchema } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import useStoreValidation from '../../hooks/useStoreValidation';
-import { Modal, Buttons, FormInput, FormSelect } from '../../lib/ui';
+import { Modal, Buttons, FormInput, FormSelect, FormSwitch } from '../../lib/ui';
 import PickingProduct from './pickingProduct';
 
 function ProductForm() {
   const { validate } = useStoreValidation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [edit, setEdit] = React.useState(false);
+  const [enabled, setEnabled] = React.useState(false);
 
   const { productFormSchema } = useReactFormSchema();
   const { register, handleSubmit, reset, errors } = useForm({
@@ -58,59 +59,69 @@ function ProductForm() {
         <PickingProduct handleProductClick={handleProductClick} />
       </Modal>
       <Flex direction='column'>
-        <FormInput
-          label='Επωνυμία Προιόντος'
-          onClick={onOpen}
-          leftIcon={MdSearch}
-          rightIcon={MdClose}
-          rightIconClick={resetForm}
-          defaultValue={product.label}
+        <FormSwitch
+          size='lg'
+          name='elementSwitch'
+          label='Ενεργοποίηση πεδίων για Έτοιμο Προϊον'
+          onChange={() => setEnabled((prev) => !prev)}
         />
-        <Flex direction={['column', 'row']} align='center' justify='space-between'>
-          <FormInput
-            w={['full', '45%']}
-            name='units'
-            label='Τεμάχια'
-            type='number'
-            errors={errors}
-            formRef={register}
-          />
-          <Flex w={['full', '45%']} align='flex-end'>
-            <Icon
-              as={MdEdit}
-              mb={2}
-              mr={2}
-              boxSize={7}
-              cursor='pointer'
-              onClick={handleIEditClick}
-              color={edit ? 'text' : 'secondaryText'}
-              display={['none', 'none', 'inline-block']}
-              _hover={edit ? { color: 'secondaryText' } : { color: 'text' }}
+        {enabled && (
+          <>
+            <FormInput
+              label='Επωνυμία Προιόντος'
+              onClick={onOpen}
+              leftIcon={MdSearch}
+              rightIcon={MdClose}
+              rightIconClick={resetForm}
+              defaultValue={product.label}
             />
-            {edit ? (
+            <Flex direction={['column', 'row']} align='center' justify='space-between'>
               <FormInput
-                name='weights'
-                label='Κιλά'
-                tag='kg'
-                step='any'
+                w={['full', '45%']}
+                name='units'
+                label='Τεμάχια'
                 type='number'
                 errors={errors}
                 formRef={register}
               />
-            ) : (
-              <FormSelect
-                name='weights'
-                label='Κιλά'
-                options={weights}
-                errors={errors}
-                formRef={register}
-              />
-            )}
-          </Flex>
-        </Flex>
-        <Buttons.Primary mt={4} ml='auto' type='submit'>
-          Προσθήκη
-        </Buttons.Primary>
+              <Flex w={['full', '45%']} align='flex-end'>
+                <Icon
+                  as={MdEdit}
+                  mb={2}
+                  mr={2}
+                  boxSize={7}
+                  cursor='pointer'
+                  onClick={handleIEditClick}
+                  color={edit ? 'text' : 'secondaryText'}
+                  display={['none', 'none', 'inline-block']}
+                  _hover={edit ? { color: 'secondaryText' } : { color: 'text' }}
+                />
+                {edit ? (
+                  <FormInput
+                    name='weights'
+                    label='Κιλά'
+                    tag='kg'
+                    step='any'
+                    type='number'
+                    errors={errors}
+                    formRef={register}
+                  />
+                ) : (
+                  <FormSelect
+                    name='weights'
+                    label='Κιλά'
+                    options={weights}
+                    errors={errors}
+                    formRef={register}
+                  />
+                )}
+              </Flex>
+            </Flex>
+            <Buttons.Primary mt={4} ml='auto' type='submit'>
+              Προσθήκη
+            </Buttons.Primary>
+          </>
+        )}
       </Flex>
     </form>
   );

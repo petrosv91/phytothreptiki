@@ -29,27 +29,28 @@ function Recipe() {
   const isLoading = state.matches('gettingMaxCode');
   const isSubmitting = state.matches('recipeSubmitting');
 
-  const { register, handleSubmit, getValues, watch, reset, setValue, errors } = useFormContext();
+  const { register, handleSubmit, getValues, reset, setValue, errors } = useFormContext();
+
+  function canSubmit() {
+    const mainFormValues = getValues();
+    return isFormFull(mainFormValues, context);
+  }
+  function canReset() {
+    const currentDate = getCurrentDate();
+    const { date, ...mainFormValues } = getValues();
+    return !isFormEmpty(mainFormValues, context) || date !== currentDate;
+  }
+
+  function onConfirm() {
+    onClose();
+    send({ type: 'DELETE_RECIPE', callback: reset });
+  }
   function onSubmit(formData) {
     send({
       type: 'RECIPE_SUBMIT',
       data: formData,
       callback: reset,
     });
-  }
-
-  function canSubmit() {
-    const mainFormValues = watch();
-    return isFormFull(mainFormValues, context);
-  }
-  function canReset() {
-    const currentDate = getCurrentDate();
-    const { date, ...mainFormValues } = watch();
-    return !isFormEmpty(mainFormValues, context) || date !== currentDate;
-  }
-  function onConfirm() {
-    onClose();
-    send({ type: 'DELETE_RECIPE', callback: reset });
   }
 
   function weightsOnBlur(e) {

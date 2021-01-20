@@ -10,6 +10,7 @@ import Menu from './menu/menu';
 import ConfirmationModal from './modals/confirmationModal';
 import Modal from './modals/modal';
 import FormSelect from './select/formSelect';
+import FormSwitch from './switch/formSwitch';
 import * as Table from './table/table';
 
 export {
@@ -18,6 +19,7 @@ export {
   Input,
   Drawer,
   Loading,
+  FormSwitch,
   FormSelect,
   ConfirmationModal,
   Table,

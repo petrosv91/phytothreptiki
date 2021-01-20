@@ -9,13 +9,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { useReactFormSchema } from '../../config/';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import useStoreValidation from '../../hooks/useStoreValidation';
-import { Modal, Buttons, FormInput } from '../../lib/ui';
+import { Modal, Buttons, FormInput, FormSwitch } from '../../lib/ui';
 import { convertEmptyFields } from '../../utils';
 import PickingElement from './pickingElement';
 
 function ElementForm() {
   const { validate } = useStoreValidation();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [enabled, setEnabled] = React.useState(false);
 
   const { elementFormSchema } = useReactFormSchema();
   const { register, handleSubmit, reset, errors } = useForm({
@@ -56,54 +57,64 @@ function ElementForm() {
         <PickingElement handleElementClick={handleElementClick} />
       </Modal>
       <Flex direction='column'>
-        <FormInput
-          label='Ά Ύλη'
-          onClick={onOpen}
-          leftIcon={MdSearch}
-          rightIcon={MdClose}
-          rightIconClick={resetForm}
-          defaultValue={element.label}
+        <FormSwitch
+          size='lg'
+          name='elementSwitch'
+          label='Ενεργοποίηση πεδίων για Ά Ύλες'
+          onChange={() => setEnabled((prev) => !prev)}
         />
-        <Flex direction={['column', 'row']} align='center' justify='space-between'>
-          <FormInput
-            w={['full', '30%']}
-            name='rate'
-            label='Συμμετοχή'
-            tag='%'
-            type='number'
-            errors={errors}
-            formRef={register}
-          />
-          <FormInput
-            w={['full', '30%']}
-            name='price'
-            label='Τιμή'
-            tag='€'
-            type='number'
-            step='any'
-            errors={errors}
-            formRef={register}
-          />
-          <FormInput
-            w={['full', '30%']}
-            name='restPrice'
-            label='Διάφορα'
-            tag='€'
-            type='number'
-            step='any'
-            errors={errors}
-            formRef={register}
-          />
-        </Flex>
-        <FormInput
-          label='Στοιχεία'
-          cursor='default'
-          pointerEvents='none'
-          defaultValue={element.formula?.join('-')}
-        />
-        <Buttons.Primary mt={4} ml='auto' type='submit'>
-          Προσθήκη
-        </Buttons.Primary>
+        {enabled && (
+          <>
+            <FormInput
+              label='Ά Ύλη'
+              onClick={onOpen}
+              leftIcon={MdSearch}
+              rightIcon={MdClose}
+              rightIconClick={resetForm}
+              defaultValue={element.label}
+            />
+            <Flex direction={['column', 'row']} align='center' justify='space-between'>
+              <FormInput
+                w={['full', '30%']}
+                name='rate'
+                label='Συμμετοχή'
+                tag='%'
+                type='number'
+                errors={errors}
+                formRef={register}
+              />
+              <FormInput
+                w={['full', '30%']}
+                name='price'
+                label='Τιμή'
+                tag='€'
+                type='number'
+                step='any'
+                errors={errors}
+                formRef={register}
+              />
+              <FormInput
+                w={['full', '30%']}
+                name='restPrice'
+                label='Διάφορα'
+                tag='€'
+                type='number'
+                step='any'
+                errors={errors}
+                formRef={register}
+              />
+            </Flex>
+            <FormInput
+              label='Στοιχεία'
+              cursor='default'
+              pointerEvents='none'
+              defaultValue={element.formula?.join('-')}
+            />
+            <Buttons.Primary mt={4} ml='auto' type='submit'>
+              Προσθήκη
+            </Buttons.Primary>
+          </>
+        )}
       </Flex>
     </form>
   );
