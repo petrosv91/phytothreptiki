@@ -9,18 +9,20 @@ import Loading from './loaders/loading';
 import Menu from './menu/menu';
 import ConfirmationModal from './modals/confirmationModal';
 import Modal from './modals/modal';
+import FormSelect from './select/formSelect';
 import * as Table from './table/table';
 
 export {
+  Menu,
+  Modal,
+  Input,
   Drawer,
+  Loading,
+  FormSelect,
+  ConfirmationModal,
   Table,
   Buttons,
-  Input,
   FormInput,
-  Loading,
-  Modal,
-  Menu,
-  ConfirmationModal,
   ElementList,
   RecipeList,
   ProductList,

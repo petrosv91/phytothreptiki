@@ -1,20 +1,21 @@
 import React from 'react';
 
-import { Flex, useDisclosure } from '@chakra-ui/react';
+import { Flex, Icon, useDisclosure } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { MdClose, MdSearch } from 'react-icons/md';
+import { MdClose, MdSearch, MdEdit } from 'react-icons/md';
 import { v4 as uuidv4 } from 'uuid';
 
-import { useReactFormSchema } from '../../config';
+import { weights, useReactFormSchema } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import useStoreValidation from '../../hooks/useStoreValidation';
-import { Modal, Buttons, FormInput } from '../../lib/ui';
+import { Modal, Buttons, FormInput, FormSelect } from '../../lib/ui';
 import PickingProduct from './pickingProduct';
 
 function ProductForm() {
   const { validate } = useStoreValidation();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [edit, setEdit] = React.useState(false);
 
   const { productFormSchema } = useReactFormSchema();
   const { register, handleSubmit, reset, errors } = useForm({
@@ -42,6 +43,9 @@ function ProductForm() {
       },
       callback: resetForm,
     });
+  }
+  function handleIEditClick() {
+    setEdit((prev) => !prev);
   }
   function handleProductClick(product) {
     onClose();
@@ -71,16 +75,37 @@ function ProductForm() {
             errors={errors}
             formRef={register}
           />
-          <FormInput
-            w={['full', '45%']}
-            name='weights'
-            label='Κιλά'
-            tag='kg'
-            type='number'
-            step='any'
-            errors={errors}
-            formRef={register}
-          />
+          <Flex w={['full', '45%']} align='flex-end'>
+            <Icon
+              as={MdEdit}
+              mb={2}
+              mr={2}
+              boxSize={7}
+              cursor='pointer'
+              onClick={handleIEditClick}
+              color={edit ? 'text' : 'secondaryText'}
+              _hover={edit ? { color: 'secondaryText' } : { color: 'text' }}
+            />
+            {edit ? (
+              <FormInput
+                name='weights'
+                label='Κιλά'
+                tag='kg'
+                step='any'
+                type='number'
+                errors={errors}
+                formRef={register}
+              />
+            ) : (
+              <FormSelect
+                name='weights'
+                label='Κιλά'
+                options={weights}
+                errors={errors}
+                formRef={register}
+              />
+            )}
+          </Flex>
         </Flex>
         <Buttons.Primary mt={4} ml='auto' type='submit'>
           Προσθήκη
