@@ -11,7 +11,6 @@ import {
   InputRightElement,
 } from '@chakra-ui/react';
 
-import { useColorMode } from '../../../context/colorModeProvider';
 import Input from './input';
 
 function FormInput({
@@ -27,7 +26,6 @@ function FormInput({
   formRef,
   ...rest
 }) {
-  const { currentColor } = useColorMode();
   return (
     <FormControl w={w} mt={2} isInvalid={errors[name]}>
       {label && (
@@ -62,7 +60,7 @@ function FormInput({
         )}
         {tag && (
           <InputRightElement zIndex={0}>
-            <Tag p={0} size='lg' borderRadius='sm' color='colorText' bg={currentColor}>
+            <Tag p={0} size='lg' borderRadius='sm' color='colorText' bg='special.500'>
               <Text w='full' textAlign='center'>
                 {tag}
               </Text>

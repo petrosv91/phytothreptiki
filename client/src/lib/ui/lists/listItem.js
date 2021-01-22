@@ -3,10 +3,8 @@ import React from 'react';
 import { ListItem as ChakraListItem, Skeleton } from '@chakra-ui/react';
 
 import ListAnimation from '../../../animations/listAnimation';
-import { useColorMode } from '../../../context/colorModeProvider';
 
 function ListItem({ animation, children, onClick, isLoaded = true, ...rest }) {
-  const { currentColor } = useColorMode();
   if (!isLoaded) {
     return (
       <Skeleton>
@@ -30,11 +28,11 @@ function ListItem({ animation, children, onClick, isLoaded = true, ...rest }) {
         borderRightWidth={15}
         color='text'
         bg='background'
-        borderColor={currentColor}
+        borderColor='special.500'
         transition='all 0.25s'
         _hover={{
           color: 'secondaryText',
-          borderColor: `${currentColor}AA`,
+          borderColor: 'special.100',
         }}
         {...rest}
       >

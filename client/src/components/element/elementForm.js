@@ -60,7 +60,7 @@ function ElementForm() {
         <FormSwitch
           size='lg'
           name='elementSwitch'
-          label='Ενεργοποίηση πεδίων για Ά Ύλες'
+          label={`${enabled ? 'Απενεργοποίηση' : 'Ενεργοποίηση'} πεδίων για Ά Ύλες`}
           onChange={() => setEnabled((prev) => !prev)}
         />
         {enabled && (

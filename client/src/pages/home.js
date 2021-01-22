@@ -27,8 +27,8 @@ function Home() {
     <ReactQueryConfigProvider config={overrides}>
       <FormProvider {...methods}>
         <MainMachineProvider>
+          <Navbar />
           <Layout>
-            <Navbar />
             <Flex p={[3, 5, 10]} justify='center'>
               <NewRecipe />
             </Flex>

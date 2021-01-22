@@ -8,6 +8,16 @@ const customTheme = extendTheme({
     lg: '62em',
     xl: '80em',
   }),
+  colors: {
+    special: {
+      100: '#008D42AA',
+      400: '#008D42DD',
+      500: '#008D42',
+    },
+  },
+  // shadows: {
+  //   outline: 'none',
+  // },
 });
 
 export const darkTheme = {

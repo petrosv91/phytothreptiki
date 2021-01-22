@@ -10,12 +10,10 @@ import {
   DrawerFooter,
 } from '@chakra-ui/react';
 
-import { useColorMode } from '../../../context/colorModeProvider';
 import useWindowSize from '../../../hooks/useWindowSize';
 
 function Drawer({ isOpen, onClose, heading, children, footer }) {
   const { width } = useWindowSize();
-  const { currentColor } = useColorMode();
   return (
     <ChakraDrawer
       size='xs'
@@ -32,7 +30,7 @@ function Drawer({ isOpen, onClose, heading, children, footer }) {
         textAlign='center'
         borderRadius='sm'
         bg='secondaryBackground'
-        color={currentColor}
+        color='special.500'
       >
         <DrawerCloseButton />
         {width < 480 && <DrawerHeader>{heading}</DrawerHeader>}

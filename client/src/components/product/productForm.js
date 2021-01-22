@@ -62,7 +62,7 @@ function ProductForm() {
         <FormSwitch
           size='lg'
           name='elementSwitch'
-          label='Ενεργοποίηση πεδίων για Έτοιμο Προϊον'
+          label={`${enabled ? 'Απενεργοποίηση' : 'Ενεργοποίηση'} πεδίων για Έτοιμο Προϊον`}
           onChange={() => setEnabled((prev) => !prev)}
         />
         {enabled && (
@@ -92,9 +92,9 @@ function ProductForm() {
                   boxSize={7}
                   cursor='pointer'
                   onClick={handleIEditClick}
-                  color={edit ? 'text' : 'secondaryText'}
                   display={['none', 'none', 'inline-block']}
-                  _hover={edit ? { color: 'secondaryText' } : { color: 'text' }}
+                  color={edit ? 'special.500' : 'special.100'}
+                  _hover={edit ? { color: 'special.100' } : { color: 'special.500' }}
                 />
                 {edit ? (
                   <FormInput

@@ -4,7 +4,6 @@ import { Box, Flex, Icon, Image, Stack, useDisclosure } from '@chakra-ui/react';
 import { MdMenu } from 'react-icons/md';
 
 import Logo from '../../assets/logo.png';
-import { useColorMode } from '../../context/colorModeProvider';
 import { Drawer } from '../../lib/ui';
 import Colorpicker from '../colorPicker/colorPicker';
 import CreateMenu from '../menu/createMenu';
@@ -12,13 +11,12 @@ import DeleteMenu from '../menu/deleteMenu';
 import SearchMenu from '../menu/searchMenu';
 
 function Navbar() {
-  const { currentColor } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Flex
       px={10}
       bg='background'
-      color={currentColor}
+      color='special.500'
       boxShadow='md'
       align='center'
       justify='space-between'
@@ -47,7 +45,7 @@ function Navbar() {
       <Icon
         as={MdMenu}
         boxSize={30}
-        fill={currentColor}
+        fill='special.500'
         cursor='pointer'
         onClick={onOpen}
         display={{ sm: 'inline-block', md: 'none' }}

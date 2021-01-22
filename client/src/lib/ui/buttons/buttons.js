@@ -2,18 +2,15 @@ import React from 'react';
 
 import { Button } from '@chakra-ui/react';
 
-import { useColorMode } from '../../../context/colorModeProvider';
-
 function Primary({ children, ...rest }) {
-  const { currentColor } = useColorMode();
   return (
     <Button
       variant='solid'
       cursor='pointer'
       borderRadius='sm'
       color='colorText'
-      bg={currentColor}
-      _hover={{ color: 'colorText', bg: `${currentColor}DD` }}
+      bg='special.500'
+      _hover={{ color: 'colorText', bg: 'special.400' }}
       {...rest}
     >
       {children}

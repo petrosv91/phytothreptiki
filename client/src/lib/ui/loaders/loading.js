@@ -2,10 +2,7 @@ import React from 'react';
 
 import { Flex, Spinner } from '@chakra-ui/react';
 
-import { useColorMode } from '../../../context/colorModeProvider';
-
 function Loading({ isLoading }) {
-  const { currentColor } = useColorMode();
   if (!isLoading) return null;
   return (
     <Flex
@@ -19,7 +16,7 @@ function Loading({ isLoading }) {
       justifyContent='center'
       alignItems='center'
     >
-      <Spinner boxSize={20} borderColor={currentColor} borderWidth={4} />
+      <Spinner boxSize={20} borderColor='special.500' borderWidth={4} />
     </Flex>
   );
 }

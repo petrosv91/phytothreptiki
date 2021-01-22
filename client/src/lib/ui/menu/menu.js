@@ -16,7 +16,7 @@ function Menu({ handleClick, options, title }) {
         rightIcon={<MdExpandMore />}
         _active={{ bg: 'none' }}
         _hover={{ color: 'secondaryText' }}
-        _expanded={{ bg: 'none', color: 'text' }}
+        _expanded={{ bg: 'none', color: 'secondaryText' }}
       >
         {title}
       </MenuButton>

@@ -2,10 +2,7 @@ import React from 'react';
 
 import { Select as ChakraSelect } from '@chakra-ui/react';
 
-import { useColorMode } from '../../../context/colorModeProvider';
-
 function Select({ children, name, formRef, ...rest }) {
-  const { currentColor } = useColorMode();
   return (
     <ChakraSelect
       name={name}
@@ -16,7 +13,7 @@ function Select({ children, name, formRef, ...rest }) {
       borderRadius='sm'
       borderColor='secondaryText'
       errorBorderColor='red.500'
-      focusBorderColor={`${currentColor}AA`}
+      focusBorderColor='special.100'
       _hover={{ borderColor: 'text' }}
       {...rest}
     >
