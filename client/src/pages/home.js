@@ -18,10 +18,10 @@ function Home() {
   const { mainFormSchema } = useReactFormSchema();
   const methods = useForm({
     mode: 'onBlur',
-    resolver: yupResolver(mainFormSchema),
     defaultValues: {
       date: getCurrentDate(),
     },
+    resolver: yupResolver(mainFormSchema),
   });
   return (
     <ReactQueryConfigProvider config={overrides}>

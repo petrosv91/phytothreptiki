@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { Box, Flex, Icon } from '@chakra-ui/react';
-import { MdDelete } from 'react-icons/md';
+import { Box } from '@chakra-ui/react';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
-import { Table } from '../../lib/ui';
+import { DeleteIcon, Table } from '../../lib/ui';
 import { roundToTwo } from '../../utils';
 
 function ProductStore({ printable, ...rest }) {
@@ -21,38 +20,33 @@ function ProductStore({ printable, ...rest }) {
       <Table.Table {...rest}>
         <Table.Head>
           <Table.Row>
+            {!printable && <Table.Header>{/* Actions */}</Table.Header>}
             <Table.Header>ΕΠΩΝΥΜΙΑ</Table.Header>
             <Table.Header>ΤΕΜΑΧΙΑ</Table.Header>
             <Table.Header>ΚΙΛΑ</Table.Header>
             <Table.Header>ΣΥΝΟΛΙΚΑ ΚΙΛΑ</Table.Header>
-            {!printable && <Table.Header>{/* Actions */}</Table.Header>}
           </Table.Row>
         </Table.Head>
         <Table.Body>
           {productStore.map((row, index) => (
             <Table.Row key={index}>
-              <Table.Cell>
-                <Flex direction='column'>{row.label}</Flex>
-              </Table.Cell>
-              <Table.Cell>{row.units} </Table.Cell>
-              <Table.Cell>{row.weights} kg</Table.Cell>
-              <Table.Cell>{roundToTwo(row.weights * row.units)}</Table.Cell>
               {!printable && (
                 <Table.Cell>
-                  <Icon
-                    as={MdDelete}
-                    color='red.500'
-                    cursor='pointer'
-                    _hover={{ color: 'red.400' }}
+                  <DeleteIcon
                     onClick={() => {
                       deleteProduct(row);
                     }}
                   />
                 </Table.Cell>
               )}
+              <Table.Cell>{row.label}</Table.Cell>
+              <Table.Cell>{row.units} </Table.Cell>
+              <Table.Cell>{row.weights} kg</Table.Cell>
+              <Table.Cell>{roundToTwo(row.weights * row.units)}</Table.Cell>
             </Table.Row>
           ))}
           <Table.Row>
+            {!printable && <Table.Cell>{/* Actions */}</Table.Cell>}
             <Table.Cell>Σύνολο</Table.Cell>
             <Table.Cell>
               {roundToTwo(
@@ -61,14 +55,7 @@ function ProductStore({ printable, ...rest }) {
                 }, 0),
               )}
             </Table.Cell>
-            <Table.Cell>
-              {roundToTwo(
-                productStore.reduce((prev, curr) => {
-                  return prev + curr.weights;
-                }, 0),
-              )}
-              kg
-            </Table.Cell>
+            <Table.Cell>{/* Weights */}</Table.Cell>
             <Table.Cell>
               {roundToTwo(
                 productStore.reduce((prev, curr) => {
@@ -77,7 +64,6 @@ function ProductStore({ printable, ...rest }) {
               )}
               kg
             </Table.Cell>
-            {!printable && <Table.Cell>{/* Actions */}</Table.Cell>}
           </Table.Row>
         </Table.Body>
       </Table.Table>

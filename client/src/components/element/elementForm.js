@@ -75,7 +75,7 @@ function ElementForm() {
             />
             <Flex direction={['column', 'row']} align='center' justify='space-between'>
               <FormInput
-                w={['full', '30%']}
+                w={['full', '45%']}
                 name='rate'
                 label='Συμμετοχή'
                 tag='%'
@@ -84,19 +84,9 @@ function ElementForm() {
                 formRef={register}
               />
               <FormInput
-                w={['full', '30%']}
+                w={['full', '45%']}
                 name='price'
                 label='Τιμή'
-                tag='€'
-                type='number'
-                step='any'
-                errors={errors}
-                formRef={register}
-              />
-              <FormInput
-                w={['full', '30%']}
-                name='restPrice'
-                label='Διάφορα'
                 tag='€'
                 type='number'
                 step='any'

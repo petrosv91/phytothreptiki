@@ -4,7 +4,7 @@ import { useToast } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 
 import { useMainMachine } from '../context/mainMachineProvider';
-import { createToast, isRateValid, isTotalWeightValid } from '../utils';
+import { createToast, isRateValid, istotalWeightsValid } from '../utils';
 
 function useStoreValidation() {
   const toast = useToast();
@@ -14,7 +14,7 @@ function useStoreValidation() {
   const validate = React.useCallback(
     (formData, key) => {
       if (!formData) return true;
-      const { totalWeight, weights } = getValues();
+      const { totalWeights, weights } = getValues();
 
       switch (key) {
         case 'element':
@@ -36,7 +36,7 @@ function useStoreValidation() {
           }
           break;
         case 'product':
-          if (!totalWeight) {
+          if (!totalWeights) {
             createToast(toast, {
               type: 'error',
               title: 'Αποτυχία',
@@ -44,7 +44,7 @@ function useStoreValidation() {
             });
             return false;
           }
-          if (!isTotalWeightValid(context, formData, totalWeight)) {
+          if (!istotalWeightsValid(context, formData, totalWeights)) {
             createToast(toast, {
               type: 'error',
               title: 'Αποτυχία',

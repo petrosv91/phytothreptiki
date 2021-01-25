@@ -33,7 +33,7 @@ function Navbar() {
           <DeleteMenu />
         </Stack>
       </Drawer>
-      <Image src={Logo} boxSize='100px' objectFit='scale-down' />
+      {/* <Image src={Logo} boxSize='100px' objectFit='scale-down' /> */}
       <Box display={['none', 'none', 'inline-block']}>
         <Stack direction='row' align='center' justify='flex-end'>
           <SearchMenu />

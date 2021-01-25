@@ -5,9 +5,8 @@ const RecipeSchema = mongoose.Schema({
   recipe: String,
   date: String,
   type: String,
-  loops: Number,
-  weights: Number,
-  totalWeight: Number,
+  restPrice: Number,
+  totalWeights: Number,
   elements: Array,
   products: Array,
 });

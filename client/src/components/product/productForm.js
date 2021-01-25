@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { Flex, Icon, useDisclosure } from '@chakra-ui/react';
+import { Flex, useDisclosure } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { MdClose, MdSearch, MdEdit } from 'react-icons/md';
+import { MdClose, MdSearch } from 'react-icons/md';
 import { v4 as uuidv4 } from 'uuid';
 
 import { weights, useReactFormSchema } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import useStoreValidation from '../../hooks/useStoreValidation';
-import { Modal, Buttons, FormInput, FormSelect, FormSwitch } from '../../lib/ui';
+import { Modal, Buttons, FormInput, FormSelect, FormSwitch, EditIcon } from '../../lib/ui';
 import PickingProduct from './pickingProduct';
 
 function ProductForm() {
@@ -85,17 +85,7 @@ function ProductForm() {
                 formRef={register}
               />
               <Flex w={['full', '45%']} align='flex-end'>
-                <Icon
-                  as={MdEdit}
-                  mb={2}
-                  mr={2}
-                  boxSize={7}
-                  cursor='pointer'
-                  onClick={handleIEditClick}
-                  display={['none', 'none', 'inline-block']}
-                  color={edit ? 'special.500' : 'special.100'}
-                  _hover={edit ? { color: 'special.100' } : { color: 'special.500' }}
-                />
+                <EditIcon mb={2} mr={2} onClick={handleIEditClick} />
                 {edit ? (
                   <FormInput
                     name='weights'

@@ -38,9 +38,9 @@ export function isRateValid({ elementStore }, { rate: newRate }) {
   const rateSum = elementStore.reduce((prev, curr) => prev + curr.rate, 0);
   return rateSum + newRate <= 100;
 }
-export function isTotalWeightValid({ productStore }, { weights, units }, totalWeight) {
+export function istotalWeightsValid({ productStore }, { weights, units }, totalWeights) {
   const weightsSum = productStore.reduce((prev, curr) => prev + curr.weights * curr.units, 0);
-  return weightsSum + weights * units <= totalWeight;
+  return weightsSum + weights * units <= totalWeights;
 }
 
 export function roundToTwo(num) {

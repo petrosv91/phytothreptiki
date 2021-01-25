@@ -1,16 +1,21 @@
 import React from 'react';
 
-import { Box, Flex, Icon, Text } from '@chakra-ui/react';
-import { MdDelete } from 'react-icons/md';
+import { Box, Flex, Text } from '@chakra-ui/react';
+import { useFormContext } from 'react-hook-form';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
-import { Table } from '../../lib/ui';
+import { DeleteIcon, Table } from '../../lib/ui';
 import { roundToTwo } from '../../utils';
 
 function ElementStore({ printable, ...rest }) {
   const [state, send] = useMainMachine();
-  const { elementStore, weightStaticValue: weights } = state.context;
+  const { elementStore } = state.context;
+  const { getValues } = useFormContext();
 
+  function calcWeights(row) {
+    const { weights = 0 } = getValues();
+    return (weights * row.rate) / 100;
+  }
   function deleteElement(row) {
     send({ type: 'DELETE_ROW', key: 'elementStore', row });
   }
@@ -21,15 +26,14 @@ function ElementStore({ printable, ...rest }) {
       <Table.Table {...rest}>
         <Table.Head>
           <Table.Row>
+            {!printable && <Table.Header>{/* Actions */}</Table.Header>}
             <Table.Header>Ά ΥΛΕΣ</Table.Header>
             <Table.Header>ΣΥΜΜΕΤΟΧΗ</Table.Header>
             <Table.Header>ΚΙΛΑ</Table.Header>
             {!printable && (
               <>
                 <Table.Header>ΤΙΜΗ</Table.Header>
-                <Table.Header>ΔΙΑΦΟΡΑ</Table.Header>
                 <Table.Header>ΣΥΝΟΛΙΚΟ ΚΟΣΤΟΣ</Table.Header>
-                <Table.Header>{/* Actions */}</Table.Header>
               </>
             )}
           </Table.Row>
@@ -37,6 +41,15 @@ function ElementStore({ printable, ...rest }) {
         <Table.Body>
           {elementStore.map((row, index) => (
             <Table.Row key={index}>
+              {!printable && (
+                <Table.Cell>
+                  <DeleteIcon
+                    onClick={() => {
+                      deleteElement(row);
+                    }}
+                  />
+                </Table.Cell>
+              )}
               <Table.Cell>
                 <Flex direction='column'>
                   {row.label}
@@ -46,36 +59,23 @@ function ElementStore({ printable, ...rest }) {
                 </Flex>
               </Table.Cell>
               <Table.Cell>{row.rate}</Table.Cell>
-              <Table.Cell>{roundToTwo(weights / row.rate)}</Table.Cell>
+              <Table.Cell>{roundToTwo(calcWeights(row))}</Table.Cell>
               {!printable && (
                 <>
                   <Table.Cell>{row.price}</Table.Cell>
-                  <Table.Cell>{row.restPrice}</Table.Cell>
-                  <Table.Cell>
-                    {roundToTwo((row.rate * (row.price + row.restPrice)) / 100)}
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Icon
-                      as={MdDelete}
-                      color='red.500'
-                      cursor='pointer'
-                      _hover={{ color: 'red.400' }}
-                      onClick={() => {
-                        deleteElement(row);
-                      }}
-                    />
-                  </Table.Cell>
+                  <Table.Cell>{roundToTwo((row.rate * row.price) / 100)}</Table.Cell>
                 </>
               )}
             </Table.Row>
           ))}
           <Table.Row>
+            {!printable && <Table.Cell>{/* Actions */}</Table.Cell>}
             <Table.Cell>Σύνολο</Table.Cell>
             <Table.Cell>{elementStore.reduce((prev, curr) => prev + curr.rate, 0)}%</Table.Cell>
             <Table.Cell>
               {roundToTwo(
                 elementStore.reduce((prev, curr) => {
-                  return prev + weights / curr.rate;
+                  return prev + calcWeights(curr);
                 }, 0),
               )}
               kg
@@ -93,20 +93,11 @@ function ElementStore({ printable, ...rest }) {
                 <Table.Cell>
                   {roundToTwo(
                     elementStore.reduce((prev, curr) => {
-                      return prev + curr.restPrice;
+                      return prev + (curr.rate * curr.price) / 100;
                     }, 0),
                   )}
                   €
                 </Table.Cell>
-                <Table.Cell>
-                  {roundToTwo(
-                    elementStore.reduce((prev, curr) => {
-                      return prev + (curr.rate * (curr.price + curr.restPrice)) / 100;
-                    }, 0),
-                  )}
-                  €
-                </Table.Cell>
-                <Table.Cell>{/* Actions */}</Table.Cell>
               </>
             )}
           </Table.Row>

@@ -32,7 +32,8 @@ function useReactFormSchema() {
       recipe: yup.string().required(),
       loops: yup.number().required().positive(),
       weights: yup.number().required().positive().weightValidation(toast),
-      totalWeight: yup.number().required().positive(),
+      totalWeights: yup.number().required().positive(),
+      restPrice: yup.number().positive().nullable().transform(nullConverter),
     });
   }, [toast]);
 
@@ -40,7 +41,6 @@ function useReactFormSchema() {
     return yup.object().shape({
       rate: yup.number().required().positive(),
       price: yup.number().default(0).positive().nullable().transform(nullConverter),
-      restPrice: yup.number().positive().nullable().transform(nullConverter),
     });
   }, []);
 

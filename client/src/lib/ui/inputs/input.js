@@ -9,6 +9,7 @@ function Input({ formRef, name, ...rest }) {
       ref={formRef}
       fontWeight='500'
       color='text'
+      autoComplete='off'
       borderRadius='sm'
       borderColor='secondaryText'
       errorBorderColor='red.500'
