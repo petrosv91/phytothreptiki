@@ -1,6 +1,6 @@
 import { elements } from './elements';
 import GlobalStyles from './globalStyles';
-import { weights } from './options';
+import { weights, baseElements } from './options';
 import useReactFormSchema from './reactFormSchema';
 import useReactQueryConfig from './reactQueryConfig';
 import { lightTheme, darkTheme } from './theme';
@@ -13,6 +13,7 @@ export {
   darkTheme,
   lightTheme,
   GlobalStyles,
+  baseElements,
   useReactFormSchema,
   useReactQueryConfig,
 };

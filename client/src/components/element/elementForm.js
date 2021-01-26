@@ -26,6 +26,13 @@ function ElementForm() {
 
   const [state, send] = useMainMachine();
   const { element } = state.context;
+  const { type } = state.event;
+
+  React.useEffect(() => {
+    if (type === 'DELETE_RECIPE' || type === 'ADD_RECIPE') {
+      setEnabled(false);
+    }
+  }, [type, setEnabled]);
 
   function resetForm() {
     send({ type: 'DELETE_ITEM', key: 'element', callback: reset });
@@ -61,6 +68,7 @@ function ElementForm() {
           size='lg'
           name='elementSwitch'
           label={`${enabled ? 'Απενεργοποίηση' : 'Ενεργοποίηση'} πεδίων για Ά Ύλες`}
+          isChecked={enabled}
           onChange={() => setEnabled((prev) => !prev)}
         />
         {enabled && (

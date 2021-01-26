@@ -1,21 +1,33 @@
 import React from 'react';
 
 import { useForm } from 'react-hook-form';
-import { MdClose, MdSearch } from 'react-icons/md';
+import { MdSearch } from 'react-icons/md';
 
+import { baseElements } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
-import { Buttons, FormInput } from '../../lib/ui';
+import { Buttons, FormInput, FormSelect } from '../../lib/ui';
 
-function CreateElement() {
+function CreateElement({ resetItem }) {
   const [state, send] = useMainMachine();
-  const { register, handleSubmit, reset } = useForm();
+  const { updatedItem: element } = state.context;
+
+  const { register, handleSubmit, errors, reset } = useForm({
+    defaultValues: {
+      label: element.label,
+      formula: element.formula?.join('-'),
+      baseElement: element.baseElement,
+    },
+  });
   const isSubmitting = state.matches('elementSubmitting');
 
   function onSubmit(formData) {
     send({
       type: 'ELEMENT_SUBMIT',
-      data: formData,
-      callback: reset,
+      data: { id: element._id, formData },
+      callback: () => {
+        reset();
+        resetItem();
+      },
     });
   }
   return (
@@ -23,12 +35,19 @@ function CreateElement() {
       <FormInput
         name='label'
         label='Ά Ύλη'
-        leftIcon={MdSearch}
-        rightIcon={MdClose}
-        rightIconClick={reset}
+        leftIcon={resetItem && MdSearch}
+        onClick={resetItem && resetItem}
+        formRef={register({ required: true })}
+      />
+      <FormInput name='formula' label='Στοιχεία' errors={errors} formRef={register} />
+      <FormSelect
+        name='baseElement'
+        label='Βασικό Στοιχείο'
+        placeholder='--- Επιλογή Βασικού Στοιχείου ---'
+        options={baseElements}
+        errors={errors}
         formRef={register}
       />
-      <FormInput name='formula' label='Στοιχεία' formRef={register} />
       <Buttons.Primary mt={4} w='full' type='submit' isLoading={isSubmitting}>
         Προσθήκη
       </Buttons.Primary>

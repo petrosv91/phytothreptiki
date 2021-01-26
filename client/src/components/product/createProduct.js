@@ -1,21 +1,30 @@
 import React from 'react';
 
 import { useForm } from 'react-hook-form';
-import { MdClose, MdSearch } from 'react-icons/md';
+import { MdSearch } from 'react-icons/md';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Buttons, FormInput } from '../../lib/ui';
 
-function CreateProduct() {
+function CreateProduct({ resetItem }) {
   const [state, send] = useMainMachine();
-  const { register, handleSubmit, reset } = useForm();
+  const { updatedItem: product } = state.context;
+
+  const { register, handleSubmit, reset } = useForm({
+    defaultValues: {
+      label: product.label,
+    },
+  });
   const isSubmitting = state.matches('productSubmitting');
 
   function onSubmit(formData) {
     send({
       type: 'PRODUCT_SUBMIT',
-      data: formData,
-      callback: reset,
+      data: { id: product._id, formData },
+      callback: () => {
+        reset();
+        resetItem();
+      },
     });
   }
   return (
@@ -23,9 +32,8 @@ function CreateProduct() {
       <FormInput
         name='label'
         label='Επωνυμία Προιόντος'
-        leftIcon={MdSearch}
-        rightIcon={MdClose}
-        rightIconClick={reset}
+        leftIcon={resetItem && MdSearch}
+        onClick={resetItem && resetItem}
         formRef={register}
       />
       <Buttons.Primary mt={4} w='full' type='submit' isLoading={isSubmitting}>

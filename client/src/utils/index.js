@@ -12,6 +12,13 @@ export function createToast(toast, props) {
   });
 }
 
+export function isObjEmpty(obj) {
+  for (var prop in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, prop)) return false;
+  }
+  return true;
+}
+
 export function convertEmptyFields(formData) {
   return Object.entries(formData).reduce(
     (acc, [key, value]) => ({ ...acc, [key]: value || 0 }),

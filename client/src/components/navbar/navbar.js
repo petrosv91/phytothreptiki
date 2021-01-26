@@ -9,6 +9,7 @@ import Colorpicker from '../colorPicker/colorPicker';
 import CreateMenu from '../menu/createMenu';
 import DeleteMenu from '../menu/deleteMenu';
 import SearchMenu from '../menu/searchMenu';
+import UpdateMenu from '../menu/updateMenu';
 
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -30,6 +31,7 @@ function Navbar() {
         <Stack mt={10} spacing={8} direction='column' align='center'>
           <SearchMenu drawerClose={onClose} />
           <CreateMenu />
+          <UpdateMenu />
           <DeleteMenu />
         </Stack>
       </Drawer>
@@ -38,6 +40,7 @@ function Navbar() {
         <Stack direction='row' align='center' justify='flex-end'>
           <SearchMenu />
           <CreateMenu />
+          <UpdateMenu />
           <DeleteMenu />
           <Colorpicker />
         </Stack>

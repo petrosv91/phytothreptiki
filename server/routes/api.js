@@ -26,8 +26,8 @@ router.post('/', async (req, res) => {
         return res.json({ success: true, data: allPosts });
       }
       case 'setRecipe': {
-        const doesRecipeAlreadyExists = await Recipe.findById(req.body.data.id);
-        if (doesRecipeAlreadyExists) {
+        const exists = await Recipe.findById(req.body.data.id);
+        if (exists) {
           await Recipe.updateOne({ _id: req.body.data.id }, { $set: { ...req.body.data } });
           return res.json({ success: true });
         }
@@ -38,11 +38,21 @@ router.post('/', async (req, res) => {
         return res.json({ success: true });
       }
       case 'setElement': {
+        const exists = await Element.findById(req.body.data.id);
+        if (exists) {
+          await Element.updateOne({ _id: req.body.data.id }, { $set: { ...req.body.data } });
+          return res.json({ success: true });
+        }
         const newPost = new Element({ ...req.body.data });
         await newPost.save();
         return res.json({ success: true });
       }
       case 'setProduct': {
+        const exists = await Product.findById(req.body.data.id);
+        if (exists) {
+          await Product.updateOne({ _id: req.body.data.id }, { $set: { ...req.body.data } });
+          return res.json({ success: true });
+        }
         const newPost = new Product({ ...req.body.data });
         await newPost.save();
         return res.json({ success: true });

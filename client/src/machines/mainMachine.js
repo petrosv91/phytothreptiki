@@ -16,10 +16,10 @@ export const MainMachine = createMachine({
           target: 'gettingMaxCode',
           actions: [actions.resetContext, actions.callback],
         },
-        ADD_ITEM: { actions: [actions.assignItem] },
+        ADD_ITEM: { actions: [actions.assignItem, actions.callback] },
         DELETE_ITEM: { actions: [actions.deleteItem, actions.callback] },
         ADD_ROW: { actions: [actions.addItemToStore, actions.callback] },
-        DELETE_ROW: { actions: [actions.deleteItemFromStore] },
+        DELETE_ROW: { actions: [actions.deleteItemFromStore, actions.callback] },
         RECIPE_SUBMIT: {
           target: 'recipeSubmitting',
         },

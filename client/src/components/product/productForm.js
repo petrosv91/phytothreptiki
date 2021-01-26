@@ -26,6 +26,13 @@ function ProductForm() {
 
   const [state, send] = useMainMachine();
   const { product } = state.context;
+  const { type } = state.event;
+
+  React.useEffect(() => {
+    if (type === 'DELETE_RECIPE' || type === 'ADD_RECIPE') {
+      setEnabled(false);
+    }
+  }, [type, setEnabled]);
 
   function resetForm() {
     send({ type: 'DELETE_ITEM', key: 'product', callback: reset });
@@ -63,6 +70,7 @@ function ProductForm() {
           size='lg'
           name='elementSwitch'
           label={`${enabled ? 'Απενεργοποίηση' : 'Ενεργοποίηση'} πεδίων για Έτοιμο Προϊον`}
+          isChecked={enabled}
           onChange={() => setEnabled((prev) => !prev)}
         />
         {enabled && (
@@ -100,6 +108,7 @@ function ProductForm() {
                   <FormSelect
                     name='weights'
                     label='Κιλά'
+                    placeholder='--- Επιλογή Κιλών ---'
                     options={weights}
                     errors={errors}
                     formRef={register}
