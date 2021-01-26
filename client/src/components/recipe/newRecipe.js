@@ -28,16 +28,14 @@ function Recipe() {
     onAfterPrint: () => setPrintLoading(false),
   });
 
-  const { getValues, reset } = useFormContext();
+  const { reset } = useFormContext();
   const [state, send] = useMainMachine();
   const isLoading = state.matches('gettingMaxCode');
   const isSubmitting = state.matches('recipeSubmitting');
 
   function onConfirm() {
     onClose();
-    console.log(getValues());
     send({ type: 'DELETE_RECIPE', callback: reset });
-    console.log(getValues());
   }
 
   return (

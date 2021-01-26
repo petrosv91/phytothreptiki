@@ -9,12 +9,12 @@ import PickingRecipe from '../recipe/pickingRecipe';
 
 function SearchMenu({ drawerClose = () => {} }) {
   const [, send] = useMainMachine();
-  const { setValue, clearErrors } = useFormContext();
+  const { reset, setValue, clearErrors } = useFormContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [{ comp, label }, setComponent] = React.useState({});
 
   function handleRecipeClick({ _id, code, elements, products, ...recipe }) {
-    send({ type: 'ADD_RECIPE', id: _id, code, elements, products });
+    send({ type: 'ADD_RECIPE', id: _id, code, elements, products, callback: reset });
     Object.entries(recipe).forEach(([key, value]) => {
       setValue(key, value);
     });

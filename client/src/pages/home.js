@@ -20,6 +20,10 @@ function Home() {
     mode: 'onBlur',
     defaultValues: {
       date: getCurrentDate(),
+      loops: '',
+      weights: '',
+      restPrice: '',
+      totalWeights: '',
     },
     resolver: yupResolver(mainFormSchema),
   });
