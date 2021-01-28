@@ -7,7 +7,7 @@ import { MdSearch } from 'react-icons/md';
 import { baseElements, useReactFormSchema } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Buttons, FormInput, FormSelect } from '../../lib/ui';
-import { convertEmptyFields } from '../../utils';
+import { convertStringToArrayOfNumbers } from '../../utils';
 
 function CreateElement({ resetItem }) {
   const [state, send] = useMainMachine();
@@ -29,7 +29,7 @@ function CreateElement({ resetItem }) {
   function onSubmit(formData) {
     send({
       type: 'ELEMENT_SUBMIT',
-      data: { id: element._id, ...convertEmptyFields(formData) },
+      data: { id: element._id, ...formData },
       callback: () => {
         reset();
         if (resetItem) resetItem();
@@ -44,7 +44,7 @@ function CreateElement({ resetItem }) {
         leftIcon={resetItem && MdSearch}
         onClick={resetItem && resetItem}
         errors={errors}
-        formRef={register({ required: true })}
+        formRef={register}
       />
       <FormInput
         name='price'
@@ -55,7 +55,16 @@ function CreateElement({ resetItem }) {
         errors={errors}
         formRef={register}
       />
-      <FormInput name='formula' label='Στοιχεία' errors={errors} formRef={register} />
+      <FormInput
+        name='formula'
+        label='Στοιχεία'
+        errors={errors}
+        formRef={register({
+          setValueAs: (formula) => {
+            return convertStringToArrayOfNumbers(formula, '-');
+          },
+        })}
+      />
       <FormSelect
         name='baseElement'
         label='Βασικό Στοιχείο'

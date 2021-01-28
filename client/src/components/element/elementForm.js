@@ -10,7 +10,7 @@ import { useReactFormSchema } from '../../config/';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import useStoreValidation from '../../hooks/useStoreValidation';
 import { Modal, Buttons, FormInput, FormSwitch } from '../../lib/ui';
-import { convertEmptyFields } from '../../utils';
+import { convertStringToArrayOfNumbers, createValuesForForm } from '../../utils';
 import PickingElement from './pickingElement';
 
 function ElementForm() {
@@ -19,13 +19,12 @@ function ElementForm() {
   const [enabled, setEnabled] = React.useState(false);
 
   const { elementFormSchema } = useReactFormSchema();
-  const { register, handleSubmit, reset, errors } = useForm({
+  const { register, handleSubmit, setValue, reset, errors } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(elementFormSchema),
   });
 
   const [state, send] = useMainMachine();
-  const { element } = state.context;
   const { type } = state.event;
 
   React.useEffect(() => {
@@ -34,9 +33,6 @@ function ElementForm() {
     }
   }, [type, setEnabled]);
 
-  function resetForm() {
-    send({ type: 'DELETE_ITEM', key: 'element', callback: reset });
-  }
   function onSubmit(formData) {
     if (!validate(formData, 'element')) {
       return;
@@ -44,18 +40,16 @@ function ElementForm() {
     send({
       type: 'ADD_ROW',
       key: 'elementStore',
-      data: {
-        id: uuidv4(),
-        label: element.label,
-        formula: element.formula,
-        ...convertEmptyFields(formData),
-      },
-      callback: resetForm,
+      data: { id: uuidv4(), ...formData },
+      callback: reset,
     });
   }
   function handleElementClick(el) {
     onClose();
-    send({ type: 'ADD_ITEM', key: 'element', data: el });
+    Object.entries(el).forEach(([key, value]) => {
+      const newValue = createValuesForForm(value);
+      setValue(key, newValue);
+    });
   }
 
   return (
@@ -79,9 +73,9 @@ function ElementForm() {
               onClick={onOpen}
               leftIcon={MdSearch}
               rightIcon={MdClose}
-              rightIconClick={resetForm}
-              defaultValue={element.label}
+              rightIconClick={reset}
               errors={errors}
+              formRef={register}
             />
             <Flex direction={['column', 'row']} align='center' justify='space-between'>
               <FormInput
@@ -100,16 +94,21 @@ function ElementForm() {
                 tag='€'
                 type='number'
                 step='any'
-                defaultValue={element.price}
                 errors={errors}
                 formRef={register}
               />
             </Flex>
             <FormInput
+              name='formula'
               label='Στοιχεία'
               cursor='default'
               pointerEvents='none'
-              defaultValue={element.formula?.join('-')}
+              errors={errors}
+              formRef={register({
+                setValueAs: (formula) => {
+                  return convertStringToArrayOfNumbers(formula, '-');
+                },
+              })}
             />
             <Buttons.Primary mt={4} ml='auto' type='submit'>
               Προσθήκη

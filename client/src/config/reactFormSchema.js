@@ -41,20 +41,21 @@ function useReactFormSchema() {
     return yup.object().shape({
       label: yup.string().required(),
       rate: yup.number().required().positive(),
-      price: yup.number().default(0).positive().nullable().transform(nullConverter),
+      price: yup.number().positive().nullable().transform(nullConverter),
     });
   }, []);
   const createElementSchema = React.useMemo(() => {
     return yup.object().shape({
       label: yup.string().required(),
-      price: yup.number().default(0).positive().nullable().transform(nullConverter),
+      price: yup.number().positive().nullable().transform(nullConverter),
+      formula: yup.string(),
     });
   }, []);
 
   const productFormSchema = React.useMemo(() => {
     return yup.object().shape({
       label: yup.string().required(),
-      units: yup.number().positive(),
+      units: yup.number().required().positive(),
       weights: yup.number().required().positive().weightValidation(toast),
     });
   }, [toast]);

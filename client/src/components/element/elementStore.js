@@ -8,9 +8,10 @@ import { DeleteIcon, Table } from '../../lib/ui';
 import { roundToTwo } from '../../utils';
 
 function ElementStore({ printable, ...rest }) {
+  const { getValues } = useFormContext();
+
   const [state, send] = useMainMachine();
   const { elementStore } = state.context;
-  const { getValues } = useFormContext();
 
   function calcWeights(row) {
     const { weights = 0 } = getValues();
@@ -54,7 +55,7 @@ function ElementStore({ printable, ...rest }) {
                 <Flex direction='column'>
                   {row.label}
                   <Text mt={1} color='secondaryText' fontSize='sm'>
-                    {row.formula?.join('-')}
+                    {row.formula.join('-')}
                   </Text>
                 </Flex>
               </Table.Cell>
@@ -62,8 +63,8 @@ function ElementStore({ printable, ...rest }) {
               <Table.Cell>{roundToTwo(calcWeights(row))}</Table.Cell>
               {!printable && (
                 <>
-                  <Table.Cell>{row.price}</Table.Cell>
-                  <Table.Cell>{roundToTwo((row.rate * row.price) / 100)}</Table.Cell>
+                  <Table.Cell>{row.price || 0}</Table.Cell>
+                  <Table.Cell>{roundToTwo((row.rate * (row.price || 0)) / 100)}</Table.Cell>
                 </>
               )}
             </Table.Row>
@@ -93,7 +94,7 @@ function ElementStore({ printable, ...rest }) {
                 <Table.Cell>
                   {roundToTwo(
                     elementStore.reduce((prev, curr) => {
-                      return prev + (curr.rate * curr.price) / 100;
+                      return prev + (curr.rate * (curr.price || 0)) / 100;
                     }, 0),
                   )}
                   €

@@ -5,9 +5,7 @@ import { baseGetService } from '../api/services';
 export const initialContext = {
   recipeId: undefined,
   updatedItem: {},
-  element: {},
   elementStore: [],
-  product: {},
   productStore: [],
 };
 

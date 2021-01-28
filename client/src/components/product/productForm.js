@@ -19,13 +19,12 @@ function ProductForm() {
   const [enabled, setEnabled] = React.useState(false);
 
   const { productFormSchema } = useReactFormSchema();
-  const { register, handleSubmit, reset, errors } = useForm({
+  const { register, handleSubmit, setValue, reset, errors } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(productFormSchema),
   });
 
   const [state, send] = useMainMachine();
-  const { product } = state.context;
   const { type } = state.event;
 
   React.useEffect(() => {
@@ -34,9 +33,6 @@ function ProductForm() {
     }
   }, [type, setEnabled]);
 
-  function resetForm() {
-    send({ type: 'DELETE_ITEM', key: 'product', callback: reset });
-  }
   function onSubmit(formData) {
     if (!validate(formData, 'product')) {
       return;
@@ -44,12 +40,8 @@ function ProductForm() {
     send({
       type: 'ADD_ROW',
       key: 'productStore',
-      data: {
-        id: uuidv4(),
-        ...formData,
-        label: product.label,
-      },
-      callback: resetForm,
+      data: { id: uuidv4(), ...formData },
+      callback: reset,
     });
   }
   function handleIEditClick() {
@@ -57,7 +49,9 @@ function ProductForm() {
   }
   function handleProductClick(product) {
     onClose();
-    send({ type: 'ADD_ITEM', key: 'product', data: product });
+    Object.entries(product).forEach(([key, value]) => {
+      setValue(key, value);
+    });
   }
 
   return (
@@ -81,9 +75,9 @@ function ProductForm() {
               onClick={onOpen}
               leftIcon={MdSearch}
               rightIcon={MdClose}
-              rightIconClick={resetForm}
-              defaultValue={product.label}
+              rightIconClick={reset}
               errors={errors}
+              formRef={register}
             />
             <Flex direction={['column', 'row']} align='center' justify='space-between'>
               <FormInput

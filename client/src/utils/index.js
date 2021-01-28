@@ -12,6 +12,14 @@ export function createToast(toast, props) {
   });
 }
 
+export function createValuesForForm(value) {
+  if (Array.isArray(value)) return value.join('-');
+  return value;
+}
+export function convertStringToArrayOfNumbers(value, delimiter) {
+  if (!value || value === '') return [];
+  return value.split(delimiter).map((el) => Number(el));
+}
 export function isObjEmpty(obj) {
   for (var prop in obj) {
     if (Object.prototype.hasOwnProperty.call(obj, prop)) return false;
@@ -19,9 +27,9 @@ export function isObjEmpty(obj) {
   return true;
 }
 
-export function convertEmptyFields(formData) {
+export function convertEmptyFields(formData, defaultValue) {
   return Object.entries(formData).reduce(
-    (acc, [key, value]) => ({ ...acc, [key]: value || 0 }),
+    (acc, [key, value]) => ({ ...acc, [key]: value || defaultValue }),
     {},
   );
 }
