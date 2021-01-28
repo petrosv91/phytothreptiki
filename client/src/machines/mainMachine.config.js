@@ -49,7 +49,7 @@ export const guards = {};
 export const services = {
   setRecipe: async (ctx, e) => {
     try {
-      const { recipeId, elementStore, productStore, codeId, code } = ctx;
+      const { code, codeId, recipeId, elementStore, productStore } = ctx;
       const data = {
         ...e.data,
         code,

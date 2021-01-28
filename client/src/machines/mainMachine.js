@@ -11,7 +11,7 @@ export const MainMachine = createMachine({
   states: {
     editting: {
       on: {
-        ADD_RECIPE: { actions: [actions.resetContext, actions.callback, actions.updateContext] },
+        ADD_RECIPE: { actions: [actions.updateContext, actions.callback] },
         DELETE_RECIPE: {
           target: 'gettingMaxCode',
           actions: [actions.resetContext, actions.callback],

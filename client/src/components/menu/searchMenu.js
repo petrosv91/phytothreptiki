@@ -14,7 +14,13 @@ function SearchMenu({ drawerClose = () => {} }) {
   const [{ comp, label }, setComponent] = React.useState({});
 
   function handleRecipeClick({ _id, code, elements, products, ...recipe }) {
-    send({ type: 'ADD_RECIPE', id: _id, code, elements, products, callback: reset });
+    send({
+      type: 'ADD_RECIPE',
+      id: _id,
+      code,
+      elements,
+      products,
+    });
     Object.entries(recipe).forEach(([key, value]) => {
       setValue(key, value);
     });
