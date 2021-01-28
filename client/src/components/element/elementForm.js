@@ -74,12 +74,14 @@ function ElementForm() {
         {enabled && (
           <>
             <FormInput
+              name='label'
               label='Ά Ύλη'
               onClick={onOpen}
               leftIcon={MdSearch}
               rightIcon={MdClose}
               rightIconClick={resetForm}
               defaultValue={element.label}
+              errors={errors}
             />
             <Flex direction={['column', 'row']} align='center' justify='space-between'>
               <FormInput
@@ -98,6 +100,7 @@ function ElementForm() {
                 tag='€'
                 type='number'
                 step='any'
+                defaultValue={element.price}
                 errors={errors}
                 formRef={register}
               />

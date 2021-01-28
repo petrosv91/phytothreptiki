@@ -76,12 +76,14 @@ function ProductForm() {
         {enabled && (
           <>
             <FormInput
+              name='label'
               label='Επωνυμία Προιόντος'
               onClick={onOpen}
               leftIcon={MdSearch}
               rightIcon={MdClose}
               rightIconClick={resetForm}
               defaultValue={product.label}
+              errors={errors}
             />
             <Flex direction={['column', 'row']} align='center' justify='space-between'>
               <FormInput

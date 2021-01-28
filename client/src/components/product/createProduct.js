@@ -20,10 +20,10 @@ function CreateProduct({ resetItem }) {
   function onSubmit(formData) {
     send({
       type: 'PRODUCT_SUBMIT',
-      data: { id: product._id, formData },
+      data: { id: product._id, ...formData },
       callback: () => {
         reset();
-        resetItem();
+        if (resetItem) resetItem();
       },
     });
   }

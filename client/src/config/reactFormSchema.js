@@ -39,19 +39,27 @@ function useReactFormSchema() {
 
   const elementFormSchema = React.useMemo(() => {
     return yup.object().shape({
+      label: yup.string().required(),
       rate: yup.number().required().positive(),
+      price: yup.number().default(0).positive().nullable().transform(nullConverter),
+    });
+  }, []);
+  const createElementSchema = React.useMemo(() => {
+    return yup.object().shape({
+      label: yup.string().required(),
       price: yup.number().default(0).positive().nullable().transform(nullConverter),
     });
   }, []);
 
   const productFormSchema = React.useMemo(() => {
     return yup.object().shape({
-      weights: yup.number().required().positive().weightValidation(toast),
+      label: yup.string().required(),
       units: yup.number().positive(),
+      weights: yup.number().required().positive().weightValidation(toast),
     });
   }, [toast]);
 
-  return { mainFormSchema, elementFormSchema, productFormSchema };
+  return { mainFormSchema, elementFormSchema, createElementSchema, productFormSchema };
 }
 
 export default useReactFormSchema;
