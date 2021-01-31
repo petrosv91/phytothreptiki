@@ -20,7 +20,7 @@ function CreateElement({ resetItem }) {
       label: element.label,
       price: element.price,
       formula: element.formula?.join('-'),
-      baseElement: element.baseElement,
+      baseElement: element.baseElement?.value,
     },
     resolver: yupResolver(createElementSchema),
   });
@@ -71,7 +71,11 @@ function CreateElement({ resetItem }) {
         placeholder='--- Επιλογή Βασικού Στοιχείου ---'
         options={baseElements}
         errors={errors}
-        formRef={register}
+        formRef={register({
+          setValueAs: (baseElement) => {
+            return baseElements.find((el) => el.value === Number(baseElement));
+          },
+        })}
       />
       <Buttons.Primary mt={4} w='full' type='submit' isLoading={isSubmitting}>
         Προσθήκη

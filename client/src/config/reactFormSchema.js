@@ -48,7 +48,7 @@ function useReactFormSchema() {
     return yup.object().shape({
       label: yup.string().required(),
       price: yup.number().positive().nullable().transform(nullConverter),
-      formula: yup.string(),
+      formula: yup.array(),
     });
   }, []);
 

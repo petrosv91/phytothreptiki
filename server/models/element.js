@@ -5,7 +5,7 @@ const ElementSchema = mongoose.Schema({
   label: String,
   price: Number,
   formula: Array,
-  baseElement: String,
+  baseElement: Object,
 });
 
 module.exports = mongoose.model('Posts', ElementSchema);

@@ -6,17 +6,16 @@ import { useForm } from 'react-hook-form';
 import { MdClose, MdSearch } from 'react-icons/md';
 import { v4 as uuidv4 } from 'uuid';
 
-import { useReactFormSchema } from '../../config/';
+import { baseElements, useReactFormSchema } from '../../config/';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import useStoreValidation from '../../hooks/useStoreValidation';
 import { Modal, Buttons, FormInput, FormSwitch } from '../../lib/ui';
-import { convertStringToArrayOfNumbers, createValuesForForm } from '../../utils';
+import { convertStringToArrayOfNumbers } from '../../utils';
 import PickingElement from './pickingElement';
 
 function ElementForm() {
   const { validate } = useStoreValidation();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [enabled, setEnabled] = React.useState(false);
 
   const { elementFormSchema } = useReactFormSchema();
   const { register, handleSubmit, setValue, reset, errors } = useForm({
@@ -25,13 +24,7 @@ function ElementForm() {
   });
 
   const [state, send] = useMainMachine();
-  const { type } = state.event;
-
-  React.useEffect(() => {
-    if (type === 'DELETE_RECIPE' || type === 'ADD_RECIPE') {
-      setEnabled(false);
-    }
-  }, [type, setEnabled]);
+  const { elementSwitch = false } = state.context.switches;
 
   function onSubmit(formData) {
     if (!validate(formData, 'element')) {
@@ -47,8 +40,14 @@ function ElementForm() {
   function handleElementClick(el) {
     onClose();
     Object.entries(el).forEach(([key, value]) => {
-      const newValue = createValuesForForm(value);
-      setValue(key, newValue);
+      if (key === 'formula') {
+        const formula = value.join('-');
+        return setValue(key, formula);
+      }
+      if (key === 'baseElement') {
+        return setValue(key, value?.label);
+      }
+      setValue(key, value);
     });
   }
 
@@ -61,11 +60,11 @@ function ElementForm() {
         <FormSwitch
           size='lg'
           name='elementSwitch'
-          label={`${enabled ? 'Απενεργοποίηση' : 'Ενεργοποίηση'} πεδίων για Ά Ύλες`}
-          isChecked={enabled}
-          onChange={() => setEnabled((prev) => !prev)}
+          label={`${elementSwitch ? 'Απενεργοποίηση' : 'Ενεργοποίηση'} πεδίων για Ά Ύλες`}
+          isChecked={elementSwitch}
+          onChange={() => send({ type: 'TOGGLE', key: 'elementSwitch' })}
         />
-        {enabled && (
+        {elementSwitch && (
           <>
             <FormInput
               name='label'
@@ -98,18 +97,34 @@ function ElementForm() {
                 formRef={register}
               />
             </Flex>
-            <FormInput
-              name='formula'
-              label='Στοιχεία'
-              cursor='default'
-              pointerEvents='none'
-              errors={errors}
-              formRef={register({
-                setValueAs: (formula) => {
-                  return convertStringToArrayOfNumbers(formula, '-');
-                },
-              })}
-            />
+            <Flex direction={['column', 'row']} align='center' justify='space-between'>
+              <FormInput
+                w={['full', '45%']}
+                name='formula'
+                label='Στοιχεία'
+                cursor='default'
+                pointerEvents='none'
+                errors={errors}
+                formRef={register({
+                  setValueAs: (formula) => {
+                    return convertStringToArrayOfNumbers(formula, '-');
+                  },
+                })}
+              />
+              <FormInput
+                w={['full', '45%']}
+                name='baseElement'
+                label='Βασικό Στοιχείο'
+                cursor='default'
+                pointerEvents='none'
+                errors={errors}
+                formRef={register({
+                  setValueAs: (baseElement) => {
+                    return baseElements.find((el) => el.label === baseElement);
+                  },
+                })}
+              />
+            </Flex>
             <Buttons.Primary mt={4} ml='auto' type='submit'>
               Προσθήκη
             </Buttons.Primary>

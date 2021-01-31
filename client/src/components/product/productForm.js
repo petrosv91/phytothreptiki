@@ -16,7 +16,6 @@ function ProductForm() {
   const { validate } = useStoreValidation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [edit, setEdit] = React.useState(false);
-  const [enabled, setEnabled] = React.useState(false);
 
   const { productFormSchema } = useReactFormSchema();
   const { register, handleSubmit, setValue, reset, errors } = useForm({
@@ -25,13 +24,7 @@ function ProductForm() {
   });
 
   const [state, send] = useMainMachine();
-  const { type } = state.event;
-
-  React.useEffect(() => {
-    if (type === 'DELETE_RECIPE' || type === 'ADD_RECIPE') {
-      setEnabled(false);
-    }
-  }, [type, setEnabled]);
+  const { productSwitch = false } = state.context.switches;
 
   function onSubmit(formData) {
     if (!validate(formData, 'product')) {
@@ -63,11 +56,11 @@ function ProductForm() {
         <FormSwitch
           size='lg'
           name='elementSwitch'
-          label={`${enabled ? 'Απενεργοποίηση' : 'Ενεργοποίηση'} πεδίων για Έτοιμο Προϊον`}
-          isChecked={enabled}
-          onChange={() => setEnabled((prev) => !prev)}
+          label={`${productSwitch ? 'Απενεργοποίηση' : 'Ενεργοποίηση'} πεδίων για Έτοιμο Προϊον`}
+          isChecked={productSwitch}
+          onChange={() => send({ type: 'TOGGLE', key: 'productSwitch' })}
         />
-        {enabled && (
+        {productSwitch && (
           <>
             <FormInput
               name='label'

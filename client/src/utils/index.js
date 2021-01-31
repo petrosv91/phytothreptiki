@@ -8,14 +8,10 @@ export function createToast(toast, props) {
     position: 'bottom',
     isClosable: true,
     duration: 4000,
-    render: ({ onClose }) => <Toast {...props} onClose={onClose} />,
+    render: ({ onClose }) => <Toast onClose={onClose} {...props} />,
   });
 }
 
-export function createValuesForForm(value) {
-  if (Array.isArray(value)) return value.join('-');
-  return value;
-}
 export function convertStringToArrayOfNumbers(value, delimiter) {
   if (!value || value === '') return [];
   return value.split(delimiter).map((el) => Number(el));

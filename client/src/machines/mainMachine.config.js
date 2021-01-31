@@ -4,6 +4,7 @@ import { baseGetService } from '../api/services';
 
 export const initialContext = {
   recipeId: undefined,
+  switches: {},
   updatedItem: {},
   elementStore: [],
   productStore: [],
@@ -40,6 +41,12 @@ export const actions = {
       recipeId: e.id,
       elementStore: e.elements,
       productStore: e.products,
+    };
+  }),
+  toggleSwitch: assign((ctx, e) => {
+    return {
+      ...ctx,
+      switches: { ...ctx.switches, [e.key]: !ctx.switches[e.key] },
     };
   }),
 };

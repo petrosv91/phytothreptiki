@@ -3,6 +3,7 @@ import React from 'react';
 import { Box, Flex, Text } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 
+import { baseElements } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { DeleteIcon, Table } from '../../lib/ui';
 import { roundToTwo } from '../../utils';
@@ -13,6 +14,13 @@ function ElementStore({ printable, ...rest }) {
   const [state, send] = useMainMachine();
   const { elementStore } = state.context;
 
+  function calcBaseElement(row, el) {
+    if (row.baseElement.value !== el.value || !row.formula.length) {
+      return 0;
+    }
+    const [baseElement] = row.formula;
+    return (row.rate * baseElement) / 100;
+  }
   function calcWeights(row) {
     const { weights = 0 } = getValues();
     return (weights * row.rate) / 100;
@@ -30,6 +38,9 @@ function ElementStore({ printable, ...rest }) {
             {!printable && <Table.Header>{/* Actions */}</Table.Header>}
             <Table.Header>Ά ΥΛΕΣ</Table.Header>
             <Table.Header>ΣΥΜΜΕΤΟΧΗ</Table.Header>
+            {baseElements.map((el) => (
+              <Table.Header key={el.value}>{el.label.toUpperCase()}</Table.Header>
+            ))}
             <Table.Header>ΚΙΛΑ</Table.Header>
             {!printable && (
               <>
@@ -60,6 +71,9 @@ function ElementStore({ printable, ...rest }) {
                 </Flex>
               </Table.Cell>
               <Table.Cell>{row.rate}</Table.Cell>
+              {baseElements.map((el) => (
+                <Table.Cell key={el.value}>{calcBaseElement(row, el)}</Table.Cell>
+              ))}
               <Table.Cell>{roundToTwo(calcWeights(row))}</Table.Cell>
               {!printable && (
                 <>
@@ -73,6 +87,13 @@ function ElementStore({ printable, ...rest }) {
             {!printable && <Table.Cell>{/* Actions */}</Table.Cell>}
             <Table.Cell>Σύνολο</Table.Cell>
             <Table.Cell>{elementStore.reduce((prev, curr) => prev + curr.rate, 0)}%</Table.Cell>
+            {baseElements.map((el) => (
+              <Table.Cell key={el.value}>
+                {elementStore.reduce((prev, curr) => {
+                  return prev + calcBaseElement(curr, el);
+                }, 0)}
+              </Table.Cell>
+            ))}
             <Table.Cell>
               {roundToTwo(
                 elementStore.reduce((prev, curr) => {

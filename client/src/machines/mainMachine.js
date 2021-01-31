@@ -16,6 +16,7 @@ export const MainMachine = createMachine({
           target: 'gettingMaxCode',
           actions: [actions.resetContext, actions.callback],
         },
+        TOGGLE: { actions: [actions.toggleSwitch, actions.callback] },
         ADD_ITEM: { actions: [actions.assignItem, actions.callback] },
         DELETE_ITEM: { actions: [actions.deleteItem, actions.callback] },
         ADD_ROW: { actions: [actions.addItemToStore, actions.callback] },

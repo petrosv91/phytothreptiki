@@ -13,20 +13,17 @@ function SearchMenu({ drawerClose = () => {} }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [{ comp, label }, setComponent] = React.useState({});
 
-  function handleRecipeClick({ _id, code, elements, products, ...recipe }) {
-    send({
-      type: 'ADD_RECIPE',
-      id: _id,
-      code,
-      elements,
-      products,
+  async function handleRecipeClick({ _id, code, elements, products, ...recipe }) {
+    await new Promise((resolve) => {
+      return resolve(send({ type: 'DELETE_ITEM', key: 'switches', callback: reset }));
     });
+    send({ type: 'ADD_RECIPE', id: _id, code, elements, products });
     Object.entries(recipe).forEach(([key, value]) => {
       setValue(key, value);
     });
-    clearErrors();
     onClose();
     drawerClose();
+    clearErrors();
   }
   function handleClick(opt) {
     setComponent(opt);
@@ -36,6 +33,7 @@ function SearchMenu({ drawerClose = () => {} }) {
   const options = [
     { label: 'Συνταγής', comp: <PickingRecipe handleRecipeClick={handleRecipeClick} /> },
   ];
+
   return (
     <Box>
       <Modal isOpen={isOpen} onClose={onClose} header={`Αναζήτηση ${label}`}>
