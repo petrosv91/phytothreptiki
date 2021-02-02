@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Box, Flex, Text } from '@chakra-ui/react';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 import { baseElements } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
@@ -9,7 +9,8 @@ import { DeleteIcon, Table } from '../../lib/ui';
 import { roundToTwo } from '../../utils';
 
 function ElementStore({ printable, ...rest }) {
-  const { getValues } = useFormContext();
+  const { control } = useFormContext();
+  const weights = useWatch({ control, name: 'weights', defaultValue: 0 });
 
   const [state, send] = useMainMachine();
   const { elementStore } = state.context;
@@ -21,10 +22,12 @@ function ElementStore({ printable, ...rest }) {
     const [baseElement] = row.formula;
     return (row.rate * baseElement) / 100;
   }
-  function calcWeights(row) {
-    const { weights = 0 } = getValues();
-    return (weights * row.rate) / 100;
-  }
+  const calcWeights = React.useCallback(
+    (row) => {
+      return (weights * row.rate) / 100;
+    },
+    [weights],
+  );
   function deleteElement(row) {
     send({ type: 'DELETE_ROW', key: 'elementStore', row });
   }

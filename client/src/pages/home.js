@@ -20,6 +20,8 @@ function Home() {
     mode: 'onBlur',
     defaultValues: {
       date: getCurrentDate(),
+      type: '',
+      recipe: '',
       loops: '',
       weights: '',
       restPrice: '',
