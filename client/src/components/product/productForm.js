@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Flex, useDisclosure } from '@chakra-ui/react';
+import { Collapse, Flex, useDisclosure } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { MdClose, MdSearch } from 'react-icons/md';
@@ -61,56 +61,54 @@ function ProductForm() {
           isChecked={productSwitch}
           onChange={() => send({ type: 'TOGGLE', key: 'productSwitch' })}
         />
-        {productSwitch && (
-          <>
+        <Collapse in={productSwitch} animateOpacity>
+          <FormInput
+            name='label'
+            label='Επωνυμία Προιόντος'
+            onClick={onOpen}
+            leftIcon={MdSearch}
+            rightIcon={MdClose}
+            rightIconClick={reset}
+            errors={errors}
+            formRef={register}
+          />
+          <Flex direction={['column', 'row']} align='center' justify='space-between'>
             <FormInput
-              name='label'
-              label='Επωνυμία Προιόντος'
-              onClick={onOpen}
-              leftIcon={MdSearch}
-              rightIcon={MdClose}
-              rightIconClick={reset}
+              w={['full', '45%']}
+              name='units'
+              label='Τεμάχια'
+              type='number'
               errors={errors}
               formRef={register}
             />
-            <Flex direction={['column', 'row']} align='center' justify='space-between'>
-              <FormInput
-                w={['full', '45%']}
-                name='units'
-                label='Τεμάχια'
-                type='number'
-                errors={errors}
-                formRef={register}
-              />
-              <Flex w={['full', '45%']} align='flex-end'>
-                <EditIcon mb={2} mr={2} onClick={handleIEditClick} />
-                {edit ? (
-                  <FormInput
-                    name='weights'
-                    label='Κιλά'
-                    tag='kg'
-                    step='any'
-                    type='number'
-                    errors={errors}
-                    formRef={register}
-                  />
-                ) : (
-                  <FormSelect
-                    name='weights'
-                    label='Κιλά'
-                    placeholder='--- Επιλογή Κιλών ---'
-                    options={weights}
-                    errors={errors}
-                    formRef={register}
-                  />
-                )}
-              </Flex>
+            <Flex w={['full', '45%']} align='flex-end'>
+              <EditIcon mb={2} mr={2} onClick={handleIEditClick} />
+              {edit ? (
+                <FormInput
+                  name='weights'
+                  label='Κιλά'
+                  tag='kg'
+                  step='any'
+                  type='number'
+                  errors={errors}
+                  formRef={register}
+                />
+              ) : (
+                <FormSelect
+                  name='weights'
+                  label='Κιλά'
+                  placeholder='--- Επιλογή Κιλών ---'
+                  options={weights}
+                  errors={errors}
+                  formRef={register}
+                />
+              )}
             </Flex>
-            <Buttons.Primary mt={4} ml='auto' type='submit'>
-              Προσθήκη
-            </Buttons.Primary>
-          </>
-        )}
+          </Flex>
+          <Buttons.Primary mt={4} ml='auto' type='submit'>
+            Προσθήκη
+          </Buttons.Primary>
+        </Collapse>
       </Flex>
     </form>
   );

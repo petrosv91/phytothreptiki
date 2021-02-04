@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Flex, useDisclosure } from '@chakra-ui/react';
+import { Collapse, Flex, useDisclosure } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { MdClose, MdSearch } from 'react-icons/md';
@@ -65,72 +65,70 @@ function ElementForm() {
           isChecked={elementSwitch}
           onChange={() => send({ type: 'TOGGLE', key: 'elementSwitch' })}
         />
-        {elementSwitch && (
-          <>
+        <Collapse in={elementSwitch} animateOpacity>
+          <FormInput
+            name='label'
+            label='Ά Ύλη'
+            onClick={onOpen}
+            leftIcon={MdSearch}
+            rightIcon={MdClose}
+            rightIconClick={reset}
+            errors={errors}
+            formRef={register}
+          />
+          <Flex direction={['column', 'row']} align='center' justify='space-between'>
             <FormInput
-              name='label'
-              label='Ά Ύλη'
-              onClick={onOpen}
-              leftIcon={MdSearch}
-              rightIcon={MdClose}
-              rightIconClick={reset}
+              w={['full', '45%']}
+              name='rate'
+              label='Συμμετοχή'
+              tag='%'
+              type='number'
               errors={errors}
               formRef={register}
             />
-            <Flex direction={['column', 'row']} align='center' justify='space-between'>
-              <FormInput
-                w={['full', '45%']}
-                name='rate'
-                label='Συμμετοχή'
-                tag='%'
-                type='number'
-                errors={errors}
-                formRef={register}
-              />
-              <FormInput
-                w={['full', '45%']}
-                name='price'
-                label='Τιμή'
-                tag='€'
-                type='number'
-                step='any'
-                errors={errors}
-                formRef={register}
-              />
-            </Flex>
-            <Flex direction={['column', 'row']} align='center' justify='space-between'>
-              <FormInput
-                w={['full', '45%']}
-                name='formula'
-                label='Στοιχεία'
-                cursor='default'
-                pointerEvents='none'
-                errors={errors}
-                formRef={register({
-                  setValueAs: (formula) => {
-                    return convertStringToArrayOfNumbers(formula, '-');
-                  },
-                })}
-              />
-              <FormInput
-                w={['full', '45%']}
-                name='baseElement'
-                label='Βασικό Στοιχείο'
-                cursor='default'
-                pointerEvents='none'
-                errors={errors}
-                formRef={register({
-                  setValueAs: (baseElement) => {
-                    return baseElements.find((el) => el.label === baseElement);
-                  },
-                })}
-              />
-            </Flex>
-            <Buttons.Primary mt={4} ml='auto' type='submit'>
-              Προσθήκη
-            </Buttons.Primary>
-          </>
-        )}
+            <FormInput
+              w={['full', '45%']}
+              name='price'
+              label='Τιμή'
+              tag='€'
+              type='number'
+              step='any'
+              errors={errors}
+              formRef={register}
+            />
+          </Flex>
+          <Flex direction={['column', 'row']} align='center' justify='space-between'>
+            <FormInput
+              w={['full', '45%']}
+              name='formula'
+              label='Στοιχεία'
+              cursor='default'
+              pointerEvents='none'
+              errors={errors}
+              formRef={register({
+                setValueAs: (formula) => {
+                  return convertStringToArrayOfNumbers(formula, '-');
+                },
+              })}
+            />
+            <FormInput
+              w={['full', '45%']}
+              name='baseElement'
+              label='Βασικό Στοιχείο'
+              cursor='default'
+              pointerEvents='none'
+              errors={errors}
+              formRef={register({
+                setValueAs: (baseElement) => {
+                  return baseElements.find((el) => el.label === baseElement);
+                },
+              })}
+            />
+          </Flex>
+          <Buttons.Primary mt={4} ml='auto' type='submit'>
+            Προσθήκη
+          </Buttons.Primary>
+        </Collapse>
       </Flex>
     </form>
   );
