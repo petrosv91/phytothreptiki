@@ -17,6 +17,30 @@ yup.addMethod(yup.mixed, 'weightValidation', function (toast) {
     );
   });
 });
+yup.addMethod(yup.mixed, 'formulaStandAlone', function (toast) {
+  return this.test('test-standAlone', 'error', function (formula) {
+    if (formula.length && !this.parent.baseElement) {
+      return createToast(toast, {
+        type: 'error',
+        title: 'Αποτυχία',
+        content: 'Το πεδίο βασικό στοιχείο είναι άδειο',
+      });
+    }
+    return true;
+  });
+});
+yup.addMethod(yup.mixed, 'baseElementStandAlone', function (toast) {
+  return this.test('test-standAlone', 'error', function (baseElement) {
+    if (baseElement && !this.parent.formula.length) {
+      return createToast(toast, {
+        type: 'error',
+        title: 'Αποτυχία',
+        content: 'Το πεδίο στοιχεία είναι άδειο',
+      });
+    }
+    return true;
+  });
+});
 
 function useReactFormSchema() {
   const toast = useToast();
@@ -48,9 +72,10 @@ function useReactFormSchema() {
     return yup.object().shape({
       label: yup.string().required(),
       price: yup.number().positive().nullable().transform(nullConverter),
-      formula: yup.array(),
+      formula: yup.array().formulaStandAlone(toast),
+      baseElement: yup.object().baseElementStandAlone(toast),
     });
-  }, []);
+  }, [toast]);
 
   const productFormSchema = React.useMemo(() => {
     return yup.object().shape({

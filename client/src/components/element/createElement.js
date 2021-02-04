@@ -16,7 +16,7 @@ function CreateElement({ resetItem }) {
 
   const { createElementSchema } = useReactFormSchema();
   const { register, handleSubmit, errors, reset } = useForm({
-    mode: 'onBlur',
+    reValidateMode: 'onSubmit',
     defaultValues: {
       label: element.label,
       price: element.price,
