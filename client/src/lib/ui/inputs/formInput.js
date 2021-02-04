@@ -3,9 +3,8 @@ import React from 'react';
 import {
   Tag,
   Text,
-  Icon,
-  FormControl,
   FormLabel,
+  FormControl,
   InputGroup,
   InputLeftElement,
   InputRightElement,
@@ -14,48 +13,40 @@ import {
 import Input from './input';
 
 function FormInput({
-  errors = {},
   w,
-  label,
-  name,
   tag,
+  name,
+  label,
   leftIcon,
   rightIcon,
-  rightIconClick,
-  defaultValue,
-  formRef,
+  errors = {},
+  rightIconClick = () => {},
   ...rest
 }) {
+  const LeftIcon = leftIcon;
+  const RightIcon = rightIcon;
   return (
     <FormControl w={w} mt={2} isInvalid={errors[name]}>
       {label && (
-        <FormLabel htmlFor={name} fontSize={{ sm: 'sm', md: 'md' }} color='text'>
+        <FormLabel htmlFor={name} color='text' fontSize={{ sm: 'sm', md: 'md' }}>
           {label}
         </FormLabel>
       )}
       <InputGroup>
         {leftIcon && (
           <InputLeftElement>
-            <Icon as={leftIcon} color='secondaryText' boxSize={6} />
+            <LeftIcon boxSize={6} />
           </InputLeftElement>
         )}
         <Input
-          pr={tag ? '10' : '4'}
-          px={leftIcon || rightIcon ? '10' : '4'}
           name={name}
-          defaultValue={defaultValue}
-          formRef={formRef}
+          pl={leftIcon ? '10' : '4'}
+          pr={tag || rightIcon ? '10' : '4'}
           {...rest}
         />
-        {defaultValue && rightIcon && (
+        {rightIcon && (
           <InputRightElement cursor='pointer' onClick={rightIconClick}>
-            <Icon
-              as={rightIcon}
-              boxSize={6}
-              color='red.500'
-              onClick={rightIconClick}
-              _hover={{ color: 'red.400' }}
-            />
+            <RightIcon boxSize={6} />
           </InputRightElement>
         )}
         {tag && (

@@ -1,5 +1,7 @@
 import * as Buttons from './buttons/buttons';
 import Drawer from './drawer/drawer';
+import CalendarIcon from './icons/calendarIcon';
+import CloseIcon from './icons/closeIcon';
 import DeleteIcon from './icons/deleteIcon';
 import EditIcon from './icons/editIcon';
 import FormInput from './inputs/formInput';
@@ -22,7 +24,9 @@ export {
   Drawer,
   Loading,
   EditIcon,
+  CloseIcon,
   DeleteIcon,
+  CalendarIcon,
   FormSwitch,
   FormSelect,
   ConfirmationModal,

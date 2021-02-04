@@ -65,3 +65,7 @@ export function getCurrentDate() {
   const year = dateObj.getFullYear();
   return `${day}/${month}/${year}`;
 }
+
+export function findDelimiter(dateFormat) {
+  return dateFormat.split('').find((c) => c === '.' || c === '/' || c === '/');
+}

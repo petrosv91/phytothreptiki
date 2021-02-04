@@ -2,12 +2,12 @@ import React from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { MdSearch } from 'react-icons/md';
 
 import { baseElements } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { useReactFormSchema } from '../../hooks';
 import { Buttons, FormInput, FormSelect } from '../../lib/ui';
+import SearchIcon from '../../lib/ui/icons/searchIcon';
 import { convertStringToArrayOfNumbers } from '../../utils';
 
 function CreateElement({ resetItem }) {
@@ -42,7 +42,7 @@ function CreateElement({ resetItem }) {
       <FormInput
         name='label'
         label='Ά Ύλη'
-        leftIcon={resetItem && MdSearch}
+        leftIcon={resetItem && SearchIcon}
         onClick={resetItem && resetItem}
         errors={errors}
         formRef={register}

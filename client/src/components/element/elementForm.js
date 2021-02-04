@@ -3,14 +3,14 @@ import React from 'react';
 import { Collapse, Flex, useDisclosure } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { MdClose, MdSearch } from 'react-icons/md';
 import { v4 as uuidv4 } from 'uuid';
 
 import { baseElements } from '../../config/';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { useReactFormSchema } from '../../hooks';
 import useStoreValidation from '../../hooks/useStoreValidation';
-import { Modal, Buttons, FormInput, FormSwitch } from '../../lib/ui';
+import { Modal, Buttons, FormInput, FormSwitch, CloseIcon } from '../../lib/ui';
+import SearchIcon from '../../lib/ui/icons/searchIcon';
 import { convertStringToArrayOfNumbers } from '../../utils';
 import PickingElement from './pickingElement';
 
@@ -19,7 +19,7 @@ function ElementForm() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { elementFormSchema } = useReactFormSchema();
-  const { register, handleSubmit, setValue, reset, errors } = useForm({
+  const { register, handleSubmit, getValues, setValue, reset, errors } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(elementFormSchema),
   });
@@ -70,8 +70,8 @@ function ElementForm() {
             name='label'
             label='Ά Ύλη'
             onClick={onOpen}
-            leftIcon={MdSearch}
-            rightIcon={MdClose}
+            leftIcon={SearchIcon}
+            rightIcon={getValues('label') && CloseIcon}
             rightIconClick={reset}
             errors={errors}
             formRef={register}
@@ -125,9 +125,11 @@ function ElementForm() {
               })}
             />
           </Flex>
-          <Buttons.Primary mt={4} ml='auto' type='submit'>
-            Προσθήκη
-          </Buttons.Primary>
+          <Flex justify='flex-end'>
+            <Buttons.Primary mt={4} ml='auto' type='submit'>
+              Προσθήκη
+            </Buttons.Primary>
+          </Flex>
         </Collapse>
       </Flex>
     </form>

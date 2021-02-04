@@ -3,14 +3,22 @@ import React from 'react';
 import { Collapse, Flex, useDisclosure } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { MdClose, MdSearch } from 'react-icons/md';
 import { v4 as uuidv4 } from 'uuid';
 
 import { weights } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { useReactFormSchema } from '../../hooks';
 import useStoreValidation from '../../hooks/useStoreValidation';
-import { Modal, Buttons, FormInput, FormSelect, FormSwitch, EditIcon } from '../../lib/ui';
+import {
+  Modal,
+  Buttons,
+  FormInput,
+  FormSelect,
+  FormSwitch,
+  EditIcon,
+  CloseIcon,
+} from '../../lib/ui';
+import SearchIcon from '../../lib/ui/icons/searchIcon';
 import PickingProduct from './pickingProduct';
 
 function ProductForm() {
@@ -66,8 +74,8 @@ function ProductForm() {
             name='label'
             label='Επωνυμία Προιόντος'
             onClick={onOpen}
-            leftIcon={MdSearch}
-            rightIcon={MdClose}
+            leftIcon={SearchIcon}
+            rightIcon={CloseIcon}
             rightIconClick={reset}
             errors={errors}
             formRef={register}
@@ -105,9 +113,11 @@ function ProductForm() {
               )}
             </Flex>
           </Flex>
-          <Buttons.Primary mt={4} ml='auto' type='submit'>
-            Προσθήκη
-          </Buttons.Primary>
+          <Flex justify='flex-end'>
+            <Buttons.Primary mt={4} type='submit'>
+              Προσθήκη
+            </Buttons.Primary>
+          </Flex>
         </Collapse>
       </Flex>
     </form>

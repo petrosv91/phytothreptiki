@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { useForm } from 'react-hook-form';
-import { MdSearch } from 'react-icons/md';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Buttons, FormInput } from '../../lib/ui';
+import SearchIcon from '../../lib/ui/icons/searchIcon';
 
 function CreateProduct({ resetItem }) {
   const [state, send] = useMainMachine();
@@ -32,7 +32,7 @@ function CreateProduct({ resetItem }) {
       <FormInput
         name='label'
         label='Επωνυμία Προιόντος'
-        leftIcon={resetItem && MdSearch}
+        leftIcon={resetItem && SearchIcon}
         onClick={resetItem && resetItem}
         formRef={register}
       />
