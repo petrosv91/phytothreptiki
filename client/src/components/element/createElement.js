@@ -4,8 +4,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { MdSearch } from 'react-icons/md';
 
-import { baseElements, useReactFormSchema } from '../../config';
+import { baseElements } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
+import { useReactFormSchema } from '../../hooks';
 import { Buttons, FormInput, FormSelect } from '../../lib/ui';
 import { convertStringToArrayOfNumbers } from '../../utils';
 

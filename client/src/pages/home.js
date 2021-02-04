@@ -8,8 +8,8 @@ import { ReactQueryConfigProvider } from 'react-query';
 // import Footer from '../components/footer/footer';
 import Navbar from '../components/navbar/navbar';
 import NewRecipe from '../components/recipe/newRecipe';
-import { useReactFormSchema, useReactQueryConfig } from '../config/';
 import { MainMachineProvider } from '../context/mainMachineProvider';
+import { useReactFormSchema, useReactQueryConfig } from '../hooks';
 import { Layout } from '../layouts';
 import { getCurrentDate } from '../utils';
 

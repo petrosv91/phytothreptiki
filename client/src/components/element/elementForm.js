@@ -6,8 +6,9 @@ import { useForm } from 'react-hook-form';
 import { MdClose, MdSearch } from 'react-icons/md';
 import { v4 as uuidv4 } from 'uuid';
 
-import { baseElements, useReactFormSchema } from '../../config/';
+import { baseElements } from '../../config/';
 import { useMainMachine } from '../../context/mainMachineProvider';
+import { useReactFormSchema } from '../../hooks';
 import useStoreValidation from '../../hooks/useStoreValidation';
 import { Modal, Buttons, FormInput, FormSwitch } from '../../lib/ui';
 import { convertStringToArrayOfNumbers } from '../../utils';
