@@ -12,19 +12,22 @@ import {
 
 import Input from './input';
 
-function FormInput({
-  w,
-  tag,
-  name,
-  label,
-  leftIcon,
-  rightIcon,
-  errors = {},
-  rightIconClick = () => {},
-  ...rest
-}) {
+function FormInput(props) {
+  const {
+    w,
+    tag,
+    name,
+    label,
+    leftIcon,
+    rightIcon,
+    errors = {},
+    rightIconClick = () => {},
+    ...rest
+  } = props;
+
   const LeftIcon = leftIcon;
   const RightIcon = rightIcon;
+
   return (
     <FormControl w={w} mt={2} isInvalid={errors[name]}>
       {label && (
@@ -41,7 +44,7 @@ function FormInput({
         <Input
           name={name}
           pl={leftIcon ? '10' : '4'}
-          pr={tag || rightIcon ? '10' : '4'}
+          pr={rightIcon || tag ? '10' : '4'}
           {...rest}
         />
         {rightIcon && (

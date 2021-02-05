@@ -1,58 +1,50 @@
 import React from 'react';
 
 import { Box } from '@chakra-ui/react';
-import DatePicker from 'react-datepicker';
 
 import { useFiltersData, usePagination } from '../../hooks';
 import { Pagination } from '../../layouts';
-import { CalendarIcon, FormInput, Input } from '../../lib/ui';
-import { findDelimiter } from '../../utils';
+import { CalendarIcon, DatePicker, FormInput } from '../../lib/ui';
+import { formatDate } from '../../utils';
 
 function ItemList({ isLoading, handleClick, data, keys, List, showDate }) {
   const [query, setQuery] = React.useState('');
-  const [startDate, setStartDate] = React.useState(null);
-  const [openDatePicker, setOpenDatePicker] = React.useState(false);
-  const dateFormat = 'dd/MM/yyyy';
-  const delimiter = findDelimiter(dateFormat);
+  const [datePickerState, setDatePickerState] = React.useState(false);
 
   const filterdData = useFiltersData({ data, query, keys });
   const paginationProps = usePagination(filterdData);
 
+  function open() {
+    setDatePickerState(true);
+  }
+  function close() {
+    setDatePickerState(false);
+  }
   function handleChange(e) {
     setQuery(e.target.value);
   }
-  function handleDateChange(date, e) {
-    setStartDate(date);
-    setQuery(e.target.value);
+  function handleDateChange(date) {
+    setQuery(formatDate(date, '/'));
+    setDatePickerState(false);
   }
 
   return (
     <Box>
-      {/* <DatePicker
-        autoFocus={true}
-        open={openDatePicker}
-        selected={startDate || undefined}
-        dateFormat={
-          query && query.split(delimiter || '').length === 1
-            ? dateFormat.split(delimiter || '').join('')
-            : dateFormat
-        }
-        placeholderText='Αναζήτηση...'
-        customInput={
-          <FormInput
-            w={[250, 300]}
-            rightIcon={CalendarIcon}
-            rightIconClick={() => setOpenDatePicker(true)}
-          />
-        }
-        onChange={handleDateChange}
-        onClickOutside={() => setOpenDatePicker(false)}
-      /> */}
       <FormInput
         w={[250, 300]}
-        rightIcon={CalendarIcon}
-        rightIconClick={() => setOpenDatePicker(true)}
+        value={query}
+        onChange={handleChange}
+        placeholder='Αναζήτηση...'
+        rightIconClick={showDate && open}
+        rightIcon={showDate && CalendarIcon}
       />
+      {showDate && (
+        <DatePicker
+          close={close}
+          datePickerState={datePickerState}
+          handleDateChange={handleDateChange}
+        />
+      )}
       <List
         pt={5}
         isLoading={isLoading}

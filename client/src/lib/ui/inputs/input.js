@@ -7,8 +7,8 @@ function Input({ formRef, name, ...rest }) {
     <ChakraInput
       name={name}
       ref={formRef}
-      fontWeight='500'
       color='text'
+      fontWeight='500'
       autoComplete='off'
       borderRadius='sm'
       borderColor='secondaryText'

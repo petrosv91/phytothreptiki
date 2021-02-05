@@ -65,6 +65,12 @@ export function getCurrentDate() {
   const year = dateObj.getFullYear();
   return `${day}/${month}/${year}`;
 }
+export function formatDate(date, delimiter) {
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  return `${day}${delimiter}${month}${delimiter}${year}`;
+}
 
 export function findDelimiter(dateFormat) {
   return dateFormat.split('').find((c) => c === '.' || c === '/' || c === '/');

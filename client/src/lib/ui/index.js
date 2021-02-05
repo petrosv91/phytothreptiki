@@ -1,4 +1,5 @@
 import * as Buttons from './buttons/buttons';
+import DatePicker from './datePicker/datepicker';
 import Drawer from './drawer/drawer';
 import CalendarIcon from './icons/calendarIcon';
 import CloseIcon from './icons/closeIcon';
@@ -21,6 +22,7 @@ export {
   Menu,
   Modal,
   Input,
+  DatePicker,
   Drawer,
   Loading,
   EditIcon,

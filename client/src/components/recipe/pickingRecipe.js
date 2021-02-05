@@ -7,7 +7,7 @@ import { RecipeList } from '../../lib/ui';
 import ItemList from '../lists/itemList';
 
 function PickingRecipe({ handleRecipeClick }) {
-  const keys = React.useRef(['recipe']);
+  const keys = React.useRef(['recipe', 'date']);
   const { data = [], status, error, isFetching } = useGetRecipes();
 
   if (error)
@@ -20,6 +20,7 @@ function PickingRecipe({ handleRecipeClick }) {
     <ItemList
       keys={keys}
       data={data}
+      showDate={true}
       List={RecipeList}
       handleClick={handleRecipeClick}
       isLoading={status === 'loading' || isFetching}
