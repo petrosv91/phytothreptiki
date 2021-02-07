@@ -35,8 +35,8 @@ function Navbar() {
           <DeleteMenu />
         </Stack>
       </Drawer>
-      {/* <Image src={Logo} boxSize='100px' objectFit='scale-down' /> */}
-      <Box display={['none', 'none', 'inline-block']}>
+      <Image src={Logo} boxSize='100px' objectFit='scale-down' />
+      <Box display={['none', 'none', 'none', 'inline-block']}>
         <Stack direction='row' align='center' justify='flex-end'>
           <SearchMenu />
           <CreateMenu />
@@ -51,7 +51,7 @@ function Navbar() {
         fill='special.500'
         cursor='pointer'
         onClick={onOpen}
-        display={{ sm: 'inline-block', md: 'none' }}
+        display={{ md: 'inline-block', lg: 'none' }}
       />
     </Flex>
   );

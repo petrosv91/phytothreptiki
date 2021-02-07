@@ -34,7 +34,7 @@ function Toast({ type = 'error', title, content, onClose }) {
         <Text lineHeight='1.5rem' fontWeight='semibold' fontSize='lg'>
           {title}
         </Text>
-        <Text maxW='90%' px={3} textAlign='center' fontSize='md' fontWeight='400'>
+        <Text W='90%' px={3} textAlign='center' fontSize='md' fontWeight='400'>
           {content}
         </Text>
       </Flex>

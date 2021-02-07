@@ -18,6 +18,7 @@ function FormInput(props) {
     tag,
     name,
     label,
+    formRef,
     leftIcon,
     rightIcon,
     errors = {},
@@ -43,6 +44,7 @@ function FormInput(props) {
         )}
         <Input
           name={name}
+          formRef={formRef}
           pl={leftIcon ? '10' : '4'}
           pr={rightIcon || tag ? '10' : '4'}
           {...rest}

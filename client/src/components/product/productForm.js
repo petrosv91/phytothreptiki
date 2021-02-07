@@ -27,7 +27,7 @@ function ProductForm() {
   const [edit, setEdit] = React.useState(false);
 
   const { productFormSchema } = useReactFormSchema();
-  const { register, handleSubmit, setValue, reset, errors } = useForm({
+  const { register, handleSubmit, getValues, setValue, reset, errors } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(productFormSchema),
   });
@@ -75,7 +75,7 @@ function ProductForm() {
             label='Επωνυμία Προιόντος'
             onClick={onOpen}
             leftIcon={SearchIcon}
-            rightIcon={CloseIcon}
+            rightIcon={getValues('label') && CloseIcon}
             rightIconClick={reset}
             errors={errors}
             formRef={register}
