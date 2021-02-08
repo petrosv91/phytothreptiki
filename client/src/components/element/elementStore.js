@@ -16,7 +16,7 @@ function ElementStore({ printable, ...rest }) {
   const { elementStore } = state.context;
 
   function calcBaseElement(row, el) {
-    if (row.baseElement.value !== el.value || !row.formula.length) {
+    if (row.baseElement?.value !== el.value || !row.formula.length) {
       return 0;
     }
     const [baseElement] = row.formula;

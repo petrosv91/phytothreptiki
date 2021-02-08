@@ -74,7 +74,8 @@ function CreateElement({ resetItem }) {
         errors={errors}
         formRef={register({
           setValueAs: (baseElement) => {
-            return baseElements.find((el) => el.value === Number(baseElement));
+            const findElement = baseElements.find((el) => el.value === Number(baseElement));
+            return findElement || {};
           },
         })}
       />

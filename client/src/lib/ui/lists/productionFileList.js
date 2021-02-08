@@ -46,12 +46,12 @@ function ProductionFileList({ data, isLoading, handleClick, ...rest }) {
               }}
             >
               <Flex px={6} align='center' justify='flex-end'>
-                <Flex flexDirection='column'>
+                <Flex direction='column'>
                   <Text textAlign='right'>{item.date}</Text>
-                  <Flex mt={0.5} justify='flex-end'>
+                  <Flex mt={0.5} wrap='wrap' justify='flex-end'>
                     {item.productStore.map(({ label }) => {
                       return (
-                        <Box
+                        <Flex
                           key={uuidv4()}
                           fontSize='xs'
                           color='secondaryText'
@@ -59,7 +59,7 @@ function ProductionFileList({ data, isLoading, handleClick, ...rest }) {
                           _last={{ _after: { content: "''" } }}
                         >
                           {label}
-                        </Box>
+                        </Flex>
                       );
                     })}
                   </Flex>

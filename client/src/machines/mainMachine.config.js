@@ -78,7 +78,7 @@ export const services = {
       service: 'setProductionFile',
       data: { date, productStore },
     });
-    return { result, ...e };
+    return { result, callback: e.data.callback };
   },
   setElement: async (ctx, e) => {
     try {

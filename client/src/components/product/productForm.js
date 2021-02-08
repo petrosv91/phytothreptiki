@@ -108,7 +108,12 @@ function ProductForm() {
                   placeholder='--- Επιλογή Κιλών ---'
                   options={weights}
                   errors={errors}
-                  formRef={register}
+                  formRef={register({
+                    setValueAs: (weightValue) => {
+                      const foundWeight = weights.find((w) => w.value === weightValue);
+                      return foundWeight?.label || 0;
+                    },
+                  })}
                 />
               )}
             </Flex>

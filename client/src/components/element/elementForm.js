@@ -120,7 +120,8 @@ function ElementForm() {
               errors={errors}
               formRef={register({
                 setValueAs: (baseElement) => {
-                  return baseElements.find((el) => el.label === baseElement);
+                  const findElement = baseElements.find((el) => el.label === baseElement);
+                  return findElement || {};
                 },
               })}
             />
