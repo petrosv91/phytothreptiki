@@ -1,12 +1,33 @@
 import React from 'react';
 
-import { Input } from '@chakra-ui/react';
 import ReactDatePicker from 'react-datepicker';
 
+import { CalendarIcon, FormInput } from '..';
 import { DatePickerWrapper } from './datePickerWrapper';
 import 'react-datepicker/dist/react-datepicker.css';
 
-function DatePicker({ close, datePickerState, handleDateChange, ...rest }) {
+function DatePicker({ handleDateChange, ...rest }) {
+  const [datePickerState, setDatePickerState] = React.useState(false);
+
+  function open() {
+    setDatePickerState(true);
+  }
+  function close() {
+    setDatePickerState(false);
+  }
+
+  const DateInput = React.forwardRef(function dateInput(props, ref) {
+    return (
+      <FormInput
+        {...props}
+        formRef={ref}
+        rightIconClick={open}
+        rightIcon={CalendarIcon}
+        {...rest}
+      />
+    );
+  });
+
   return (
     <DatePickerWrapper>
       <ReactDatePicker
@@ -14,9 +35,11 @@ function DatePicker({ close, datePickerState, handleDateChange, ...rest }) {
         open={datePickerState}
         onClickOutside={close}
         dateFormat='dd/MM/yyyy'
-        onSelect={handleDateChange}
-        customInput={<Input display='none' />}
-        {...rest}
+        customInput={<DateInput />}
+        onSelect={(date) => {
+          close();
+          handleDateChange(date);
+        }}
       />
     </DatePickerWrapper>
   );

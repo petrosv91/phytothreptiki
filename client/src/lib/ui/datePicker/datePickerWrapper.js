@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 
 export const DatePickerWrapper = styled.div`
   .react-datepicker {
-    top: -25px;
     font-size: 1.05em;
     @media screen and (max-width: 415px) {
       font-size: 0.89em;
