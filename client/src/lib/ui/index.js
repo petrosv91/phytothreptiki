@@ -8,6 +8,7 @@ import EditIcon from './icons/editIcon';
 import FormInput from './inputs/formInput';
 import Input from './inputs/input';
 import ElementList from './lists/elementList';
+import ProductionFileList from './lists/productionFileList';
 import ProductList from './lists/productList';
 import RecipeList from './lists/recipeList';
 import Loading from './loaders/loading';
@@ -38,4 +39,5 @@ export {
   ElementList,
   RecipeList,
   ProductList,
+  ProductionFileList,
 };

@@ -75,6 +75,18 @@ export const MainMachine = createMachine({
       invoke: {
         src: services.setRecipe,
         onDone: {
+          target: 'productionSubmitting',
+        },
+        onError: {
+          target: 'editting',
+          actions: ['renderError'],
+        },
+      },
+    },
+    productionSubmitting: {
+      invoke: {
+        src: services.setProductionFile,
+        onDone: {
           target: 'gettingMaxCode',
           actions: ['renderSuccess', actions.resetContext, actions.callback],
         },

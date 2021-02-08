@@ -37,10 +37,10 @@ export const actions = {
   }),
   updateContext: assign((ctx, e) => {
     return {
-      code: e.code,
       recipeId: e.id,
-      elementStore: e.elements,
-      productStore: e.products,
+      code: e.code || ctx.code,
+      elementStore: e.elements || [],
+      productStore: e.products || [],
     };
   }),
   toggleSwitch: assign((ctx, e) => {
@@ -70,6 +70,15 @@ export const services = {
     } catch (error) {
       throw Object.assign(new Error(error), { toast: e.toast, message: error.message });
     }
+  },
+  setProductionFile: async (ctx, e) => {
+    const { date } = e.data.data;
+    const { productStore } = ctx;
+    const result = await baseGetService({
+      service: 'setProductionFile',
+      data: { date, productStore },
+    });
+    return { result, ...e };
   },
   setElement: async (ctx, e) => {
     try {

@@ -5,6 +5,7 @@ const Element = require('../models/element');
 const Product = require('../models/product');
 const Recipe = require('../models/recipe');
 const Code = require('../models/code');
+const ProductionFile = require('../models/productionFile');
 
 router.post('/', async (req, res) => {
   try {
@@ -23,6 +24,10 @@ router.post('/', async (req, res) => {
       }
       case 'getProducts': {
         const allPosts = await Product.find();
+        return res.json({ success: true, data: allPosts });
+      }
+      case 'getProductionFile': {
+        const allPosts = await ProductionFile.find();
         return res.json({ success: true, data: allPosts });
       }
       case 'setRecipe': {
@@ -54,6 +59,11 @@ router.post('/', async (req, res) => {
           return res.json({ success: true });
         }
         const newPost = new Product({ ...req.body.data });
+        await newPost.save();
+        return res.json({ success: true });
+      }
+      case 'setProductionFile': {
+        const newPost = new ProductionFile({ ...req.body.data });
         await newPost.save();
         return res.json({ success: true });
       }

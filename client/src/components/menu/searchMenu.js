@@ -5,6 +5,7 @@ import { useFormContext } from 'react-hook-form';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Menu, Modal } from '../../lib/ui';
+import PickingProductionFile from '../lists/PickingProductionFile';
 import PickingRecipe from '../recipe/pickingRecipe';
 
 function SearchMenu({ drawerClose = () => {} }) {
@@ -25,6 +26,16 @@ function SearchMenu({ drawerClose = () => {} }) {
     drawerClose();
     clearErrors();
   }
+  async function handleProductionClick({ date, productStore }) {
+    await new Promise((resolve) => {
+      return resolve(send({ type: 'DELETE_ITEM', key: 'switches', callback: reset }));
+    });
+    setValue('date', date);
+    send({ type: 'ADD_RECIPE', products: productStore });
+    onClose();
+    drawerClose();
+    clearErrors();
+  }
   function handleClick(opt) {
     setComponent(opt);
     onOpen();
@@ -32,6 +43,10 @@ function SearchMenu({ drawerClose = () => {} }) {
 
   const options = [
     { label: 'Συνταγής', comp: <PickingRecipe handleRecipeClick={handleRecipeClick} /> },
+    {
+      label: 'Παραγωγής',
+      comp: <PickingProductionFile handleProductionClick={handleProductionClick} />,
+    },
   ];
 
   return (

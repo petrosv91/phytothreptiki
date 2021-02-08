@@ -31,7 +31,7 @@ function Recipe() {
   const { reset } = useFormContext();
   const [state, send] = useMainMachine();
   const isLoading = state.matches('gettingMaxCode');
-  const isSubmitting = state.matches('recipeSubmitting');
+  const isSubmitting = state.matches('recipeSubmitting') || state.matches('productionSubmitting');
 
   function onConfirm() {
     onClose();
