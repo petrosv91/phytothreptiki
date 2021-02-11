@@ -5,10 +5,10 @@ import { MdMenu } from 'react-icons/md';
 
 import Logo from '../../assets/logo.png';
 import { Drawer } from '../../lib/ui';
-import Colorpicker from '../colorPicker/colorPicker';
 import CreateMenu from '../menu/createMenu';
 import DeleteMenu from '../menu/deleteMenu';
 import SearchMenu from '../menu/searchMenu';
+import Settings from '../menu/settings';
 import UpdateMenu from '../menu/updateMenu';
 
 function Navbar() {
@@ -26,7 +26,7 @@ function Navbar() {
         isOpen={isOpen}
         onClose={onClose}
         heading={<Image src={Logo} m='0 auto' boxSize='100px' objectFit='scale-down' />}
-        footer={<Colorpicker drawerClose={onClose} />}
+        footer={<Settings drawerClose={onClose} />}
       >
         <Stack mt={10} spacing={8} direction='column' align='center'>
           <SearchMenu drawerClose={onClose} />
@@ -35,14 +35,14 @@ function Navbar() {
           <DeleteMenu />
         </Stack>
       </Drawer>
-      {/* <Image src={Logo} boxSize='100px' objectFit='scale-down' /> */}
+      <Image src={Logo} boxSize='100px' objectFit='scale-down' />
       <Box display={['none', 'none', 'none', 'inline-block']}>
         <Stack direction='row' align='center' justify='flex-end'>
           <SearchMenu />
           <CreateMenu />
           <UpdateMenu />
           <DeleteMenu />
-          <Colorpicker />
+          <Settings />
         </Stack>
       </Box>
       <Icon

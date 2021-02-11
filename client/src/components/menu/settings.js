@@ -1,44 +1,13 @@
 import React from 'react';
 
-import {
-  Text,
-  // Box,
-  Icon,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  // SimpleGrid,
-} from '@chakra-ui/react';
+import { Text, Icon, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { MdSettings } from 'react-icons/md';
 
-// import { useColorMode } from '../../context/colorModeProvider';
 import { Version } from '../../config';
 import { useThemeMode } from '../../context/themeModeProvider';
 
-// const MAX_LINEITEMS = 3;
-// const colors = [
-//   'red',
-//   'orange',
-//   'yellow',
-//   'green',
-//   'teal',
-//   'blue',
-//   'messenger',
-//   'cyan',
-//   'purple',
-//   'pink',
-//   'blackAlpha',
-//   'whiteAlpha',
-// ];
-
-// function Circle({ color }) {
-//   return <Box bg={`${color}.500`} borderRadius='full' height={5} width={5} />;
-// }
-
-function Colorpicker({ drawerClose = () => {} }) {
-  // const { colorChange } = useColorMode();
+function Settings({ drawerClose = () => {} }) {
   const { toggleTheme, currentTheme } = useThemeMode();
 
   return (
@@ -48,19 +17,6 @@ function Colorpicker({ drawerClose = () => {} }) {
           <Icon as={MdSettings} boxSize={[7, 6, 5]} />
         </MenuButton>
         <MenuList px={1} py={1} minWidth='50px' bg='background'>
-          {/* <SimpleGrid columns={MAX_LINEITEMS}>
-            {colors.map((color, index) => (
-              <MenuItem
-                mb={1}
-                key={index}
-                borderBottomWidth={1}
-                borderBottomColor='secondaryText'
-                onClick={() => colorChange(color)}
-              >
-                <Circle color={color} />
-              </MenuItem>
-            ))}
-          </SimpleGrid> */}
           <MenuItem
             _hover={{ bg: 'secondaryBackground' }}
             _focus={{ bg: 'secondaryBackground' }}
@@ -89,4 +45,4 @@ function Colorpicker({ drawerClose = () => {} }) {
   );
 }
 
-export default Colorpicker;
+export default Settings;
