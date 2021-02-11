@@ -103,6 +103,7 @@ function ElementForm() {
               name='formula'
               label='Στοιχεία'
               cursor='default'
+              tabIndex='-1'
               pointerEvents='none'
               errors={errors}
               formRef={register({
@@ -116,6 +117,7 @@ function ElementForm() {
               name='baseElement'
               label='Βασικό Στοιχείο'
               cursor='default'
+              tabIndex='-1'
               pointerEvents='none'
               errors={errors}
               formRef={register({
