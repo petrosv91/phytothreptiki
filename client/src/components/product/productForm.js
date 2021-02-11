@@ -110,7 +110,9 @@ function ProductForm() {
                   errors={errors}
                   formRef={register({
                     setValueAs: (weightValue) => {
-                      const foundWeight = weights.find((w) => w.value === weightValue);
+                      const foundWeight = weights.find((w) => {
+                        return w.value === Number(weightValue);
+                      });
                       return foundWeight?.label || 0;
                     },
                   })}

@@ -21,6 +21,7 @@ function PickingProductionFile({ handleProductionClick }) {
       keys={keys}
       data={data}
       List={ProductionFileList}
+      showDate={true}
       handleClick={handleProductionClick}
       isLoading={status === 'loading' || isFetching}
     />
