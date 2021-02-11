@@ -3,7 +3,7 @@ import React from 'react';
 import { useToast } from '@chakra-ui/react';
 import * as yup from 'yup';
 
-import { createToast } from '../utils';
+import { createToast, isObjEmpty } from '../utils';
 
 yup.addMethod(yup.mixed, 'weightValidation', function (toast) {
   return this.test('test-weight', 'error', function (value) {
@@ -19,26 +19,34 @@ yup.addMethod(yup.mixed, 'weightValidation', function (toast) {
 });
 yup.addMethod(yup.mixed, 'formulaStandAlone', function (toast) {
   return this.test('test-standAlone', 'error', function (formula) {
-    if (formula.length && !this.parent.baseElement) {
-      return createToast(toast, {
-        type: 'error',
-        title: 'Αποτυχία',
-        content: 'Το πεδίο βασικό στοιχείο είναι άδειο',
-      });
-    }
-    return true;
+    if (formula.length && !isObjEmpty(this.parent.baseElement)) return true;
+    if (!formula.length && isObjEmpty(this.parent.baseElement)) return true;
+    return createToast(toast, {
+      type: 'error',
+      title: 'Αποτυχία',
+      content: 'Τα πεδία "Στοιχεία" και "Βασικό Στοιχείο" πρέπει να είναι ή γεμάτα ή άδεια',
+    });
   });
 });
 yup.addMethod(yup.mixed, 'baseElementStandAlone', function (toast) {
   return this.test('test-standAlone', 'error', function (baseElement) {
-    if (baseElement && !this.parent.formula.length) {
-      return createToast(toast, {
-        type: 'error',
-        title: 'Αποτυχία',
-        content: 'Το πεδίο στοιχεία είναι άδειο',
-      });
-    }
-    return true;
+    if (this.parent.formula.length && !isObjEmpty(baseElement)) return true;
+    if (!this.parent.formula.length && isObjEmpty(baseElement)) return true;
+    return createToast(toast, {
+      type: 'error',
+      title: 'Αποτυχία',
+      content: 'Τα πεδία "Στοιχεία" και "Βασικό Στοιχείο" πρέπει να είναι ή γεμάτα ή άδεια',
+    });
+  });
+});
+yup.addMethod(yup.mixed, 'formulaValidation', function (toast) {
+  return this.test('test-formula', 'error', function (formula) {
+    if (!formula.length || formula.length >= 3) return true;
+    return createToast(toast, {
+      type: 'error',
+      title: 'Αποτυχία',
+      content: 'Το πεδίο "Στοιχεία" πρέπει να είναι της μορφής 0-0-0',
+    });
   });
 });
 
@@ -72,7 +80,7 @@ function useReactFormSchema() {
     return yup.object().shape({
       label: yup.string().required(),
       price: yup.number().positive().nullable().transform(nullConverter),
-      formula: yup.array().formulaStandAlone(toast),
+      formula: yup.array().formulaValidation(toast).formulaStandAlone(toast),
       baseElement: yup.object().baseElementStandAlone(toast),
     });
   }, [toast]);
