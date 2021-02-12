@@ -22,15 +22,17 @@ function FormInput(props) {
     leftIcon,
     rightIcon,
     errors = {},
+    horizontal,
     rightIconClick = () => {},
     ...rest
   } = props;
 
   const LeftIcon = leftIcon;
   const RightIcon = rightIcon;
+  const horizontalProps = horizontal ? { display: 'flex', alignItems: 'flex-end' } : {};
 
   return (
-    <FormControl w={w} mt={2} isInvalid={errors[name]}>
+    <FormControl w={w} mt={2} isInvalid={errors[name]} {...horizontalProps}>
       {label && (
         <FormLabel htmlFor={name} color='text' fontSize={{ sm: 'sm', md: 'md' }}>
           {label}

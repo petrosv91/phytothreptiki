@@ -7,20 +7,16 @@ import { MdSettings } from 'react-icons/md';
 import { Version } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { useThemeMode } from '../../context/themeModeProvider';
-import { DataTabs, Input, Modal } from '../../lib/ui';
+import { DataTabs, FormInput, Modal } from '../../lib/ui';
 
-function Settings({ drawerClose = () => {} }) {
+function Settings() {
   const [state, send] = useMainMachine();
   const { machineCapacity } = state.context;
   const { onOpen, isOpen, onClose } = useDisclosure();
   const { toggleTheme, currentTheme } = useThemeMode();
-  const [query, setQuery] = React.useState(machineCapacity);
 
-  function handleChange(e) {
-    setQuery(e.target.value);
-  }
-  function handleOnblur() {
-    send({ type: 'ADD_ITEM', key: 'machineCapacity', data: Number(query) });
+  function handleOnblur(e) {
+    send({ type: 'ADD_ITEM', key: 'machineCapacity', data: Number(e.target.value) });
   }
 
   const data = [
@@ -36,18 +32,14 @@ function Settings({ drawerClose = () => {} }) {
     {
       label: 'Επεξεργασία',
       content: (
-        <Flex align='flex-end'>
-          <Text fontWeight='semibold'>Χωρητικότητα</Text>
-          <Input
-            ml={4}
-            w={100}
-            size='sm'
-            variant='flushed'
-            value={query}
-            onChange={handleChange}
-            onBlur={handleOnblur}
-          />
-        </Flex>
+        <FormInput
+          w={250}
+          tag='kg'
+          label='Χωρητικότητα:'
+          horizontal={true}
+          onBlur={handleOnblur}
+          defaultValue={machineCapacity}
+        />
       ),
     },
     {
