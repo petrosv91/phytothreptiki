@@ -13,7 +13,7 @@ function Select({ children, name, formRef, ...rest }) {
       borderRadius='sm'
       borderColor='secondaryText'
       errorBorderColor='red.500'
-      focusBorderColor='special.100'
+      focusBorderColor='special.600'
       _hover={{ borderColor: 'text' }}
       {...rest}
     >

@@ -32,7 +32,7 @@ function ListItem({ animation, children, onClick, isLoaded = true, ...rest }) {
         transition='all 0.25s'
         _hover={{
           color: 'secondaryText',
-          borderColor: 'special.100',
+          borderColor: 'special.600',
         }}
         {...rest}
       >

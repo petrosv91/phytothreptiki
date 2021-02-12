@@ -10,14 +10,18 @@ const customTheme = extendTheme({
   }),
   colors: {
     special: {
-      100: '#008D42AA',
-      400: '#008D42DD',
+      50: '#ddffee',
+      100: '#b0ffd5',
+      200: '#80ffbb',
+      300: '#50ffa1',
+      400: '#27ff87',
       500: '#008D42',
+      600: '#0ab355',
+      700: '#00803c',
+      800: '#004d23',
+      900: '#001b08',
     },
   },
-  // shadows: {
-  //   outline: 'none',
-  // },
 });
 
 export const darkTheme = {

@@ -16,7 +16,7 @@ export function Table(props) {
   );
 }
 export function Head(props) {
-  return <Box as='thead' bg='special.100' {...props} />;
+  return <Box as='thead' bg='special.600' {...props} />;
 }
 export function Row(props) {
   return <Box as='tr' _last={{ fontWeight: 'bold' }} {...props} />;

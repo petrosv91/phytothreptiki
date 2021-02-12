@@ -3,16 +3,17 @@ import React from 'react';
 import { useToast } from '@chakra-ui/react';
 import * as yup from 'yup';
 
+import { useMainMachine } from '../context/mainMachineProvider';
 import { createToast, isObjEmpty } from '../utils';
 
-yup.addMethod(yup.mixed, 'weightValidation', function (toast) {
+yup.addMethod(yup.mixed, 'weightValidation', function (toast, machineCapacity) {
   return this.test('test-weight', 'error', function (value) {
     return (
-      value <= 600 ||
+      value <= machineCapacity ||
       createToast(toast, {
         type: 'error',
         title: 'Αποτυχία',
-        content: 'Η χωρητικότητα του μηχανήματος ειναι μέχρι 600 κιλά',
+        content: `Η χωρητικότητα του μηχανήματος ειναι μέχρι ${machineCapacity} κιλά`,
       })
     );
   });
@@ -52,6 +53,8 @@ yup.addMethod(yup.mixed, 'formulaValidation', function (toast) {
 
 function useReactFormSchema() {
   const toast = useToast();
+  const [state] = useMainMachine();
+  const { machineCapacity } = state.context;
 
   function nullConverter(value, originalValue) {
     return String(originalValue).trim() === '' ? null : value;
@@ -63,11 +66,11 @@ function useReactFormSchema() {
       type: yup.string().required(),
       recipe: yup.string().required(),
       loops: yup.number().required().positive(),
-      weights: yup.number().required().positive().weightValidation(toast),
+      weights: yup.number().required().positive().weightValidation(toast, machineCapacity),
       totalWeights: yup.number().required().positive(),
       restPrice: yup.number().positive().nullable().transform(nullConverter),
     });
-  }, [toast]);
+  }, [toast, machineCapacity]);
 
   const elementFormSchema = React.useMemo(() => {
     return yup.object().shape({
@@ -89,9 +92,9 @@ function useReactFormSchema() {
     return yup.object().shape({
       label: yup.string().required(),
       units: yup.number().required().positive(),
-      weights: yup.number().required().positive().weightValidation(toast),
+      weights: yup.number().required().positive().weightValidation(toast, machineCapacity),
     });
-  }, [toast]);
+  }, [toast, machineCapacity]);
 
   return { mainFormSchema, elementFormSchema, createElementSchema, productFormSchema };
 }

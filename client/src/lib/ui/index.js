@@ -18,6 +18,7 @@ import Modal from './modals/modal';
 import FormSelect from './select/formSelect';
 import FormSwitch from './switch/formSwitch';
 import * as Table from './table/table';
+import DataTabs from './Tabs/Tabs';
 
 export {
   Menu,
@@ -27,6 +28,7 @@ export {
   Drawer,
   Loading,
   EditIcon,
+  FormInput,
   CloseIcon,
   DeleteIcon,
   CalendarIcon,
@@ -35,7 +37,7 @@ export {
   ConfirmationModal,
   Table,
   Buttons,
-  FormInput,
+  DataTabs,
   ElementList,
   RecipeList,
   ProductList,

@@ -12,8 +12,8 @@ function EditIcon({ edit, ...rest }) {
       boxSize={7}
       cursor='pointer'
       display={['none', 'none', 'inline-block']}
-      color={edit ? 'special.500' : 'special.100'}
-      _hover={edit ? { color: 'special.100' } : { color: 'special.500' }}
+      color={edit ? 'special.500' : 'special.600'}
+      _hover={edit ? { color: 'special.600' } : { color: 'special.500' }}
       {...rest}
     />
   );

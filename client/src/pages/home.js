@@ -8,7 +8,6 @@ import { ReactQueryConfigProvider } from 'react-query';
 // import Footer from '../components/footer/footer';
 import Navbar from '../components/navbar/navbar';
 import NewRecipe from '../components/recipe/newRecipe';
-import { MainMachineProvider } from '../context/mainMachineProvider';
 import { useReactFormSchema, useReactQueryConfig } from '../hooks';
 import { Layout } from '../layouts';
 import { getCurrentDate } from '../utils';
@@ -32,15 +31,13 @@ function Home() {
   return (
     <ReactQueryConfigProvider config={overrides}>
       <FormProvider {...methods}>
-        <MainMachineProvider>
-          <Navbar />
-          <Layout>
-            <Flex p={[3, 5, 10]} justify='center'>
-              <NewRecipe />
-            </Flex>
-            {/* <Footer /> */}
-          </Layout>
-        </MainMachineProvider>
+        <Navbar />
+        <Layout>
+          <Flex p={[3, 5, 10]} justify='center'>
+            <NewRecipe />
+          </Flex>
+          {/* <Footer /> */}
+        </Layout>
       </FormProvider>
     </ReactQueryConfigProvider>
   );
