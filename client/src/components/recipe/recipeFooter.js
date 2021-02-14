@@ -3,13 +3,22 @@ import React from 'react';
 import { Flex } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 
+import { useMainMachine } from '../../context/mainMachineProvider';
 import { FormInput } from '../../lib/ui';
+import { roundToTwo } from '../../utils';
 
 function RecipeFooter() {
+  const [state] = useMainMachine();
+  const { productStore } = state.context;
   const { getValues, setValue, errors, register } = useFormContext();
 
   function calctotalWeights() {
-    const { loops, weights } = getValues();
+    const { loops, weights, totalWeights } = getValues();
+    if (productStore.length) {
+      if (!loops && !totalWeights) return;
+      const newWeights = roundToTwo(totalWeights / loops);
+      return setValue('weights', newWeights);
+    }
     if (!loops || !weights) {
       return setValue('totalWeights', '');
     }
