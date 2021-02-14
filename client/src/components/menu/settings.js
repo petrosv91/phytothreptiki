@@ -33,7 +33,7 @@ function Settings() {
       label: 'Επεξεργασία',
       content: (
         <FormInput
-          w={250}
+          w={230}
           tag='kg'
           label='Χωρητικότητα:'
           horizontal={true}

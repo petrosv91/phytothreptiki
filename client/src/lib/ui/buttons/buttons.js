@@ -10,7 +10,7 @@ function Primary({ children, ...rest }) {
       borderRadius='sm'
       color='colorText'
       bg='special.500'
-      _hover={{ color: 'colorText', bg: 'special.600' }}
+      _hover={{ bg: 'special.600' }}
       {...rest}
     >
       {children}

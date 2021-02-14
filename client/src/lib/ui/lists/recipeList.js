@@ -45,8 +45,11 @@ function RecipeList({ data, isLoading, handleClick, ...rest }) {
                 handleClick(item);
               }}
             >
-              <Flex px={6} align='center' justify='flex-end'>
+              <Flex px={6} direction='column' align='flex-end' justify='center'>
                 <Text textAlign='right'>{item.recipe}</Text>
+                <Text fontSize='sm' textAlign='right' color='secondaryText'>
+                  {item.date}
+                </Text>
               </Flex>
             </ListItem>
           );

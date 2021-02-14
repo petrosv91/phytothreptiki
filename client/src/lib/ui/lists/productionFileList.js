@@ -45,24 +45,22 @@ function ProductionFileList({ data, isLoading, handleClick, ...rest }) {
                 handleClick(item);
               }}
             >
-              <Flex px={6} align='center' justify='flex-end'>
-                <Flex direction='column'>
-                  <Text textAlign='right'>{item.date}</Text>
-                  <Flex mt={0.5} wrap='wrap' justify='flex-end'>
-                    {item.productStore.map(({ label }) => {
-                      return (
-                        <Flex
-                          key={uuidv4()}
-                          fontSize='xs'
-                          color='secondaryText'
-                          _after={{ content: "','" }}
-                          _last={{ _after: { content: "''" } }}
-                        >
-                          {label}
-                        </Flex>
-                      );
-                    })}
-                  </Flex>
+              <Flex px={6} direction='column' align='flex-end' justify='center'>
+                <Text textAlign='right'>{item.date}</Text>
+                <Flex mt={0.5} wrap='wrap' justify='flex-end'>
+                  {item.productStore.map(({ label }) => {
+                    return (
+                      <Flex
+                        key={uuidv4()}
+                        fontSize='xs'
+                        color='secondaryText'
+                        _after={{ content: "','" }}
+                        _last={{ _after: { content: "''" } }}
+                      >
+                        {label}
+                      </Flex>
+                    );
+                  })}
                 </Flex>
               </Flex>
             </ListItem>

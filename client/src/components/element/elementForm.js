@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Collapse, Flex, useDisclosure } from '@chakra-ui/react';
+import { Collapse, Flex, useDisclosure, useToast } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
@@ -8,14 +8,13 @@ import { v4 as uuidv4 } from 'uuid';
 import { baseElements } from '../../config/';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { useReactFormSchema } from '../../hooks';
-import useStoreValidation from '../../hooks/useStoreValidation';
 import { Modal, Buttons, FormInput, FormSwitch, CloseIcon } from '../../lib/ui';
 import SearchIcon from '../../lib/ui/icons/searchIcon';
-import { convertStringToArrayOfNumbers } from '../../utils';
+import { convertStringToArrayOfNumbers, createToast, isRateValid } from '../../utils';
 import PickingElement from './pickingElement';
 
 function ElementForm() {
-  const { validate } = useStoreValidation();
+  const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { elementFormSchema } = useReactFormSchema();
@@ -24,12 +23,16 @@ function ElementForm() {
     resolver: yupResolver(elementFormSchema),
   });
 
-  const [state, send] = useMainMachine();
-  const { elementSwitch = false } = state.context.switches;
+  const [{ context }, send] = useMainMachine();
+  const { elementSwitch = false } = context.switches;
 
   function onSubmit(formData) {
-    if (!validate(formData, 'element')) {
-      return;
+    if (!isRateValid(context, formData)) {
+      return createToast(toast, {
+        type: 'error',
+        title: 'Αποτυχία',
+        content: 'Το ποσοστό έχει ξεπεράσει το 100%',
+      });
     }
     send({
       type: 'ADD_ROW',

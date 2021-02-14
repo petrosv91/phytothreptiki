@@ -50,8 +50,8 @@ function Recipe() {
       <Loading isLoading={isSubmitting || isLoading} />
       <ComponentToPrint printRef={printRef} />
       <ConfirmationModal
-        message={MESSAGE}
         isOpen={isOpen}
+        message={MESSAGE}
         onClose={onClose}
         onConfirm={onConfirm}
       />

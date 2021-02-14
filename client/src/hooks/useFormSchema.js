@@ -4,61 +4,23 @@ import { useToast } from '@chakra-ui/react';
 import * as yup from 'yup';
 
 import { useMainMachine } from '../context/mainMachineProvider';
-import { createToast, isObjEmpty } from '../utils';
+import {
+  nullConverter,
+  formulaValidation,
+  weightsValidation,
+  formulaStandAlone,
+  baseElementStandAlone,
+} from '../utils/yupMethods';
 
-yup.addMethod(yup.mixed, 'weightValidation', function (toast, machineCapacity) {
-  return this.test('test-weight', 'error', function (value) {
-    return (
-      value <= machineCapacity ||
-      createToast(toast, {
-        type: 'error',
-        title: 'Αποτυχία',
-        content: `Η χωρητικότητα του μηχανήματος ειναι μέχρι ${machineCapacity} κιλά`,
-      })
-    );
-  });
-});
-yup.addMethod(yup.mixed, 'formulaStandAlone', function (toast) {
-  return this.test('test-standAlone', 'error', function (formula) {
-    if (formula.length && !isObjEmpty(this.parent.baseElement)) return true;
-    if (!formula.length && isObjEmpty(this.parent.baseElement)) return true;
-    return createToast(toast, {
-      type: 'error',
-      title: 'Αποτυχία',
-      content: 'Τα πεδία "Στοιχεία" και "Βασικό Στοιχείο" πρέπει να είναι ή γεμάτα ή άδεια',
-    });
-  });
-});
-yup.addMethod(yup.mixed, 'baseElementStandAlone', function (toast) {
-  return this.test('test-standAlone', 'error', function (baseElement) {
-    if (this.parent.formula.length && !isObjEmpty(baseElement)) return true;
-    if (!this.parent.formula.length && isObjEmpty(baseElement)) return true;
-    return createToast(toast, {
-      type: 'error',
-      title: 'Αποτυχία',
-      content: 'Τα πεδία "Στοιχεία" και "Βασικό Στοιχείο" πρέπει να είναι ή γεμάτα ή άδεια',
-    });
-  });
-});
-yup.addMethod(yup.mixed, 'formulaValidation', function (toast) {
-  return this.test('test-formula', 'error', function (formula) {
-    if (!formula.length || formula.length >= 3) return true;
-    return createToast(toast, {
-      type: 'error',
-      title: 'Αποτυχία',
-      content: 'Το πεδίο "Στοιχεία" πρέπει να είναι της μορφής 0-0-0',
-    });
-  });
-});
+yup.addMethod(yup.mixed, 'weightValidation', weightsValidation);
+yup.addMethod(yup.mixed, 'formulaValidation', formulaValidation);
+yup.addMethod(yup.mixed, 'formulaStandAlone', formulaStandAlone);
+yup.addMethod(yup.mixed, 'baseElementStandAlone', baseElementStandAlone);
 
 function useReactFormSchema() {
   const toast = useToast();
-  const [state] = useMainMachine();
-  const { machineCapacity } = state.context;
-
-  function nullConverter(value, originalValue) {
-    return String(originalValue).trim() === '' ? null : value;
-  }
+  const [{ context }] = useMainMachine();
+  const { machineCapacity } = context;
 
   const mainFormSchema = React.useMemo(() => {
     return yup.object().shape({
@@ -79,6 +41,7 @@ function useReactFormSchema() {
       price: yup.number().positive().nullable().transform(nullConverter),
     });
   }, []);
+
   const createElementSchema = React.useMemo(() => {
     return yup.object().shape({
       label: yup.string().required(),

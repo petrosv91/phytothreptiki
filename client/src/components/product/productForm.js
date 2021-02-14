@@ -8,7 +8,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { weights } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { useReactFormSchema } from '../../hooks';
-import useStoreValidation from '../../hooks/useStoreValidation';
 import {
   Modal,
   Buttons,
@@ -22,7 +21,6 @@ import SearchIcon from '../../lib/ui/icons/searchIcon';
 import PickingProduct from './pickingProduct';
 
 function ProductForm() {
-  const { validate } = useStoreValidation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [edit, setEdit] = React.useState(false);
 
@@ -32,13 +30,10 @@ function ProductForm() {
     resolver: yupResolver(productFormSchema),
   });
 
-  const [state, send] = useMainMachine();
-  const { productSwitch = false } = state.context.switches;
+  const [{ context }, send] = useMainMachine();
+  const { productSwitch = false } = context.switches;
 
   function onSubmit(formData) {
-    if (!validate(formData, 'product')) {
-      return;
-    }
     send({
       type: 'ADD_ROW',
       key: 'productStore',
@@ -90,7 +85,7 @@ function ProductForm() {
               formRef={register}
             />
             <Flex w={['full', '45%']} align='flex-end'>
-              <EditIcon mb={2} mr={2} onClick={handleIEditClick} />
+              <EditIcon mb={2} mr={2} edit={edit} onClick={handleIEditClick} />
               {edit ? (
                 <FormInput
                   name='weights'
