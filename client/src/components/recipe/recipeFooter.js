@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Flex } from '@chakra-ui/react';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { FormInput } from '../../lib/ui';
@@ -10,12 +10,16 @@ import { roundToTwo } from '../../utils';
 function RecipeFooter() {
   const [state] = useMainMachine();
   const { productStore } = state.context;
-  const { getValues, setValue, errors, register } = useFormContext();
 
-  function calctotalWeights() {
-    const { loops, weights, totalWeights } = getValues();
+  const { control, setValue, errors, register } = useFormContext();
+  const { loops, weights, totalWeights } = useWatch({
+    control,
+    name: ['loops', 'weights', 'totalWeights'],
+  });
+
+  React.useEffect(() => {
     if (productStore.length) {
-      if (!loops && !totalWeights) return;
+      if (!loops || !totalWeights) return;
       const newWeights = roundToTwo(totalWeights / loops);
       return setValue('weights', newWeights);
     }
@@ -23,7 +27,7 @@ function RecipeFooter() {
       return setValue('totalWeights', '');
     }
     setValue('totalWeights', loops * weights);
-  }
+  }, [setValue, loops, weights, totalWeights, productStore.length]);
 
   return (
     <Flex direction={['column', 'row']} align='center' justify='space-between'>
@@ -34,7 +38,6 @@ function RecipeFooter() {
         type='number'
         errors={errors}
         formRef={register}
-        onBlur={calctotalWeights}
       />
       <FormInput
         w={['full', '45%']}
@@ -45,7 +48,6 @@ function RecipeFooter() {
         tag='kg'
         errors={errors}
         formRef={register}
-        onBlur={calctotalWeights}
       />
     </Flex>
   );

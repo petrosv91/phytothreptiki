@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Box } from '@chakra-ui/react';
-import { useFormContext } from 'react-hook-form';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { DeleteIcon, Table } from '../../lib/ui';
@@ -11,21 +10,9 @@ function ProductStore({ printable, ...rest }) {
   const [state, send] = useMainMachine();
   const { productStore } = state.context;
 
-  const { setValue } = useFormContext();
-
   function deleteProduct(row) {
     send({ type: 'DELETE_ROW', key: 'productStore', row });
   }
-
-  const calcTotalWeights = React.useCallback(() => {
-    const totalWeights = roundToTwo(
-      productStore.reduce((prev, curr) => {
-        return prev + curr.weights * curr.units;
-      }, 0),
-    );
-    setValue('totalWeights', totalWeights);
-    return totalWeights;
-  }, [setValue, productStore]);
 
   if (!productStore.length) return null;
   return (
@@ -70,7 +57,11 @@ function ProductStore({ printable, ...rest }) {
             </Table.Cell>
             <Table.Cell>{/* Weights */}</Table.Cell>
             <Table.Cell>
-              {calcTotalWeights()}
+              {roundToTwo(
+                productStore.reduce((prev, curr) => {
+                  return prev + curr.weights * curr.units;
+                }, 0),
+              )}
               kg
             </Table.Cell>
           </Table.Row>

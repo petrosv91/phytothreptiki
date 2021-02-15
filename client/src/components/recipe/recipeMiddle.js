@@ -3,10 +3,24 @@ import React from 'react';
 import { Flex } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 
+import { useMainMachine } from '../../context/mainMachineProvider';
 import { FormInput } from '../../lib/ui';
+import { roundToTwo } from '../../utils';
 
 function RecipeMiddle() {
-  const { register, errors } = useFormContext();
+  const [state] = useMainMachine();
+  const { productStore } = state.context;
+
+  const { register, setValue, errors } = useFormContext();
+
+  React.useEffect(() => {
+    const totalWeights = roundToTwo(
+      productStore.reduce((prev, curr) => {
+        return prev + curr.weights * curr.units;
+      }, 0),
+    );
+    setValue('totalWeights', totalWeights);
+  }, [productStore, setValue]);
 
   return (
     <Flex direction={['column', 'row']} mt={4} align='center' justify='space-between'>
