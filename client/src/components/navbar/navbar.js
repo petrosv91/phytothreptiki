@@ -4,7 +4,6 @@ import { Box, Flex, Icon, Image, Stack, useDisclosure } from '@chakra-ui/react';
 import { MdMenu } from 'react-icons/md';
 
 import Logo from '../../assets/logo.png';
-import { useThemeMode } from '../../context/themeModeProvider';
 import { Drawer } from '../../lib/ui';
 import CreateMenu from '../menu/createMenu';
 import DeleteMenu from '../menu/deleteMenu';

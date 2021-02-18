@@ -9,7 +9,11 @@ import { roundToTwo } from '../../utils';
 
 function ProductStore({ printable, ...rest }) {
   const { currentTheme } = useThemeMode();
-  const labelColor = currentTheme === 'dark' ? 'special.400' : 'special.500';
+  const labelColor = printable
+    ? 'special.500'
+    : currentTheme === 'dark'
+    ? 'special.600'
+    : 'special.500';
 
   const [state, send] = useMainMachine();
   const { productStore } = state.context;
