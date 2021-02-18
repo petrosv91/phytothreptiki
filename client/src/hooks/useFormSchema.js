@@ -27,8 +27,13 @@ function useReactFormSchema() {
       date: yup.string().required(),
       type: yup.string().required(),
       recipe: yup.string().required(),
-      loops: yup.number().required().positive(),
-      weights: yup.number().required().positive().weightValidation(toast, machineCapacity),
+      loops: yup.number().positive().nullable().transform(nullConverter),
+      weights: yup
+        .number()
+        .positive()
+        .nullable()
+        .transform(nullConverter)
+        .weightValidation(toast, machineCapacity),
       totalWeights: yup.number().required().positive(),
       restPrice: yup.number().positive().nullable().transform(nullConverter),
     });

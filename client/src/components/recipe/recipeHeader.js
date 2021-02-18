@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Flex } from '@chakra-ui/react';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Buttons, FormInput } from '../../lib/ui';
@@ -9,7 +9,9 @@ import { getCurrentDate, isFormEmpty, isFormFull } from '../../utils';
 
 function RecipeHeader({ onOpen, handlePrint, printLoading }) {
   const [{ context }, send] = useMainMachine();
-  const { register, handleSubmit, getValues, reset, errors } = useFormContext();
+  const { register, handleSubmit, control, reset, errors } = useFormContext();
+  const mainFormValues = useWatch(control);
+
   function onSubmit(formData) {
     send({
       type: 'RECIPE_SUBMIT',
@@ -18,24 +20,25 @@ function RecipeHeader({ onOpen, handlePrint, printLoading }) {
     });
   }
 
-  function canSubmit() {
-    const { restPrice, ...mainFormValues } = getValues();
-    return isFormFull(mainFormValues, context);
-  }
-  function canReset() {
+  const canSubmit = React.useMemo(() => {
+    const { restPrice, loops, weights, ...importantData } = mainFormValues;
+    return isFormFull(importantData, context);
+  }, [context, mainFormValues]);
+
+  const canReset = React.useMemo(() => {
     const currentDate = getCurrentDate();
-    const { date, ...mainFormValues } = getValues();
-    return !isFormEmpty(mainFormValues, context) || date !== currentDate;
-  }
+    const { date, ...importantData } = mainFormValues;
+    return !isFormEmpty(importantData, context) || date !== currentDate;
+  }, [context, mainFormValues]);
 
   return (
     <form style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
       <Flex wrap='wrap' align='center' justify={['center', 'space-between']}>
-        <Buttons.Secondary w={150} type='submit' isDisabled={!canSubmit()}>
+        <Buttons.Secondary w={150} type='submit' isDisabled={!canSubmit}>
           Καταχώρηση
         </Buttons.Secondary>
         <Flex>
-          <Buttons.Tertiary w={150} onClick={onOpen} isDisabled={!canReset()}>
+          <Buttons.Tertiary w={150} onClick={onOpen} isDisabled={!canReset}>
             Επαναφορά
           </Buttons.Tertiary>
           <Buttons.Tertiary w={150} onClick={handlePrint} isLoading={printLoading}>

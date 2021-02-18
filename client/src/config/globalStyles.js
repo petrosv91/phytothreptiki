@@ -15,12 +15,12 @@ const GlobalStyles = css`
       overflow: initial !important;
       -webkit-print-color-adjust: exact;
       table.print > thead > tr > th {
-        padding: 10px;
+        padding: 5px;
         font-size: 16px;
         line-height: 16px;
       }
       table.print > tbody > tr > td {
-        padding: 10px;
+        padding: 5px;
         font-size: 16px;
         line-height: 20px;
       }

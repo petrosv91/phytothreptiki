@@ -5,10 +5,14 @@ import { useFormContext, useWatch } from 'react-hook-form';
 
 import { baseElements } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
+import { useThemeMode } from '../../context/themeModeProvider';
 import { DeleteIcon, Table } from '../../lib/ui';
 import { roundToTwo } from '../../utils';
 
 function ElementStore({ printable, ...rest }) {
+  const { currentTheme } = useThemeMode();
+  const labelColor = currentTheme === 'dark' ? 'special.400' : 'special.500';
+
   const { control } = useFormContext();
   const weights = useWatch({ control, name: 'weights', defaultValue: 0 });
 
@@ -65,7 +69,7 @@ function ElementStore({ printable, ...rest }) {
                   />
                 </Table.Cell>
               )}
-              <Table.Cell>
+              <Table.Cell color={labelColor}>
                 <Flex direction='column'>
                   {row.label}
                   <Text mt={1} color='secondaryText' fontSize='sm'>

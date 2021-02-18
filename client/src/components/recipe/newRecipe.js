@@ -41,8 +41,8 @@ function Recipe() {
   return (
     <Flex
       p={[3, 5, 10]}
-      maxW={[450, 800]}
-      minW={[300, 400]}
+      maxW={[450, 650, 850, 1000]}
+      minW={[300, 400, 600, 1000]}
       bg='background'
       boxShadow='md'
       direction='column'

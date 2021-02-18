@@ -40,14 +40,5 @@ export function Body(props) {
   return <Box as='tbody' fontSize={['sm', 'sm', 'md']} fontWeight='500' {...props} />;
 }
 export function Cell(props) {
-  return (
-    <Box
-      as='td'
-      p={4}
-      color='text'
-      lineHeight='1.25rem'
-      _first={{ color: 'special.500', fontSize: ['sm', 'sm', 'md'] }}
-      {...props}
-    />
-  );
+  return <Box as='td' p={4} color='text' lineHeight='1.25rem' {...props} />;
 }

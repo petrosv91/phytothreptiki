@@ -3,10 +3,14 @@ import React from 'react';
 import { Box } from '@chakra-ui/react';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
+import { useThemeMode } from '../../context/themeModeProvider';
 import { DeleteIcon, Table } from '../../lib/ui';
 import { roundToTwo } from '../../utils';
 
 function ProductStore({ printable, ...rest }) {
+  const { currentTheme } = useThemeMode();
+  const labelColor = currentTheme === 'dark' ? 'special.400' : 'special.500';
+
   const [state, send] = useMainMachine();
   const { productStore } = state.context;
 
@@ -39,7 +43,7 @@ function ProductStore({ printable, ...rest }) {
                   />
                 </Table.Cell>
               )}
-              <Table.Cell>{row.label}</Table.Cell>
+              <Table.Cell color={labelColor}>{row.label}</Table.Cell>
               <Table.Cell>{row.units} </Table.Cell>
               <Table.Cell>{row.weights} kg</Table.Cell>
               <Table.Cell>{roundToTwo(row.weights * row.units)}</Table.Cell>
