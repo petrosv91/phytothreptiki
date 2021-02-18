@@ -14,6 +14,7 @@ function RecipeMiddle() {
   const { register, setValue, errors } = useFormContext();
 
   React.useEffect(() => {
+    if (!productStore.length) return;
     const totalWeights = roundToTwo(
       productStore.reduce((prev, curr) => {
         return prev + curr.weights * curr.units;

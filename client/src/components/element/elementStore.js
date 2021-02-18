@@ -75,7 +75,7 @@ function ElementStore({ printable, ...rest }) {
               </Table.Cell>
               <Table.Cell>{row.rate}</Table.Cell>
               {baseElements.map((el) => (
-                <Table.Cell key={el.value}>{calcBaseElement(row, el)}</Table.Cell>
+                <Table.Cell key={el.value}>{roundToTwo(calcBaseElement(row, el))}</Table.Cell>
               ))}
               <Table.Cell>{roundToTwo(calcWeights(row))}</Table.Cell>
               {!printable && (
@@ -92,9 +92,11 @@ function ElementStore({ printable, ...rest }) {
             <Table.Cell>{elementStore.reduce((prev, curr) => prev + curr.rate, 0)}%</Table.Cell>
             {baseElements.map((el) => (
               <Table.Cell key={el.value}>
-                {elementStore.reduce((prev, curr) => {
-                  return prev + calcBaseElement(curr, el);
-                }, 0)}
+                {roundToTwo(
+                  elementStore.reduce((prev, curr) => {
+                    return prev + calcBaseElement(curr, el);
+                  }, 0),
+                )}
               </Table.Cell>
             ))}
             <Table.Cell>
