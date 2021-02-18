@@ -4,7 +4,7 @@ import { Text } from '@chakra-ui/react';
 
 import useGetProductionFile from '../../api/queries/useGetProductionFile';
 import { ProductionFileList } from '../../lib/ui';
-import ItemList from './itemList';
+import ItemList from '../lists/itemList';
 
 function PickingProductionFile({ handleProductionClick }) {
   const keys = React.useRef(['date']);

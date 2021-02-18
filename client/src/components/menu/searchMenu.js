@@ -5,7 +5,7 @@ import { useFormContext } from 'react-hook-form';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Loading, Menu, Modal } from '../../lib/ui';
-import PickingProductionFile from '../lists/PickingProductionFile';
+import PickingProductionFile from '../productionFile/PickingProductionFile';
 import PickingRecipe from '../recipe/pickingRecipe';
 
 function SearchMenu({ drawerClose = () => {} }) {

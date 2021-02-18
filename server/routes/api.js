@@ -79,6 +79,10 @@ router.post('/', async (req, res) => {
         await Product.deleteOne({ _id: req.body.id });
         return res.json({ success: true });
       }
+      case 'deleteProductionFile': {
+        await ProductionFile.deleteOne({ _id: req.body.id });
+        return res.json({ success: true });
+      }
       default: {
         res.json({ success: false, message: 'Service doesnt exists' });
       }
