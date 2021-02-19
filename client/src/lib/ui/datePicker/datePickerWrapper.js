@@ -1,6 +1,14 @@
 import styled from '@emotion/styled';
 
 export const DatePickerWrapper = styled.div`
+  position: relative;
+  svg {
+    cursor: pointer;
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    z-index: 100;
+  }
   .react-datepicker {
     font-size: 1.05em;
     @media screen and (max-width: 415px) {

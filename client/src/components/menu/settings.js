@@ -7,6 +7,7 @@ import { MdSettings } from 'react-icons/md';
 import { Version } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { useThemeMode } from '../../context/themeModeProvider';
+import { useLocalStorage } from '../../hooks';
 import { DataTabs, FormInput, Modal } from '../../lib/ui';
 
 function Settings() {
@@ -14,8 +15,10 @@ function Settings() {
   const { machineCapacity } = state.context;
   const { onOpen, isOpen, onClose } = useDisclosure();
   const { toggleTheme, currentTheme } = useThemeMode();
+  const [, setValue] = useLocalStorage(`phytothreptikiSettings`);
 
   function handleOnblur(e) {
+    setValue((prev) => ({ ...prev, machineCapacity: Number(e.target.value) }));
     send({ type: 'ADD_ITEM', key: 'machineCapacity', data: Number(e.target.value) });
   }
 

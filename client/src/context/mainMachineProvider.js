@@ -3,6 +3,8 @@ import React from 'react';
 import { useToast } from '@chakra-ui/react';
 import { useMachine, useService } from '@xstate/react';
 
+import { defaultSettings } from '../config';
+import { useLocalStorage } from '../hooks';
 import { MainMachine } from '../machines/mainMachine';
 import { createToast } from '../utils';
 
@@ -10,8 +12,11 @@ const MainMachineContext = React.createContext();
 
 function MainMachineProvider({ children }) {
   const toast = useToast();
+  const [storedValue] = useLocalStorage('phytothreptikiSettings', defaultSettings);
+
   const [, , service] = useMachine(MainMachine, {
     devTools: true,
+    context: { ...storedValue },
     actions: {
       renderSuccess: (ctx, e) => {
         createToast(toast, { type: 'success', title: 'Επιτυχής καταχώρηση' });
