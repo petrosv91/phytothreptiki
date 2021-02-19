@@ -49,6 +49,9 @@ export const actions = {
       switches: { ...ctx.switches, [e.key]: !ctx.switches[e.key] },
     };
   }),
+  restoreDefaults: assign((ctx, e) => {
+    return { ...ctx, ...e.data };
+  }),
 };
 
 export const guards = {};

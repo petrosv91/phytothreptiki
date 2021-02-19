@@ -5,7 +5,6 @@ import { useFormContext } from 'react-hook-form';
 import { useReactToPrint } from 'react-to-print';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
-import { useForceUpdate } from '../../hooks';
 import { ConfirmationModal, Loading } from '../../lib/ui';
 import ElementForm from '../element/elementForm';
 import ElementStore from '../element/elementStore';
@@ -19,17 +18,18 @@ import RecipeMiddle from './recipeMiddle';
 const MESSAGE = 'Προσοχή αν πατήσετε σύνεχεια θα χάσετε ότι έχετε κάνει στην διαδικασία';
 
 function Recipe() {
-  const forceUpdate = useForceUpdate();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const printRef = React.useRef();
   const [printLoading, setPrintLoading] = React.useState(false);
   const handlePrint = useReactToPrint({
-    onBeforeGetContent: forceUpdate,
     content: () => printRef.current,
-    onBeforePrint: () => setPrintLoading(true),
     onAfterPrint: () => setPrintLoading(false),
   });
+  const onPrint = React.useCallback(() => {
+    setPrintLoading(true);
+    handlePrint();
+  }, [handlePrint]);
 
   const { reset } = useFormContext();
   const [state, send] = useMainMachine();
@@ -61,7 +61,7 @@ function Recipe() {
       <RecipeHeader
         onOpen={onOpen}
         onConfirm={onConfirm}
-        handlePrint={handlePrint}
+        handlePrint={onPrint}
         printLoading={printLoading}
       />
       <ElementForm mt={4} />

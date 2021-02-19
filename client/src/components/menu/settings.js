@@ -1,60 +1,28 @@
 import React from 'react';
 
-import { Text, Icon, Box, useDisclosure, Flex } from '@chakra-ui/react';
-import { FaMoon, FaSun } from 'react-icons/fa';
+import { Icon, Box, useDisclosure } from '@chakra-ui/react';
 import { MdSettings } from 'react-icons/md';
 
-import { Version } from '../../config';
-import { useMainMachine } from '../../context/mainMachineProvider';
-import { useThemeMode } from '../../context/themeModeProvider';
-import { useLocalStorage } from '../../hooks';
-import { DataTabs, FormInput, Modal } from '../../lib/ui';
+import { DataTabs, Modal } from '../../lib/ui';
+import Edit from '../generalSettings.js/edit';
+import General from '../generalSettings.js/general';
+import Info from '../generalSettings.js/info';
 
 function Settings() {
-  const [state, send] = useMainMachine();
-  const { machineCapacity } = state.context;
   const { onOpen, isOpen, onClose } = useDisclosure();
-  const { toggleTheme, currentTheme } = useThemeMode();
-  const [, setValue] = useLocalStorage(`phytothreptikiSettings`);
-
-  function handleOnblur(e) {
-    setValue((prev) => ({ ...prev, machineCapacity: Number(e.target.value) }));
-    send({ type: 'ADD_ITEM', key: 'machineCapacity', data: Number(e.target.value) });
-  }
 
   const data = [
     {
       label: 'Θέμα',
-      content: (
-        <Flex align='center' cursor='pointer' onClick={toggleTheme}>
-          <Icon as={currentTheme === 'dark' ? FaSun : FaMoon} />
-          <Text ml={2}>{currentTheme === 'dark' ? 'Φωτεινό Θέμα' : 'Σκούρο Θέμα'}</Text>
-        </Flex>
-      ),
+      content: <General />,
     },
     {
       label: 'Επεξεργασία',
-      content: (
-        <FormInput
-          w={230}
-          tag='kg'
-          label='Χωρητικότητα:'
-          horizontal={true}
-          onBlur={handleOnblur}
-          defaultValue={machineCapacity}
-        />
-      ),
+      content: <Edit />,
     },
     {
-      label: 'Έκδοση',
-      content: (
-        <Flex align='center'>
-          <Text fontWeight='semibold'>Version:</Text>
-          <Text ml={4} fontWeight={500} color='gray.500'>
-            {Version}
-          </Text>
-        </Flex>
-      ),
+      label: 'Πληροφορίες',
+      content: <Info />,
     },
   ];
 
