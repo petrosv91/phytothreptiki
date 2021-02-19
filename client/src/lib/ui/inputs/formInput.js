@@ -70,4 +70,4 @@ function FormInput(props) {
   );
 }
 
-export default FormInput;
+export default React.memo(FormInput);

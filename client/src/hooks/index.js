@@ -1,4 +1,5 @@
 import useFiltersData from './useFiltersData';
+import useForceUpdate from './useForceUpdate';
 import useReactFormSchema from './useFormSchema';
 import useLocalStorage from './useLocalStorage';
 import useNavbarTitle from './useNavbarTitle';
@@ -12,6 +13,7 @@ export {
   useNavbarTitle,
   useLocalStorage,
   useWindowSize,
+  useForceUpdate,
   useReactQueryConfig,
   useReactFormSchema,
 };

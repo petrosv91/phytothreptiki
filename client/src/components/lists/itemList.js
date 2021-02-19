@@ -26,8 +26,8 @@ function ItemList({ isLoading, handleClick, data, keys, List, showDate }) {
         <DatePicker
           w={[250, 300]}
           value={query}
-          onChange={handleChange}
           placeholder='Αναζήτηση...'
+          handleChange={handleChange}
           handleDateChange={handleDateChange}
         />
       ) : (

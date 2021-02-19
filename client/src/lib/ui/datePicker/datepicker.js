@@ -6,7 +6,7 @@ import { CalendarIcon, FormInput } from '..';
 import { DatePickerWrapper } from './datePickerWrapper';
 import 'react-datepicker/dist/react-datepicker.css';
 
-function DatePicker({ handleDateChange, ...rest }) {
+function DatePicker({ placeholder, value, handleChange, handleDateChange, ...rest }) {
   const [datePickerState, setDatePickerState] = React.useState(false);
 
   function open() {
@@ -19,10 +19,10 @@ function DatePicker({ handleDateChange, ...rest }) {
   const DateInput = React.forwardRef(function dateInput(props, ref) {
     return (
       <FormInput
-        {...props}
         formRef={ref}
         rightIconClick={open}
         rightIcon={CalendarIcon}
+        {...props}
         {...rest}
       />
     );
@@ -31,18 +31,21 @@ function DatePicker({ handleDateChange, ...rest }) {
   return (
     <DatePickerWrapper>
       <ReactDatePicker
+        value={value}
         autoFocus={true}
         open={datePickerState}
         onClickOutside={close}
-        dateFormat='dd/MM/yyyy'
-        customInput={<DateInput />}
+        onChangeRaw={handleChange}
         onSelect={(date) => {
           close();
           handleDateChange(date);
         }}
+        dateFormat='dd/MM/yyyy'
+        customInput={<DateInput />}
+        placeholderText={placeholder}
       />
     </DatePickerWrapper>
   );
 }
 
-export default DatePicker;
+export default React.memo(DatePicker);
