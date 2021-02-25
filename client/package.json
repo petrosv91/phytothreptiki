@@ -3,8 +3,6 @@
   "productName": "Φυτοθρεπτική App",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
-  "main": "public/electron.js",
   "dependencies": {
     "@chakra-ui/react": "^1.1.5",
     "@emotion/react": "^11.0.0",
@@ -12,8 +10,6 @@
     "@hookform/resolvers": "^1.0.1",
     "@xstate/react": "^1.0.3",
     "axios": "^0.21.1",
-    "cross-env": "^7.0.3",
-    "electron-is-dev": "^1.2.0",
     "focus-visible": "^5.2.0",
     "framer-motion": "^2.9.4",
     "react": "^16.14.0",
@@ -33,37 +29,16 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "electron-build": "yarn build && yarn electron-builder",
-    "electron-start": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\""
+    "eject": "react-scripts eject"
   },
   "author": "Petros Vasilopoulos",
   "license": "ISC",
   "eslintConfig": {
     "extends": "react-app"
   },
-  "build": {
-    "appId": "phytothreptiki-app",
-    "win": {
-      "target": [
-        "nsis"
-      ],
-      "icon": "public/logos/favicon.ico"
-    },
-    "nsis": {
-      "oneClick": false,
-      "installerIcon": "public/logos/favicon.ico",
-      "uninstallerIcon": "public/logos/favicon.ico",
-      "uninstallDisplayName": "Φυτοθρεπτική App",
-      "allowToChangeInstallationDirectory": true
-    }
-  },
   "devDependencies": {
     "wait-on": "^5.2.1",
-    "electron": "^11.3.0",
     "babel-eslint": "^10.1.0",
-    "concurrently": "^6.0.0",
-    "electron-builder": "^22.9.1",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-react": "^7.20.5",
     "@testing-library/jest-dom": "^4.2.4",
