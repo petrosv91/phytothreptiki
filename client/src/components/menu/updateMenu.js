@@ -72,13 +72,15 @@ function UpdateMenu() {
     return (
       <Flex justify='center'>
         <Flex w={300} align='center'>
-          <Icon
-            boxSize={8}
-            cursor='pointer'
-            color='special.500'
-            as={MdKeyboardBackspace}
-            onClick={handleResetItem}
-          />
+          {!isObjEmpty(updatedItem) && (
+            <Icon
+              boxSize={8}
+              cursor='pointer'
+              color='special.500'
+              as={MdKeyboardBackspace}
+              onClick={handleResetItem}
+            />
+          )}
           <Text w='full' textAlign='center'>{`Μεταβολή ${label}`}</Text>
         </Flex>
       </Flex>

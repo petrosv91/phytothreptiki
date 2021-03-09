@@ -26,7 +26,6 @@ function ProductionFile() {
         <FormInput w={['full', '45%']} name='date' label='Ημερομηνία' formRef={register} />
         <FormInput w={['full', '45%']} name='recipe' label='Συνταγή' formRef={register} />
       </Flex>
-      <FormInput w='full' tag='kg' name='totalWeights' label='Συνολικά Κιλά' formRef={register} />
       <ProductStore mt={4} />
     </Flex>
   );
