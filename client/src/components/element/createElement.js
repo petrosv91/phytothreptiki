@@ -7,10 +7,9 @@ import { baseElements } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { useReactFormSchema } from '../../hooks';
 import { Buttons, FormInput, FormSelect } from '../../lib/ui';
-import SearchIcon from '../../lib/ui/icons/searchIcon';
 import { convertStringToArrayOfNumbers } from '../../utils';
 
-function CreateElement({ resetItem }) {
+function CreateElement({ resetItem, refetch }) {
   const [state, send] = useMainMachine();
   const { updatedItem: element } = state.context;
 
@@ -33,20 +32,16 @@ function CreateElement({ resetItem }) {
       data: { id: element._id, ...formData },
       callback: () => {
         reset();
-        if (resetItem) resetItem();
+        if (resetItem) {
+          resetItem();
+          refetch();
+        }
       },
     });
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FormInput
-        name='label'
-        label='Ά Ύλη'
-        leftIcon={resetItem && SearchIcon}
-        onClick={resetItem && resetItem}
-        errors={errors}
-        formRef={register}
-      />
+      <FormInput name='label' label='Ά Ύλη' errors={errors} formRef={register} />
       <FormInput
         name='price'
         label='Τιμή'

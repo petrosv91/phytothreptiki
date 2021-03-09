@@ -4,13 +4,17 @@ import { useDisclosure, useToast } from '@chakra-ui/react';
 import { queryCache } from 'react-query';
 
 import useDeleteRecipe from '../../api/mutations/useDeleteRecipe';
-import { ConfirmationModal } from '../../lib/ui';
+import useGetRecipes from '../../api/queries/useGetRecipes';
+import { ConfirmationModal, RecipeList } from '../../lib/ui';
 import { createToast } from '../../utils';
+import PickingItem from '../lists/pickingItem';
 
 function DeleteRecipe() {
   const toast = useToast();
-  // const recipeKeys = React.useRef(['recipe', 'date']);
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const getRecipes = useGetRecipes();
+  const recipeKeys = React.useRef(['recipe', 'date']);
   const [mutate, { status }] = useDeleteRecipe({
     onSuccess: () => {
       onClose();
@@ -40,6 +44,13 @@ function DeleteRecipe() {
         message={message}
         onConfirm={onConfirm}
         isLoading={status === 'loading'}
+      />
+      <PickingItem
+        showDate={true}
+        keys={recipeKeys}
+        List={RecipeList}
+        promiseData={getRecipes}
+        handleClick={deleteItem}
       />
     </div>
   );

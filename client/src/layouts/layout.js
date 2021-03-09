@@ -1,19 +1,30 @@
 import React from 'react';
 
-import { Flex } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 
 function Layout({ children }) {
   return (
-    <Flex
+    <Box
+      p={[3, 5, 10]}
       color='text'
-      direction='column'
       overflowY='scroll'
       overflowX='hidden'
       bg='secondaryBackground'
       height='calc(100vh - 100px)'
     >
-      {children}
-    </Flex>
+      <Flex justify='center'>
+        <Flex
+          p={[3, 5, 10]}
+          bg='background'
+          boxShadow='md'
+          direction='column'
+          maxW={[450, 650, 850, 1000]}
+          minW={[300, 400, 600, 1000]}
+        >
+          {children}
+        </Flex>
+      </Flex>
+    </Box>
   );
 }
 

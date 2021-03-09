@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Box, useDisclosure } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
+import { useHistory } from 'react-router';
 
 import useGetRecipes from '../../api/queries/useGetRecipes';
 import { useMainMachine } from '../../context/mainMachineProvider';
@@ -16,6 +17,7 @@ import {
 import PickingItem from '../lists/pickingItem';
 
 function SearchMenu({ drawerClose = () => {} }) {
+  const history = useHistory();
   const [, send] = useMainMachine();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { reset, setValue, clearErrors } = useFormContext();
@@ -64,6 +66,7 @@ function SearchMenu({ drawerClose = () => {} }) {
           promiseData={getRecipes}
           handleClick={(recipe) => {
             handleItemClick(recipe);
+            history.push('/');
           }}
         />
       ),
@@ -78,6 +81,7 @@ function SearchMenu({ drawerClose = () => {} }) {
           promiseData={getRecipes}
           handleClick={({ products, ...rest }) => {
             handleItemClick(rest);
+            history.push('/rawMaterials');
           }}
         />
       ),
@@ -92,6 +96,7 @@ function SearchMenu({ drawerClose = () => {} }) {
           promiseData={getRecipes}
           handleClick={({ elements, ...rest }) => {
             handleItemClick(rest);
+            history.push('/productionFile');
           }}
         />
       ),

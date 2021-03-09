@@ -4,12 +4,17 @@ import { useDisclosure, useToast } from '@chakra-ui/react';
 import { queryCache } from 'react-query';
 
 import useDeleteElement from '../../api/mutations/useDeleteElement';
-import { ConfirmationModal } from '../../lib/ui';
+import useGetElements from '../../api/queries/useGetElements';
+import { ConfirmationModal, ElementList } from '../../lib/ui';
 import { createToast } from '../../utils';
+import PickingItem from '../lists/pickingItem';
 
 function DeleteElement() {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const keys = React.useRef(['label', 'formula']);
+  const getElements = useGetElements();
   const [mutate, { status }] = useDeleteElement({
     onSuccess: () => {
       onClose();
@@ -40,7 +45,12 @@ function DeleteElement() {
         onConfirm={onConfirm}
         isLoading={status === 'loading'}
       />
-      {/* <PickingElement handleElementClick={deleteItem} /> */}
+      <PickingItem
+        keys={keys}
+        List={ElementList}
+        promiseData={getElements}
+        handleClick={deleteItem}
+      />
     </div>
   );
 }

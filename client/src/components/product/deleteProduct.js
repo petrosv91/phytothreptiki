@@ -4,13 +4,17 @@ import { useDisclosure, useToast } from '@chakra-ui/react';
 import { queryCache } from 'react-query';
 
 import useDeleteProduct from '../../api/mutations/useDeleteProduct';
-import { ConfirmationModal } from '../../lib/ui';
+import useGetProducts from '../../api/queries/useGetProducts';
+import { ConfirmationModal, ProductList } from '../../lib/ui';
 import { createToast } from '../../utils';
-// import PickingProduct from './pickingProduct';
+import PickingItem from '../lists/pickingItem';
 
 function DeleteProduct() {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const keys = React.useRef(['label']);
+  const getProducts = useGetProducts();
   const [mutate, { status }] = useDeleteProduct({
     onSuccess: () => {
       onClose();
@@ -41,7 +45,12 @@ function DeleteProduct() {
         onConfirm={onConfirm}
         isLoading={status === 'loading'}
       />
-      {/* <PickingProduct handleProductClick={deleteItem} /> */}
+      <PickingItem
+        keys={keys}
+        List={ProductList}
+        promiseData={getProducts}
+        handleClick={deleteItem}
+      />
     </div>
   );
 }

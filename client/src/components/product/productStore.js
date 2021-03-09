@@ -7,9 +7,9 @@ import { useThemeMode } from '../../context/themeModeProvider';
 import { DeleteIcon, Table } from '../../lib/ui';
 import { roundToTwo } from '../../utils';
 
-function ProductStore({ editable, ...rest }) {
+function ProductStore({ printable, editable, ...rest }) {
   const { currentTheme } = useThemeMode();
-  const labelColor = editable
+  const labelColor = printable
     ? 'special.500'
     : currentTheme === 'dark'
     ? 'special.600'

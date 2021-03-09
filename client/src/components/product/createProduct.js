@@ -4,9 +4,8 @@ import { useForm } from 'react-hook-form';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Buttons, FormInput } from '../../lib/ui';
-import SearchIcon from '../../lib/ui/icons/searchIcon';
 
-function CreateProduct({ resetItem }) {
+function CreateProduct({ resetItem, refetch }) {
   const [state, send] = useMainMachine();
   const { updatedItem: product } = state.context;
 
@@ -23,19 +22,16 @@ function CreateProduct({ resetItem }) {
       data: { id: product._id, ...formData },
       callback: () => {
         reset();
-        if (resetItem) resetItem();
+        if (resetItem) {
+          refetch();
+          resetItem();
+        }
       },
     });
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FormInput
-        name='label'
-        label='Επωνυμία Προιόντος'
-        leftIcon={resetItem && SearchIcon}
-        onClick={resetItem && resetItem}
-        formRef={register}
-      />
+      <FormInput w={300} name='label' label='Επωνυμία Προιόντος' formRef={register} />
       <Buttons.Primary mt={4} w='full' type='submit' isLoading={isSubmitting}>
         Προσθήκη
       </Buttons.Primary>

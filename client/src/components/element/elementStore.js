@@ -9,9 +9,9 @@ import { useThemeMode } from '../../context/themeModeProvider';
 import { DeleteIcon, Table } from '../../lib/ui';
 import { roundToTwo } from '../../utils';
 
-function ElementStore({ editable, ...rest }) {
+function ElementStore({ printable, editable, ...rest }) {
   const { currentTheme } = useThemeMode();
-  const labelColor = editable
+  const labelColor = printable
     ? 'special.500'
     : currentTheme === 'dark'
     ? 'special.600'
@@ -53,7 +53,7 @@ function ElementStore({ editable, ...rest }) {
               <Table.Header key={el.value}>{el.label.toUpperCase()}</Table.Header>
             ))}
             <Table.Header>ΚΙΛΑ</Table.Header>
-            {editable && (
+            {!printable && (
               <>
                 <Table.Header>ΤΙΜΗ</Table.Header>
                 <Table.Header>ΣΥΝΟΛΙΚΟ ΚΟΣΤΟΣ</Table.Header>
@@ -86,7 +86,7 @@ function ElementStore({ editable, ...rest }) {
                 <Table.Cell key={el.value}>{roundToTwo(calcBaseElement(row, el))}</Table.Cell>
               ))}
               <Table.Cell>{roundToTwo(calcWeights(row))}</Table.Cell>
-              {editable && (
+              {!printable && (
                 <>
                   <Table.Cell>{row.price || 0}</Table.Cell>
                   <Table.Cell>{roundToTwo((row.rate * (row.price || 0)) / 100)}</Table.Cell>
@@ -115,7 +115,7 @@ function ElementStore({ editable, ...rest }) {
               )}
               kg
             </Table.Cell>
-            {editable && (
+            {!printable && (
               <>
                 <Table.Cell>
                   {roundToTwo(

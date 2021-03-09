@@ -4,16 +4,16 @@ import { Flex, useDisclosure } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 import { useReactToPrint } from 'react-to-print';
 
-import { useMainMachine } from '../../context/mainMachineProvider';
-import { ConfirmationModal, Loading } from '../../lib/ui';
-import ElementForm from '../element/elementForm';
-import ElementStore from '../element/elementStore';
-import ComponentToPrint from '../print/componentToPrint';
-import ProductForm from '../product/productForm';
-import ProductStore from '../product/productStore';
-import RecipeFooter from './recipeFooter';
-import RecipeHeader from './recipeHeader';
-import RecipeMiddle from './recipeMiddle';
+import ElementForm from '../components/element/elementForm';
+import ElementStore from '../components/element/elementStore';
+import ComponentToPrint from '../components/print/componentToPrint';
+import ProductForm from '../components/product/productForm';
+import ProductStore from '../components/product/productStore';
+import RecipeFooter from '../components/recipe/recipeFooter';
+import RecipeHeader from '../components/recipe/recipeHeader';
+import RecipeMiddle from '../components/recipe/recipeMiddle';
+import { useMainMachine } from '../context/mainMachineProvider';
+import { ConfirmationModal, Loading } from '../lib/ui';
 
 const MESSAGE = 'Προσοχή αν πατήσετε σύνεχεια θα χάσετε ότι έχετε κάνει στην διαδικασία';
 
@@ -42,14 +42,7 @@ function Recipe() {
   }
 
   return (
-    <Flex
-      p={[3, 5, 10]}
-      maxW={[450, 650, 850, 1000]}
-      minW={[300, 400, 600, 1000]}
-      bg='background'
-      boxShadow='md'
-      direction='column'
-    >
+    <Flex w='full' direction='column'>
       <Loading isLoading={isSubmitting || isLoading} />
       <ComponentToPrint printRef={printRef} />
       <ConfirmationModal
@@ -65,10 +58,10 @@ function Recipe() {
         printLoading={printLoading}
       />
       <ElementForm mt={4} />
-      <ElementStore mt={4} />
+      <ElementStore mt={4} editable />
       <RecipeMiddle mt={4} />
       <ProductForm mt={4} />
-      <ProductStore mt={4} />
+      <ProductStore mt={4} editable />
       <RecipeFooter mt={4} />
     </Flex>
   );

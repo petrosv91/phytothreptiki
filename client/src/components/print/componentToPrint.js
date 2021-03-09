@@ -54,8 +54,8 @@ function ComponentToPrint({ printRef }) {
             <FormInput label='Κιλά' w='30%' tag='kg' defaultValue={weights} />
             <FormInput label='Συνολικά Κιλά' w='30%' tag='kg' defaultValue={totalWeights} />
           </Flex>
-          <ElementStore mt={2} />
-          <ProductStore mt={2} />
+          <ElementStore mt={2} printable />
+          <ProductStore mt={2} printable />
         </Flex>
       </ChakraProvider>
     </div>
