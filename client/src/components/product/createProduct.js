@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Buttons, FormInput } from '../../lib/ui';
 
-function CreateProduct({ resetItem, refetch }) {
+function CreateProduct({ resetItem }) {
   const [state, send] = useMainMachine();
   const { updatedItem: product } = state.context;
 
@@ -22,10 +22,7 @@ function CreateProduct({ resetItem, refetch }) {
       data: { id: product._id, ...formData },
       callback: () => {
         reset();
-        if (resetItem) {
-          refetch();
-          resetItem();
-        }
+        if (resetItem) resetItem();
       },
     });
   }

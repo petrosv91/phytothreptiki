@@ -5,9 +5,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { ReactQueryConfigProvider } from 'react-query';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import CreateElement from '../components/element/createElement';
 import Navbar from '../components/navbar/navbar';
-import CreateProduct from '../components/product/createProduct';
 import { formDefaultValues } from '../config';
 import { useReactFormSchema, useReactQueryConfig } from '../hooks';
 import { Layout } from '../layouts';

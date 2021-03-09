@@ -12,13 +12,15 @@ import CreateElement from '../element/createElement';
 import PickingItem from '../lists/pickingItem';
 import CreateProduct from '../product/createProduct';
 
+function Edit({ keys, List, handleClick, useGetItems }) {
+  const getItems = useGetItems();
+  return <PickingItem keys={keys} List={List} promiseData={getItems} handleClick={handleClick} />;
+}
+
 function UpdateMenu() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [state, send] = useMainMachine();
   const { updatedItem } = state.context;
-
-  const getElements = useGetElements();
-  const getProducts = useGetProducts();
 
   const productKeys = React.useRef(['label']);
   const elementKeys = React.useRef(['label', 'formula']);
@@ -29,10 +31,10 @@ function UpdateMenu() {
     {
       label: 'Στοιχείου',
       baseComp: (
-        <PickingItem
+        <Edit
           keys={elementKeys}
           List={ElementList}
-          promiseData={getElements}
+          useGetItems={useGetElements}
           handleClick={handleItemClick}
         />
       ),
@@ -41,10 +43,10 @@ function UpdateMenu() {
     {
       label: 'Προϊόντος',
       baseComp: (
-        <PickingItem
+        <Edit
           keys={productKeys}
           List={ProductList}
-          promiseData={getProducts}
+          useGetItems={useGetProducts}
           handleClick={handleItemClick}
         />
       ),

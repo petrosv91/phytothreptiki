@@ -9,7 +9,7 @@ import { useReactFormSchema } from '../../hooks';
 import { Buttons, FormInput, FormSelect } from '../../lib/ui';
 import { convertStringToArrayOfNumbers } from '../../utils';
 
-function CreateElement({ resetItem, refetch }) {
+function CreateElement({ resetItem }) {
   const [state, send] = useMainMachine();
   const { updatedItem: element } = state.context;
 
@@ -32,10 +32,7 @@ function CreateElement({ resetItem, refetch }) {
       data: { id: element._id, ...formData },
       callback: () => {
         reset();
-        if (resetItem) {
-          resetItem();
-          refetch();
-        }
+        if (resetItem) resetItem();
       },
     });
   }
