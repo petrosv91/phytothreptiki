@@ -9,9 +9,9 @@ import { useThemeMode } from '../../context/themeModeProvider';
 import { DeleteIcon, Table } from '../../lib/ui';
 import { roundToTwo } from '../../utils';
 
-function ElementStore({ printable, ...rest }) {
+function ElementStore({ editable, ...rest }) {
   const { currentTheme } = useThemeMode();
-  const labelColor = printable
+  const labelColor = editable
     ? 'special.500'
     : currentTheme === 'dark'
     ? 'special.600'
@@ -46,14 +46,14 @@ function ElementStore({ printable, ...rest }) {
       <Table.Table {...rest}>
         <Table.Head>
           <Table.Row>
-            {!printable && <Table.Header>{/* Actions */}</Table.Header>}
+            {editable && <Table.Header>{/* Actions */}</Table.Header>}
             <Table.Header>Ά ΥΛΕΣ</Table.Header>
             <Table.Header>ΣΥΜΜΕΤΟΧΗ</Table.Header>
             {baseElements.map((el) => (
               <Table.Header key={el.value}>{el.label.toUpperCase()}</Table.Header>
             ))}
             <Table.Header>ΚΙΛΑ</Table.Header>
-            {!printable && (
+            {editable && (
               <>
                 <Table.Header>ΤΙΜΗ</Table.Header>
                 <Table.Header>ΣΥΝΟΛΙΚΟ ΚΟΣΤΟΣ</Table.Header>
@@ -64,7 +64,7 @@ function ElementStore({ printable, ...rest }) {
         <Table.Body>
           {elementStore.map((row, index) => (
             <Table.Row key={index}>
-              {!printable && (
+              {editable && (
                 <Table.Cell>
                   <DeleteIcon
                     onClick={() => {
@@ -86,7 +86,7 @@ function ElementStore({ printable, ...rest }) {
                 <Table.Cell key={el.value}>{roundToTwo(calcBaseElement(row, el))}</Table.Cell>
               ))}
               <Table.Cell>{roundToTwo(calcWeights(row))}</Table.Cell>
-              {!printable && (
+              {editable && (
                 <>
                   <Table.Cell>{row.price || 0}</Table.Cell>
                   <Table.Cell>{roundToTwo((row.rate * (row.price || 0)) / 100)}</Table.Cell>
@@ -95,7 +95,7 @@ function ElementStore({ printable, ...rest }) {
             </Table.Row>
           ))}
           <Table.Row>
-            {!printable && <Table.Cell>{/* Actions */}</Table.Cell>}
+            {editable && <Table.Cell>{/* Actions */}</Table.Cell>}
             <Table.Cell>Σύνολο</Table.Cell>
             <Table.Cell>{elementStore.reduce((prev, curr) => prev + curr.rate, 0)}%</Table.Cell>
             {baseElements.map((el) => (
@@ -115,7 +115,7 @@ function ElementStore({ printable, ...rest }) {
               )}
               kg
             </Table.Cell>
-            {!printable && (
+            {editable && (
               <>
                 <Table.Cell>
                   {roundToTwo(

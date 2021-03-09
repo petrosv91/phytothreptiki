@@ -7,9 +7,9 @@ import { useThemeMode } from '../../context/themeModeProvider';
 import { DeleteIcon, Table } from '../../lib/ui';
 import { roundToTwo } from '../../utils';
 
-function ProductStore({ printable, ...rest }) {
+function ProductStore({ editable, ...rest }) {
   const { currentTheme } = useThemeMode();
-  const labelColor = printable
+  const labelColor = editable
     ? 'special.500'
     : currentTheme === 'dark'
     ? 'special.600'
@@ -28,7 +28,7 @@ function ProductStore({ printable, ...rest }) {
       <Table.Table {...rest}>
         <Table.Head>
           <Table.Row>
-            {!printable && <Table.Header>{/* Actions */}</Table.Header>}
+            {editable && <Table.Header>{/* Actions */}</Table.Header>}
             <Table.Header>ΕΠΩΝΥΜΙΑ</Table.Header>
             <Table.Header>ΤΕΜΑΧΙΑ</Table.Header>
             <Table.Header>ΚΙΛΑ</Table.Header>
@@ -38,7 +38,7 @@ function ProductStore({ printable, ...rest }) {
         <Table.Body>
           {productStore.map((row, index) => (
             <Table.Row key={index}>
-              {!printable && (
+              {editable && (
                 <Table.Cell>
                   <DeleteIcon
                     onClick={() => {
@@ -54,7 +54,7 @@ function ProductStore({ printable, ...rest }) {
             </Table.Row>
           ))}
           <Table.Row>
-            {!printable && <Table.Cell>{/* Actions */}</Table.Cell>}
+            {editable && <Table.Cell>{/* Actions */}</Table.Cell>}
             <Table.Cell>Σύνολο</Table.Cell>
             <Table.Cell>
               {roundToTwo(

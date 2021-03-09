@@ -6,7 +6,9 @@ function findMatch(keys, query, item) {
       return item[key].toLowerCase().includes(query.toLowerCase());
     }
     if (item[key] instanceof Array) {
-      return item[key].some((cell) => String(cell)?.toLowerCase().includes(query.toLowerCase()));
+      return item[key].some(({ label }) =>
+        String(label)?.toLowerCase().includes(query.toLowerCase()),
+      );
     }
     return false;
   });

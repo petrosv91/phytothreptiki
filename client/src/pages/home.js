@@ -5,27 +5,18 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ReactQueryConfigProvider } from 'react-query';
 
-// import Footer from '../components/footer/footer';
 import Navbar from '../components/navbar/navbar';
 import NewRecipe from '../components/recipe/newRecipe';
+import { formDefaultValues } from '../config';
 import { useReactFormSchema, useReactQueryConfig } from '../hooks';
 import { Layout } from '../layouts';
-import { getCurrentDate } from '../utils';
 
 function Home() {
   const overrides = useReactQueryConfig();
   const { mainFormSchema } = useReactFormSchema();
   const methods = useForm({
     mode: 'onBlur',
-    defaultValues: {
-      date: getCurrentDate(),
-      type: '',
-      recipe: '',
-      loops: '',
-      weights: '',
-      restPrice: '',
-      totalWeights: '',
-    },
+    defaultValues: { ...formDefaultValues },
     resolver: yupResolver(mainFormSchema),
   });
   return (
@@ -36,7 +27,6 @@ function Home() {
           <Flex p={[3, 5, 10]} justify='center'>
             <NewRecipe />
           </Flex>
-          {/* <Footer /> */}
         </Layout>
       </FormProvider>
     </ReactQueryConfigProvider>

@@ -7,7 +7,7 @@ export function createToast(toast, props) {
   toast({
     position: 'bottom',
     isClosable: true,
-    duration: 4000,
+    duration: 5000,
     render: ({ onClose }) => <Toast onClose={onClose} {...props} />,
   });
 }

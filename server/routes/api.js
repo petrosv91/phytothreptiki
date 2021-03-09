@@ -5,11 +5,11 @@ const Element = require('../models/element');
 const Product = require('../models/product');
 const Recipe = require('../models/recipe');
 const Code = require('../models/code');
-const ProductionFile = require('../models/productionFile');
 
 router.post('/', async (req, res) => {
   try {
     switch (req.body.service) {
+      // ----------- Get Services -------------
       case 'getMaxCode': {
         const allPosts = await Code.find();
         return res.json({ success: true, data: allPosts });
@@ -26,20 +26,20 @@ router.post('/', async (req, res) => {
         const allPosts = await Product.find();
         return res.json({ success: true, data: allPosts });
       }
-      case 'getProductionFile': {
-        const allPosts = await ProductionFile.find();
-        return res.json({ success: true, data: allPosts });
+      // ----------- Set Services ------------
+      case 'setMaxCode': {
+        const newCode = Number(req.body.data.code) + 1;
+        await Code.updateOne({ _id: req.body.data.codeId }, { $set: { code: newCode } });
+        return res.json({ success: true });
       }
       case 'setRecipe': {
         const exists = await Recipe.findById(req.body.data.id);
         if (exists) {
           await Recipe.updateOne({ _id: req.body.data.id }, { $set: { ...req.body.data } });
-          return res.json({ success: true });
+          return res.json({ success: true, exists: true });
         }
         const newPost = new Recipe({ ...req.body.data });
         await newPost.save();
-        const newCode = Number(req.body.data.code) + 1;
-        await Code.updateOne({ _id: req.body.data.codeId }, { $set: { code: newCode } });
         return res.json({ success: true });
       }
       case 'setElement': {
@@ -62,11 +62,7 @@ router.post('/', async (req, res) => {
         await newPost.save();
         return res.json({ success: true });
       }
-      case 'setProductionFile': {
-        const newPost = new ProductionFile({ ...req.body.data });
-        await newPost.save();
-        return res.json({ success: true });
-      }
+      // ---------- Delete Services ------------
       case 'deleteRecipe': {
         await Recipe.deleteOne({ _id: req.body.id });
         return res.json({ success: true });
@@ -77,10 +73,6 @@ router.post('/', async (req, res) => {
       }
       case 'deleteProduct': {
         await Product.deleteOne({ _id: req.body.id });
-        return res.json({ success: true });
-      }
-      case 'deleteProductionFile': {
-        await ProductionFile.deleteOne({ _id: req.body.id });
         return res.json({ success: true });
       }
       default: {

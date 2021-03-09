@@ -6,10 +6,10 @@ import { queryCache } from 'react-query';
 import useDeleteRecipe from '../../api/mutations/useDeleteRecipe';
 import { ConfirmationModal } from '../../lib/ui';
 import { createToast } from '../../utils';
-import PickingRecipe from './pickingRecipe';
 
 function DeleteRecipe() {
   const toast = useToast();
+  // const recipeKeys = React.useRef(['recipe', 'date']);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [mutate, { status }] = useDeleteRecipe({
     onSuccess: () => {
@@ -41,7 +41,6 @@ function DeleteRecipe() {
         onConfirm={onConfirm}
         isLoading={status === 'loading'}
       />
-      <PickingRecipe handleRecipeClick={deleteItem} />
     </div>
   );
 }

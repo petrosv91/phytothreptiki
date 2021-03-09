@@ -6,7 +6,6 @@ const RecipeSchema = mongoose.Schema({
   date: String,
   type: String,
   restPrice: Number,
-  totalWeights: Number,
   elements: Array,
   products: Array,
 });

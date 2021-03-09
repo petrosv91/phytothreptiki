@@ -6,7 +6,6 @@ import { queryCache } from 'react-query';
 import useDeleteElement from '../../api/mutations/useDeleteElement';
 import { ConfirmationModal } from '../../lib/ui';
 import { createToast } from '../../utils';
-import PickingElement from './pickingElement';
 
 function DeleteElement() {
   const toast = useToast();
@@ -41,7 +40,7 @@ function DeleteElement() {
         onConfirm={onConfirm}
         isLoading={status === 'loading'}
       />
-      <PickingElement handleElementClick={deleteItem} />
+      {/* <PickingElement handleElementClick={deleteItem} /> */}
     </div>
   );
 }

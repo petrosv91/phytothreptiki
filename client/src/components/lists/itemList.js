@@ -1,52 +1,43 @@
 import React from 'react';
 
-import { Box } from '@chakra-ui/react';
+import { List as ChakraList } from '@chakra-ui/react';
+import { AnimatePresence } from 'framer-motion';
+import { v4 as uuidv4 } from 'uuid';
 
-import { useFiltersData, usePagination } from '../../hooks';
-import { Pagination } from '../../layouts';
-import { DatePicker, FormInput } from '../../lib/ui';
-import { formatDate } from '../../utils';
+import ListItem from '../../lib/ui/lists/listItem';
 
-function ItemList({ isLoading, handleClick, data, keys, List, showDate }) {
-  const [query, setQuery] = React.useState('');
+function ItemList({ handleClick, data, Item }) {
+  const shouldAnimate = React.useRef(true);
 
-  const filterdData = useFiltersData({ data, query, keys });
-  const paginationProps = usePagination(filterdData);
-
-  function handleChange(e) {
-    setQuery(e.target.value);
-  }
-  function handleDateChange(date) {
-    setQuery(formatDate(date, '/'));
-  }
+  React.useEffect(() => {
+    if (data.length) {
+      shouldAnimate.current = false;
+    } else {
+      shouldAnimate.current = true;
+    }
+  }, [data]);
 
   return (
-    <Box>
-      {showDate ? (
-        <DatePicker
-          w={[250, 300]}
-          value={query}
-          placeholder='Αναζήτηση...'
-          handleChange={handleChange}
-          handleDateChange={handleDateChange}
-        />
-      ) : (
-        <FormInput
-          w={[250, 300]}
-          value={query}
-          autoFocus={true}
-          onChange={handleChange}
-          placeholder='Αναζήτηση...'
-        />
-      )}
-      <List
-        pt={5}
-        isLoading={isLoading}
-        handleClick={handleClick}
-        data={paginationProps.currentData}
-      />
-      {!isLoading && <Pagination {...paginationProps} />}
-    </Box>
+    <AnimatePresence initial={false}>
+      <ChakraList pt={5} spacing={3}>
+        {data.map((item, index) => {
+          return (
+            <ListItem
+              key={uuidv4()}
+              animation={{
+                index,
+                shouldAnimate: shouldAnimate.current,
+              }}
+              onClick={() => {
+                handleClick(item);
+              }}
+            >
+              <Item item={item} />
+            </ListItem>
+          );
+        })}
+      </ChakraList>
+    </AnimatePresence>
   );
 }
 

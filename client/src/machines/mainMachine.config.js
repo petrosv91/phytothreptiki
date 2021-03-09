@@ -54,34 +54,47 @@ export const actions = {
   }),
 };
 
-export const guards = {};
+export const guards = {
+  doesRecipeExists: (ctx, e) => {
+    return e.data.result.exists;
+  },
+};
 
 export const services = {
-  setRecipe: async (ctx, e) => {
+  getMaxCode: async (ctx, e) => {
     try {
-      const { code, codeId, recipeId, elementStore, productStore } = ctx;
-      const data = {
-        ...e.data,
-        code,
-        codeId,
-        id: recipeId,
-        elements: elementStore,
-        products: productStore,
-      };
-      const result = await baseGetService({ service: 'setRecipe', data });
+      const result = await baseGetService({ service: 'getMaxCode' });
       return { result, ...e };
     } catch (error) {
       throw Object.assign(new Error(error), { toast: e.toast, message: error.message });
     }
   },
-  setProductionFile: async (ctx, e) => {
-    const { date } = e.data.data;
-    const { productStore } = ctx;
-    const result = await baseGetService({
-      service: 'setProductionFile',
-      data: { date, productStore },
-    });
-    return { result, callback: e.data.callback };
+  setMaxCode: async (ctx, e) => {
+    try {
+      const { code, codeId } = ctx;
+      const result = await baseGetService({ service: 'setMaxCode', data: { code, codeId } });
+      return { result, ...e };
+    } catch (error) {
+      throw Object.assign(new Error(error), {
+        toast: e.toast,
+        message: `Ο κωδικός δεν αυξήθηκε: ${error.message}`,
+      });
+    }
+  },
+  setRecipe: async (ctx, e) => {
+    try {
+      const { recipeId, elementStore, productStore } = ctx;
+      const result = await baseGetService({
+        service: 'setRecipe',
+        data: { ...e.data, id: recipeId, elements: elementStore, products: productStore },
+      });
+      return { result, ...e };
+    } catch (error) {
+      throw Object.assign(new Error(error), {
+        toast: e.toast,
+        message: `Η συνταγή δεν αποθηκεύτηκε: ${error.message}`,
+      });
+    }
   },
   setElement: async (ctx, e) => {
     try {
@@ -94,14 +107,6 @@ export const services = {
   setProduct: async (ctx, e) => {
     try {
       const result = await baseGetService({ service: 'setProduct', data: { ...e.data } });
-      return { result, ...e };
-    } catch (error) {
-      throw Object.assign(new Error(error), { toast: e.toast, message: error.message });
-    }
-  },
-  getMaxCode: async (ctx, e) => {
-    try {
-      const result = await baseGetService({ service: 'getMaxCode' });
       return { result, ...e };
     } catch (error) {
       throw Object.assign(new Error(error), { toast: e.toast, message: error.message });

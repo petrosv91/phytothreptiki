@@ -5,17 +5,21 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 
+import useGetElements from '../../api/queries/useGetElements';
 import { baseElements } from '../../config/';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { useReactFormSchema } from '../../hooks';
-import { Modal, Buttons, FormInput, FormSwitch, CloseIcon } from '../../lib/ui';
+import { Modal, Buttons, FormInput, FormSwitch, CloseIcon, ElementList } from '../../lib/ui';
 import SearchIcon from '../../lib/ui/icons/searchIcon';
 import { convertStringToArrayOfNumbers, createToast, isRateValid } from '../../utils';
-import PickingElement from './pickingElement';
+import PickingItem from '../lists/pickingItem';
 
 function ElementForm() {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const getElements = useGetElements();
+  const keys = React.useRef(['label', 'formula']);
 
   const { elementFormSchema } = useReactFormSchema();
   const { register, handleSubmit, getValues, setValue, reset, errors } = useForm({
@@ -58,7 +62,12 @@ function ElementForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Modal isOpen={isOpen} onClose={onClose} header='Επιλογή Ά Ύλης'>
-        <PickingElement handleElementClick={handleElementClick} />
+        <PickingItem
+          keys={keys}
+          List={ElementList}
+          promiseData={getElements}
+          handleClick={handleElementClick}
+        />
       </Modal>
       <Flex direction='column'>
         <FormSwitch

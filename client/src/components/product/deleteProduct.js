@@ -6,7 +6,7 @@ import { queryCache } from 'react-query';
 import useDeleteProduct from '../../api/mutations/useDeleteProduct';
 import { ConfirmationModal } from '../../lib/ui';
 import { createToast } from '../../utils';
-import PickingProduct from './pickingProduct';
+// import PickingProduct from './pickingProduct';
 
 function DeleteProduct() {
   const toast = useToast();
@@ -41,7 +41,7 @@ function DeleteProduct() {
         onConfirm={onConfirm}
         isLoading={status === 'loading'}
       />
-      <PickingProduct handleProductClick={deleteItem} />
+      {/* <PickingProduct handleProductClick={deleteItem} /> */}
     </div>
   );
 }

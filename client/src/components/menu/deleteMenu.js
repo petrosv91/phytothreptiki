@@ -5,7 +5,6 @@ import { Box, useDisclosure } from '@chakra-ui/react';
 import { Menu, Modal } from '../../lib/ui';
 import DeleteElement from '../element/deleteElement';
 import DeleteProduct from '../product/deleteProduct';
-import DeleteProductionFile from '../productionFile/DeleteProductionFile';
 import DeleteRecipe from '../recipe/deleteRecipe';
 
 function DeleteMenu() {
@@ -16,7 +15,6 @@ function DeleteMenu() {
     { label: 'Συνταγής', comp: <DeleteRecipe /> },
     { label: 'Στοιχείου', comp: <DeleteElement /> },
     { label: 'Προϊόντος', comp: <DeleteProduct /> },
-    { label: 'Αρχείου Παραγωγής', comp: <DeleteProductionFile /> },
   ];
 
   function handleClick(opt) {

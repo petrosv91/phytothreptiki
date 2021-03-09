@@ -1,19 +1,10 @@
 import React from 'react';
 
-import { ListItem as ChakraListItem, Skeleton } from '@chakra-ui/react';
+import { ListItem as ChakraListItem } from '@chakra-ui/react';
 
 import ListAnimation from '../../../animations/listAnimation';
 
-function ListItem({ animation, children, onClick, isLoaded = true, ...rest }) {
-  if (!isLoaded) {
-    return (
-      <Skeleton>
-        <ChakraListItem height={14} width={[250, 300]} rounded='md' {...rest}>
-          {children}
-        </ChakraListItem>
-      </Skeleton>
-    );
-  }
+function ListItem({ animation, children, onClick, ...rest }) {
   return (
     <ListAnimation animation={animation}>
       <ChakraListItem

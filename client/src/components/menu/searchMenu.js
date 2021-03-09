@@ -3,19 +3,32 @@ import React from 'react';
 import { Box, useDisclosure } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 
+import useGetRecipes from '../../api/queries/useGetRecipes';
 import { useMainMachine } from '../../context/mainMachineProvider';
-import { Loading, Menu, Modal } from '../../lib/ui';
-import PickingProductionFile from '../productionFile/PickingProductionFile';
-import PickingRecipe from '../recipe/pickingRecipe';
+import {
+  Loading,
+  Menu,
+  Modal,
+  ProductionFileList,
+  RawMaterialList,
+  RecipeList,
+} from '../../lib/ui';
+import PickingItem from '../lists/pickingItem';
 
 function SearchMenu({ drawerClose = () => {} }) {
   const [, send] = useMainMachine();
-  const { reset, setValue, clearErrors } = useFormContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { reset, setValue, clearErrors } = useFormContext();
+
+  const getRecipes = useGetRecipes();
   const [loading, setLoading] = React.useState(false);
   const [{ comp, label }, setComponent] = React.useState({});
 
-  async function handleRecipeClick({ _id, code, elements, products, ...recipe }) {
+  const recipeKeys = React.useRef(['recipe', 'date']);
+  const rawMaterialKeys = React.useRef(['date', 'type']);
+  const productionKeys = React.useRef(['date', 'products']);
+
+  async function handleItemClick({ _id, code, elements, products, ...rest }) {
     try {
       onClose();
       drawerClose();
@@ -25,7 +38,7 @@ function SearchMenu({ drawerClose = () => {} }) {
       });
       setTimeout(() => {
         send({ type: 'ADD_RECIPE', id: _id, code, elements, products });
-        Object.entries(recipe).forEach(([key, value]) => {
+        Object.entries(rest).forEach(([key, value]) => {
           setValue(key, value);
         });
         setLoading(false);
@@ -35,34 +48,53 @@ function SearchMenu({ drawerClose = () => {} }) {
       console.log(error);
     }
   }
-  async function handleProductionClick({ date, productStore }) {
-    try {
-      onClose();
-      drawerClose();
-      setLoading(true);
-      await new Promise((resolve) => {
-        return resolve(send({ type: 'DELETE_ITEM', key: 'switches', callback: reset }));
-      });
-      setTimeout(() => {
-        send({ type: 'ADD_RECIPE', products: productStore });
-        setValue('date', date);
-        setLoading(false);
-      }, [300]);
-      clearErrors();
-    } catch (error) {
-      console.log(error);
-    }
-  }
+
   function handleClick(opt) {
     setComponent(opt);
     onOpen();
   }
 
   const options = [
-    { label: 'Συνταγής', comp: <PickingRecipe handleRecipeClick={handleRecipeClick} /> },
     {
-      label: 'Παραγωγής',
-      comp: <PickingProductionFile handleProductionClick={handleProductionClick} />,
+      label: 'Συνταγής',
+      comp: (
+        <PickingItem
+          keys={recipeKeys}
+          List={RecipeList}
+          promiseData={getRecipes}
+          handleClick={(recipe) => {
+            handleItemClick(recipe);
+          }}
+        />
+      ),
+    },
+    {
+      label: 'Αρχείου Ά Υλών',
+      comp: (
+        <PickingItem
+          showDate={true}
+          keys={rawMaterialKeys}
+          List={RawMaterialList}
+          promiseData={getRecipes}
+          handleClick={({ products, ...rest }) => {
+            handleItemClick(rest);
+          }}
+        />
+      ),
+    },
+    {
+      label: 'Αρχείου Παραγωγής',
+      comp: (
+        <PickingItem
+          showDate={true}
+          keys={productionKeys}
+          List={ProductionFileList}
+          promiseData={getRecipes}
+          handleClick={({ elements, ...rest }) => {
+            handleItemClick(rest);
+          }}
+        />
+      ),
     },
   ];
 

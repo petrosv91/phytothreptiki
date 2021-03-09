@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 
+import useGetProducts from '../../api/queries/useGetProducts';
 import { weights } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { useReactFormSchema } from '../../hooks';
@@ -16,13 +17,17 @@ import {
   FormSwitch,
   EditIcon,
   CloseIcon,
+  ProductList,
 } from '../../lib/ui';
 import SearchIcon from '../../lib/ui/icons/searchIcon';
-import PickingProduct from './pickingProduct';
+import PickingItem from '../lists/pickingItem';
 
 function ProductForm() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const [edit, setEdit] = React.useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const keys = React.useRef(['label']);
+  const getProducts = useGetProducts();
 
   const { productFormSchema } = useReactFormSchema();
   const { register, handleSubmit, getValues, setValue, reset, errors } = useForm({
@@ -54,7 +59,12 @@ function ProductForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Modal isOpen={isOpen} onClose={onClose} header='Επιλογή Προϊόντος'>
-        <PickingProduct handleProductClick={handleProductClick} />
+        <PickingItem
+          keys={keys}
+          List={ProductList}
+          promiseData={getProducts}
+          handleClick={handleProductClick}
+        />
       </Modal>
       <Flex direction='column'>
         <FormSwitch

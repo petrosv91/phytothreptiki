@@ -6,9 +6,9 @@ import { useMainMachine } from '../../context/mainMachineProvider';
 import { Menu, Modal } from '../../lib/ui';
 import { isObjEmpty } from '../../utils';
 import CreateElement from '../element/createElement';
-import PickingElement from '../element/pickingElement';
+// import PickingElement from '../element/pickingElement';
 import CreateProduct from '../product/createProduct';
-import PickingProduct from '../product/pickingProduct';
+// import PickingProduct from '../product/pickingProduct';
 
 function UpdateMenu() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -20,12 +20,12 @@ function UpdateMenu() {
   const options = [
     {
       label: 'Στοιχείου',
-      baseComp: <PickingElement handleElementClick={handleItemClick} />,
+      // baseComp: <PickingElement handleElementClick={handleItemClick} />,
       secondComp: <CreateElement resetItem={handleResetItem} />,
     },
     {
       label: 'Προϊόντος',
-      baseComp: <PickingProduct handleProductClick={handleItemClick} />,
+      // baseComp: <PickingProduct handleProductClick={handleItemClick} />,
       secondComp: <CreateProduct resetItem={handleResetItem} />,
     },
   ];

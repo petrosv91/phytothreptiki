@@ -1,6 +1,6 @@
 import { createMachine } from 'xstate';
 
-import { initialContext, actions, services } from './mainMachine.config';
+import { initialContext, actions, services, guards } from './mainMachine.config';
 
 export const MainMachine = createMachine({
   id: 'mainMachine',
@@ -73,27 +73,38 @@ export const MainMachine = createMachine({
       },
     },
     recipeSubmitting: {
-      invoke: {
-        src: services.setRecipe,
-        onDone: {
-          target: 'productionSubmitting',
+      initial: 'settingRecipe',
+      states: {
+        settingRecipe: {
+          invoke: {
+            src: services.setRecipe,
+            onDone: [
+              {
+                cond: guards.doesRecipeExists,
+                target: '#mainMachine.gettingMaxCode',
+                actions: [actions.resetContext, actions.callback],
+              },
+              { target: 'settingMaxCode' },
+            ],
+            onError: {
+              target: '#mainMachine.editting',
+              actions: ['renderError'],
+            },
+          },
         },
-        onError: {
-          target: 'editting',
-          actions: ['renderError'],
-        },
-      },
-    },
-    productionSubmitting: {
-      invoke: {
-        src: services.setProductionFile,
-        onDone: {
-          target: 'gettingMaxCode',
-          actions: ['renderSuccess', actions.resetContext, actions.callback],
-        },
-        onError: {
-          target: 'editting',
-          actions: ['renderError'],
+        settingMaxCode: {
+          entry: [actions.resetContext, actions.callback],
+          invoke: {
+            src: services.setMaxCode,
+            onDone: {
+              target: '#mainMachine.gettingMaxCode',
+              actions: ['renderSuccess'],
+            },
+            onError: {
+              target: '#mainMachine.editting',
+              actions: ['renderError'],
+            },
+          },
         },
       },
     },

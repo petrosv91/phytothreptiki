@@ -10,8 +10,10 @@ import Input from './inputs/input';
 import ElementList from './lists/elementList';
 import ProductionFileList from './lists/productionFileList';
 import ProductList from './lists/productList';
+import RawMaterialList from './lists/rawMaterialList';
 import RecipeList from './lists/recipeList';
 import Loading from './loaders/loading';
+import Skeleton from './loaders/skeleton';
 import Menu from './menu/menu';
 import ConfirmationModal from './modals/confirmationModal';
 import Modal from './modals/modal';
@@ -24,11 +26,11 @@ export {
   Menu,
   Modal,
   Input,
-  DatePicker,
   Drawer,
   Loading,
+  Skeleton,
+  DataTabs,
   EditIcon,
-  FormInput,
   CloseIcon,
   DeleteIcon,
   CalendarIcon,
@@ -37,9 +39,11 @@ export {
   ConfirmationModal,
   Table,
   Buttons,
-  DataTabs,
+  FormInput,
+  DatePicker,
   ElementList,
   RecipeList,
   ProductList,
+  RawMaterialList,
   ProductionFileList,
 };
