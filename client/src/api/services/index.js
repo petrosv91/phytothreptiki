@@ -5,7 +5,7 @@ const { default: Axios } = require('axios');
 
 // const API = process.env.NODE_ENV === 'development' ? DEV_API : PROD_API;
 
-const API = '/api';
+const API = 'http://localhost:5000/api';
 
 async function baseGetService(params) {
   const result = await Axios.post(API, params);
