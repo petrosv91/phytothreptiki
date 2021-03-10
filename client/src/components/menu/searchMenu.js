@@ -31,24 +31,20 @@ function SearchMenu({ drawerClose = () => {} }) {
   const productionKeys = React.useRef(['date', 'products']);
 
   async function handleItemClick({ _id, code, elements, products, ...rest }) {
-    try {
-      onClose();
-      drawerClose();
-      setLoading(true);
-      await new Promise((resolve) => {
-        return resolve(send({ type: 'DELETE_ITEM', key: 'switches', callback: reset }));
+    onClose();
+    drawerClose();
+    setLoading(true);
+    await new Promise((resolve) => {
+      return resolve(send({ type: 'RESET', callback: reset }));
+    });
+    setTimeout(() => {
+      send({ type: 'ADD_RECIPE', id: _id, code, elements, products });
+      Object.entries(rest).forEach(([key, value]) => {
+        setValue(key, value);
       });
-      setTimeout(() => {
-        send({ type: 'ADD_RECIPE', id: _id, code, elements, products });
-        Object.entries(rest).forEach(([key, value]) => {
-          setValue(key, value);
-        });
-        setLoading(false);
-      }, [100]);
-      clearErrors();
-    } catch (error) {
-      console.log(error);
-    }
+      setLoading(false);
+    }, [100]);
+    clearErrors();
   }
 
   function handleClick(opt) {
