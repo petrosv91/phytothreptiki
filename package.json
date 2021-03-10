@@ -6,8 +6,8 @@
     "client": "cd client && yarn start",
     "server": "cd server && yarn start",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "start": "cd server && npm install --no-shrinkwrap && npm start",
-    "heroku-postbuild": "cd client && npm install --no-shrinkwrap && npm run build"
+    "start": "cd server && yarn --no-shrinkwrap && yarn start",
+    "heroku-postbuild": "cd client && yarn --no-shrinkwrap && yarn build"
   },
   "repository": {
     "type": "git",
