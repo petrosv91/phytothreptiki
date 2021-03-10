@@ -9,7 +9,7 @@ import { formatDate } from '../../utils';
 import ItemList from './itemList';
 
 function PickingItem({ promiseData, keys, List, showDate, handleClick }) {
-  const { error, data, status, isFetching } = promiseData;
+  const { data = [], error, status, isFetching } = promiseData;
 
   const [query, setQuery] = React.useState('');
   const filterdData = useFiltersData({ data, query, keys });

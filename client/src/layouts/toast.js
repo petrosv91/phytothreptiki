@@ -4,7 +4,7 @@ import { Flex, Icon, Text } from '@chakra-ui/react';
 import { MdWarning, MdCheck, MdClose } from 'react-icons/md';
 
 const colors = {
-  success: '#008D42',
+  success: 'special.500',
   error: 'yellow.500',
 };
 const icons = {
@@ -16,7 +16,7 @@ function Toast({ type = 'error', title, content, onClose }) {
   return (
     <Flex
       w={['sm', 'md']}
-      maxW={[350, 700]}
+      maxW={[300, 700]}
       px={6}
       py={8}
       mb={5}
@@ -25,8 +25,7 @@ function Toast({ type = 'error', title, content, onClose }) {
       rounded='sm'
       boxShadow='md'
       bg='secondaryBackground'
-      borderWidth={1}
-      borderRightWidth={8}
+      borderWidth={2}
       borderColor={colors[type]}
     >
       <Icon as={icons[type]} color={colors[type]} boxSize={5} />
