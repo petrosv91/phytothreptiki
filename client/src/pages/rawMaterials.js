@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Flex } from '@chakra-ui/layout';
+import { Flex } from '@chakra-ui/layout';
 import { useFormContext } from 'react-hook-form';
 
 import ElementStore from '../components/element/elementStore';
@@ -19,7 +19,7 @@ function RawMaterials() {
 
   return (
     <Flex direction='column'>
-      <Box pointerEvents='none'>
+      <Flex direction='column' pointerEvents='none'>
         <Flex mt={4} justify='flex-end'>
           <FormInput
             w={['full', '30%']}
@@ -36,8 +36,8 @@ function RawMaterials() {
           <FormInput w={['full', '30%']} name='recipe' label='Συνταγή' formRef={register} />
         </Flex>
         <RecipeMiddle mt={4} />
-        <ElementStore mt={4} />
-      </Box>
+      </Flex>
+      <ElementStore mt={4} />
       <RecipeFooter mt={4} />
     </Flex>
   );

@@ -43,9 +43,9 @@ function SearchMenu({ drawerClose = () => {} }) {
         Object.entries(rest).forEach(([key, value]) => {
           setValue(key, value);
         });
-        clearErrors();
         setLoading(false);
       }, [100]);
+      clearErrors();
     } catch (error) {
       console.log(error);
     }
