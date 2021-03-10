@@ -18,6 +18,7 @@ function Layout({ children }) {
           bg='background'
           boxShadow='md'
           direction='column'
+          minH={['70vh', '70vh', '70vh', 'auto']}
           maxW={[450, 650, 850, 1000]}
           minW={[300, 400, 600, 1000]}
         >

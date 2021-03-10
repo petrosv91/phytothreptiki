@@ -11,7 +11,12 @@ import { FormInput } from '../lib/ui';
 
 function RawMaterials() {
   const [{ context }] = useMainMachine();
-  const { register } = useFormContext();
+  const { register, setValue } = useFormContext();
+
+  React.useEffect(() => {
+    setValue('totalWeights', '');
+  }, [setValue]);
+
   return (
     <Flex direction='column'>
       <Box pointerEvents='none'>

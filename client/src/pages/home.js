@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Navbar from '../components/navbar/navbar';
 import { formDefaultValues } from '../config';
+import ErrorBoundary from '../error/errorBoundary';
 import { useReactFormSchema, useReactQueryConfig } from '../hooks';
 import { Layout } from '../layouts';
 import NewRecipe from './newRecipe';
@@ -27,17 +28,19 @@ function Home() {
         <BrowserRouter>
           <Navbar />
           <Layout>
-            <Switch>
-              <Route exact path='/'>
-                <NewRecipe />
-              </Route>
-              <Route path='/rawMaterials'>
-                <RawMaterials />
-              </Route>
-              <Route path='/productionFile'>
-                <ProductionFile />
-              </Route>
-            </Switch>
+            <ErrorBoundary>
+              <Switch>
+                <Route exact path='/'>
+                  <NewRecipe />
+                </Route>
+                <Route path='/rawMaterials'>
+                  <RawMaterials />
+                </Route>
+                <Route path='/productionFile'>
+                  <ProductionFile />
+                </Route>
+              </Switch>
+            </ErrorBoundary>
           </Layout>
         </BrowserRouter>
       </FormProvider>

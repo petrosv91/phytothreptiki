@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "phytothreptiki-recipe-creator",
   "scripts": {
-    "client": "cd client && npm start",
-    "server": "cd server && npm start",
+    "client": "cd client && yarn start",
+    "server": "cd server && yarn start",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "start": "cd server && npm install --no-shrinkwrap && npm start",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "cd client && npm install --no-shrinkwrap && npm run build"
   },
   "repository": {

@@ -15,11 +15,11 @@ const icons = {
 function Toast({ type = 'error', title, content, onClose }) {
   return (
     <Flex
-      w={['sm', 'md']}
-      maxW={[300, 700]}
       px={6}
       py={8}
       mb={5}
+      maxW={[450, 400, 500]}
+      minW={[300, 350, 450]}
       align='center'
       justify='space-between'
       rounded='sm'

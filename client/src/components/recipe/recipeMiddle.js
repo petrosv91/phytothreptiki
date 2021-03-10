@@ -24,7 +24,7 @@ function RecipeMiddle() {
   }, [productStore, setValue]);
 
   return (
-    <Flex direction={['column', 'row']} mt={4} align='center' justify='space-between'>
+    <Flex mt={4} direction={['column', 'row']} align='center' justify='space-between'>
       <FormInput
         w={['full', '45%']}
         name='restPrice'
