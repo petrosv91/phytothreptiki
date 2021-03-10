@@ -29,9 +29,6 @@ function PickingItem({ promiseData, keys, List, showDate, handleClick }) {
         {error.message}
       </Text>
     );
-  if (status === 'loading' || isFetching) {
-    return <Skeleton />;
-  }
   if (!data.length) {
     return (
       <Flex direction='column' align='center'>
@@ -61,7 +58,12 @@ function PickingItem({ promiseData, keys, List, showDate, handleClick }) {
           placeholder='Αναζήτηση...'
         />
       )}
-      <ItemList data={currentData} Item={List} handleClick={handleClick} />
+      <ItemList
+        Item={List}
+        data={currentData}
+        handleClick={handleClick}
+        loading={status === 'loading' || isFetching}
+      />
       <Pagination {...paginationProps} />
     </Flex>
   );

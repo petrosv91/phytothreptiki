@@ -4,9 +4,10 @@ import { List as ChakraList } from '@chakra-ui/react';
 import { AnimatePresence } from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid';
 
+import { Skeleton } from '../../lib/ui';
 import ListItem from '../../lib/ui/lists/listItem';
 
-function ItemList({ handleClick, data, Item }) {
+function ItemList({ handleClick, data, Item, loading }) {
   const shouldAnimate = React.useRef(true);
 
   React.useEffect(() => {
@@ -17,6 +18,9 @@ function ItemList({ handleClick, data, Item }) {
     }
   }, [data]);
 
+  if (loading) {
+    return <Skeleton />;
+  }
   return (
     <AnimatePresence initial={false}>
       <ChakraList pt={5} spacing={3}>
