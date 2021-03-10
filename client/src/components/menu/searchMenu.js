@@ -30,21 +30,26 @@ function SearchMenu({ drawerClose = () => {} }) {
   const rawMaterialKeys = React.useRef(['date', 'type']);
   const productionKeys = React.useRef(['date', 'products']);
 
-  async function handleItemClick({ _id, code, elements, products, ...rest }) {
-    onClose();
-    drawerClose();
-    setLoading(true);
-    await new Promise((resolve) => {
-      return resolve(send({ type: 'RESET', callback: reset }));
-    });
-    setTimeout(() => {
-      send({ type: 'ADD_RECIPE', id: _id, code, elements, products });
-      Object.entries(rest).forEach(([key, value]) => {
-        setValue(key, value);
+  async function handleItemClick({ _id, code, elements, products, ...rest }, path) {
+    try {
+      onClose();
+      setLoading(true);
+      await new Promise((resolve) => {
+        return resolve(send({ type: 'RESET', callback: reset }));
       });
-      setLoading(false);
-    }, [100]);
-    clearErrors();
+      setTimeout(() => {
+        send({ type: 'ADD_RECIPE', id: _id, code, elements, products });
+        Object.entries(rest).forEach(([key, value]) => {
+          setValue(key, value);
+        });
+        clearErrors();
+        setLoading(false);
+        drawerClose();
+        history.push(path);
+      }, [100]);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function handleClick(opt) {
@@ -61,8 +66,7 @@ function SearchMenu({ drawerClose = () => {} }) {
           List={RecipeList}
           promiseData={getRecipes}
           handleClick={(recipe) => {
-            handleItemClick(recipe);
-            history.push('/');
+            handleItemClick(recipe, '/');
           }}
         />
       ),
@@ -76,8 +80,7 @@ function SearchMenu({ drawerClose = () => {} }) {
           List={RawMaterialList}
           promiseData={getRecipes}
           handleClick={({ products, ...rest }) => {
-            handleItemClick(rest);
-            history.push('/rawMaterials');
+            handleItemClick(rest, '/rawMaterials');
           }}
         />
       ),
@@ -91,8 +94,7 @@ function SearchMenu({ drawerClose = () => {} }) {
           List={ProductionFileList}
           promiseData={getRecipes}
           handleClick={({ elements, ...rest }) => {
-            handleItemClick(rest);
-            history.push('/productionFile');
+            handleItemClick(rest, '/productionFile');
           }}
         />
       ),
