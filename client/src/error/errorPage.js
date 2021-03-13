@@ -16,12 +16,14 @@ export default function ErrorPage({ changeError }) {
   }
 
   return (
-    <Flex direction='column' justify='space-evenly' align='center' boxSize='100%'>
-      <Text fontWeight='bold' color='red.500' fontSize='lg' textAlign='center'>
+    <Flex p={10} direction='column' align='center'>
+      <Text mb={10} color='red.500' fontWeight='bold' fontSize='lg' textAlign='center'>
         Κάτι πήγε στραβά!
       </Text>
-      <Image as={ErrorSVG} boxSize={['70%', '50%']} />
-      <Buttons.Primary onClick={goHome}>Αρχική</Buttons.Primary>
+      <Image as={ErrorSVG} boxSize={[250, 300, 350, 450]} />
+      <Buttons.Primary mt={10} onClick={goHome}>
+        Αρχική
+      </Buttons.Primary>
     </Flex>
   );
 }

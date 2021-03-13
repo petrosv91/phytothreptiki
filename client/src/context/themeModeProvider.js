@@ -1,5 +1,9 @@
 import React, { useContext } from 'react';
 
+import { ChakraProvider } from '@chakra-ui/react';
+import { Global } from '@emotion/react';
+
+import { darkTheme, GlobalStyles, lightTheme } from '../config';
 import { useLocalStorage } from '../hooks';
 
 const ThemeModeContext = React.createContext();
@@ -13,7 +17,10 @@ function ThemeModeProvider({ children }) {
 
   return (
     <ThemeModeContext.Provider value={{ currentTheme: storedValue, toggleTheme: toggleTheme }}>
-      {children}
+      <ChakraProvider theme={storedValue === 'dark' ? darkTheme : lightTheme}>
+        {children}
+        <Global styles={GlobalStyles} />
+      </ChakraProvider>
     </ThemeModeContext.Provider>
   );
 }

@@ -17,7 +17,7 @@ import { ConfirmationModal, Loading } from '../lib/ui';
 
 const MESSAGE = 'Προσοχή αν πατήσετε σύνεχεια θα χάσετε ότι έχετε κάνει στην διαδικασία';
 
-function Recipe() {
+function NewRecipe() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const printRef = React.useRef();
@@ -67,4 +67,4 @@ function Recipe() {
   );
 }
 
-export default Recipe;
+export default NewRecipe;

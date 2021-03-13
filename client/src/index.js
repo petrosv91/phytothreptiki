@@ -1,21 +1,23 @@
 import React from 'react';
 
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
-import { ColorModeProvider } from './context/colorModeProvider';
+import { MainMachineProvider } from './context/mainMachineProvider';
 import { ThemeModeProvider } from './context/themeModeProvider';
 import * as serviceWorker from './serviceWorker';
-
 import 'focus-visible/dist/focus-visible';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeModeProvider>
-      <ColorModeProvider>
-        <App />
-      </ColorModeProvider>
-    </ThemeModeProvider>
+    <BrowserRouter>
+      <ThemeModeProvider>
+        <MainMachineProvider>
+          <App />
+        </MainMachineProvider>
+      </ThemeModeProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),
 );
