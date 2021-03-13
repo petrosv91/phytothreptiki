@@ -26,8 +26,8 @@ function App() {
     <ReactQueryConfigProvider config={overrides}>
       <FormProvider {...methods}>
         <Navbar />
-        <ErrorBoundary>
-          <Layout>
+        <Layout>
+          <ErrorBoundary>
             <Switch>
               <Route exact path='/'>
                 <NewRecipe />
@@ -39,8 +39,8 @@ function App() {
                 <ProductionFile />
               </Route>
             </Switch>
-          </Layout>
-        </ErrorBoundary>
+          </ErrorBoundary>
+        </Layout>
       </FormProvider>
     </ReactQueryConfigProvider>
   );
