@@ -24,12 +24,9 @@ function NewRecipe() {
   const [printLoading, setPrintLoading] = React.useState(false);
   const handlePrint = useReactToPrint({
     content: () => printRef.current,
+    onBeforePrint: () => setPrintLoading(true),
     onAfterPrint: () => setPrintLoading(false),
   });
-  const onPrint = React.useCallback(() => {
-    setPrintLoading(true);
-    handlePrint();
-  }, [handlePrint]);
 
   const { reset } = useFormContext();
   const [state, send] = useMainMachine();
@@ -54,7 +51,7 @@ function NewRecipe() {
       <RecipeHeader
         onOpen={onOpen}
         onConfirm={onConfirm}
-        handlePrint={onPrint}
+        handlePrint={handlePrint}
         printLoading={printLoading}
       />
       <ElementForm mt={4} />
