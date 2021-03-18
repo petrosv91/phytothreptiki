@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { Box, ChakraProvider, Flex, Image } from '@chakra-ui/react';
+import { Box, Flex, Image } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 
 import Logo from '../../assets/logo.png';
-import { lightTheme } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { FormInput } from '../../lib/ui';
 import ElementStore from '../element/elementStore';
