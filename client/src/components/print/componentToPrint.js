@@ -17,47 +17,39 @@ function ComponentToPrint({ printRef }) {
 
   return (
     <div style={{ display: 'none' }}>
-      <ChakraProvider theme={lightTheme}>
-        <Flex direction='column' ref={printRef}>
-          <Flex justify='flex-end'>
-            <FormInput
-              w={150}
-              tag='No.'
-              fontSize='lg'
-              color='red.500'
-              defaultValue={context.code}
-            />
-          </Flex>
-          <Box
-            position='relative'
-            _after={{
-              content: "'ΣΥΝΤΑΓΕΣ ΥΔΑΤΟΔΙΑΛΥΤΩΝ'",
-              w: '80%',
-              position: 'absolute',
-              top: '50%',
-              left: '20%',
-              color: 'white',
-              bg: '#008D42',
-              fontSize: 'sm',
-              textAlign: 'center',
-            }}
-          >
-            <Image src={Logo} boxSize='120px' />
-          </Box>
-          <Flex align='center' justify='space-between'>
-            <FormInput w='30%' label='Ημερομηνία' defaultValue={date} />
-            <FormInput w='30%' label='Τύπος' defaultValue={type} />
-            <FormInput w='30%' label='Συνταγή' defaultValue={recipe} />
-          </Flex>
-          <Flex align='center' justify='space-between'>
-            <FormInput label='Χαρμάνια' w='30%' defaultValue={loops} />
-            <FormInput label='Κιλά' w='30%' tag='kg' defaultValue={weights} />
-            <FormInput label='Συνολικά Κιλά' w='30%' tag='kg' defaultValue={totalWeights} />
-          </Flex>
-          <ElementStore mt={2} printable />
-          <ProductStore mt={2} printable />
+      <Flex direction='column' ref={printRef}>
+        <Flex justify='flex-end'>
+          <FormInput w={150} tag='No.' fontSize='lg' color='red.500' defaultValue={context.code} />
         </Flex>
-      </ChakraProvider>
+        <Box
+          position='relative'
+          _after={{
+            content: "'ΣΥΝΤΑΓΕΣ ΥΔΑΤΟΔΙΑΛΥΤΩΝ'",
+            w: '80%',
+            position: 'absolute',
+            top: '50%',
+            left: '20%',
+            color: 'white',
+            bg: '#008D42',
+            fontSize: 'sm',
+            textAlign: 'center',
+          }}
+        >
+          <Image src={Logo} boxSize='120px' />
+        </Box>
+        <Flex align='center' justify='space-between'>
+          <FormInput w='30%' label='Ημερομηνία' defaultValue={date} />
+          <FormInput w='30%' label='Τύπος' defaultValue={type} />
+          <FormInput w='30%' label='Συνταγή' defaultValue={recipe} />
+        </Flex>
+        <Flex align='center' justify='space-between'>
+          <FormInput label='Χαρμάνια' w='30%' defaultValue={loops} />
+          <FormInput label='Κιλά' w='30%' tag='kg' defaultValue={weights} />
+          <FormInput label='Συνολικά Κιλά' w='30%' tag='kg' defaultValue={totalWeights} />
+        </Flex>
+        <ElementStore mt={2} printable />
+        <ProductStore mt={2} printable />
+      </Flex>
     </div>
   );
 }
