@@ -31,7 +31,7 @@ function Navbar() {
       >
         <Stack mt={10} spacing={8} direction='column' align='center'>
           <SearchMenu drawerClose={onClose} />
-          <CreateMenu />
+          <CreateMenu drawerClose={onClose} />
           <UpdateMenu />
           <DeleteMenu />
         </Stack>

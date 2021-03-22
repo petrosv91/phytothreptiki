@@ -9,7 +9,7 @@ import { Menu, Modal } from '../../lib/ui';
 import CreateElement from '../element/createElement';
 import CreateProduct from '../product/createProduct';
 
-function CreateMenu() {
+function CreateMenu({ drawerClose = () => {} }) {
   const history = useHistory();
   const [, send] = useMainMachine();
   const { reset } = useFormContext();
@@ -27,6 +27,7 @@ function CreateMenu() {
       await new Promise((resolve) => {
         return resolve(send({ type: 'DELETE_RECIPE', callback: reset }));
       });
+      drawerClose();
       return history.push(opt.path);
     }
     onOpen();
