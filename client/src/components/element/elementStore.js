@@ -11,11 +11,7 @@ import { roundToTwo } from '../../utils';
 
 function ElementStore({ printable, editable, ...rest }) {
   const { currentTheme } = useThemeMode();
-  const labelColor = printable
-    ? 'special.500'
-    : currentTheme === 'dark'
-    ? 'special.600'
-    : 'special.500';
+  const labelColor = currentTheme === 'dark' ? 'special.400' : 'special.500';
 
   const { control } = useFormContext();
   const weights = useWatch({ control, name: 'weights', defaultValue: 0 });

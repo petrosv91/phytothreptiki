@@ -30,7 +30,7 @@ function ProductForm() {
   const getProducts = useGetProducts();
 
   const { productFormSchema } = useReactFormSchema();
-  const { register, handleSubmit, getValues, setValue, reset, errors } = useForm({
+  const { register, handleSubmit, getValues, setValue, clearErrors, reset, errors } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(productFormSchema),
   });
@@ -51,9 +51,8 @@ function ProductForm() {
   }
   function handleProductClick(product) {
     onClose();
-    Object.entries(product).forEach(([key, value]) => {
-      setValue(key, value);
-    });
+    clearErrors('label');
+    setValue('label', product.label);
   }
 
   return (

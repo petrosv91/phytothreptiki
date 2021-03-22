@@ -30,10 +30,10 @@ function Toast({ type = 'error', title, content, onClose }) {
     >
       <Icon as={icons[type]} color={colors[type]} boxSize={5} />
       <Flex direction='column' justify='center' align='center' color='text'>
-        <Text lineHeight='1.5rem' fontWeight='semibold' fontSize='lg'>
+        <Text mb={2} lineHeight='1.5rem' fontWeight='semibold' fontSize='lg'>
           {title}
         </Text>
-        <Text w='90%' px={3} textAlign='center' fontSize='md' fontWeight='400'>
+        <Text px={5} textAlign='center' wordBreak='break-word' fontSize='md' fontWeight='400'>
           {content}
         </Text>
       </Flex>

@@ -22,7 +22,7 @@ function ElementForm() {
   const keys = React.useRef(['label', 'formula']);
 
   const { elementFormSchema } = useReactFormSchema();
-  const { register, handleSubmit, getValues, setValue, reset, errors } = useForm({
+  const { register, handleSubmit, getValues, setValue, reset, clearErrors, errors } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(elementFormSchema),
   });
@@ -47,6 +47,7 @@ function ElementForm() {
   }
   function handleElementClick(el) {
     onClose();
+    clearErrors('label');
     Object.entries(el).forEach(([key, value]) => {
       if (key === 'formula') {
         const formula = value.join('-');
