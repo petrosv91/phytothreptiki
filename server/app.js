@@ -1,9 +1,13 @@
 require('dotenv/config');
-const express = require('express');
+const path = require('path');
+
 const cors = require('cors');
+const express = require('express');
+const mongoose = require('mongoose');
+
+const apiRoute = require('./routes/api');
 
 const app = express();
-const path = require('path');
 const port = process.env.PORT || 5000;
 
 // Body-parser
@@ -12,11 +16,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Import Routes
-const apiRoute = require('./routes/api');
 app.use('/api', apiRoute);
 
 // Connect to DB
-const mongoose = require('mongoose');
 mongoose.connect(
   process.env.DB_CONNECTION,
   {
