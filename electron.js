@@ -33,13 +33,15 @@ function createWindow() {
       show: false,
       autoHideMenuBar: true,
     });
-    setTimeout(() => mainWindow.loadURL(mainURL), 300);
+    mainWindow.loadURL(mainURL);
 
     mainWindow.webContents.once('dom-ready', () => {
-      mainWindow.maximize();
-      loadingWindow.hide();
-      loadingWindow.close();
-      mainWindow.show();
+      setTimeout(() => {
+        mainWindow.maximize();
+        loadingWindow.hide();
+        loadingWindow.close();
+        mainWindow.show();
+      }, 500);
       mainWindow.on('closed', () => (mainWindow = null));
     });
   });
