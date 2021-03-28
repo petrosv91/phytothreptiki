@@ -1,9 +1,7 @@
 const path = require('path');
 
-const electron = require('electron');
+const { app, BrowserWindow } = require('electron');
 const isDev = require('electron-is-dev');
-
-const { app, BrowserWindow } = electron;
 
 let mainWindow;
 let loadingWindow;
@@ -12,13 +10,13 @@ const mainURL = isDev
   ? 'http://localhost:3000'
   : `file://${path.join(__dirname, 'build/index.html')}`;
 const loadURL = isDev
-  ? path.join(__dirname, 'client/public/loading.html')
+  ? path.join(__dirname, 'public/loading.html')
   : `file://${path.join(__dirname, 'build/loading.html')}`;
 
 function createWindow() {
   // express server is started here when production build
   if (!isDev) {
-    require(path.join(__dirname, 'build-server/app'));
+    require(path.join(__dirname, 'build-server/server'));
   }
 
   loadingWindow = new BrowserWindow({
@@ -33,22 +31,15 @@ function createWindow() {
     loadingWindow.show();
     mainWindow = new BrowserWindow({
       show: false,
-      minWidth: 400,
-      minHeight: 700,
+      autoHideMenuBar: true,
     });
-    mainWindow.loadURL(mainURL);
+    setTimeout(() => mainWindow.loadURL(mainURL), 300);
 
     mainWindow.webContents.once('dom-ready', () => {
-      setTimeout(() => {
-        mainWindow.maximize();
-        mainWindow.setTitle('');
-        if (!isDev) {
-          mainWindow.setMenu(null);
-        }
-        loadingWindow.hide();
-        loadingWindow.close();
-        mainWindow.show();
-      }, 1000);
+      mainWindow.maximize();
+      loadingWindow.hide();
+      loadingWindow.close();
+      mainWindow.show();
       mainWindow.on('closed', () => (mainWindow = null));
     });
   });

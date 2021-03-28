@@ -4,7 +4,7 @@
     [
       "inline-dotenv",
       {
-        "path": "./server/.env"
+        "path": ".env"
       }
     ],
     "@babel/transform-runtime"

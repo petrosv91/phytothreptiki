@@ -3,7 +3,7 @@ import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ReactQueryConfigProvider } from 'react-query';
-import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import Navbar from './components/navbar/navbar';
 import { formDefaultValues } from './config';

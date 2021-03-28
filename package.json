@@ -15,7 +15,8 @@
     "preelectron-pack": "rm -rf dist && rm -rf build-server && rm -rf build",
     "electron-pack": "concurrently --kill-others-on-fail \"yarn server-build\" \"yarn client-build\"",
     "postelectron-pack": "electron-builder -c.extraMetadata.main='./electron.js'",
-    "electron-dev": "concurrently --kill-others-on-fail \"yarn server-start\" \"yarn client-start\" \"wait-on http://localhost:3000 && electron .\""
+    "postelectron-dev": "wait-on http://localhost:3000 && electron .",
+    "electron-dev": "concurrently --kill-others-on-fail \"yarn server-start\" \"yarn client-start\""
   },
   "author": "Petros Vasilopoulos",
   "license": "ISC",
