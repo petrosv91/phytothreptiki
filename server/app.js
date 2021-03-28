@@ -2,11 +2,15 @@ require('dotenv/config');
 const path = require('path');
 
 const cors = require('cors');
+const { ipcRenderer } = require('electron');
 const express = require('express');
 const mongoose = require('mongoose');
 
 const app = express();
 const apiRoute = require('./routes/api');
+
+// get an availaible port
+const port = ipcRenderer.sendSync('request-port');
 
 // Body-parser
 app.use(cors());
@@ -44,6 +48,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.listen(5000, () => {
-  console.log(`Server listen on port ${5000}`);
+app.listen(port, () => {
+  console.log(`Server listen on port ${port}`);
 });

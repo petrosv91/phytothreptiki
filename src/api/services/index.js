@@ -1,6 +1,10 @@
 const { default: Axios } = require('axios');
+const { ipcRenderer } = window.require('electron');
 
-const API = `http://localhost:${5000}/api`;
+const port = ipcRenderer.sendSync('request-port');
+console.log(`Client listen on port ${port}`);
+
+const API = `http://localhost:${port}/api`;
 
 async function baseGetService(params) {
   const result = await Axios.post(API, params);

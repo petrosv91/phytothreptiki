@@ -1,8 +1,10 @@
 const path = require('path');
 
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const isDev = require('electron-is-dev');
+const getPort = require('get-port');
 
+let port;
 let mainWindow;
 let loadingWindow;
 
@@ -12,13 +14,18 @@ const mainURL = isDev
 const loadURL = isDev
   ? path.join(__dirname, 'public/loading.html')
   : `file://${path.join(__dirname, 'build/loading.html')}`;
+const serverURL = isDev
+  ? path.join(__dirname, 'server/app.js')
+  : path.join(__dirname, 'build-server/app.js');
+
+// request for available port
+getAvailablePort();
+async function getAvailablePort() {
+  const availablePort = await getPort();
+  port = availablePort;
+}
 
 function createWindow() {
-  // express server is started here when production build
-  if (!isDev) {
-    require(path.join(__dirname, 'build-server/app'));
-  }
-
   loadingWindow = new BrowserWindow({
     width: 450,
     height: 250,
@@ -32,6 +39,11 @@ function createWindow() {
     mainWindow = new BrowserWindow({
       show: false,
       autoHideMenuBar: true,
+      webPreferences: {
+        preload: serverURL,
+        nodeIntegration: true,
+        contextIsolation: false,
+      },
     });
     mainWindow.loadURL(mainURL);
 
@@ -46,6 +58,10 @@ function createWindow() {
     });
   });
 }
+
+ipcMain.on('request-port', (event) => {
+  event.returnValue = port;
+});
 
 app.on('ready', createWindow);
 app.on('window-all-closed', () => {
