@@ -16,7 +16,7 @@ const loadURL = isDev
 function createWindow() {
   // express server is started here when production build
   if (!isDev) {
-    require(path.join(__dirname, 'build-server/server'));
+    require(path.join(__dirname, 'build-server/app'));
   }
 
   loadingWindow = new BrowserWindow({
