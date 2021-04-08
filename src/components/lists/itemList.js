@@ -11,18 +11,18 @@ function ItemList({ handleClick, data, Item, loading }) {
   const shouldAnimate = React.useRef(true);
 
   React.useEffect(() => {
-    if (data.length) {
+    if (data.length && !loading) {
       shouldAnimate.current = false;
     } else {
       shouldAnimate.current = true;
     }
-  }, [data]);
+  }, [data, loading]);
 
   if (loading) {
     return <Skeleton />;
   }
   return (
-    <AnimatePresence initial={false}>
+    <AnimatePresence initial={true}>
       <ChakraList pt={5} spacing={3}>
         {data.map((item, index) => {
           return (

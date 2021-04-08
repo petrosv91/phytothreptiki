@@ -11,6 +11,7 @@ import ItemList from './itemList';
 
 function PickingItem({ promiseData, keys, List, showDate, handleClick }) {
   const { data = [], error, status, isFetching } = promiseData;
+  const isLoading = status === 'loading' || isFetching;
 
   const [query, setQuery] = React.useState('');
   const filterdData = useFiltersData({ data, query, keys });
@@ -25,11 +26,11 @@ function PickingItem({ promiseData, keys, List, showDate, handleClick }) {
 
   if (error)
     return (
-      <Text mt={4} color='red.500' fontSize={['sm', 'md']} fontWeight='500'>
+      <Text mt={4} color='red.500' fontWeight='500' fontSize={['sm', 'md']}>
         {error.message}
       </Text>
     );
-  if (!data.length) {
+  if (!isLoading && !data.length) {
     return (
       <Flex direction='column' align='center'>
         <Text mt={4} color='red.500' fontSize={['sm', 'md']} fontWeight='500'>
@@ -43,7 +44,7 @@ function PickingItem({ promiseData, keys, List, showDate, handleClick }) {
     <Flex direction='column'>
       {showDate ? (
         <DatePicker
-          w={[250, 300]}
+          w={[250, 300, 350]}
           value={query}
           placeholder='Αναζήτηση...'
           handleChange={handleChange}
@@ -51,7 +52,7 @@ function PickingItem({ promiseData, keys, List, showDate, handleClick }) {
         />
       ) : (
         <FormInput
-          w={[250, 300]}
+          w={[250, 300, 350]}
           value={query}
           autoFocus={true}
           onChange={handleChange}
@@ -61,8 +62,8 @@ function PickingItem({ promiseData, keys, List, showDate, handleClick }) {
       <ItemList
         Item={List}
         data={currentData}
+        loading={isLoading}
         handleClick={handleClick}
-        loading={status === 'loading' || isFetching}
       />
       <Pagination {...paginationProps} />
     </Flex>

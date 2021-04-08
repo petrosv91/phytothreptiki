@@ -27,7 +27,9 @@ function MainMachineProvider({ children }) {
       },
     },
   });
-  return <MainMachineContext.Provider value={service}>{children}</MainMachineContext.Provider>;
+  return (
+    <MainMachineContext.Provider value={service}>{children}</MainMachineContext.Provider>
+  );
 }
 
 function useMainMachine() {

@@ -10,11 +10,11 @@ function ListItem({ animation, children, onClick, ...rest }) {
       <ChakraListItem
         cursor='pointer'
         onClick={onClick}
-        width={[250, 300]}
         py={4}
+        w={[250, 300, 350]}
         rounded='md'
-        fontSize={['sm', 'md']}
         boxShadow='md'
+        fontSize={['sm', 'md']}
         fontWeight='500'
         borderRightWidth={15}
         color='text'

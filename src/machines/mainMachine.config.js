@@ -72,7 +72,10 @@ export const services = {
   setMaxCode: async (ctx, e) => {
     try {
       const { code, codeId } = ctx;
-      const result = await baseGetService({ service: 'setMaxCode', data: { code, codeId } });
+      const result = await baseGetService({
+        service: 'setMaxCode',
+        data: { code, codeId },
+      });
       return { result, ...e };
     } catch (error) {
       throw Object.assign(new Error(error), {

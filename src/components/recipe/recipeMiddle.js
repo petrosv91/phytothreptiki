@@ -27,7 +27,7 @@ function RecipeMiddle() {
       }, 0),
     );
     setValue('totalWeights', totalWeights);
-  }, [productStore, setValue]);
+  }, [productStore, setValue, getValues]);
 
   return (
     <Flex mt={4} direction={['column', 'row']} align='center' justify='space-between'>
