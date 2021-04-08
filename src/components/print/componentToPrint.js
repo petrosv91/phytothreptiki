@@ -53,7 +53,7 @@ function ComponentToPrint({ printRef }) {
           <FormInput label='Συνολικά Κιλά' w='30%' tag='kg' defaultValue={totalWeights} />
         </Flex>
         <ElementStore mt={2} printable />
-        <ProductStore mt={2} />
+        <ProductStore mt={2} printable />
       </Flex>
     </div>
   );

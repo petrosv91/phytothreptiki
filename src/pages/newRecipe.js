@@ -31,7 +31,8 @@ function NewRecipe() {
   const { reset } = useFormContext();
   const [state, send] = useMainMachine();
   const isLoading = state.matches('gettingMaxCode');
-  const isSubmitting = state.matches('recipeSubmitting') || state.matches('productionSubmitting');
+  const isSubmitting =
+    state.matches('recipeSubmitting') || state.matches('productionSubmitting');
 
   function onConfirm() {
     onClose();
@@ -55,10 +56,10 @@ function NewRecipe() {
         printLoading={printLoading}
       />
       <ElementForm mt={4} />
-      <ElementStore mt={4} editable />
+      <ElementStore mt={4} />
       <RecipeMiddle mt={4} />
       <ProductForm mt={4} />
-      <ProductStore mt={4} editable />
+      <ProductStore mt={4} />
       <RecipeFooter mt={4} />
     </Flex>
   );
