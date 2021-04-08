@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useForm } from 'react-hook-form';
+import { queryCache } from 'react-query';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Buttons, FormInput } from '../../lib/ui';
@@ -23,6 +24,7 @@ function CreateProduct({ resetItem }) {
       callback: () => {
         reset();
         if (resetItem) resetItem();
+        queryCache.refetchQueries(['products']);
       },
     });
   }

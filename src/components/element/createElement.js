@@ -2,6 +2,7 @@ import React from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { queryCache } from 'react-query';
 
 import { baseElements } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
@@ -33,6 +34,7 @@ function CreateElement({ resetItem }) {
       callback: () => {
         reset();
         if (resetItem) resetItem();
+        queryCache.refetchQueries(['elements']);
       },
     });
   }

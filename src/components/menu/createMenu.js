@@ -18,7 +18,7 @@ function CreateMenu({ drawerClose = () => {} }) {
   const [{ comp, label }, setComponent] = React.useState({});
   const options = [
     { label: 'Συνταγής', path: '/' },
-    { label: 'Στοιχείου', comp: <CreateElement /> },
+    { label: 'Ά Ύλης', comp: <CreateElement /> },
     { label: 'Προϊόντος', comp: <CreateProduct /> },
   ];
 

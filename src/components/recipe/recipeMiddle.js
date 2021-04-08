@@ -11,10 +11,16 @@ function RecipeMiddle() {
   const [state] = useMainMachine();
   const { productStore } = state.context;
 
-  const { register, setValue, errors } = useFormContext();
+  const { register, setValue, getValues, errors } = useFormContext();
 
   React.useEffect(() => {
-    if (!productStore.length) return;
+    if (!productStore.length) {
+      const { loops, weights } = getValues();
+      if (loops && weights) {
+        return setValue('totalWeights', loops * weights);
+      }
+      return setValue('totalWeights', '');
+    }
     const totalWeights = roundToTwo(
       productStore.reduce((prev, curr) => {
         return prev + curr.weights * curr.units;

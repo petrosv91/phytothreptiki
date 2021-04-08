@@ -83,9 +83,12 @@ export const MainMachine = createMachine({
               {
                 cond: guards.doesRecipeExists,
                 target: '#mainMachine.gettingMaxCode',
-                actions: [actions.resetContext, actions.callback],
+                actions: ['renderSuccess', actions.resetContext, actions.callback],
               },
-              { target: 'settingMaxCode' },
+              {
+                target: 'settingMaxCode',
+                actions: ['renderSuccess', actions.resetContext, actions.callback],
+              },
             ],
             onError: {
               target: '#mainMachine.editting',

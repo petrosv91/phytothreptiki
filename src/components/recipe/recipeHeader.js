@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Flex } from '@chakra-ui/react';
 import { useFormContext, useWatch } from 'react-hook-form';
+import { queryCache } from 'react-query';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Buttons, FormInput } from '../../lib/ui';
@@ -16,7 +17,10 @@ function RecipeHeader({ onOpen, handlePrint, printLoading }) {
     send({
       type: 'RECIPE_SUBMIT',
       data: formData,
-      callback: reset,
+      callback: () => {
+        reset();
+        queryCache.refetchQueries(['recipes']);
+      },
     });
   }
 

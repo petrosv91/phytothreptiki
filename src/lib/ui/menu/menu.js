@@ -1,13 +1,19 @@
 import React from 'react';
 
-import { Button, Menu as ChakraMenu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
+import {
+  Button,
+  Menu as ChakraMenu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from '@chakra-ui/react';
 import { MdExpandMore } from 'react-icons/md';
 
 function Menu({ handleClick, options, title }) {
   return (
     <ChakraMenu placement='bottom'>
       <MenuButton
-        w={170}
+        w={150}
         as={Button}
         fontWeight='500'
         fontSize={['md', 'lg']}

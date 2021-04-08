@@ -29,7 +29,7 @@ function UpdateMenu() {
 
   const options = [
     {
-      label: 'Στοιχείου',
+      label: 'Ά Ύλης',
       baseComp: (
         <Edit
           keys={elementKeys}

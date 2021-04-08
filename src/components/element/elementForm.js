@@ -9,7 +9,14 @@ import useGetElements from '../../api/queries/useGetElements';
 import { baseElements } from '../../config/';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { useReactFormSchema } from '../../hooks';
-import { Modal, Buttons, FormInput, FormSwitch, CloseIcon, ElementList } from '../../lib/ui';
+import {
+  Modal,
+  Buttons,
+  FormInput,
+  FormSwitch,
+  CloseIcon,
+  ElementList,
+} from '../../lib/ui';
 import SearchIcon from '../../lib/ui/icons/searchIcon';
 import { convertStringToArrayOfNumbers, createToast, isRateValid } from '../../utils';
 import PickingItem from '../lists/pickingItem';
@@ -22,7 +29,15 @@ function ElementForm() {
   const keys = React.useRef(['label', 'formula']);
 
   const { elementFormSchema } = useReactFormSchema();
-  const { register, handleSubmit, getValues, setValue, reset, clearErrors, errors } = useForm({
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    setValue,
+    reset,
+    clearErrors,
+    errors,
+  } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(elementFormSchema),
   });
@@ -95,6 +110,7 @@ function ElementForm() {
               name='rate'
               label='Συμμετοχή'
               tag='%'
+              step='any'
               type='number'
               errors={errors}
               formRef={register}
