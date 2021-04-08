@@ -70,22 +70,26 @@ function ElementStore({ printable, editable, ...rest }) {
                 </Table.Cell>
               )}
               <Table.Cell color={labelColor}>
-                <Flex direction='column'>
+                <Flex id='label' direction='column'>
                   {row.label}
-                  <Text mt={1} color='secondaryText' fontSize='sm'>
+                  <Text id='formula' mt={1} color='secondaryText' fontSize='md'>
                     {row.formula.join('-')}
                   </Text>
                 </Flex>
               </Table.Cell>
               <Table.Cell>{row.rate}</Table.Cell>
               {baseElements.map((el) => (
-                <Table.Cell key={el.value}>{roundToTwo(calcBaseElement(row, el))}</Table.Cell>
+                <Table.Cell key={el.value}>
+                  {roundToTwo(calcBaseElement(row, el))}
+                </Table.Cell>
               ))}
               <Table.Cell>{roundToTwo(calcWeights(row))}</Table.Cell>
               {!printable && (
                 <>
                   <Table.Cell>{row.price || 0}</Table.Cell>
-                  <Table.Cell>{roundToTwo((row.rate * (row.price || 0)) / 100)}</Table.Cell>
+                  <Table.Cell>
+                    {roundToTwo((row.rate * (row.price || 0)) / 100)}
+                  </Table.Cell>
                 </>
               )}
             </Table.Row>
@@ -93,7 +97,13 @@ function ElementStore({ printable, editable, ...rest }) {
           <Table.Row>
             {editable && <Table.Cell>{/* Actions */}</Table.Cell>}
             <Table.Cell>Σύνολο</Table.Cell>
-            <Table.Cell>{elementStore.reduce((prev, curr) => prev + curr.rate, 0)}%</Table.Cell>
+            <Table.Cell>
+              {roundToTwo(
+                elementStore.reduce((prev, curr) => prev + curr.rate, 0),
+                0,
+              )}
+              %
+            </Table.Cell>
             {baseElements.map((el) => (
               <Table.Cell key={el.value}>
                 {roundToTwo(

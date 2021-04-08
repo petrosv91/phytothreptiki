@@ -31,6 +31,20 @@ const GlobalStyles = css`
         display: table-row-group;
       }
     }
+    // keep colors to light theme
+    td,
+    input,
+    label {
+      color: #333333 !important;
+    }
+    #formula {
+      /* A6AFBD */
+      color: #718096 !important;
+    }
+    #label {
+      color: #008d42 !important;
+    }
+    /* ---------------- */
     #page,
     #page * {
       page-break-inside: avoid;

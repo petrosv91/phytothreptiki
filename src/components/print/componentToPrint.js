@@ -18,7 +18,13 @@ function ComponentToPrint({ printRef }) {
     <div style={{ display: 'none' }}>
       <Flex direction='column' ref={printRef}>
         <Flex justify='flex-end'>
-          <FormInput w={150} tag='No.' fontSize='lg' color='red.500' defaultValue={context.code} />
+          <FormInput
+            w={150}
+            tag='No.'
+            fontSize='lg'
+            color='red.500'
+            defaultValue={context.code}
+          />
         </Flex>
         <Box
           position='relative'
@@ -47,7 +53,7 @@ function ComponentToPrint({ printRef }) {
           <FormInput label='Συνολικά Κιλά' w='30%' tag='kg' defaultValue={totalWeights} />
         </Flex>
         <ElementStore mt={2} printable />
-        <ProductStore mt={2} printable />
+        <ProductStore mt={2} />
       </Flex>
     </div>
   );

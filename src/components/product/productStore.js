@@ -7,7 +7,7 @@ import { useThemeMode } from '../../context/themeModeProvider';
 import { DeleteIcon, Table } from '../../lib/ui';
 import { roundToTwo } from '../../utils';
 
-function ProductStore({ printable, editable, ...rest }) {
+function ProductStore({ editable, ...rest }) {
   const { currentTheme } = useThemeMode();
   const labelColor = currentTheme === 'dark' ? 'special.400' : 'special.500';
 
@@ -43,7 +43,9 @@ function ProductStore({ printable, editable, ...rest }) {
                   />
                 </Table.Cell>
               )}
-              <Table.Cell color={labelColor}>{row.label}</Table.Cell>
+              <Table.Cell id='label' color={labelColor}>
+                {row.label}
+              </Table.Cell>
               <Table.Cell>{row.units} </Table.Cell>
               <Table.Cell>{row.weights} kg</Table.Cell>
               <Table.Cell>{roundToTwo(row.weights * row.units)}</Table.Cell>
