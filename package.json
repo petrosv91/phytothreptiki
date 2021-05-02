@@ -1,114 +1,25 @@
 {
   "name": "phytothreptiki_app",
-  "productName": "Φυτοθρεπτική App",
-  "description": "Electron application with React and Node",
-  "homepage": "./",
-  "version": "1.3.7",
-  "main": "./electron.js",
+  "version": "1.0.0",
+  "description": "phytothreptiki-recipe-creator",
   "scripts": {
-    "react-test": "react-scripts test",
-    "react-eject": "react-scripts eject",
-    "client-build": "react-scripts build",
-    "client-start": "cross-env BROWSER=none react-scripts start",
-    "server-start": "nodemon server/app.js",
-    "server-build": "babel server --out-dir build-server",
-    "preelectron-pack": "rm -rf dist && rm -rf build-server && rm -rf build",
-    "electron-pack": "concurrently --kill-others-on-fail \"yarn server-build\" \"yarn client-build\"",
-    "postelectron-pack": "electron-builder -c.extraMetadata.main='./electron.js'",
-    "postelectron-dev": "wait-on http://localhost:3000 && electron .",
-    "electron-dev": "concurrently --kill-others-on-fail \"yarn server-start\" \"yarn client-start\""
+    "client": "cd client && yarn start",
+    "server": "cd server && yarn start",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "start": "cd server && yarn --no-shrinkwrap && yarn start",
+    "heroku-postbuild": "cd client && yarn --no-shrinkwrap && yarn build"
   },
-  "author": "Petros Vasilopoulos",
-  "license": "ISC",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/petrosv91/ReactProjects.git"
   },
-  "build": {
-    "appId": "com.phytothreptiki-app",
-    "win": {
-      "target": [
-        "nsis"
-      ],
-      "icon": "public/logos/favicon.ico"
-    },
-    "files": [
-      "build/**/**/*",
-      "build-server/**/**/*",
-      "node_modules/**/*",
-      "./electron.js"
-    ],
-    "directories": {
-      "buildResources": "assets"
-    },
-    "nsis": {
-      "oneClick": false,
-      "installerIcon": "public/logos/favicon.ico",
-      "uninstallerIcon": "public/logos/favicon.ico",
-      "uninstallDisplayName": "Φυτοθρεπτική App",
-      "allowToChangeInstallationDirectory": true
-    }
+  "author": "Petros Vasilopoulos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/petrosv91/ReactProjects/issues"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "homepage": "https://github.com/petrosv91/ReactProjects#readme",
   "dependencies": {
-    "@chakra-ui/react": "^1.1.5",
-    "@emotion/react": "^11.0.0",
-    "@emotion/styled": "^11.0.0",
-    "@hookform/resolvers": "^1.0.1",
-    "@xstate/react": "^1.0.3",
-    "axios": "^0.21.1",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "electron-is-dev": "^2.0.0",
-    "express": "^4.17.1",
-    "focus-visible": "^5.2.0",
-    "framer-motion": "^2.9.4",
-    "get-port": "^5.1.1",
-    "mongoose": "^5.12.2",
-    "react": "^16.14.0",
-    "react-datepicker": "^3.4.1",
-    "react-dom": "^16.14.0",
-    "react-hook-form": "^6.14.2",
-    "react-icons": "^3.11.0",
-    "react-query": "^2.25.2",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.4",
-    "react-to-print": "^2.12.0",
-    "uuid": "^8.3.1",
-    "xstate": "^4.16.0",
-    "yup": "^0.31.0"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.13.10",
-    "@babel/core": "^7.13.10",
-    "@babel/plugin-transform-runtime": "^7.13.10",
-    "@babel/preset-env": "^7.13.12",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "babel-eslint": "^10.1.0",
-    "babel-plugin-inline-dotenv": "^1.6.0",
-    "concurrently": "^6.0.0",
-    "cross-env": "^7.0.3",
-    "electron": "^12.0.2",
-    "electron-builder": "^22.10.5",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-react": "^7.20.5",
-    "nodemon": "^2.0.7",
-    "wait-on": "^5.3.0"
+    "concurrently": "^5.3.0"
   }
 }

@@ -1,16 +1,10 @@
 require('dotenv/config');
-const path = require('path');
-
-const cors = require('cors');
-const { ipcRenderer } = require('electron');
 const express = require('express');
-const mongoose = require('mongoose');
+const cors = require('cors');
 
 const app = express();
-const apiRoute = require('./routes/api');
-
-// get an availaible port
-const port = ipcRenderer.sendSync('request-port');
+const path = require('path');
+const port = process.env.PORT || 5000;
 
 // Body-parser
 app.use(cors());
@@ -18,9 +12,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Import Routes
+const apiRoute = require('./routes/api');
 app.use('/api', apiRoute);
 
 // Connect to DB
+const mongoose = require('mongoose');
 mongoose.connect(
   process.env.DB_CONNECTION,
   {
@@ -41,13 +37,13 @@ mongoose.connect(
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
-  app.use(express.static(path.join(__dirname, '../build')));
+  app.use(express.static(path.join(__dirname, '../client/build')));
   // Handle React routing, return all requests to React app
   app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, '../build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
   });
 }
 
 app.listen(port, () => {
-  console.log(`Server listen on port ${port}`);
+  console.log(`Listening on port ${port}`);
 });
