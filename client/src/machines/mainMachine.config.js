@@ -15,7 +15,7 @@ export const actions = {
     if (e.callback) e.callback();
     if (e.data?.callback) e.data.callback();
   },
-  resetContext: assign((ctx, e) => {
+  resetContext: assign(() => {
     return { ...initialContext };
   }),
   assignItem: assign((ctx, e) => {

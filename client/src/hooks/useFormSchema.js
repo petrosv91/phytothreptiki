@@ -60,7 +60,11 @@ function useReactFormSchema() {
     return yup.object().shape({
       label: yup.string().required(),
       units: yup.number().required().positive(),
-      weights: yup.number().required().positive().weightValidation(toast, machineCapacity),
+      weights: yup
+        .number()
+        .required()
+        .positive()
+        .weightValidation(toast, machineCapacity),
     });
   }, [toast, machineCapacity]);
 

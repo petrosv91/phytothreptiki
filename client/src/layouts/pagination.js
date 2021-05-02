@@ -3,7 +3,7 @@ import React from 'react';
 import { Flex, Icon, Box } from '@chakra-ui/react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-function Pagination({ next, prev, jump, maxPage, canNext, canPrevious, currentPage }) {
+function Pagination({ next, prev, maxPage, canNext, canPrevious, currentPage }) {
   const disabledColor = 'gray.500';
   const enabledColor = 'text';
   return (

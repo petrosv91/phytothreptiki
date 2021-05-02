@@ -31,7 +31,13 @@ function Settings() {
       <Modal isOpen={isOpen} onClose={onClose} header='Ρυθμίσεις'>
         <DataTabs data={data} />
       </Modal>
-      <Icon as={MdSettings} ml={4} cursor='pointer' boxSize={[7, 6, 5]} onClick={onOpen} />
+      <Icon
+        as={MdSettings}
+        ml={4}
+        cursor='pointer'
+        boxSize={[7, 6, 5]}
+        onClick={onOpen}
+      />
     </Box>
   );
 }

@@ -25,6 +25,7 @@ function RecipeHeader({ onOpen, handlePrint, printLoading }) {
   }
 
   const canSubmit = React.useMemo(() => {
+    // eslint-disable-next-line no-unused-vars
     const { restPrice, loops, weights, ...importantData } = mainFormValues;
     return isFormFull(importantData, context);
   }, [context, mainFormValues]);

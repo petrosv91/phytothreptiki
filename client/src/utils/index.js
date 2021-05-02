@@ -8,6 +8,7 @@ export function createToast(toast, props) {
     position: 'bottom',
     isClosable: true,
     duration: 5000,
+    // eslint-disable-next-line react/display-name
     render: ({ onClose }) => <Toast onClose={onClose} {...props} />,
   });
 }
@@ -50,7 +51,10 @@ export function isRateValid({ elementStore }, { rate: newRate }) {
   return rateSum + newRate <= 100;
 }
 export function istotalWeightsValid({ productStore }, { weights, units }, totalWeights) {
-  const weightsSum = productStore.reduce((prev, curr) => prev + curr.weights * curr.units, 0);
+  const weightsSum = productStore.reduce(
+    (prev, curr) => prev + curr.weights * curr.units,
+    0,
+  );
   return weightsSum + weights * units <= totalWeights;
 }
 

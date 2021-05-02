@@ -19,7 +19,8 @@ export function formulaStandAlone(toast) {
     return createToast(toast, {
       type: 'error',
       title: 'Αποτυχία',
-      content: 'Τα πεδία "Στοιχεία" και "Βασικό Στοιχείο" πρέπει να είναι ή γεμάτα ή άδεια',
+      content:
+        'Τα πεδία "Στοιχεία" και "Βασικό Στοιχείο" πρέπει να είναι ή γεμάτα ή άδεια',
     });
   });
 }
@@ -30,7 +31,8 @@ export function baseElementStandAlone(toast) {
     return createToast(toast, {
       type: 'error',
       title: 'Αποτυχία',
-      content: 'Τα πεδία "Στοιχεία" και "Βασικό Στοιχείο" πρέπει να είναι ή γεμάτα ή άδεια',
+      content:
+        'Τα πεδία "Στοιχεία" και "Βασικό Στοιχείο" πρέπει να είναι ή γεμάτα ή άδεια',
     });
   });
 }

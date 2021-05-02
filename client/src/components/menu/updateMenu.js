@@ -14,7 +14,14 @@ import CreateProduct from '../product/createProduct';
 
 function Edit({ keys, List, handleClick, useGetItems }) {
   const getItems = useGetItems();
-  return <PickingItem keys={keys} List={List} promiseData={getItems} handleClick={handleClick} />;
+  return (
+    <PickingItem
+      keys={keys}
+      List={List}
+      promiseData={getItems}
+      handleClick={handleClick}
+    />
+  );
 }
 
 function UpdateMenu() {

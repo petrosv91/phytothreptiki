@@ -79,6 +79,7 @@ function SearchMenu({ drawerClose = () => {} }) {
           keys={rawMaterialKeys}
           List={RawMaterialList}
           promiseData={getRecipes}
+          // eslint-disable-next-line no-unused-vars
           handleClick={({ products, ...rest }) => {
             handleItemClick(rest, '/rawMaterials');
           }}
@@ -93,6 +94,7 @@ function SearchMenu({ drawerClose = () => {} }) {
           keys={productionKeys}
           List={ProductionFileList}
           promiseData={getRecipes}
+          // eslint-disable-next-line no-unused-vars
           handleClick={({ elements, ...rest }) => {
             handleItemClick(rest, '/productionFile');
           }}

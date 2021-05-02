@@ -27,9 +27,19 @@ function RawMaterials() {
           />
         </Flex>
         <Flex mt={4} align='center' justify='space-between' direction={['column', 'row']}>
-          <FormInput w={['full', '30%']} name='date' label='Ημερομηνία' formRef={register} />
+          <FormInput
+            w={['full', '30%']}
+            name='date'
+            label='Ημερομηνία'
+            formRef={register}
+          />
           <FormInput w={['full', '30%']} name='type' label='Τύπος' formRef={register} />
-          <FormInput w={['full', '30%']} name='recipe' label='Συνταγή' formRef={register} />
+          <FormInput
+            w={['full', '30%']}
+            name='recipe'
+            label='Συνταγή'
+            formRef={register}
+          />
         </Flex>
         <RecipeMiddle mt={4} />
       </Flex>

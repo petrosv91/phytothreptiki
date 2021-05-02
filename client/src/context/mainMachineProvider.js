@@ -18,10 +18,10 @@ function MainMachineProvider({ children }) {
     devTools: true,
     context: { ...storedValue },
     actions: {
-      renderSuccess: (ctx, e) => {
+      renderSuccess: () => {
         createToast(toast, { type: 'success', title: 'Επιτυχής καταχώρηση' });
       },
-      renderError: (ctx, e) => {
+      renderError: (_ctx, e) => {
         const { message } = e.data;
         createToast(toast, { type: 'error', title: 'Αποτυχία', content: message });
       },

@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
+const Code = require('../models/code');
 const Element = require('../models/element');
 const Product = require('../models/product');
 const Recipe = require('../models/recipe');
-const Code = require('../models/code');
 
 router.post('/', async (req, res) => {
   try {
@@ -35,7 +35,10 @@ router.post('/', async (req, res) => {
       case 'setRecipe': {
         const exists = await Recipe.findById(req.body.data.id);
         if (exists) {
-          await Recipe.updateOne({ _id: req.body.data.id }, { $set: { ...req.body.data } });
+          await Recipe.updateOne(
+            { _id: req.body.data.id },
+            { $set: { ...req.body.data } },
+          );
           return res.json({ success: true, exists: true });
         }
         const newPost = new Recipe({ ...req.body.data });
@@ -45,7 +48,10 @@ router.post('/', async (req, res) => {
       case 'setElement': {
         const exists = await Element.findById(req.body.data.id);
         if (exists) {
-          await Element.updateOne({ _id: req.body.data.id }, { $set: { ...req.body.data } });
+          await Element.updateOne(
+            { _id: req.body.data.id },
+            { $set: { ...req.body.data } },
+          );
           return res.json({ success: true });
         }
         const newPost = new Element({ ...req.body.data });
@@ -55,7 +61,10 @@ router.post('/', async (req, res) => {
       case 'setProduct': {
         const exists = await Product.findById(req.body.data.id);
         if (exists) {
-          await Product.updateOne({ _id: req.body.data.id }, { $set: { ...req.body.data } });
+          await Product.updateOne(
+            { _id: req.body.data.id },
+            { $set: { ...req.body.data } },
+          );
           return res.json({ success: true });
         }
         const newPost = new Product({ ...req.body.data });
