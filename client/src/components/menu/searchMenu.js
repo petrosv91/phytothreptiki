@@ -14,6 +14,7 @@ import {
   RawMaterialList,
   RecipeList,
 } from '../../lib/ui';
+import { excludeFromObj } from '../../utils';
 import PickingItem from '../lists/pickingItem';
 
 function SearchMenu({ drawerClose = () => {} }) {
@@ -79,8 +80,8 @@ function SearchMenu({ drawerClose = () => {} }) {
           keys={rawMaterialKeys}
           List={RawMaterialList}
           promiseData={getRecipes}
-          // eslint-disable-next-line no-unused-vars
-          handleClick={({ products, ...rest }) => {
+          handleClick={(recipe) => {
+            const rest = excludeFromObj(recipe, ['products']);
             handleItemClick(rest, '/rawMaterials');
           }}
         />
@@ -94,8 +95,8 @@ function SearchMenu({ drawerClose = () => {} }) {
           keys={productionKeys}
           List={ProductionFileList}
           promiseData={getRecipes}
-          // eslint-disable-next-line no-unused-vars
-          handleClick={({ elements, ...rest }) => {
+          handleClick={(recipe) => {
+            const rest = excludeFromObj(recipe, ['elements']);
             handleItemClick(rest, '/productionFile');
           }}
         />

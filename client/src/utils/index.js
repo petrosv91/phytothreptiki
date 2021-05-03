@@ -7,7 +7,7 @@ export function createToast(toast, props) {
   toast({
     position: 'bottom',
     isClosable: true,
-    duration: 5000,
+    duration: 3000,
     // eslint-disable-next-line react/display-name
     render: ({ onClose }) => <Toast onClose={onClose} {...props} />,
   });
@@ -78,4 +78,10 @@ export function formatDate(date, delimiter) {
 
 export function findDelimiter(dateFormat) {
   return dateFormat.split('').find((c) => c === '.' || c === '/' || c === '/');
+}
+
+export function excludeFromObj(currObj, arr) {
+  const newObj = { ...currObj };
+  arr.forEach((prop) => delete newObj[prop]);
+  return newObj;
 }

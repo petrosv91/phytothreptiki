@@ -6,7 +6,7 @@ import { queryCache } from 'react-query';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Buttons, FormInput } from '../../lib/ui';
-import { getCurrentDate, isFormEmpty, isFormFull } from '../../utils';
+import { excludeFromObj, getCurrentDate, isFormEmpty, isFormFull } from '../../utils';
 
 function RecipeHeader({ onOpen, handlePrint, printLoading }) {
   const [{ context }, send] = useMainMachine();
@@ -25,8 +25,11 @@ function RecipeHeader({ onOpen, handlePrint, printLoading }) {
   }
 
   const canSubmit = React.useMemo(() => {
-    // eslint-disable-next-line no-unused-vars
-    const { restPrice, loops, weights, ...importantData } = mainFormValues;
+    const importantData = excludeFromObj(mainFormValues, [
+      'loops',
+      'weights',
+      'restPrice',
+    ]);
     return isFormFull(importantData, context);
   }, [context, mainFormValues]);
 
