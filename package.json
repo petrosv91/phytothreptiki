@@ -74,7 +74,7 @@
     "electron-is-dev": "^2.0.0",
     "express": "^4.17.1",
     "focus-visible": "^5.2.0",
-    "framer-motion": "^4",
+    "framer-motion": "4.1.11",
     "get-port": "^5.1.1",
     "mongoose": "^5.12.2",
     "react": "^16.14.0",
