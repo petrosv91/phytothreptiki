@@ -16,7 +16,9 @@ function ThemeModeProvider({ children }) {
   }
 
   return (
-    <ThemeModeContext.Provider value={{ currentTheme: storedValue, toggleTheme: toggleTheme }}>
+    <ThemeModeContext.Provider
+      value={{ currentTheme: storedValue, toggleTheme: toggleTheme }}
+    >
       <ChakraProvider theme={storedValue === 'dark' ? darkTheme : lightTheme}>
         {children}
         <Global styles={GlobalStyles} />

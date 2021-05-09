@@ -24,8 +24,18 @@ function ProductionFile() {
           />
         </Flex>
         <Flex mt={4} align='center' justify='space-between' direction={['column', 'row']}>
-          <FormInput w={['full', '45%']} name='date' label='Ημερομηνία' formRef={register} />
-          <FormInput w={['full', '45%']} name='recipe' label='Συνταγή' formRef={register} />
+          <FormInput
+            w={['full', '45%']}
+            name='date'
+            label='Ημερομηνία'
+            formRef={register}
+          />
+          <FormInput
+            w={['full', '45%']}
+            name='recipe'
+            label='Συνταγή'
+            formRef={register}
+          />
         </Flex>
       </Flex>
       <ProductStore mt={4} />

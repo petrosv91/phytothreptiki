@@ -15,7 +15,7 @@ export const actions = {
     if (e.callback) e.callback();
     if (e.data?.callback) e.data.callback();
   },
-  resetContext: assign((ctx, e) => {
+  resetContext: assign(() => {
     return { ...initialContext };
   }),
   assignItem: assign((ctx, e) => {
@@ -66,7 +66,10 @@ export const services = {
       const result = await baseGetService({ service: 'getMaxCode' });
       return { result, ...e };
     } catch (error) {
-      throw Object.assign(new Error(error), { toast: e.toast, message: error.message });
+      throw Object.assign(new Error(error), {
+        toast: e.toast,
+        message: error.message,
+      });
     }
   },
   setMaxCode: async (ctx, e) => {
@@ -89,7 +92,12 @@ export const services = {
       const { recipeId, elementStore, productStore } = ctx;
       const result = await baseGetService({
         service: 'setRecipe',
-        data: { ...e.data, id: recipeId, elements: elementStore, products: productStore },
+        data: {
+          ...e.data,
+          id: recipeId,
+          elements: elementStore,
+          products: productStore,
+        },
       });
       return { result, ...e };
     } catch (error) {
@@ -101,18 +109,30 @@ export const services = {
   },
   setElement: async (ctx, e) => {
     try {
-      const result = await baseGetService({ service: 'setElement', data: { ...e.data } });
+      const result = await baseGetService({
+        service: 'setElement',
+        data: { ...e.data },
+      });
       return { result, ...e };
     } catch (error) {
-      throw Object.assign(new Error(error), { toast: e.toast, message: error.message });
+      throw Object.assign(new Error(error), {
+        toast: e.toast,
+        message: error.message,
+      });
     }
   },
   setProduct: async (ctx, e) => {
     try {
-      const result = await baseGetService({ service: 'setProduct', data: { ...e.data } });
+      const result = await baseGetService({
+        service: 'setProduct',
+        data: { ...e.data },
+      });
       return { result, ...e };
     } catch (error) {
-      throw Object.assign(new Error(error), { toast: e.toast, message: error.message });
+      throw Object.assign(new Error(error), {
+        toast: e.toast,
+        message: error.message,
+      });
     }
   },
 };

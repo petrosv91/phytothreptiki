@@ -21,7 +21,11 @@ function Edit() {
 
   function handleOnblur(e) {
     setValue((prev) => ({ ...prev, machineCapacity: Number(e.target.value) }));
-    send({ type: 'ADD_ITEM', key: 'machineCapacity', data: Number(e.target.value) });
+    send({
+      type: 'ADD_ITEM',
+      key: 'machineCapacity',
+      data: Number(e.target.value),
+    });
   }
   function restoreDefault() {
     setRestoreLoading(true);

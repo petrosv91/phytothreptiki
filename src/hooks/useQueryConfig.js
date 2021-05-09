@@ -9,7 +9,11 @@ function useReactQueryConfig() {
 
   const overrides = useMemo(() => {
     function handleError(e) {
-      createToast(toast, { type: 'error', title: 'Αποτυχία', content: e.message });
+      createToast(toast, {
+        type: 'error',
+        title: 'Αποτυχία',
+        content: e.message,
+      });
     }
     return {
       queries: {

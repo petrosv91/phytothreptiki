@@ -60,11 +60,20 @@ function useReactFormSchema() {
     return yup.object().shape({
       label: yup.string().required(),
       units: yup.number().required().positive(),
-      weights: yup.number().required().positive().weightValidation(toast, machineCapacity),
+      weights: yup
+        .number()
+        .required()
+        .positive()
+        .weightValidation(toast, machineCapacity),
     });
   }, [toast, machineCapacity]);
 
-  return { mainFormSchema, elementFormSchema, createElementSchema, productFormSchema };
+  return {
+    mainFormSchema,
+    elementFormSchema,
+    createElementSchema,
+    productFormSchema,
+  };
 }
 
 export default useReactFormSchema;

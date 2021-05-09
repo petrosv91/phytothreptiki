@@ -21,8 +21,12 @@ export const MainMachine = createMachine({
         DELETE_ITEM: { actions: [actions.deleteItem, actions.callback] },
         RESET: { actions: [actions.resetContext, actions.callback] },
         ADD_ROW: { actions: [actions.addItemToStore, actions.callback] },
-        DELETE_ROW: { actions: [actions.deleteItemFromStore, actions.callback] },
-        RESTORE_DEFAULTS: { actions: [actions.restoreDefaults, actions.callback] },
+        DELETE_ROW: {
+          actions: [actions.deleteItemFromStore, actions.callback],
+        },
+        RESTORE_DEFAULTS: {
+          actions: [actions.restoreDefaults, actions.callback],
+        },
         RECIPE_SUBMIT: {
           target: 'recipeSubmitting',
         },

@@ -30,7 +30,15 @@ function ProductForm() {
   const getProducts = useGetProducts();
 
   const { productFormSchema } = useReactFormSchema();
-  const { register, handleSubmit, getValues, setValue, clearErrors, reset, errors } = useForm({
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    setValue,
+    clearErrors,
+    reset,
+    errors,
+  } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(productFormSchema),
   });
@@ -69,7 +77,9 @@ function ProductForm() {
         <FormSwitch
           size='lg'
           name='elementSwitch'
-          label={`${productSwitch ? 'Απενεργοποίηση' : 'Ενεργοποίηση'} πεδίων για Έτοιμο Προϊον`}
+          label={`${
+            productSwitch ? 'Απενεργοποίηση' : 'Ενεργοποίηση'
+          } πεδίων για Έτοιμο Προϊον`}
           isChecked={productSwitch}
           onChange={() => send({ type: 'TOGGLE', key: 'productSwitch' })}
         />

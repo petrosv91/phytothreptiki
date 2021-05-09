@@ -5,7 +5,13 @@ import { MdDelete } from 'react-icons/md';
 
 function DeleteIcon({ ...rest }) {
   return (
-    <Icon as={MdDelete} color='red.500' cursor='pointer' _hover={{ color: 'red.400' }} {...rest} />
+    <Icon
+      as={MdDelete}
+      color='red.500'
+      cursor='pointer'
+      _hover={{ color: 'red.400' }}
+      {...rest}
+    />
   );
 }
 
