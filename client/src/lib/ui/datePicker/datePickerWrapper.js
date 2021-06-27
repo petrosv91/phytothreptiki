@@ -10,8 +10,11 @@ export const DatePickerWrapper = styled.div`
     z-index: 100;
   }
   .react-datepicker {
-    font-size: 1.05em;
-    @media screen and (max-width: 415px) {
+    font-size: 1.24em;
+    @media screen and (max-width: ${({ breakpoints }) => breakpoints.md}) {
+      font-size: 1.055em;
+    }
+    @media screen and (max-width: ${({ breakpoints }) => breakpoints.sm}) {
       font-size: 0.89em;
     }
   }

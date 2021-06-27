@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Input } from '@chakra-ui/react';
+import { useTheme } from '@emotion/react';
 import ReactDatePicker from 'react-datepicker';
 
 import { CalendarIcon } from '..';
@@ -9,6 +10,7 @@ import { DatePickerWrapper } from './datePickerWrapper';
 import 'react-datepicker/dist/react-datepicker.css';
 
 function DatePicker({ placeholder, value, handleChange, handleDateChange, ...rest }) {
+  const { breakpoints } = useTheme();
   const [datePickerState, setDatePickerState] = React.useState(false);
 
   function open() {
@@ -19,21 +21,19 @@ function DatePicker({ placeholder, value, handleChange, handleDateChange, ...res
   }
 
   return (
-    <DatePickerWrapper>
+    <DatePickerWrapper breakpoints={breakpoints}>
       <CalendarIcon boxSize={6} onClick={open} />
       <ReactDatePicker
         value={value}
+        dateFormat='dd/MM/yyyy'
         autoFocus={true}
         open={datePickerState}
         onClickOutside={close}
         onChangeRaw={handleChange}
-        onSelect={(date) => {
-          close();
-          handleDateChange(date);
-        }}
-        dateFormat='dd/MM/yyyy'
+        placeholderText={placeholder}
         customInput={
           <Input
+            w='full'
             color='text'
             fontWeight='500'
             autoComplete='off'
@@ -45,7 +45,10 @@ function DatePicker({ placeholder, value, handleChange, handleDateChange, ...res
             {...rest}
           />
         }
-        placeholderText={placeholder}
+        onSelect={(date) => {
+          close();
+          handleDateChange(date);
+        }}
       />
     </DatePickerWrapper>
   );
