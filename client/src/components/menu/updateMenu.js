@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef, useState } from 'react';
 
 import { Box, Flex, Icon, Text, useDisclosure } from '@chakra-ui/react';
 import { MdKeyboardBackspace } from 'react-icons/md';
@@ -29,10 +29,10 @@ function UpdateMenu() {
   const [state, send] = useMainMachine();
   const { updatedItem } = state.context;
 
-  const productKeys = React.useRef(['label']);
-  const elementKeys = React.useRef(['label', 'formula']);
+  const productKeys = useRef(['label']);
+  const elementKeys = useRef(['label', 'formula']);
 
-  const [{ baseComp, secondComp, label }, setComponent] = React.useState({});
+  const [{ baseComp, secondComp, label }, setComponent] = useState({});
 
   const options = [
     {

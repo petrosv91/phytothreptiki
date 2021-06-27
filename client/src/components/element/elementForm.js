@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef, memo } from 'react';
 
 import { Collapse, Flex, useDisclosure, useToast } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -26,7 +26,7 @@ function ElementForm() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const getElements = useGetElements();
-  const keys = React.useRef(['label', 'formula']);
+  const keys = useRef(['label', 'formula']);
 
   const { elementFormSchema } = useReactFormSchema();
   const {
@@ -168,4 +168,4 @@ function ElementForm() {
   );
 }
 
-export default React.memo(ElementForm);
+export default memo(ElementForm);

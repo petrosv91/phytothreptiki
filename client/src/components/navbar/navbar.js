@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Box, Flex, Icon, Image, Stack, useDisclosure } from '@chakra-ui/react';
 import { MdMenu } from 'react-icons/md';
 

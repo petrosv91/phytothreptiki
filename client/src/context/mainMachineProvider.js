@@ -1,4 +1,4 @@
-import React from 'react';
+import { createContext, useContext } from 'react';
 
 import { useToast } from '@chakra-ui/react';
 import { useMachine, useService } from '@xstate/react';
@@ -8,7 +8,7 @@ import { useLocalStorage } from '../hooks';
 import { MainMachine } from '../machines/mainMachine';
 import { createToast } from '../utils';
 
-const MainMachineContext = React.createContext();
+const MainMachineContext = createContext();
 
 function MainMachineProvider({ children }) {
   const toast = useToast();
@@ -33,7 +33,7 @@ function MainMachineProvider({ children }) {
 }
 
 function useMainMachine() {
-  const context = React.useContext(MainMachineContext);
+  const context = useContext(MainMachineContext);
   if (context === undefined) {
     throw new Error('useMainMachine must be used within a MainMachineProvider');
   }

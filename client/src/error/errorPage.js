@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Flex, Image, Text } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
 

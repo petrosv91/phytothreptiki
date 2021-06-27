@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Select as ChakraSelect } from '@chakra-ui/react';
 
 function Select({ children, name, formRef, ...rest }) {

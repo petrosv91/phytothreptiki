@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef, useState } from 'react';
 
 import { Flex, useDisclosure } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
@@ -20,8 +20,8 @@ const MESSAGE = 'Προσοχή αν πατήσετε σύνεχεια θα χά
 function NewRecipe() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const printRef = React.useRef();
-  const [printLoading, setPrintLoading] = React.useState(false);
+  const printRef = useRef();
+  const [printLoading, setPrintLoading] = useState(false);
   const handlePrint = useReactToPrint({
     content: () => printRef.current,
     onBeforePrint: () => setPrintLoading(true),

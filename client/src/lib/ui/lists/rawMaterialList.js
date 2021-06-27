@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 
 import { Flex, Text } from '@chakra-ui/react';
 
@@ -13,4 +13,4 @@ function RawMaterialList({ item }) {
   );
 }
 
-export default React.memo(RawMaterialList);
+export default memo(RawMaterialList);

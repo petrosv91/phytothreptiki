@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Icon, Box, useDisclosure } from '@chakra-ui/react';
 import { MdSettings } from 'react-icons/md';
 

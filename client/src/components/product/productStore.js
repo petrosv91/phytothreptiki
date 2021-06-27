@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 
 import { Box } from '@chakra-ui/react';
 
@@ -77,4 +77,4 @@ function ProductStore({ printable, ...rest }) {
   );
 }
 
-export default React.memo(ProductStore);
+export default memo(ProductStore);

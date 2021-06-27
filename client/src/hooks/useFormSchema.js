@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 
 import { useToast } from '@chakra-ui/react';
 import * as yup from 'yup';
@@ -22,7 +22,7 @@ function useReactFormSchema() {
   const [{ context }] = useMainMachine();
   const { machineCapacity } = context;
 
-  const mainFormSchema = React.useMemo(() => {
+  const mainFormSchema = useMemo(() => {
     return yup.object().shape({
       date: yup.string().required(),
       type: yup.string().required(),
@@ -39,7 +39,7 @@ function useReactFormSchema() {
     });
   }, [toast, machineCapacity]);
 
-  const elementFormSchema = React.useMemo(() => {
+  const elementFormSchema = useMemo(() => {
     return yup.object().shape({
       label: yup.string().required(),
       rate: yup.number().required().positive(),
@@ -47,7 +47,7 @@ function useReactFormSchema() {
     });
   }, []);
 
-  const createElementSchema = React.useMemo(() => {
+  const createElementSchema = useMemo(() => {
     return yup.object().shape({
       label: yup.string().required(),
       price: yup.number().positive().nullable().transform(nullConverter),
@@ -56,7 +56,7 @@ function useReactFormSchema() {
     });
   }, [toast]);
 
-  const productFormSchema = React.useMemo(() => {
+  const productFormSchema = useMemo(() => {
     return yup.object().shape({
       label: yup.string().required(),
       units: yup.number().required().positive(),

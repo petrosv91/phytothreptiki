@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 
 import {
   Tag,
@@ -70,4 +70,4 @@ function FormInput(props) {
   );
 }
 
-export default React.memo(FormInput);
+export default memo(FormInput);

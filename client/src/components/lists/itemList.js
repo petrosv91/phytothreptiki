@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef, useEffect } from 'react';
 
 import { List as ChakraList } from '@chakra-ui/react';
 import { AnimatePresence } from 'framer-motion';
@@ -8,9 +8,9 @@ import { Skeleton } from '../../lib/ui';
 import ListItem from '../../lib/ui/lists/listItem';
 
 function ItemList({ handleClick, data, Item, loading }) {
-  const shouldAnimate = React.useRef(true);
+  const shouldAnimate = useRef(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (data.length && !loading) {
       shouldAnimate.current = false;
     } else {

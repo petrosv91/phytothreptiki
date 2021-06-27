@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, memo } from 'react';
 
 import { Input } from '@chakra-ui/react';
 import { useTheme } from '@emotion/react';
@@ -11,7 +11,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 function DatePicker({ placeholder, value, handleChange, handleDateChange, ...rest }) {
   const { breakpoints } = useTheme();
-  const [datePickerState, setDatePickerState] = React.useState(false);
+  const [datePickerState, setDatePickerState] = useState(false);
 
   function open() {
     setDatePickerState(true);
@@ -54,4 +54,4 @@ function DatePicker({ placeholder, value, handleChange, handleDateChange, ...res
   );
 }
 
-export default React.memo(DatePicker);
+export default memo(DatePicker);

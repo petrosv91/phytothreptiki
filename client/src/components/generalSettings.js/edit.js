@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 
 import { Flex } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
@@ -16,7 +16,7 @@ function Edit() {
     defaultValues: { machineCapacity },
   });
 
-  const [restoreLoading, setRestoreLoading] = React.useState(false);
+  const [restoreLoading, setRestoreLoading] = useState(false);
   const [, setValue] = useLocalStorage(`phytothreptikiSettings`);
 
   function handleOnblur(e) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useCallback, memo } from 'react';
 
 import { Flex } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
@@ -13,7 +13,7 @@ function RecipeFooter() {
 
   const { getValues, setValue, errors, register } = useFormContext();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (productStore.length) {
       const { loops, totalWeights } = getValues();
       if (!loops || !totalWeights) return;
@@ -22,7 +22,7 @@ function RecipeFooter() {
     }
   }, [getValues, setValue, productStore.length]);
 
-  const calcTotalWeights = React.useCallback(() => {
+  const calcTotalWeights = useCallback(() => {
     const { loops, weights, totalWeights } = getValues();
     if (productStore.length) {
       if (!loops || !totalWeights) return;
@@ -61,4 +61,4 @@ function RecipeFooter() {
   );
 }
 
-export default React.memo(RecipeFooter);
+export default memo(RecipeFooter);

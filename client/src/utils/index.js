@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Toast } from '../layouts';
 
 export function createToast(toast, props) {

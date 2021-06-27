@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback, memo } from 'react';
 
 import { Box, Flex, Text } from '@chakra-ui/react';
 import { useFormContext, useWatch } from 'react-hook-form';
@@ -26,7 +26,7 @@ function ElementStore({ printable, ...rest }) {
     const [baseElement] = row.formula;
     return (row.rate * baseElement) / 100;
   }
-  const calcWeights = React.useCallback(
+  const calcWeights = useCallback(
     (row) => {
       return (weights * row.rate) / 100;
     },
@@ -148,4 +148,4 @@ function ElementStore({ printable, ...rest }) {
   );
 }
 
-export default React.memo(ElementStore);
+export default memo(ElementStore);

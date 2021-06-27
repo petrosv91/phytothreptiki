@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 
 function findMatch(keys, query, item) {
   const match = keys.current.find((key) => {
@@ -19,7 +19,7 @@ function findMatch(keys, query, item) {
 }
 
 export default function useFiltersData({ keys = [], query = '', data }) {
-  const filteredData = React.useMemo(() => {
+  const filteredData = useMemo(() => {
     if (!query) return data;
     return data.filter((item) => findMatch(keys, query, item));
   }, [data, query, keys]);

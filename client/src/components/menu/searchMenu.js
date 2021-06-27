@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useRef } from 'react';
 
 import { Box, useDisclosure } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
@@ -24,12 +24,12 @@ function SearchMenu({ drawerClose = () => {} }) {
   const { reset, setValue, clearErrors } = useFormContext();
 
   const getRecipes = useGetRecipes();
-  const [loading, setLoading] = React.useState(false);
-  const [{ comp, label }, setComponent] = React.useState({});
+  const [loading, setLoading] = useState(false);
+  const [{ comp, label }, setComponent] = useState({});
 
-  const recipeKeys = React.useRef(['recipe', 'date']);
-  const rawMaterialKeys = React.useRef(['date', 'type']);
-  const productionKeys = React.useRef(['date', 'products']);
+  const recipeKeys = useRef(['recipe', 'date']);
+  const rawMaterialKeys = useRef(['date', 'type']);
+  const productionKeys = useRef(['date', 'products']);
 
   async function handleItemClick({ _id, code, elements, products, ...rest }, path) {
     try {

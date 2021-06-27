@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 
 import { Box, useDisclosure } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
@@ -15,7 +15,7 @@ function CreateMenu({ drawerClose = () => {} }) {
   const { reset } = useFormContext();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [{ comp, label }, setComponent] = React.useState({});
+  const [{ comp, label }, setComponent] = useState({});
   const options = [
     { label: 'Συνταγής', path: '/' },
     { label: 'Ά Ύλης', comp: <CreateElement /> },

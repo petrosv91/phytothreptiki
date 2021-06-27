@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 
 import { Flex, Image, Text } from '@chakra-ui/react';
 
@@ -13,7 +13,7 @@ function PickingItem({ promiseData, keys, List, showDate, handleClick }) {
   const { data = [], error, status, isFetching } = promiseData;
   const isLoading = status === 'loading' || isFetching;
 
-  const [query, setQuery] = React.useState('');
+  const [query, setQuery] = useState('');
   const filterdData = useFiltersData({ data, query, keys });
   const { currentData, ...paginationProps } = usePagination(filterdData);
 

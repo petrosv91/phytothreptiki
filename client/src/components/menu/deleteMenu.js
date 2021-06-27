@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 
 import { Box, useDisclosure } from '@chakra-ui/react';
 
@@ -9,7 +9,7 @@ import DeleteRecipe from '../recipe/deleteRecipe';
 
 function DeleteMenu() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [{ comp, label }, setComponent] = React.useState({});
+  const [{ comp, label }, setComponent] = useState({});
 
   const options = [
     { label: 'Συνταγής', comp: <DeleteRecipe /> },

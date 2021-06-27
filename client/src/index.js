@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
@@ -10,7 +10,7 @@ import * as serviceWorker from './serviceWorker';
 import 'focus-visible/dist/focus-visible';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <StrictMode>
     <BrowserRouter>
       <ThemeModeProvider>
         <MainMachineProvider>
@@ -18,7 +18,7 @@ ReactDOM.render(
         </MainMachineProvider>
       </ThemeModeProvider>
     </BrowserRouter>
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById('root'),
 );
 

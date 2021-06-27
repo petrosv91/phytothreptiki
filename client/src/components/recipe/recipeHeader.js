@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo, memo } from 'react';
 
 import { Flex } from '@chakra-ui/react';
 import { useFormContext, useWatch } from 'react-hook-form';
@@ -24,7 +24,7 @@ function RecipeHeader({ onOpen, handlePrint, printLoading }) {
     });
   }
 
-  const canSubmit = React.useMemo(() => {
+  const canSubmit = useMemo(() => {
     const importantData = excludeFromObj(mainFormValues, [
       'loops',
       'weights',
@@ -33,7 +33,7 @@ function RecipeHeader({ onOpen, handlePrint, printLoading }) {
     return isFormFull(importantData, context);
   }, [context, mainFormValues]);
 
-  const canReset = React.useMemo(() => {
+  const canReset = useMemo(() => {
     const currentDate = getCurrentDate();
     const { date, ...importantData } = mainFormValues;
     return !isFormEmpty(importantData, context) || date !== currentDate;
@@ -92,4 +92,4 @@ function RecipeHeader({ onOpen, handlePrint, printLoading }) {
   );
 }
 
-export default React.memo(RecipeHeader);
+export default memo(RecipeHeader);

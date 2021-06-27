@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {
   Flex,
   Modal as ChakraModal,
