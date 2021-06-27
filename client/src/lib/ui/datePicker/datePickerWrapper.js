@@ -42,8 +42,6 @@ export const DatePickerWrapper = styled.div`
   }
   .react-datepicker__navigation {
     top: 1em;
-    line-height: 1.7em;
-    border: 0.45em solid transparent;
   }
   .react-datepicker__navigation--previous {
     border-right-color: #ccc;

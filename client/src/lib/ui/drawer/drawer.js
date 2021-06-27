@@ -6,19 +6,18 @@ import {
   DrawerContent,
   DrawerCloseButton,
   DrawerFooter,
+  useMediaQuery,
 } from '@chakra-ui/react';
 
-import useWindowSize from '../../../hooks/useWindowSize';
-
 function Drawer({ isOpen, onClose, heading, children, footer }) {
-  const { width } = useWindowSize();
+  const [isLargerThan480] = useMediaQuery('(min-width: 480px)');
   return (
     <ChakraDrawer
       size='xs'
       overflow='auto'
       isOpen={isOpen}
       onClose={onClose}
-      placement={width < 480 ? 'bottom' : 'right'}
+      placement={isLargerThan480 ? 'right' : 'bottom'}
       isFullHeight={true}
     >
       <DrawerOverlay />
@@ -31,7 +30,7 @@ function Drawer({ isOpen, onClose, heading, children, footer }) {
         color='special.500'
       >
         <DrawerCloseButton />
-        {width < 480 && <DrawerHeader>{heading}</DrawerHeader>}
+        {!isLargerThan480 && <DrawerHeader>{heading}</DrawerHeader>}
         <DrawerBody overflow='auto'>{children}</DrawerBody>
         <DrawerFooter>{footer}</DrawerFooter>
       </DrawerContent>
