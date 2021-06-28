@@ -29,18 +29,11 @@ function ElementForm() {
   const keys = useRef(['label', 'formula']);
 
   const { elementFormSchema } = useReactFormSchema();
-  const {
-    register,
-    handleSubmit,
-    getValues,
-    setValue,
-    reset,
-    clearErrors,
-    errors,
-  } = useForm({
-    mode: 'onBlur',
-    resolver: yupResolver(elementFormSchema),
-  });
+  const { register, handleSubmit, getValues, setValue, reset, clearErrors, errors } =
+    useForm({
+      mode: 'onBlur',
+      resolver: yupResolver(elementFormSchema),
+    });
 
   const [{ context }, send] = useMainMachine();
   const { elementSwitch = false } = context.switches;
@@ -104,7 +97,7 @@ function ElementForm() {
             errors={errors}
             formRef={register}
           />
-          <Flex direction={['column', 'row']} align='center' justify='space-between'>
+          <Flex direction={['column', 'row']} align='start' justify='space-between'>
             <FormInput
               w={['full', '45%']}
               name='rate'

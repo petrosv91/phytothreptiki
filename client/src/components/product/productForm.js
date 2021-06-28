@@ -30,18 +30,11 @@ function ProductForm() {
   const getProducts = useGetProducts();
 
   const { productFormSchema } = useReactFormSchema();
-  const {
-    register,
-    handleSubmit,
-    getValues,
-    setValue,
-    clearErrors,
-    reset,
-    errors,
-  } = useForm({
-    mode: 'onBlur',
-    resolver: yupResolver(productFormSchema),
-  });
+  const { register, handleSubmit, getValues, setValue, clearErrors, reset, errors } =
+    useForm({
+      mode: 'onBlur',
+      resolver: yupResolver(productFormSchema),
+    });
 
   const [{ context }, send] = useMainMachine();
   const { productSwitch = false } = context.switches;
@@ -94,7 +87,7 @@ function ProductForm() {
             errors={errors}
             formRef={register}
           />
-          <Flex direction={['column', 'row']} align='center' justify='space-between'>
+          <Flex direction={['column', 'row']} align='start' justify='space-between'>
             <FormInput
               w={['full', '45%']}
               name='units'

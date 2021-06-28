@@ -36,7 +36,7 @@ function RecipeFooter() {
   }, [getValues, setValue, productStore.length]);
 
   return (
-    <Flex direction={['column', 'row']} align='center' justify='space-between'>
+    <Flex direction={['column', 'row']} align='start' justify='space-between'>
       <FormInput
         w={['full', '45%']}
         name='loops'

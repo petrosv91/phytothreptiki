@@ -8,6 +8,7 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightElement,
+  FormErrorMessage,
 } from '@chakra-ui/react';
 
 import Input from './input';
@@ -33,17 +34,11 @@ function FormInput(props) {
 
   return (
     <FormControl w={w} mt={2} isInvalid={errors[name]} {...horizontalProps}>
-      {label && (
-        <FormLabel htmlFor={name} color='text' fontSize={{ sm: 'sm', md: 'md' }}>
-          {label}
-        </FormLabel>
-      )}
+      <FormLabel htmlFor={name} color='text' fontSize={{ sm: 'sm', md: 'md' }}>
+        {label}
+      </FormLabel>
       <InputGroup>
-        {leftIcon && (
-          <InputLeftElement>
-            <LeftIcon boxSize={6} />
-          </InputLeftElement>
-        )}
+        <InputLeftElement>{leftIcon && <LeftIcon boxSize={6} />}</InputLeftElement>
         <Input
           name={name}
           formRef={formRef}
@@ -51,21 +46,22 @@ function FormInput(props) {
           pr={rightIcon || tag ? '10' : '4'}
           {...rest}
         />
-        {rightIcon && (
-          <InputRightElement cursor='pointer' onClick={rightIconClick}>
-            <RightIcon boxSize={6} />
-          </InputRightElement>
-        )}
-        {tag && (
-          <InputRightElement zIndex={0}>
-            <Tag p={0} size='lg' borderRadius='sm' color='colorText' bg='special.500'>
-              <Text w='full' textAlign='center'>
+        <InputRightElement>
+          {rightIcon && (
+            <RightIcon boxSize={6} cursor='pointer' onClick={rightIconClick} />
+          )}
+          {tag && (
+            <Tag p={0} size='lg' borderRadius='sm' bg='special.500'>
+              <Text w='full' textAlign='center' color='colorText'>
                 {tag}
               </Text>
             </Tag>
-          </InputRightElement>
-        )}
+          )}
+        </InputRightElement>
       </InputGroup>
+      <FormErrorMessage fontSize='md' fontWeight='semibold'>
+        {errors[name]?.message}
+      </FormErrorMessage>
     </FormControl>
   );
 }

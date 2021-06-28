@@ -65,7 +65,7 @@ function RecipeHeader({ onOpen, handlePrint, printLoading }) {
           defaultValue={context.code}
         />
       </Flex>
-      <Flex direction={['column', 'row']} mt={4} align='center' justify='space-between'>
+      <Flex direction={['column', 'row']} mt={4} align='start' justify='space-between'>
         <FormInput
           w={['full', '30%']}
           name='date'
