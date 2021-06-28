@@ -1,8 +1,8 @@
 import { Flex, Image, Text } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
 
-import { ReactComponent as ErrorSVG } from '../assets/error.svg';
-import { Buttons } from '../lib/ui';
+import { ReactComponent as ErrorSVG } from '../../assets/error.svg';
+import { Buttons } from '../../lib/ui';
 
 export default function ErrorPage({ changeError }) {
   const history = useHistory();

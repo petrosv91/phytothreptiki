@@ -1,13 +1,16 @@
 import { Flex } from '@chakra-ui/layout';
 import { useFormContext } from 'react-hook-form';
 
-import ProductStore from '../components/product/productStore';
-import { useMainMachine } from '../context/mainMachineProvider';
-import { FormInput } from '../lib/ui';
+import { useMainMachine } from '../../context/mainMachineProvider';
+import { FormInput } from '../../lib/ui';
+import ElementStore from '../element/elementStore';
+import RecipeFooter from '../recipe/recipeFooter';
+import RecipeMiddle from '../recipe/recipeMiddle';
 
-function ProductionFile() {
+function RawMaterials() {
   const [{ context }] = useMainMachine();
   const { register } = useFormContext();
+
   return (
     <Flex direction='column'>
       <Flex direction='column' pointerEvents='none'>
@@ -23,22 +26,25 @@ function ProductionFile() {
         </Flex>
         <Flex mt={4} align='center' justify='space-between' direction={['column', 'row']}>
           <FormInput
-            w={['full', '45%']}
+            w={['full', '30%']}
             name='date'
             label='Ημερομηνία'
             formRef={register}
           />
+          <FormInput w={['full', '30%']} name='type' label='Τύπος' formRef={register} />
           <FormInput
-            w={['full', '45%']}
+            w={['full', '30%']}
             name='recipe'
             label='Συνταγή'
             formRef={register}
           />
         </Flex>
+        <RecipeMiddle mt={4} />
       </Flex>
-      <ProductStore mt={4} />
+      <ElementStore mt={4} />
+      <RecipeFooter mt={4} />
     </Flex>
   );
 }
 
-export default ProductionFile;
+export default RawMaterials;

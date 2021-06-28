@@ -3,14 +3,14 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { ReactQueryConfigProvider } from 'react-query';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import ErrorBoundary from './components/error/errorBoundary';
 import Navbar from './components/navbar/navbar';
+import NewRecipe from './components/pages/newRecipe';
+import ProductionFile from './components/pages/productionfile';
+import RawMaterials from './components/pages/rawMaterials';
 import { formDefaultValues } from './config';
-import ErrorBoundary from './error/errorBoundary';
 import { useReactFormSchema, useReactQueryConfig } from './hooks';
-import { Layout } from './layouts';
-import NewRecipe from './pages/newRecipe';
-import ProductionFile from './pages/productionfile';
-import RawMaterials from './pages/rawMaterials';
+import { Layout } from './lib/layouts';
 
 function App() {
   const overrides = useReactQueryConfig();

@@ -11,18 +11,34 @@ export const MainMachine = createMachine({
   states: {
     editting: {
       on: {
-        ADD_RECIPE: { actions: [actions.updateContext, actions.callback] },
+        ADD_RECIPE: {
+          actions: [actions.updateContext, actions.callback],
+        },
         DELETE_RECIPE: {
           target: 'gettingMaxCode',
           actions: [actions.resetContext, actions.callback],
         },
-        TOGGLE: { actions: [actions.toggleSwitch, actions.callback] },
-        ADD_ITEM: { actions: [actions.assignItem, actions.callback] },
-        DELETE_ITEM: { actions: [actions.deleteItem, actions.callback] },
-        RESET: { actions: [actions.resetContext, actions.callback] },
-        ADD_ROW: { actions: [actions.addItemToStore, actions.callback] },
-        DELETE_ROW: { actions: [actions.deleteItemFromStore, actions.callback] },
-        RESTORE_DEFAULTS: { actions: [actions.restoreDefaults, actions.callback] },
+        TOGGLE: {
+          actions: [actions.toggleSwitch, actions.callback],
+        },
+        ADD_ITEM: {
+          actions: [actions.assignItem, actions.callback],
+        },
+        DELETE_ITEM: {
+          actions: [actions.deleteItem, actions.callback],
+        },
+        RESET: {
+          actions: [actions.resetContext, actions.callback],
+        },
+        ADD_ROW: {
+          actions: [actions.addItemToStore, actions.callback],
+        },
+        DELETE_ROW: {
+          actions: [actions.deleteItemFromStore, actions.callback],
+        },
+        RESTORE_DEFAULTS: {
+          actions: [actions.restoreDefaults, actions.callback],
+        },
         RECIPE_SUBMIT: {
           target: 'recipeSubmitting',
         },

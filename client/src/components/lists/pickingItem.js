@@ -4,7 +4,7 @@ import { Flex, Image, Text } from '@chakra-ui/react';
 
 import { ReactComponent as EmptySVG } from '../../assets/no_data.svg';
 import { useFiltersData, usePagination } from '../../hooks';
-import { Pagination } from '../../layouts';
+import { Pagination } from '../../lib/layouts';
 import { DatePicker, FormInput } from '../../lib/ui';
 import { formatDate } from '../../utils';
 import ItemList from './itemList';
