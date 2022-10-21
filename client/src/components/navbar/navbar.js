@@ -17,9 +17,11 @@ function Navbar() {
       px={10}
       bg='background'
       color='special.600'
-      boxShadow='md'
       align='center'
       justify='space-between'
+      boxShadow='md'
+      zIndex={99}
+      position='relative'
     >
       <Drawer
         isOpen={isOpen}

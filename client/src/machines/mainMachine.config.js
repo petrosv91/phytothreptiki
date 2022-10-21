@@ -4,6 +4,7 @@ import { baseGetService } from '../api/services';
 
 export const initialContext = {
   recipeId: undefined,
+  files: [],
   switches: {},
   updatedItem: {},
   elementStore: [],
@@ -52,6 +53,10 @@ export const actions = {
   restoreDefaults: assign((ctx, e) => {
     return { ...ctx, ...e.data };
   }),
+  deleteFile: assign({
+    files: (ctx, e) => ctx.files.filter((item) => item.key !== e.id),
+  }),
+  saveFiles: assign({ files: (ctx, e) => [...ctx.files, e.file] }),
 };
 
 export const guards = {

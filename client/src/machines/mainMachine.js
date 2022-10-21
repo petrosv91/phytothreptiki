@@ -5,9 +5,7 @@ import { initialContext, actions, services, guards } from './mainMachine.config'
 export const MainMachine = createMachine({
   id: 'mainMachine',
   initial: 'gettingMaxCode',
-  context: {
-    ...initialContext,
-  },
+  context: { ...initialContext },
   states: {
     editting: {
       on: {
@@ -39,15 +37,15 @@ export const MainMachine = createMachine({
         RESTORE_DEFAULTS: {
           actions: [actions.restoreDefaults, actions.callback],
         },
-        RECIPE_SUBMIT: {
-          target: 'recipeSubmitting',
+        SAVE_FILE: {
+          actions: [actions.saveFiles, actions.callback],
         },
-        ELEMENT_SUBMIT: {
-          target: 'elementSubmitting',
+        DELETE_FILE: {
+          actions: [actions.deleteFile, actions.callback],
         },
-        PRODUCT_SUBMIT: {
-          target: 'productSubmitting',
-        },
+        RECIPE_SUBMIT: 'recipeSubmitting',
+        ELEMENT_SUBMIT: 'elementSubmitting',
+        PRODUCT_SUBMIT: 'productSubmitting',
       },
     },
     gettingMaxCode: {

@@ -5,6 +5,7 @@ import CalendarIcon from './icons/calendarIcon';
 import CloseIcon from './icons/closeIcon';
 import DeleteIcon from './icons/deleteIcon';
 import EditIcon from './icons/editIcon';
+import PdfIcon from './icons/pdfIcon';
 import FormInput from './inputs/formInput';
 import Input from './inputs/input';
 import ElementList from './lists/elementList';
@@ -30,6 +31,7 @@ export {
   Loading,
   Skeleton,
   DataTabs,
+  PdfIcon,
   EditIcon,
   CloseIcon,
   DeleteIcon,

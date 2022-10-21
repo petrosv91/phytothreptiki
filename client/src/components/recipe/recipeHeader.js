@@ -7,6 +7,7 @@ import { queryCache } from 'react-query';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Buttons, FormInput } from '../../lib/ui';
 import { excludeFromObj, getCurrentDate, isFormEmpty, isFormFull } from '../../utils';
+import { UploadFiles } from '../files/uploadFiles';
 
 function RecipeHeader({ onOpen, handlePrint, printLoading }) {
   const [{ context }, send] = useMainMachine();
@@ -52,6 +53,7 @@ function RecipeHeader({ onOpen, handlePrint, printLoading }) {
           <Buttons.Tertiary w={150} onClick={handlePrint} isLoading={printLoading}>
             Εκτύπωση
           </Buttons.Tertiary>
+          <UploadFiles />
         </Flex>
       </Flex>
       <Flex mt={4} justify='flex-end'>
@@ -65,7 +67,7 @@ function RecipeHeader({ onOpen, handlePrint, printLoading }) {
           defaultValue={context.code}
         />
       </Flex>
-      <Flex direction={['column', 'row']} mt={4} align='start' justify='space-between'>
+      <Flex mt={4} direction={['column', 'row']} align='start' justify='space-between'>
         <FormInput
           w={['full', '30%']}
           name='date'
