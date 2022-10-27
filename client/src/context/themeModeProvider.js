@@ -19,7 +19,10 @@ function ThemeModeProvider({ children }) {
     <ThemeModeContext.Provider
       value={{ currentTheme: storedValue, toggleTheme: toggleTheme }}
     >
-      <ChakraProvider theme={storedValue === 'dark' ? darkTheme : lightTheme}>
+      <ChakraProvider
+        portalZIndex={99}
+        theme={storedValue === 'dark' ? darkTheme : lightTheme}
+      >
         {children}
         <Global styles={GlobalStyles} />
       </ChakraProvider>
