@@ -1,11 +1,13 @@
 import { assign } from 'xstate';
 
-import { baseGetService, uploadFile } from '../api/services';
+import { baseGetService, deleteFile, uploadFile } from '../api/services';
 
 export const initialContext = {
   file: undefined,
+  oldFile: undefined,
   recipeId: undefined,
   switches: {},
+  formData: {},
   updatedItem: {},
   elementStore: [],
   productStore: [],
@@ -40,6 +42,7 @@ export const actions = {
     return {
       recipeId: e.id,
       file: e.file || undefined,
+      oldFile: e.file || undefined,
       code: e.code || ctx.code,
       elementStore: e.elements || [],
       productStore: e.products || [],
@@ -54,6 +57,7 @@ export const actions = {
   restoreDefaults: assign((ctx, e) => {
     return { ...ctx, ...e.data };
   }),
+  saveFormData: assign({ formData: (_, e) => e.formData }),
   deleteFile: assign({ file: () => undefined }),
   saveFile: assign({ file: (_, e) => e.file }),
 };
@@ -90,19 +94,17 @@ export const services = {
   },
   setRecipe: async (ctx, e) => {
     try {
-      const { file, recipeId, elementStore, productStore } = ctx;
-      const fileResult = await uploadFile(file.formData);
       const result = await baseGetService({
         service: 'setRecipe',
         data: {
-          ...e.data,
-          id: recipeId,
+          ...ctx.formData,
+          id: ctx.recipeId,
           file: {
-            id: fileResult.file.id,
-            name: fileResult.file.filename,
+            id: e.data?.file?.id,
+            name: ctx.file?.name,
           },
-          elements: elementStore,
-          products: productStore,
+          elements: ctx.elementStore,
+          products: ctx.productStore,
         },
       });
       return { result, ...e };
@@ -112,6 +114,12 @@ export const services = {
         message: `Η συνταγή δεν αποθηκεύτηκε: ${error.message}`,
       });
     }
+  },
+  setFile: async (ctx) => {
+    return await uploadFile(ctx.file.formData);
+  },
+  deleteFile: async (ctx) => {
+    return await deleteFile(ctx.oldFile.id);
   },
   setElement: async (ctx, e) => {
     try {

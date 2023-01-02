@@ -43,7 +43,10 @@ export const MainMachine = createMachine({
         DELETE_FILE: {
           actions: [actions.deleteFile, actions.callback],
         },
-        RECIPE_SUBMIT: 'recipeSubmitting',
+        RECIPE_SUBMIT: {
+          target: 'recipeSubmitting',
+          actions: actions.saveFormData,
+        },
         ELEMENT_SUBMIT: 'elementSubmitting',
         PRODUCT_SUBMIT: 'productSubmitting',
       },
@@ -88,8 +91,36 @@ export const MainMachine = createMachine({
       },
     },
     recipeSubmitting: {
-      initial: 'settingRecipe',
+      initial: 'settingFile',
       states: {
+        settingFile: {
+          always: {
+            cond: (ctx) => !ctx.file,
+            target: 'deletingFile',
+          },
+          invoke: {
+            src: services.setFile,
+            onDone: 'settingRecipe',
+            onError: {
+              target: '#mainMachine.editting',
+              actions: 'renderError',
+            },
+          },
+        },
+        deletingFile: {
+          always: {
+            cond: (ctx) => !ctx.oldFile,
+            target: 'settingRecipe',
+          },
+          invoke: {
+            src: services.deleteFile,
+            onDone: 'settingRecipe',
+            onError: {
+              target: '#mainMachine.editting',
+              actions: 'renderError',
+            },
+          },
+        },
         settingRecipe: {
           invoke: {
             src: services.setRecipe,
@@ -106,7 +137,7 @@ export const MainMachine = createMachine({
             ],
             onError: {
               target: '#mainMachine.editting',
-              actions: ['renderError'],
+              actions: 'renderError',
             },
           },
         },
@@ -116,11 +147,11 @@ export const MainMachine = createMachine({
             src: services.setMaxCode,
             onDone: {
               target: '#mainMachine.gettingMaxCode',
-              actions: ['renderSuccess'],
+              actions: 'renderSuccess',
             },
             onError: {
               target: '#mainMachine.editting',
-              actions: ['renderError'],
+              actions: 'renderError',
             },
           },
         },

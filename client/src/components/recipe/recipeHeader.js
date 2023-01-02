@@ -17,7 +17,7 @@ function RecipeHeader({ onOpen, handlePrint, printLoading }) {
   function onSubmit(formData) {
     send({
       type: 'RECIPE_SUBMIT',
-      data: formData,
+      formData,
       callback: () => {
         reset();
         queryCache.refetchQueries(['recipes']);

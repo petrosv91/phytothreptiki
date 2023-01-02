@@ -19,8 +19,12 @@ async function baseGetService(params) {
 }
 
 async function uploadFile(file) {
-  const result = await axios.post(`${FILES_API}/upload`, file);
+  const result = await axios.post(`${FILES_API}`, file);
+  return result.data;
+}
+async function deleteFile(fileId) {
+  const result = await axios.delete(`${FILES_API}/${fileId}`);
   return result.data;
 }
 
-export { baseGetService, uploadFile };
+export { baseGetService, uploadFile, deleteFile };

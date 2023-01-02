@@ -23,7 +23,7 @@ const storage = new GridFsStorage({
 const upload = multer({ storage }).single('file');
 const uploadFile = util.promisify(upload);
 
-router.post('/upload', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     await uploadFile(req, res);
     res.json({ success: true, file: req.file });
@@ -33,7 +33,7 @@ router.post('/upload', async (req, res) => {
   }
 });
 
-router.get('/download/:id/:name', async (req, res) => {
+router.get('/:id/:name', async (req, res) => {
   try {
     const fileId = req.params.id;
     const filename = req.params.name;
@@ -44,6 +44,14 @@ router.get('/download/:id/:name', async (req, res) => {
     const message = `File Error: ${error}`;
     res.status(500).send({ message });
   }
+});
+
+router.delete('/:id', async (req, res) => {
+  const fileId = req.params.id;
+  bucket
+    .delete(ObjectId(fileId))
+    .then(() => res.json({ success: true, id: fileId }))
+    .catch((message) => res.status(500).send({ message }));
 });
 
 module.exports = router;

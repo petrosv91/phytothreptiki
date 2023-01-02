@@ -1,14 +1,24 @@
-import { Flex, Link, Text } from '@chakra-ui/react';
+import { Flex, Link, Text, useToast } from '@chakra-ui/react';
 
 import { FILES_API } from '../../api/services';
 import { CloseIcon, PdfIcon } from '../../lib/ui';
+import { createToast } from '../../utils';
 
 export function UploadFile({ file, saveFile, deleteFile }) {
+  const toast = useToast();
+
   function open() {
     document.getElementById('upload').click();
   }
   function onBrowse(e) {
     const [selectedFile] = e.target.files;
+    if (selectedFile.type !== 'application/pdf') {
+      return createToast(toast, {
+        type: 'error',
+        title: 'Αποτυχία',
+        content: 'Το αρχείο θα πρέπει να είναι σε μορφή pdf',
+      });
+    }
     const formData = new FormData();
     formData.append('file', selectedFile);
     saveFile({ name: selectedFile.name, formData });
@@ -32,7 +42,7 @@ export function UploadFile({ file, saveFile, deleteFile }) {
               textAlign='center'
               cursor='pointer'
               target='_blank'
-              href={`${FILES_API}/download/${file.id}/${file.name}`}
+              href={`${FILES_API}/${file.id}/${file.name}`}
             >
               {file.name}
             </Link>
