@@ -6,6 +6,13 @@ const Element = require('../models/element');
 const Product = require('../models/product');
 const Recipe = require('../models/recipe');
 
+const {
+  setMaxCode,
+  setRecipe,
+  setElement,
+  setProduct,
+} = require('../services/setServices');
+
 router.post('/', async (req, res) => {
   try {
     switch (req.body.service) {
@@ -28,48 +35,20 @@ router.post('/', async (req, res) => {
       }
       // ----------- Set Services ------------
       case 'setMaxCode': {
-        const newCode = Number(req.body.data.code) + 1;
-        await Code.updateOne({ _id: req.body.data.codeId }, { $set: { code: newCode } });
-        return res.json({ success: true });
+        const obj = setMaxCode(req.body.data);
+        return res.json(obj);
       }
       case 'setRecipe': {
-        const exists = await Recipe.findById(req.body.data.id);
-        if (exists) {
-          await Recipe.updateOne(
-            { _id: req.body.data.id },
-            { $set: { ...req.body.data } },
-          );
-          return res.json({ success: true, exists: true });
-        }
-        const newPost = new Recipe({ ...req.body.data });
-        await newPost.save();
-        return res.json({ success: true });
+        const obj = await setRecipe(req.body.data);
+        return res.json(obj);
       }
       case 'setElement': {
-        const exists = await Element.findById(req.body.data.id);
-        if (exists) {
-          await Element.updateOne(
-            { _id: req.body.data.id },
-            { $set: { ...req.body.data } },
-          );
-          return res.json({ success: true });
-        }
-        const newPost = new Element({ ...req.body.data });
-        await newPost.save();
-        return res.json({ success: true });
+        const obj = setElement(req.body.data);
+        return res.json(obj);
       }
       case 'setProduct': {
-        const exists = await Product.findById(req.body.data.id);
-        if (exists) {
-          await Product.updateOne(
-            { _id: req.body.data.id },
-            { $set: { ...req.body.data } },
-          );
-          return res.json({ success: true });
-        }
-        const newPost = new Product({ ...req.body.data });
-        await newPost.save();
-        return res.json({ success: true });
+        const obj = setProduct(req.body.data);
+        return res.json(obj);
       }
       // ---------- Delete Services ------------
       case 'deleteRecipe': {
