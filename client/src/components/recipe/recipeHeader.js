@@ -7,7 +7,7 @@ import { queryCache } from 'react-query';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { Buttons, FormInput } from '../../lib/ui';
 import { excludeFromObj, getCurrentDate, isFormEmpty, isFormFull } from '../../utils';
-import { UploadFiles } from '../files/uploadFiles';
+import { UploadFile } from '../files/upload';
 
 function RecipeHeader({ onOpen, handlePrint, printLoading }) {
   const [{ context }, send] = useMainMachine();
@@ -42,21 +42,27 @@ function RecipeHeader({ onOpen, handlePrint, printLoading }) {
 
   return (
     <form style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
-      <Flex wrap='wrap' align='center' justify={['center', 'space-between']}>
-        <Buttons.Secondary w={150} type='submit' isDisabled={!canSubmit}>
-          Καταχώρηση
-        </Buttons.Secondary>
-        <Flex>
-          <Buttons.Tertiary w={150} onClick={onOpen} isDisabled={!canReset}>
-            Επαναφορά
-          </Buttons.Tertiary>
-          <Buttons.Tertiary w={150} onClick={handlePrint} isLoading={printLoading}>
-            Εκτύπωση
-          </Buttons.Tertiary>
-          <UploadFiles />
+      <Flex direction='column' gridGap={2}>
+        <Flex wrap='wrap' align='center' justify={['center', 'space-between']}>
+          <Buttons.Secondary w={150} type='submit' isDisabled={!canSubmit}>
+            Καταχώρηση
+          </Buttons.Secondary>
+          <Flex>
+            <Buttons.Tertiary w={150} onClick={onOpen} isDisabled={!canReset}>
+              Επαναφορά
+            </Buttons.Tertiary>
+            <Buttons.Tertiary w={150} onClick={handlePrint} isLoading={printLoading}>
+              Εκτύπωση
+            </Buttons.Tertiary>
+          </Flex>
         </Flex>
+        <UploadFile
+          file={context.file}
+          saveFile={(file) => send({ type: 'SAVE_FILE', file })}
+          deleteFile={() => send({ type: 'DELETE_FILE' })}
+        />
       </Flex>
-      <Flex mt={4} justify='flex-end'>
+      <Flex mt={2} justify='flex-end'>
         <FormInput
           w={['full', '30%']}
           tag='No.'

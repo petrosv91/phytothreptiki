@@ -7,12 +7,12 @@ import { useHistory } from 'react-router';
 import useGetRecipes from '../../api/queries/useGetRecipes';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import {
-  Loading,
   Menu,
   Modal,
-  ProductionFileList,
-  RawMaterialList,
+  Loading,
   RecipeList,
+  RawMaterialList,
+  ProductionFileList,
 } from '../../lib/ui';
 import { excludeFromObj } from '../../utils';
 import PickingItem from '../lists/pickingItem';
@@ -31,18 +31,17 @@ function SearchMenu({ drawerClose = () => {} }) {
   const rawMaterialKeys = useRef(['date', 'type']);
   const productionKeys = useRef(['date', 'products']);
 
-  async function handleItemClick({ _id, code, elements, products, ...rest }, path) {
+  async function handleItemClick(props, path) {
+    const { _id, code, elements, file, products, ...rest } = props;
     try {
       onClose();
       setLoading(true);
-      await new Promise((resolve) => {
-        return resolve(send({ type: 'RESET', callback: reset }));
-      });
+      const resetRecipe = () => send({ type: 'RESET', callback: reset });
+      await new Promise((resolve) => resolve(resetRecipe));
       setTimeout(() => {
-        send({ type: 'ADD_RECIPE', id: _id, code, elements, products });
-        Object.entries(rest).forEach(([key, value]) => {
-          setValue(key, value);
-        });
+        send({ type: 'ADD_RECIPE', id: _id, file, code, elements, products });
+        const recipeValues = Object.entries(rest);
+        recipeValues.forEach(([key, value]) => setValue(key, value));
         clearErrors();
         setLoading(false);
         drawerClose();

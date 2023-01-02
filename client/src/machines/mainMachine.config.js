@@ -1,10 +1,10 @@
 import { assign } from 'xstate';
 
-import { baseGetService } from '../api/services';
+import { baseGetService, uploadFile } from '../api/services';
 
 export const initialContext = {
+  file: undefined,
   recipeId: undefined,
-  files: [],
   switches: {},
   updatedItem: {},
   elementStore: [],
@@ -39,6 +39,7 @@ export const actions = {
   updateContext: assign((ctx, e) => {
     return {
       recipeId: e.id,
+      file: e.file || undefined,
       code: e.code || ctx.code,
       elementStore: e.elements || [],
       productStore: e.products || [],
@@ -53,10 +54,8 @@ export const actions = {
   restoreDefaults: assign((ctx, e) => {
     return { ...ctx, ...e.data };
   }),
-  deleteFile: assign({
-    files: (ctx, e) => ctx.files.filter((item) => item.key !== e.id),
-  }),
-  saveFiles: assign({ files: (ctx, e) => [...ctx.files, e.file] }),
+  deleteFile: assign({ file: () => undefined }),
+  saveFile: assign({ file: (_, e) => e.file }),
 };
 
 export const guards = {
@@ -91,10 +90,20 @@ export const services = {
   },
   setRecipe: async (ctx, e) => {
     try {
-      const { recipeId, elementStore, productStore } = ctx;
+      const { file, recipeId, elementStore, productStore } = ctx;
+      const fileResult = await uploadFile(file.formData);
       const result = await baseGetService({
         service: 'setRecipe',
-        data: { ...e.data, id: recipeId, elements: elementStore, products: productStore },
+        data: {
+          ...e.data,
+          id: recipeId,
+          file: {
+            id: fileResult.file.id,
+            name: fileResult.file.filename,
+          },
+          elements: elementStore,
+          products: productStore,
+        },
       });
       return { result, ...e };
     } catch (error) {

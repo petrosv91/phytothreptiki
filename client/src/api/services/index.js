@@ -1,12 +1,16 @@
-const { default: Axios } = require('axios');
+import axios from 'axios';
 
 const DEV_API = 'http://localhost:5000/api';
 const PROD_API = '/api';
 
+const DEV_FILES = 'http://localhost:5000/file';
+const PROD_FILES = '/files';
+
 const API = process.env.NODE_ENV === 'development' ? DEV_API : PROD_API;
+export const FILES_API = process.env.NODE_ENV === 'development' ? DEV_FILES : PROD_FILES;
 
 async function baseGetService(params) {
-  const result = await Axios.post(API, params);
+  const result = await axios.post(API, params);
   const data = result.data;
   if (!data.success) {
     throw new Error(data.message);
@@ -14,4 +18,9 @@ async function baseGetService(params) {
   return data;
 }
 
-export { baseGetService };
+async function uploadFile(file) {
+  const result = await axios.post(`${FILES_API}/upload`, file);
+  return result.data;
+}
+
+export { baseGetService, uploadFile };

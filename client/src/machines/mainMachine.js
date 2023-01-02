@@ -38,7 +38,7 @@ export const MainMachine = createMachine({
           actions: [actions.restoreDefaults, actions.callback],
         },
         SAVE_FILE: {
-          actions: [actions.saveFiles, actions.callback],
+          actions: [actions.saveFile, actions.callback],
         },
         DELETE_FILE: {
           actions: [actions.deleteFile, actions.callback],
