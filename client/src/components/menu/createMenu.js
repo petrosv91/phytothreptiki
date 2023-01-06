@@ -5,11 +5,11 @@ import { useFormContext } from 'react-hook-form';
 import { useHistory } from 'react-router';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
-import { Accordion, Modal } from '../../lib/ui';
+import { Accordion, Menu, Modal } from '../../lib/ui';
 import CreateElement from '../element/createElement';
 import CreateProduct from '../product/createProduct';
 
-function CreateMenu({ drawerClose = () => {} }) {
+function CreateMenu({ type = 'navbar', drawerClose = () => {} }) {
   const history = useHistory();
   const [, send] = useMainMachine();
   const { reset } = useFormContext();
@@ -39,7 +39,14 @@ function CreateMenu({ drawerClose = () => {} }) {
       <Modal isOpen={isOpen} onClose={onClose} header={`Δημιουργία ${label}`}>
         {comp}
       </Modal>
-      <Accordion options={options} title='Δημιουργία' handleClick={handleClick} />
+      {(() => {
+        if (type === 'navbar') {
+          return <Menu options={options} title='Δημιουργία' handleClick={handleClick} />;
+        }
+        return (
+          <Accordion options={options} title='Δημιουργία' handleClick={handleClick} />
+        );
+      })()}
     </>
   );
 }

@@ -9,7 +9,7 @@ import {
 
 function Accordion({ handleClick, options, title }) {
   return (
-    <ChakraAccordion w='full' allowToggle>
+    <ChakraAccordion w='full' allowToggle allowMultiple>
       <AccordionItem>
         <AccordionButton>
           <Box flex='1' fontWeight='semibold' textAlign='left'>

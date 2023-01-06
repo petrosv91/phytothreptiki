@@ -6,7 +6,7 @@ import { MdKeyboardBackspace } from 'react-icons/md';
 import useGetElements from '../../api/queries/useGetElements';
 import useGetProducts from '../../api/queries/useGetProducts';
 import { useMainMachine } from '../../context/mainMachineProvider';
-import { Accordion, ElementList, Modal, ProductList } from '../../lib/ui';
+import { Accordion, ElementList, Menu, Modal, ProductList } from '../../lib/ui';
 import { isObjEmpty } from '../../utils';
 import CreateElement from '../element/createElement';
 import PickingItem from '../lists/pickingItem';
@@ -24,7 +24,7 @@ function Edit({ keys, List, handleClick, useGetItems }) {
   );
 }
 
-function UpdateMenu() {
+function UpdateMenu({ type = 'navbar' }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [state, send] = useMainMachine();
   const { updatedItem } = state.context;
@@ -61,7 +61,7 @@ function UpdateMenu() {
     },
   ];
 
-  function handleOptionClick(opt) {
+  function handleClick(opt) {
     onOpen();
     setComponent(opt);
   }
@@ -99,7 +99,12 @@ function UpdateMenu() {
       <Modal isOpen={isOpen} onClose={handleOnClose} header={<Header />}>
         {isObjEmpty(updatedItem) ? baseComp : secondComp}
       </Modal>
-      <Accordion options={options} title='Μεταβολή' handleClick={handleOptionClick} />
+      {(() => {
+        if (type === 'navbar') {
+          return <Menu options={options} title='Μεταβολή' handleClick={handleClick} />;
+        }
+        return <Accordion options={options} title='Μεταβολή' handleClick={handleClick} />;
+      })()}
     </>
   );
 }

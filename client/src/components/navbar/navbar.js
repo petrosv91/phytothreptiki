@@ -1,8 +1,10 @@
+import { useState } from 'react';
+
 import { Box, Flex, Icon, Image, Stack, useDisclosure } from '@chakra-ui/react';
 import { MdMenu } from 'react-icons/md';
 
 import Logo from '../../assets/logo.png';
-import { Drawer } from '../../lib/ui';
+import { Drawer, Loading } from '../../lib/ui';
 import CreateMenu from '../menu/createMenu';
 import DeleteMenu from '../menu/deleteMenu';
 import SearchMenu from '../menu/searchMenu';
@@ -11,6 +13,13 @@ import UpdateMenu from '../menu/updateMenu';
 
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [loading, setLoading] = useState(false);
+
+  function handleClick() {
+    onClose();
+    setLoading((bool) => !bool);
+  }
 
   return (
     <Flex
@@ -23,6 +32,7 @@ function Navbar() {
       zIndex={99}
       position='relative'
     >
+      <Loading isLoading={loading} />
       <Drawer
         isOpen={isOpen}
         onClose={onClose}
@@ -30,16 +40,16 @@ function Navbar() {
         footer={<Settings drawerClose={onClose} />}
       >
         <Stack mt={10} direction='column' align='center'>
-          <SearchMenu drawerClose={onClose} />
-          <CreateMenu drawerClose={onClose} />
-          <UpdateMenu />
-          <DeleteMenu />
+          <SearchMenu type='drawer' toggleLoading={handleClick} />
+          <CreateMenu type='drawer' drawerClose={onClose} />
+          <UpdateMenu type='drawer' />
+          <DeleteMenu type='drawer' />
         </Stack>
       </Drawer>
       <Image src={Logo} boxSize='100px' objectFit='scale-down' />
       <Box display={['none', 'none', 'none', 'inline-block']}>
         <Stack direction='row' align='center' justify='flex-end'>
-          <SearchMenu />
+          <SearchMenu toggleLoading={handleClick} />
           <CreateMenu />
           <UpdateMenu />
           <DeleteMenu />

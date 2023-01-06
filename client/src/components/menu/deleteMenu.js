@@ -2,12 +2,12 @@ import { useState } from 'react';
 
 import { useDisclosure } from '@chakra-ui/react';
 
-import { Accordion, Modal } from '../../lib/ui';
+import { Accordion, Menu, Modal } from '../../lib/ui';
 import DeleteElement from '../element/deleteElement';
 import DeleteProduct from '../product/deleteProduct';
 import DeleteRecipe from '../recipe/deleteRecipe';
 
-function DeleteMenu() {
+function DeleteMenu({ type = 'navbar' }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [{ comp, label }, setComponent] = useState({});
 
@@ -27,7 +27,12 @@ function DeleteMenu() {
       <Modal isOpen={isOpen} onClose={onClose} header={`Αναζήτηση ${label}`}>
         {comp}
       </Modal>
-      <Accordion options={options} title='Διαγραφη' handleClick={handleClick} />
+      {(() => {
+        if (type === 'navbar') {
+          return <Menu options={options} title='Διαγραφη' handleClick={handleClick} />;
+        }
+        return <Accordion options={options} title='Διαγραφη' handleClick={handleClick} />;
+      })()}
     </>
   );
 }
