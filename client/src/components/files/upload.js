@@ -19,6 +19,13 @@ export function UploadFile({ file, saveFile, deleteFile }) {
         content: 'Το αρχείο θα πρέπει να είναι σε μορφή pdf',
       });
     }
+    if (selectedFile.size > 4000000) {
+      return createToast(toast, {
+        type: 'error',
+        title: 'Αποτυχία',
+        content: 'Το αρχείο θα πρέπει να είναι λιγότερο απο 4mb',
+      });
+    }
     const formData = new FormData();
     formData.append('file', selectedFile);
     saveFile({ name: selectedFile.name, formData });

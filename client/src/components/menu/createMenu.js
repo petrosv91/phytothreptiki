@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
-import { Box, useDisclosure } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 import { useHistory } from 'react-router';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
-import { Menu, Modal } from '../../lib/ui';
+import { Accordion, Modal } from '../../lib/ui';
 import CreateElement from '../element/createElement';
 import CreateProduct from '../product/createProduct';
 
@@ -35,12 +35,12 @@ function CreateMenu({ drawerClose = () => {} }) {
   }
 
   return (
-    <Box>
+    <>
       <Modal isOpen={isOpen} onClose={onClose} header={`Δημιουργία ${label}`}>
         {comp}
       </Modal>
-      <Menu options={options} title='Δημιουργία' handleClick={handleClick} />
-    </Box>
+      <Accordion options={options} title='Δημιουργία' handleClick={handleClick} />
+    </>
   );
 }
 

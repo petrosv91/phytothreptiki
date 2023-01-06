@@ -7,9 +7,9 @@ import { useHistory } from 'react-router';
 import useGetRecipes from '../../api/queries/useGetRecipes';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import {
-  Menu,
   Modal,
   Loading,
+  Accordion,
   RecipeList,
   RawMaterialList,
   ProductionFileList,
@@ -104,13 +104,13 @@ function SearchMenu({ drawerClose = () => {} }) {
   ];
 
   return (
-    <Box>
+    <>
       <Loading isLoading={loading} />
       <Modal isOpen={isOpen} onClose={onClose} header={`Αναζήτηση ${label}`}>
         {comp}
       </Modal>
-      <Menu options={options} title='Αναζήτηση' handleClick={handleClick} />
-    </Box>
+      <Accordion options={options} title='Αναζήτηση' handleClick={handleClick} />
+    </>
   );
 }
 

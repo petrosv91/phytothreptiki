@@ -1,3 +1,4 @@
+import Accordion from './accordion/accordion';
 import * as Buttons from './buttons/buttons';
 import DatePicker from './datePicker/datepicker';
 import Drawer from './drawer/drawer';
@@ -38,6 +39,7 @@ export {
   CalendarIcon,
   FormSwitch,
   FormSelect,
+  Accordion,
   ConfirmationModal,
   Table,
   Buttons,

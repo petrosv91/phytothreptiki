@@ -29,7 +29,7 @@ function Navbar() {
         heading={<Image src={Logo} m='0 auto' boxSize='100px' objectFit='scale-down' />}
         footer={<Settings drawerClose={onClose} />}
       >
-        <Stack mt={10} spacing={8} direction='column' align='center'>
+        <Stack mt={10} direction='column' align='center'>
           <SearchMenu drawerClose={onClose} />
           <CreateMenu drawerClose={onClose} />
           <UpdateMenu />

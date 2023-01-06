@@ -1,12 +1,12 @@
 import { useRef, useState } from 'react';
 
-import { Box, Flex, Icon, Text, useDisclosure } from '@chakra-ui/react';
+import { Flex, Icon, Text, useDisclosure } from '@chakra-ui/react';
 import { MdKeyboardBackspace } from 'react-icons/md';
 
 import useGetElements from '../../api/queries/useGetElements';
 import useGetProducts from '../../api/queries/useGetProducts';
 import { useMainMachine } from '../../context/mainMachineProvider';
-import { ElementList, Menu, Modal, ProductList } from '../../lib/ui';
+import { Accordion, ElementList, Modal, ProductList } from '../../lib/ui';
 import { isObjEmpty } from '../../utils';
 import CreateElement from '../element/createElement';
 import PickingItem from '../lists/pickingItem';
@@ -95,12 +95,12 @@ function UpdateMenu() {
   }
 
   return (
-    <Box>
+    <>
       <Modal isOpen={isOpen} onClose={handleOnClose} header={<Header />}>
         {isObjEmpty(updatedItem) ? baseComp : secondComp}
       </Modal>
-      <Menu options={options} title='Μεταβολή' handleClick={handleOptionClick} />
-    </Box>
+      <Accordion options={options} title='Μεταβολή' handleClick={handleOptionClick} />
+    </>
   );
 }
 
