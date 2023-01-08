@@ -14,6 +14,7 @@ function ConfirmationModal({ isOpen, onClose, message, onConfirm, isLoading = fa
     <Modal isOpen={isOpen} onClose={isLoading ? () => {} : onClose}>
       <ModalOverlay>
         <ModalContent
+          my={[2, 10]}
           mx={3}
           py={4}
           bg='secondaryBackground'

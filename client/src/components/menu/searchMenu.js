@@ -7,13 +7,12 @@ import { useHistory } from 'react-router';
 import useGetRecipes from '../../api/queries/useGetRecipes';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import {
+  Menu,
   Modal,
-  Loading,
   Accordion,
   RecipeList,
   RawMaterialList,
   ProductionFileList,
-  Menu,
 } from '../../lib/ui';
 import { excludeFromObj } from '../../utils';
 import PickingItem from '../lists/pickingItem';
