@@ -12,6 +12,7 @@ export function UploadFile({ file, saveFile, deleteFile }) {
   }
   function onBrowse(e) {
     const [selectedFile] = e.target.files;
+    if (!selectedFile) return;
     if (selectedFile.type !== 'application/pdf') {
       return createToast(toast, {
         type: 'error',

@@ -4,8 +4,9 @@ import { Flex } from '@chakra-ui/react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { queryCache } from 'react-query';
 
+import { companies } from '../../config/options';
 import { useMainMachine } from '../../context/mainMachineProvider';
-import { Buttons, FormInput } from '../../lib/ui';
+import { Buttons, FormInput, FormSelect } from '../../lib/ui';
 import { excludeFromObj, getCurrentDate, isFormEmpty, isFormFull } from '../../utils';
 import { UploadFile } from '../files/upload';
 
@@ -62,15 +63,15 @@ function RecipeHeader({ onOpen, handlePrint, printLoading }) {
           deleteFile={() => send({ type: 'DELETE_FILE' })}
         />
       </Flex>
-      <Flex mt={2} justify='flex-end'>
-        <FormInput
+      <Flex justify='flex-end'>
+        <FormSelect
           w={['full', '30%']}
-          tag='No.'
-          fontSize='lg'
-          color='red.500'
-          cursor='default'
-          pointerEvents='none'
-          defaultValue={context.code}
+          label='Εταιρεία'
+          name='company'
+          placeholder='--- Επιλογή Εταιρείας---'
+          options={companies}
+          errors={errors}
+          formRef={register}
         />
       </Flex>
       <Flex mt={4} direction={['column', 'row']} align='start' justify='space-between'>

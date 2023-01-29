@@ -4,6 +4,7 @@ const RecipeSchema = mongoose.Schema({
   code: Number,
   recipe: String,
   date: String,
+  company: String,
   type: String,
   file: Object,
   restPrice: Number,

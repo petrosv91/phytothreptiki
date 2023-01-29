@@ -6,3 +6,8 @@ export const baseElements = baseElementsArr.map((val, index) => ({
   value: index + 1,
   label: val,
 }));
+
+export const companies = [
+  { value: '1000', label: 'Ασπρόπυργος' },
+  { value: '2000', label: 'Κόρινθος' },
+];
