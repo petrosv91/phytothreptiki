@@ -30,6 +30,8 @@ export function UploadFile({ file, saveFile, deleteFile }) {
     const formData = new FormData();
     formData.append('file', selectedFile);
     saveFile({ name: selectedFile.name, formData });
+    // reset the input field for re-add to work
+    e.target.value = '';
   }
 
   return (
