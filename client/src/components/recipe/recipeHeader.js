@@ -71,7 +71,11 @@ function RecipeHeader({ onOpen, handlePrint, printLoading }) {
           placeholder='--- Επιλογή Εταιρείας---'
           options={companies}
           errors={errors}
-          formRef={register}
+          formRef={register({
+            setValueAs: (company) => {
+              return companies.find((c) => c.value === company);
+            },
+          })}
         />
       </Flex>
       <Flex mt={4} direction={['column', 'row']} align='start' justify='space-between'>

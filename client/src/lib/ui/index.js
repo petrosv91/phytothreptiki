@@ -8,6 +8,7 @@ import DeleteIcon from './icons/deleteIcon';
 import EditIcon from './icons/editIcon';
 import PdfIcon from './icons/pdfIcon';
 import FormInput from './inputs/formInput';
+import FormTitle from './inputs/formTitle';
 import Input from './inputs/input';
 import ElementList from './lists/elementList';
 import ProductionFileList from './lists/productionFileList';
@@ -35,6 +36,7 @@ export {
   PdfIcon,
   EditIcon,
   CloseIcon,
+  FormTitle,
   DeleteIcon,
   CalendarIcon,
   FormSwitch,

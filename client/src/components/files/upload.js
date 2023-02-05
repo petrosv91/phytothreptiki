@@ -33,7 +33,12 @@ export function UploadFile({ file, saveFile, deleteFile }) {
   }
 
   return (
-    <Flex alignSelf={['center', 'flex-end']} align='center' gridGap={2}>
+    <Flex
+      align='center'
+      gridGap={2}
+      alignSelf={['flex-start', 'flex-end']}
+      direction={['row-reverse', 'row']}
+    >
       {(() => {
         if (!file) {
           return (

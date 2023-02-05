@@ -6,15 +6,7 @@ import { useHistory } from 'react-router';
 
 import useGetRecipes from '../../api/queries/useGetRecipes';
 import { useMainMachine } from '../../context/mainMachineProvider';
-import {
-  Menu,
-  Modal,
-  Accordion,
-  RecipeList,
-  RawMaterialList,
-  ProductionFileList,
-} from '../../lib/ui';
-import { excludeFromObj } from '../../utils';
+import { Menu, Modal, Accordion, RecipeList } from '../../lib/ui';
 import PickingItem from '../lists/pickingItem';
 
 function SearchMenu({ type = 'navbar', toggleLoading }) {
@@ -27,9 +19,7 @@ function SearchMenu({ type = 'navbar', toggleLoading }) {
   const getRecipes = useGetRecipes();
   const [{ comp, label }, setComponent] = useState({});
 
-  const recipeKeys = useRef(['recipe', 'date']);
-  const rawMaterialKeys = useRef(['date', 'type']);
-  const productionKeys = useRef(['date', 'products']);
+  const recipeKeys = useRef(['recipe', 'date', 'company']);
 
   async function handleItemClick(props, path) {
     const { _id, code, elements, file, products, ...rest } = props;
@@ -40,7 +30,12 @@ function SearchMenu({ type = 'navbar', toggleLoading }) {
     setTimeout(() => {
       send({ type: 'ADD_RECIPE', id: _id, file, code, elements, products });
       const recipeValues = Object.entries(rest);
-      recipeValues.forEach(([key, value]) => setValue(key, value));
+      recipeValues.forEach(([key, value]) => {
+        if (key === 'company') {
+          return setValue(key, value.value);
+        }
+        setValue(key, value);
+      });
       clearErrors();
       toggleLoading();
       history.push(path);
@@ -57,41 +52,27 @@ function SearchMenu({ type = 'navbar', toggleLoading }) {
       label: 'Συνταγής',
       comp: (
         <PickingItem
+          showDate={true}
+          keys={recipeKeys}
+          List={RecipeList}
+          promiseData={getRecipes}
+          handleClick={(recipe) => {
+            const rest = { ...recipe, products: [] };
+            handleItemClick(rest, '/');
+          }}
+        />
+      ),
+    },
+    {
+      label: 'Ιστορικό Συνταγών',
+      comp: (
+        <PickingItem
+          showDate={true}
           keys={recipeKeys}
           List={RecipeList}
           promiseData={getRecipes}
           handleClick={(recipe) => {
             handleItemClick(recipe, '/');
-          }}
-        />
-      ),
-    },
-    {
-      label: 'Αρχείου Ά Υλών',
-      comp: (
-        <PickingItem
-          showDate={true}
-          keys={rawMaterialKeys}
-          List={RawMaterialList}
-          promiseData={getRecipes}
-          handleClick={(recipe) => {
-            const rest = excludeFromObj(recipe, ['products']);
-            handleItemClick(rest, '/rawMaterials');
-          }}
-        />
-      ),
-    },
-    {
-      label: 'Αρχείου Παραγωγής',
-      comp: (
-        <PickingItem
-          showDate={true}
-          keys={productionKeys}
-          List={ProductionFileList}
-          promiseData={getRecipes}
-          handleClick={(recipe) => {
-            const rest = excludeFromObj(recipe, ['elements']);
-            handleItemClick(rest, '/productionFile');
           }}
         />
       ),
