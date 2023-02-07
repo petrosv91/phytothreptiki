@@ -1,10 +1,10 @@
-import React from 'react';
+import { useState, useEffect, useMemo } from 'react';
 export const ITEMS_PER_PAGE = 5;
 
 function usePagination(data, itemsPerPage = ITEMS_PER_PAGE) {
-  const [currentPage, setCurrentPage] = React.useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (data.length === 0) {
       setCurrentPage(0);
       return;
@@ -13,7 +13,7 @@ function usePagination(data, itemsPerPage = ITEMS_PER_PAGE) {
   }, [data]);
 
   const maxPage = data.length ? Math.ceil(data.length / itemsPerPage) : 0;
-  const currentData = React.useMemo(() => {
+  const currentData = useMemo(() => {
     const begin = (currentPage - 1) * itemsPerPage;
     const end = begin + itemsPerPage;
     return data.slice(begin, end);

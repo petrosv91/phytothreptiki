@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef, useState, useMemo } from 'react';
 
 import { useDisclosure, useToast } from '@chakra-ui/react';
 import { queryCache } from 'react-query';
@@ -13,7 +13,7 @@ function DeleteElement() {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const keys = React.useRef(['label', 'formula']);
+  const keys = useRef(['label', 'formula']);
   const getElements = useGetElements();
   const [mutate, { status }] = useDeleteElement({
     onSuccess: () => {
@@ -23,8 +23,8 @@ function DeleteElement() {
     },
   });
 
-  const [item, setItem] = React.useState(undefined);
-  const message = React.useMemo(() => {
+  const [item, setItem] = useState(undefined);
+  const message = useMemo(() => {
     return `Θέλετε να διαγράψετε το στοιχείο ${item?.label}`;
   }, [item]);
 

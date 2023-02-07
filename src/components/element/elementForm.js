@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef, memo } from 'react';
 
 import { Collapse, Flex, useDisclosure, useToast } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -26,21 +26,14 @@ function ElementForm() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const getElements = useGetElements();
-  const keys = React.useRef(['label', 'formula']);
+  const keys = useRef(['label', 'formula']);
 
   const { elementFormSchema } = useReactFormSchema();
-  const {
-    register,
-    handleSubmit,
-    getValues,
-    setValue,
-    reset,
-    clearErrors,
-    errors,
-  } = useForm({
-    mode: 'onBlur',
-    resolver: yupResolver(elementFormSchema),
-  });
+  const { register, handleSubmit, getValues, setValue, reset, clearErrors, errors } =
+    useForm({
+      mode: 'onBlur',
+      resolver: yupResolver(elementFormSchema),
+    });
 
   const [{ context }, send] = useMainMachine();
   const { elementSwitch = false } = context.switches;
@@ -104,7 +97,7 @@ function ElementForm() {
             errors={errors}
             formRef={register}
           />
-          <Flex direction={['column', 'row']} align='center' justify='space-between'>
+          <Flex direction={['column', 'row']} align='start' justify='space-between'>
             <FormInput
               w={['full', '45%']}
               name='rate'
@@ -168,4 +161,4 @@ function ElementForm() {
   );
 }
 
-export default React.memo(ElementForm);
+export default memo(ElementForm);

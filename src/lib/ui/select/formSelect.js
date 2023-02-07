@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { FormControl, FormLabel, useTheme } from '@chakra-ui/react';
 
 import Select from './select';

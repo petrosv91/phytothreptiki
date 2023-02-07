@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { createContext, useContext } from 'react';
 
 import { ChakraProvider } from '@chakra-ui/react';
 import { Global } from '@emotion/react';
@@ -6,7 +6,7 @@ import { Global } from '@emotion/react';
 import { darkTheme, GlobalStyles, lightTheme } from '../config';
 import { useLocalStorage } from '../hooks';
 
-const ThemeModeContext = React.createContext();
+const ThemeModeContext = createContext();
 
 function ThemeModeProvider({ children }) {
   const [storedValue, setValue] = useLocalStorage('phytothreptikiTheme', 'light');
@@ -19,7 +19,10 @@ function ThemeModeProvider({ children }) {
     <ThemeModeContext.Provider
       value={{ currentTheme: storedValue, toggleTheme: toggleTheme }}
     >
-      <ChakraProvider theme={storedValue === 'dark' ? darkTheme : lightTheme}>
+      <ChakraProvider
+        portalZIndex={99}
+        theme={storedValue === 'dark' ? darkTheme : lightTheme}
+      >
         {children}
         <Global styles={GlobalStyles} />
       </ChakraProvider>

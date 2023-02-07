@@ -1,10 +1,13 @@
 import { assign } from 'xstate';
 
-import { baseGetService } from '../api/services';
+import { baseGetService, deleteFile, uploadFile } from '../api/services';
 
 export const initialContext = {
+  file: undefined,
+  oldFile: undefined,
   recipeId: undefined,
   switches: {},
+  formData: {},
   updatedItem: {},
   elementStore: [],
   productStore: [],
@@ -38,6 +41,8 @@ export const actions = {
   updateContext: assign((ctx, e) => {
     return {
       recipeId: e.id,
+      file: e.file || undefined,
+      oldFile: e.file || undefined,
       code: e.code || ctx.code,
       elementStore: e.elements || [],
       productStore: e.products || [],
@@ -52,6 +57,9 @@ export const actions = {
   restoreDefaults: assign((ctx, e) => {
     return { ...ctx, ...e.data };
   }),
+  saveFormData: assign({ formData: (_, e) => e.formData }),
+  deleteFile: assign({ file: () => undefined }),
+  saveFile: assign({ file: (_, e) => e.file }),
 };
 
 export const guards = {
@@ -89,14 +97,17 @@ export const services = {
   },
   setRecipe: async (ctx, e) => {
     try {
-      const { recipeId, elementStore, productStore } = ctx;
       const result = await baseGetService({
         service: 'setRecipe',
         data: {
-          ...e.data,
-          id: recipeId,
-          elements: elementStore,
-          products: productStore,
+          ...ctx.formData,
+          id: ctx.recipeId,
+          file: {
+            id: e.data?.file?.id,
+            name: ctx.file?.name,
+          },
+          elements: ctx.elementStore,
+          products: ctx.productStore,
         },
       });
       return { result, ...e };
@@ -106,6 +117,12 @@ export const services = {
         message: `Η συνταγή δεν αποθηκεύτηκε: ${error.message}`,
       });
     }
+  },
+  setFile: async (ctx) => {
+    return await uploadFile(ctx.file.formData);
+  },
+  deleteFile: async (ctx) => {
+    return await deleteFile(ctx.oldFile.id);
   },
   setElement: async (ctx, e) => {
     try {

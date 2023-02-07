@@ -1,3 +1,4 @@
+import Accordion from './accordion/accordion';
 import * as Buttons from './buttons/buttons';
 import DatePicker from './datePicker/datepicker';
 import Drawer from './drawer/drawer';
@@ -5,7 +6,9 @@ import CalendarIcon from './icons/calendarIcon';
 import CloseIcon from './icons/closeIcon';
 import DeleteIcon from './icons/deleteIcon';
 import EditIcon from './icons/editIcon';
+import PdfIcon from './icons/pdfIcon';
 import FormInput from './inputs/formInput';
+import FormTitle from './inputs/formTitle';
 import Input from './inputs/input';
 import ElementList from './lists/elementList';
 import ProductionFileList from './lists/productionFileList';
@@ -30,12 +33,15 @@ export {
   Loading,
   Skeleton,
   DataTabs,
+  PdfIcon,
   EditIcon,
   CloseIcon,
+  FormTitle,
   DeleteIcon,
   CalendarIcon,
   FormSwitch,
   FormSelect,
+  Accordion,
   ConfirmationModal,
   Table,
   Buttons,

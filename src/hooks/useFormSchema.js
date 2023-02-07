@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 
 import { useToast } from '@chakra-ui/react';
 import * as yup from 'yup';
@@ -17,63 +17,61 @@ yup.addMethod(yup.mixed, 'formulaValidation', formulaValidation);
 yup.addMethod(yup.mixed, 'formulaStandAlone', formulaStandAlone);
 yup.addMethod(yup.mixed, 'baseElementStandAlone', baseElementStandAlone);
 
+const requiredMsg = 'Yποχρεωτικό πεδίο';
+const positiveMsg = 'Μόνο θετικοί αριθμοί';
+
 function useReactFormSchema() {
   const toast = useToast();
   const [{ context }] = useMainMachine();
   const { machineCapacity } = context;
 
-  const mainFormSchema = React.useMemo(() => {
+  const mainFormSchema = useMemo(() => {
     return yup.object().shape({
-      date: yup.string().required(),
-      type: yup.string().required(),
-      recipe: yup.string().required(),
-      loops: yup.number().positive().nullable().transform(nullConverter),
+      date: yup.string().required(requiredMsg),
+      type: yup.string().required(requiredMsg),
+      recipe: yup.string().required(requiredMsg),
+      loops: yup.number().positive(positiveMsg).nullable().transform(nullConverter),
       weights: yup
         .number()
-        .positive()
+        .positive(positiveMsg)
         .nullable()
         .transform(nullConverter)
         .weightValidation(toast, machineCapacity),
-      totalWeights: yup.number().required().positive(),
-      restPrice: yup.number().positive().nullable().transform(nullConverter),
+      totalWeights: yup.number().required(requiredMsg).positive(positiveMsg),
+      restPrice: yup.number().positive(positiveMsg).nullable().transform(nullConverter),
     });
   }, [toast, machineCapacity]);
 
-  const elementFormSchema = React.useMemo(() => {
+  const elementFormSchema = useMemo(() => {
     return yup.object().shape({
-      label: yup.string().required(),
-      rate: yup.number().required().positive(),
-      price: yup.number().positive().nullable().transform(nullConverter),
+      label: yup.string().required(requiredMsg),
+      rate: yup.number().required(requiredMsg).positive(positiveMsg),
+      price: yup.number().positive(positiveMsg).nullable().transform(nullConverter),
     });
   }, []);
 
-  const createElementSchema = React.useMemo(() => {
+  const createElementSchema = useMemo(() => {
     return yup.object().shape({
-      label: yup.string().required(),
-      price: yup.number().positive().nullable().transform(nullConverter),
+      label: yup.string().required(requiredMsg),
+      price: yup.number().positive(positiveMsg).nullable().transform(nullConverter),
       formula: yup.array().formulaValidation(toast).formulaStandAlone(toast),
       baseElement: yup.object().baseElementStandAlone(toast),
     });
   }, [toast]);
 
-  const productFormSchema = React.useMemo(() => {
+  const productFormSchema = useMemo(() => {
     return yup.object().shape({
-      label: yup.string().required(),
-      units: yup.number().required().positive(),
+      label: yup.string().required(requiredMsg),
+      units: yup.number().required(requiredMsg).positive(positiveMsg),
       weights: yup
         .number()
-        .required()
-        .positive()
+        .required(requiredMsg)
+        .positive(positiveMsg)
         .weightValidation(toast, machineCapacity),
     });
   }, [toast, machineCapacity]);
 
-  return {
-    mainFormSchema,
-    elementFormSchema,
-    createElementSchema,
-    productFormSchema,
-  };
+  return { mainFormSchema, elementFormSchema, createElementSchema, productFormSchema };
 }
 
 export default useReactFormSchema;

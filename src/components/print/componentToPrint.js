@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Box, Flex, Image } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 

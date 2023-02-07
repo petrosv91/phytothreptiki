@@ -1,21 +1,21 @@
-import React from 'react';
+import { useState } from 'react';
 
-import { Box, useDisclosure } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 import { useHistory } from 'react-router';
 
 import { useMainMachine } from '../../context/mainMachineProvider';
-import { Menu, Modal } from '../../lib/ui';
+import { Accordion, Menu, Modal } from '../../lib/ui';
 import CreateElement from '../element/createElement';
 import CreateProduct from '../product/createProduct';
 
-function CreateMenu({ drawerClose = () => {} }) {
+function CreateMenu({ type = 'navbar', drawerClose = () => {} }) {
   const history = useHistory();
   const [, send] = useMainMachine();
   const { reset } = useFormContext();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [{ comp, label }, setComponent] = React.useState({});
+  const [{ comp, label }, setComponent] = useState({});
   const options = [
     { label: 'Συνταγής', path: '/' },
     { label: 'Ά Ύλης', comp: <CreateElement /> },
@@ -35,12 +35,19 @@ function CreateMenu({ drawerClose = () => {} }) {
   }
 
   return (
-    <Box>
+    <>
       <Modal isOpen={isOpen} onClose={onClose} header={`Δημιουργία ${label}`}>
         {comp}
       </Modal>
-      <Menu options={options} title='Δημιουργία' handleClick={handleClick} />
-    </Box>
+      {(() => {
+        if (type === 'navbar') {
+          return <Menu options={options} title='Δημιουργία' handleClick={handleClick} />;
+        }
+        return (
+          <Accordion options={options} title='Δημιουργία' handleClick={handleClick} />
+        );
+      })()}
+    </>
   );
 }
 

@@ -1,56 +1,45 @@
-import React from 'react';
+import { useState, useRef } from 'react';
 
-import { Box, useDisclosure } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 import { useHistory } from 'react-router';
 
 import useGetRecipes from '../../api/queries/useGetRecipes';
 import { useMainMachine } from '../../context/mainMachineProvider';
-import {
-  Loading,
-  Menu,
-  Modal,
-  ProductionFileList,
-  RawMaterialList,
-  RecipeList,
-} from '../../lib/ui';
-import { excludeFromObj } from '../../utils';
+import { Menu, Modal, Accordion, RecipeList } from '../../lib/ui';
 import PickingItem from '../lists/pickingItem';
 
-function SearchMenu({ drawerClose = () => {} }) {
+function SearchMenu({ type = 'navbar', toggleLoading }) {
   const history = useHistory();
   const [, send] = useMainMachine();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { reset, setValue, clearErrors } = useFormContext();
 
   const getRecipes = useGetRecipes();
-  const [loading, setLoading] = React.useState(false);
-  const [{ comp, label }, setComponent] = React.useState({});
+  const [{ comp, label }, setComponent] = useState({});
 
-  const recipeKeys = React.useRef(['recipe', 'date']);
-  const rawMaterialKeys = React.useRef(['date', 'type']);
-  const productionKeys = React.useRef(['date', 'products']);
+  const recipeKeys = useRef(['recipe', 'date', 'company']);
 
-  async function handleItemClick({ _id, code, elements, products, ...rest }, path) {
-    try {
-      onClose();
-      setLoading(true);
-      await new Promise((resolve) => {
-        return resolve(send({ type: 'RESET', callback: reset }));
+  async function handleItemClick(props, path) {
+    const { _id, code, elements, file, products, ...rest } = props;
+    onClose();
+    toggleLoading();
+    const resetRecipe = () => send({ type: 'RESET', callback: reset });
+    await new Promise((resolve) => resolve(resetRecipe));
+    setTimeout(() => {
+      send({ type: 'ADD_RECIPE', id: _id, file, code, elements, products });
+      const recipeValues = Object.entries(rest);
+      recipeValues.forEach(([key, value]) => {
+        if (key === 'company') {
+          return setValue(key, value.value);
+        }
+        setValue(key, value);
       });
-      setTimeout(() => {
-        send({ type: 'ADD_RECIPE', id: _id, code, elements, products });
-        Object.entries(rest).forEach(([key, value]) => {
-          setValue(key, value);
-        });
-        clearErrors();
-        setLoading(false);
-        drawerClose();
-        history.push(path);
-      }, [100]);
-    } catch (error) {
-      console.log(error);
-    }
+      clearErrors();
+      toggleLoading();
+      history.push(path);
+    }, [100]);
   }
 
   function handleClick(opt) {
@@ -63,6 +52,22 @@ function SearchMenu({ drawerClose = () => {} }) {
       label: 'Συνταγής',
       comp: (
         <PickingItem
+          showDate={true}
+          keys={recipeKeys}
+          List={RecipeList}
+          promiseData={getRecipes}
+          handleClick={(recipe) => {
+            const rest = { ...recipe, products: [] };
+            handleItemClick(rest, '/');
+          }}
+        />
+      ),
+    },
+    {
+      label: 'Ιστορικό Συνταγών',
+      comp: (
+        <PickingItem
+          showDate={true}
           keys={recipeKeys}
           List={RecipeList}
           promiseData={getRecipes}
@@ -72,46 +77,22 @@ function SearchMenu({ drawerClose = () => {} }) {
         />
       ),
     },
-    {
-      label: 'Αρχείου Ά Υλών',
-      comp: (
-        <PickingItem
-          showDate={true}
-          keys={rawMaterialKeys}
-          List={RawMaterialList}
-          promiseData={getRecipes}
-          handleClick={(recipe) => {
-            const rest = excludeFromObj(recipe, ['products']);
-            handleItemClick(rest, '/rawMaterials');
-          }}
-        />
-      ),
-    },
-    {
-      label: 'Αρχείου Παραγωγής',
-      comp: (
-        <PickingItem
-          showDate={true}
-          keys={productionKeys}
-          List={ProductionFileList}
-          promiseData={getRecipes}
-          handleClick={(recipe) => {
-            const rest = excludeFromObj(recipe, ['elements']);
-            handleItemClick(rest, '/productionFile');
-          }}
-        />
-      ),
-    },
   ];
 
   return (
-    <Box>
-      <Loading isLoading={loading} />
+    <>
       <Modal isOpen={isOpen} onClose={onClose} header={`Αναζήτηση ${label}`}>
         {comp}
       </Modal>
-      <Menu options={options} title='Αναζήτηση' handleClick={handleClick} />
-    </Box>
+      {(() => {
+        if (type === 'navbar') {
+          return <Menu options={options} title='Αναζήτηση' handleClick={handleClick} />;
+        }
+        return (
+          <Accordion options={options} title='Αναζήτηση' handleClick={handleClick} />
+        );
+      })()}
+    </>
   );
 }
 

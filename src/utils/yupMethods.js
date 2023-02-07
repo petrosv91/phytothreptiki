@@ -1,4 +1,4 @@
-import { createToast, isObjEmpty } from '../utils';
+import { createToast, isObjEmpty } from '.';
 
 export function weightsValidation(toast, machineCapacity) {
   return this.test('test-weight', 'error', function (value) {

@@ -1,12 +1,14 @@
-import React from 'react';
+import { useMemo, memo } from 'react';
 
 import { Flex } from '@chakra-ui/react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { queryCache } from 'react-query';
 
+import { companies } from '../../config/options';
 import { useMainMachine } from '../../context/mainMachineProvider';
-import { Buttons, FormInput } from '../../lib/ui';
+import { Buttons, FormInput, FormSelect } from '../../lib/ui';
 import { excludeFromObj, getCurrentDate, isFormEmpty, isFormFull } from '../../utils';
+import { UploadFile } from '../files/upload';
 
 function RecipeHeader({ onOpen, handlePrint, printLoading }) {
   const [{ context }, send] = useMainMachine();
@@ -16,7 +18,7 @@ function RecipeHeader({ onOpen, handlePrint, printLoading }) {
   function onSubmit(formData) {
     send({
       type: 'RECIPE_SUBMIT',
-      data: formData,
+      formData,
       callback: () => {
         reset();
         queryCache.refetchQueries(['recipes']);
@@ -24,7 +26,7 @@ function RecipeHeader({ onOpen, handlePrint, printLoading }) {
     });
   }
 
-  const canSubmit = React.useMemo(() => {
+  const canSubmit = useMemo(() => {
     const importantData = excludeFromObj(mainFormValues, [
       'loops',
       'weights',
@@ -33,7 +35,7 @@ function RecipeHeader({ onOpen, handlePrint, printLoading }) {
     return isFormFull(importantData, context);
   }, [context, mainFormValues]);
 
-  const canReset = React.useMemo(() => {
+  const canReset = useMemo(() => {
     const currentDate = getCurrentDate();
     const { date, ...importantData } = mainFormValues;
     return !isFormEmpty(importantData, context) || date !== currentDate;
@@ -41,31 +43,42 @@ function RecipeHeader({ onOpen, handlePrint, printLoading }) {
 
   return (
     <form style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
-      <Flex wrap='wrap' align='center' justify={['center', 'space-between']}>
-        <Buttons.Secondary w={150} type='submit' isDisabled={!canSubmit}>
-          Καταχώρηση
-        </Buttons.Secondary>
-        <Flex>
-          <Buttons.Tertiary w={150} onClick={onOpen} isDisabled={!canReset}>
-            Επαναφορά
-          </Buttons.Tertiary>
-          <Buttons.Tertiary w={150} onClick={handlePrint} isLoading={printLoading}>
-            Εκτύπωση
-          </Buttons.Tertiary>
+      <Flex direction='column' gridGap={2}>
+        <Flex wrap='wrap' align='center' justify={['center', 'space-between']}>
+          <Buttons.Secondary w={150} type='submit' isDisabled={!canSubmit}>
+            Καταχώρηση
+          </Buttons.Secondary>
+          <Flex>
+            <Buttons.Tertiary w={150} onClick={onOpen} isDisabled={!canReset}>
+              Επαναφορά
+            </Buttons.Tertiary>
+            <Buttons.Tertiary w={150} onClick={handlePrint} isLoading={printLoading}>
+              Εκτύπωση
+            </Buttons.Tertiary>
+          </Flex>
         </Flex>
-      </Flex>
-      <Flex mt={4} justify='flex-end'>
-        <FormInput
-          w={['full', '30%']}
-          tag='No.'
-          fontSize='lg'
-          color='red.500'
-          cursor='default'
-          pointerEvents='none'
-          defaultValue={context.code}
+        <UploadFile
+          file={context.file}
+          saveFile={(file) => send({ type: 'SAVE_FILE', file })}
+          deleteFile={() => send({ type: 'DELETE_FILE' })}
         />
       </Flex>
-      <Flex direction={['column', 'row']} mt={4} align='center' justify='space-between'>
+      <Flex justify='flex-end'>
+        <FormSelect
+          w={['full', '30%']}
+          label='Εταιρεία'
+          name='company'
+          placeholder='--- Επιλογή Εταιρείας---'
+          options={companies}
+          errors={errors}
+          formRef={register({
+            setValueAs: (company) => {
+              return companies.find((c) => c.value === company);
+            },
+          })}
+        />
+      </Flex>
+      <Flex mt={2} direction={['column', 'row']} align='start' justify='space-between'>
         <FormInput
           w={['full', '30%']}
           name='date'
@@ -92,4 +105,4 @@ function RecipeHeader({ onOpen, handlePrint, printLoading }) {
   );
 }
 
-export default React.memo(RecipeHeader);
+export default memo(RecipeHeader);

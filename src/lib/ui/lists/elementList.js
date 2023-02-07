@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 
 import { Flex, Text, Box } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
@@ -26,4 +26,4 @@ function ElementList({ item }) {
   );
 }
 
-export default React.memo(ElementList);
+export default memo(ElementList);

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Icon } from '@chakra-ui/react';
 import { MdEdit } from 'react-icons/md';
 

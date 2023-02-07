@@ -1,6 +1,4 @@
-import React from 'react';
-
-import { Toast } from '../layouts';
+import { Toast } from '../lib/layouts';
 
 export function createToast(toast, props) {
   toast.closeAll();
