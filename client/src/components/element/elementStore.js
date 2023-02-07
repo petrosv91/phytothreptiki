@@ -1,13 +1,16 @@
 import { useCallback, memo } from 'react';
 
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Flex, Icon, Text } from '@chakra-ui/react';
 import { useFormContext, useWatch } from 'react-hook-form';
+import { FaStarOfLife } from 'react-icons/fa';
 
 import { baseElements } from '../../config';
 import { useMainMachine } from '../../context/mainMachineProvider';
 import { useThemeMode } from '../../context/themeModeProvider';
 import { DeleteIcon, Table } from '../../lib/ui';
 import { roundToTwo } from '../../utils';
+
+const MAX_RATE = 5;
 
 function ElementStore({ printable, ...rest }) {
   const { currentTheme } = useThemeMode();
@@ -58,42 +61,44 @@ function ElementStore({ printable, ...rest }) {
           </Table.Row>
         </Table.Head>
         <Table.Body>
-          {elementStore.map((row, index) => (
-            <Table.Row key={index}>
-              {!printable && (
-                <Table.Cell>
-                  <DeleteIcon
-                    onClick={() => {
-                      deleteElement(row);
-                    }}
-                  />
-                </Table.Cell>
-              )}
-              <Table.Cell color={labelColor}>
-                <Flex id='label' direction='column'>
-                  {row.label}
-                  <Text id='formula' mt={1} color='secondaryText' fontSize='md'>
-                    {row.formula.join('-')}
-                  </Text>
-                </Flex>
-              </Table.Cell>
-              <Table.Cell>{row.rate}</Table.Cell>
-              {baseElements.map((el) => (
-                <Table.Cell key={el.value}>
-                  {roundToTwo(calcBaseElement(row, el))}
-                </Table.Cell>
-              ))}
-              <Table.Cell>{roundToTwo(calcWeights(row))}</Table.Cell>
-              {!printable && (
-                <>
-                  <Table.Cell>{row.price || 0}</Table.Cell>
+          {elementStore.map((row, index) => {
+            const hasOverRate = row.rate > MAX_RATE;
+            return (
+              <Table.Row key={index}>
+                {!printable && (
                   <Table.Cell>
-                    {roundToTwo((row.rate * (row.price || 0)) / 100)}
+                    <DeleteIcon onClick={() => deleteElement(row)} />
                   </Table.Cell>
-                </>
-              )}
-            </Table.Row>
-          ))}
+                )}
+                <Table.Cell color={labelColor}>
+                  <Flex id='label' direction='column'>
+                    <Flex gridGap={2}>
+                      <Text>{row.label}</Text>
+                      {hasOverRate && <Icon as={FaStarOfLife} boxSize={2} />}
+                    </Flex>
+                    <Text id='formula' mt={1} color='secondaryText'>
+                      {row.formula.join('-')}
+                    </Text>
+                  </Flex>
+                </Table.Cell>
+                <Table.Cell>{row.rate}</Table.Cell>
+                {baseElements.map((el) => (
+                  <Table.Cell key={el.value}>
+                    {roundToTwo(calcBaseElement(row, el))}
+                  </Table.Cell>
+                ))}
+                <Table.Cell>{roundToTwo(calcWeights(row))}</Table.Cell>
+                {!printable && (
+                  <>
+                    <Table.Cell>{row.price || 0}</Table.Cell>
+                    <Table.Cell>
+                      {roundToTwo((row.rate * (row.price || 0)) / 100)}
+                    </Table.Cell>
+                  </>
+                )}
+              </Table.Row>
+            );
+          })}
           <Table.Row>
             {!printable && <Table.Cell>{/* Actions */}</Table.Cell>}
             <Table.Cell>Σύνολο</Table.Cell>

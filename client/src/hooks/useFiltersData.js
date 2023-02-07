@@ -13,7 +13,7 @@ function validate(item, query) {
 function findMatch(keys, query, item) {
   return keys.current.find((key) => {
     if (item[key] instanceof Array) {
-      return item[key].some((cell) => validate(cell, query));
+      return item[key].join('-').includes(query.toLowerCase());
     }
     return validate(item[key], query);
   });
