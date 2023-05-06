@@ -16,6 +16,8 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Deprecation Warning
+mongoose.set('strictQuery', false);
 // Connect to DB
 mongoose.connect(
   process.env.DB_CONNECTION,

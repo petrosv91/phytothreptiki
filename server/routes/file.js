@@ -8,7 +8,7 @@ const { GridFsStorage } = require('multer-gridfs-storage');
 const { GridFSBucket, MongoClient, ObjectId } = require('mongodb');
 
 const client = new MongoClient(process.env.DB_CONNECTION);
-const bucket = new GridFSBucket(client.db('Test-Server'), {
+const bucket = new GridFSBucket(client.db(process.env.DB_NAME), {
   bucketName: 'uploads',
 });
 
