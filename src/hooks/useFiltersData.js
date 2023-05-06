@@ -1,25 +1,26 @@
-import React from 'react';
+import { useMemo } from 'react';
+
+function validate(item, query) {
+  if (typeof item === 'string' || typeof item === 'number') {
+    return String(item).toLowerCase().includes(query.toLowerCase());
+  }
+  if (item instanceof Object) {
+    return String(item.label).toLowerCase().includes(query.toLowerCase());
+  }
+  return false;
+}
 
 function findMatch(keys, query, item) {
-  const match = keys.current.find((key) => {
-    if (typeof item[key] === 'string') {
-      return item[key].toLowerCase().includes(query.toLowerCase());
-    }
+  return keys.current.find((key) => {
     if (item[key] instanceof Array) {
-      return item[key].some((cell) => {
-        if (cell instanceof Object) {
-          return String(cell.label)?.toLowerCase().includes(query.toLowerCase());
-        }
-        return String(cell)?.toLowerCase().includes(query.toLowerCase());
-      });
+      return item[key].join('-').includes(query.toLowerCase());
     }
-    return false;
+    return validate(item[key], query);
   });
-  return match;
 }
 
 export default function useFiltersData({ keys = [], query = '', data }) {
-  const filteredData = React.useMemo(() => {
+  const filteredData = useMemo(() => {
     if (!query) return data;
     return data.filter((item) => findMatch(keys, query, item));
   }, [data, query, keys]);

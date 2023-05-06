@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Flex, Icon, Text } from '@chakra-ui/react';
 import { MdWarning, MdCheck, MdClose } from 'react-icons/md';
 

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {
   List as ChakraList,
   ListItem as ChakraListItem,

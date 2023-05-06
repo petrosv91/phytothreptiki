@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef, useState, useMemo } from 'react';
 
 import { useDisclosure, useToast } from '@chakra-ui/react';
 import { queryCache } from 'react-query';
@@ -14,7 +14,7 @@ function DeleteRecipe() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const getRecipes = useGetRecipes();
-  const recipeKeys = React.useRef(['recipe', 'date']);
+  const recipeKeys = useRef(['recipe', 'date']);
   const [mutate, { status }] = useDeleteRecipe({
     onSuccess: () => {
       onClose();
@@ -23,8 +23,8 @@ function DeleteRecipe() {
     },
   });
 
-  const [item, setItem] = React.useState(undefined);
-  const message = React.useMemo(() => {
+  const [item, setItem] = useState(undefined);
+  const message = useMemo(() => {
     return `Θέλετε να διαγράψετε τη συνταγή ${item?.recipe}`;
   }, [item]);
 

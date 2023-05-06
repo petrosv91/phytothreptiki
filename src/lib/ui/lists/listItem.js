@@ -1,8 +1,6 @@
-import React from 'react';
-
 import { ListItem as ChakraListItem } from '@chakra-ui/react';
 
-import ListAnimation from '../../../animations/listAnimation';
+import ListAnimation from '../../animations/listAnimation';
 
 function ListItem({ animation, children, onClick, ...rest }) {
   return (

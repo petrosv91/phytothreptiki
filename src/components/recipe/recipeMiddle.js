@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, memo } from 'react';
 
 import { Flex } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
@@ -13,7 +13,7 @@ function RecipeMiddle() {
 
   const { register, setValue, getValues, errors } = useFormContext();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!productStore.length) {
       const { loops, weights } = getValues();
       if (loops && weights) {
@@ -30,7 +30,7 @@ function RecipeMiddle() {
   }, [productStore, setValue, getValues]);
 
   return (
-    <Flex mt={4} direction={['column', 'row']} align='center' justify='space-between'>
+    <Flex mt={4} direction={['column', 'row']} align='start' justify='space-between'>
       <FormInput
         w={['full', '45%']}
         name='restPrice'
@@ -56,4 +56,4 @@ function RecipeMiddle() {
   );
 }
 
-export default React.memo(RecipeMiddle);
+export default memo(RecipeMiddle);

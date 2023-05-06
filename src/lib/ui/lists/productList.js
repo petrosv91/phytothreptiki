@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 
 import { Flex, Text } from '@chakra-ui/react';
 
@@ -10,4 +10,4 @@ function ProductList({ item }) {
   );
 }
 
-export default React.memo(ProductList);
+export default memo(ProductList);

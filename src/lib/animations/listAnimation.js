@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { motion } from 'framer-motion';
 
 function ListAnimation({ animation, children }) {

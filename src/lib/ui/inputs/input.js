@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Input as ChakraInput } from '@chakra-ui/react';
 
 function Input({ formRef, name, ...rest }) {

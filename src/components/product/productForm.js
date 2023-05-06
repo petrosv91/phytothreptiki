@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useRef, memo } from 'react';
 
 import { Collapse, Flex, useDisclosure } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -23,25 +23,18 @@ import SearchIcon from '../../lib/ui/icons/searchIcon';
 import PickingItem from '../lists/pickingItem';
 
 function ProductForm() {
-  const [edit, setEdit] = React.useState(false);
+  const [edit, setEdit] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const keys = React.useRef(['label']);
+  const keys = useRef(['label']);
   const getProducts = useGetProducts();
 
   const { productFormSchema } = useReactFormSchema();
-  const {
-    register,
-    handleSubmit,
-    getValues,
-    setValue,
-    clearErrors,
-    reset,
-    errors,
-  } = useForm({
-    mode: 'onBlur',
-    resolver: yupResolver(productFormSchema),
-  });
+  const { register, handleSubmit, getValues, setValue, clearErrors, reset, errors } =
+    useForm({
+      mode: 'onBlur',
+      resolver: yupResolver(productFormSchema),
+    });
 
   const [{ context }, send] = useMainMachine();
   const { productSwitch = false } = context.switches;
@@ -94,7 +87,7 @@ function ProductForm() {
             errors={errors}
             formRef={register}
           />
-          <Flex direction={['column', 'row']} align='center' justify='space-between'>
+          <Flex direction={['column', 'row']} align='start' justify='space-between'>
             <FormInput
               w={['full', '45%']}
               name='units'
@@ -145,4 +138,4 @@ function ProductForm() {
   );
 }
 
-export default React.memo(ProductForm);
+export default memo(ProductForm);

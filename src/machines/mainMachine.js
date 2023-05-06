@@ -5,37 +5,50 @@ import { initialContext, actions, services, guards } from './mainMachine.config'
 export const MainMachine = createMachine({
   id: 'mainMachine',
   initial: 'gettingMaxCode',
-  context: {
-    ...initialContext,
-  },
+  context: { ...initialContext },
   states: {
     editting: {
       on: {
-        ADD_RECIPE: { actions: [actions.updateContext, actions.callback] },
+        ADD_RECIPE: {
+          actions: [actions.updateContext, actions.callback],
+        },
         DELETE_RECIPE: {
           target: 'gettingMaxCode',
           actions: [actions.resetContext, actions.callback],
         },
-        TOGGLE: { actions: [actions.toggleSwitch, actions.callback] },
-        ADD_ITEM: { actions: [actions.assignItem, actions.callback] },
-        DELETE_ITEM: { actions: [actions.deleteItem, actions.callback] },
-        RESET: { actions: [actions.resetContext, actions.callback] },
-        ADD_ROW: { actions: [actions.addItemToStore, actions.callback] },
+        TOGGLE: {
+          actions: [actions.toggleSwitch, actions.callback],
+        },
+        ADD_ITEM: {
+          actions: [actions.assignItem, actions.callback],
+        },
+        DELETE_ITEM: {
+          actions: [actions.deleteItem, actions.callback],
+        },
+        RESET: {
+          actions: [actions.resetContext, actions.callback],
+        },
+        ADD_ROW: {
+          actions: [actions.addItemToStore, actions.callback],
+        },
         DELETE_ROW: {
           actions: [actions.deleteItemFromStore, actions.callback],
         },
         RESTORE_DEFAULTS: {
           actions: [actions.restoreDefaults, actions.callback],
         },
+        SAVE_FILE: {
+          actions: [actions.saveFile, actions.callback],
+        },
+        DELETE_FILE: {
+          actions: [actions.deleteFile, actions.callback],
+        },
         RECIPE_SUBMIT: {
           target: 'recipeSubmitting',
+          actions: actions.saveFormData,
         },
-        ELEMENT_SUBMIT: {
-          target: 'elementSubmitting',
-        },
-        PRODUCT_SUBMIT: {
-          target: 'productSubmitting',
-        },
+        ELEMENT_SUBMIT: 'elementSubmitting',
+        PRODUCT_SUBMIT: 'productSubmitting',
       },
     },
     gettingMaxCode: {
@@ -78,8 +91,36 @@ export const MainMachine = createMachine({
       },
     },
     recipeSubmitting: {
-      initial: 'settingRecipe',
+      initial: 'settingFile',
       states: {
+        settingFile: {
+          always: {
+            cond: (ctx) => !ctx.file,
+            target: 'deletingFile',
+          },
+          invoke: {
+            src: services.setFile,
+            onDone: 'settingRecipe',
+            onError: {
+              target: '#mainMachine.editting',
+              actions: 'renderError',
+            },
+          },
+        },
+        deletingFile: {
+          always: {
+            cond: (ctx) => !ctx.oldFile,
+            target: 'settingRecipe',
+          },
+          invoke: {
+            src: services.deleteFile,
+            onDone: 'settingRecipe',
+            onError: {
+              target: '#mainMachine.editting',
+              actions: 'renderError',
+            },
+          },
+        },
         settingRecipe: {
           invoke: {
             src: services.setRecipe,
@@ -96,7 +137,7 @@ export const MainMachine = createMachine({
             ],
             onError: {
               target: '#mainMachine.editting',
-              actions: ['renderError'],
+              actions: 'renderError',
             },
           },
         },
@@ -106,11 +147,11 @@ export const MainMachine = createMachine({
             src: services.setMaxCode,
             onDone: {
               target: '#mainMachine.gettingMaxCode',
-              actions: ['renderSuccess'],
+              actions: 'renderSuccess',
             },
             onError: {
               target: '#mainMachine.editting',
-              actions: ['renderError'],
+              actions: 'renderError',
             },
           },
         },

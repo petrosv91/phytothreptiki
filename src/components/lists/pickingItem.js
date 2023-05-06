@@ -1,19 +1,19 @@
-import React from 'react';
+import { useState } from 'react';
 
 import { Flex, Image, Text } from '@chakra-ui/react';
 
+import ItemList from './itemList';
 import { ReactComponent as EmptySVG } from '../../assets/no_data.svg';
 import { useFiltersData, usePagination } from '../../hooks';
-import { Pagination } from '../../layouts';
+import { Pagination } from '../../lib/layouts';
 import { DatePicker, FormInput } from '../../lib/ui';
 import { formatDate } from '../../utils';
-import ItemList from './itemList';
 
 function PickingItem({ promiseData, keys, List, showDate, handleClick }) {
   const { data = [], error, status, isFetching } = promiseData;
   const isLoading = status === 'loading' || isFetching;
 
-  const [query, setQuery] = React.useState('');
+  const [query, setQuery] = useState('');
   const filterdData = useFiltersData({ data, query, keys });
   const { currentData, ...paginationProps } = usePagination(filterdData);
 

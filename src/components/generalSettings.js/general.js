@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Flex, Icon, Text } from '@chakra-ui/react';
 import { FaMoon, FaSun } from 'react-icons/fa';
 

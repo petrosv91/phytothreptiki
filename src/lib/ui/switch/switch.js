@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Switch as ChakraSwitch } from '@chakra-ui/react';
 
 function Switch({ formRef, name, ...rest }) {

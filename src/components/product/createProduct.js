@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useForm } from 'react-hook-form';
 import { queryCache } from 'react-query';
 

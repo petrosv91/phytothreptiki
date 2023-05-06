@@ -1,18 +1,14 @@
-import React from 'react';
-
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ReactQueryConfigProvider } from 'react-query';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import ErrorBoundary from './components/error/errorBoundary';
 import Navbar from './components/navbar/navbar';
+import NewRecipe from './components/pages/newRecipe';
 import { formDefaultValues } from './config';
-import ErrorBoundary from './error/errorBoundary';
 import { useReactFormSchema, useReactQueryConfig } from './hooks';
-import { Layout } from './layouts';
-import NewRecipe from './pages/newRecipe';
-import ProductionFile from './pages/productionfile';
-import RawMaterials from './pages/rawMaterials';
+import { Layout } from './lib/layouts';
 
 function App() {
   const overrides = useReactQueryConfig();
@@ -31,12 +27,6 @@ function App() {
             <Switch>
               <Route exact path='/'>
                 <NewRecipe />
-              </Route>
-              <Route path='/rawMaterials'>
-                <RawMaterials />
-              </Route>
-              <Route path='/productionFile'>
-                <ProductionFile />
               </Route>
               <Redirect to='/' />
             </Switch>

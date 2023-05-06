@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { FormControl, FormLabel } from '@chakra-ui/react';
 
 import Switch from './switch';
