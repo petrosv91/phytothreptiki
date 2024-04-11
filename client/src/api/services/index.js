@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const DEV_API = 'http://localhost:5000/api';
+const DEV_API = 'http://localhost:3001/api';
 const PROD_API = '/api';
 
-const DEV_FILES = 'http://localhost:5000/file';
+const DEV_FILES = 'http://localhost:3001/file';
 const PROD_FILES = '/files';
 
 const API = process.env.NODE_ENV === 'development' ? DEV_API : PROD_API;

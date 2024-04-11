@@ -9,7 +9,7 @@ const apiRoute = require('./routes/api');
 const fileRoute = require('./routes/file');
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3001;
 
 // Body-parser
 app.use(cors());
@@ -24,6 +24,7 @@ mongoose.connect(
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    dbName: process.env.DB_NAME
   },
   (err, client) => {
     if (err) {
