@@ -24,6 +24,7 @@ mongoose.connect(
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    dbName: process.env.DB_NAME
   },
   (err, client) => {
     if (err) {

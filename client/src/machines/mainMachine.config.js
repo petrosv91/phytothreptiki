@@ -25,7 +25,7 @@ export const actions = {
     return { ...ctx, [e.key]: e.data };
   }),
   assignCode: assign((ctx, e) => {
-    const [{ _id, code }] = e.data.result.data;
+    const [{ _id = 0, code } = {}] = e.data.result.data;
     return { ...ctx, codeId: _id, code };
   }),
   deleteItem: assign((ctx, e) => {
